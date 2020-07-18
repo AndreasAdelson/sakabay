@@ -12,6 +12,7 @@ Encore
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     .cleanupOutputBeforeBuild()
+    .enableVueLoader()
     .enableSourceMaps(!Encore.isProduction())
     // uncomment to create hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())
@@ -30,13 +31,11 @@ Encore
 
     
     
-    .addEntry('app', './assets/js/app.js')
-    .addStyleEntry('css/now-ui-kit', './assets/scss/now-ui-kit.scss')
+    .addEntry('js/app', './assets/js/app.js')
     .addStyleEntry('css/bootstrap', './node_modules/bootstrap/dist/css/bootstrap.min.css')
+    .addStyleEntry('css/bootstrap-vue', './node_modules/bootstrap-vue/dist/bootstrap-vue.min.css')
     .enableSassLoader()
     //.addStyleEntry('css/main', './assets/scss/main.scss')
-    //.addEntry('page1', './assets/js/page1.js')
-    //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     // .splitEntryChunks()
@@ -45,7 +44,7 @@ Encore
     // but, you probably want this, unless you're building a single-page app
     .disableSingleRuntimeChunk()
     .autoProvidejQuery()
-    .enableVueLoader()    
+    
     
     /*
      * FEATURE CONFIG

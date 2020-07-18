@@ -1,20 +1,14 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="card">
-        <img slot="image" class="img rounded img-raised" src="https://demos.creative-tim.com/vue-now-ui-kit-pro/img/project13.jpg"/>
-        <div class="card-body">
-          <h6 class="category text-warning">
-            <i class="now-ui-icons business_bulb-63"></i> Focus
-          </h6>
-          <h5 class="card-title">
-            <a href="#nuk">Stay Focused: Train Your Brain</a>
-          </h5>
-          <p class="card-footer">
-            Our brains are finely attuned to distraction, so today's digital environment makes it
-            especially hard to focus...
-            {{ message }}
-          </p>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div>
+          <b-table striped hover :items="items"></b-table>
+          <b-button-group>
+            <b-button>Button 1</b-button>
+            <b-button>Button 2</b-button>
+            <b-button>Button 3</b-button>
+          </b-button-group>
         </div>
       </div>
     </div>
@@ -30,6 +24,17 @@ export default {
       message: {
         type: String,
         default: 'Pd'
+      }
+    },
+
+    data() {
+      return {
+        items: [
+          { age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
+          { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
+          { age: 89, first_name: 'Geneva', last_name: 'Wilson' },
+          { age: 38, first_name: 'Jami', last_name: 'Carney' }
+        ]
       }
     }
 }

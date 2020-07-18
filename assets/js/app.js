@@ -7,13 +7,14 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import '../css/app.css';
-import '../scss/now-ui-kit.scss';
 import $ from 'jquery';
 import Vue from 'vue';
-import Bootstrap from 'bootstrap';
+import {BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 import Toto from './components/toto';
 
-// Vue.use(Bootstrap);
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
+
 new Vue({ el: '#app',
 components:{
     Toto

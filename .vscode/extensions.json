@@ -1,0 +1,31 @@
+{
+	// List of extensions which should be recommended for users of this workspace.
+	"recommendations": [
+	"junstyle.php-cs-fixer", // PHP cs fixer
+	"bmewburn.vscode-intelephense-client", // PHP Intelephense
+	"mehedidracula.php-namespace-resolver", // PHP Namespace Resolver
+	"marabesi.php-import-checker", // PHP import checker
+	// "formulahendry.code-runner", // Code runner
+	"hookyqr.beautify", // Beautify
+	"ms-azuretools.vscode-docker", // Docker
+	"editorconfig.editorconfig", // EditorConfig for VS Code
+	"dbaeumer.vscode-eslint", // Eslint
+	"donjayamanne.githistory", // Git History (git log)
+	"eamodio.gitlens", // GitLens
+	"ecmel.vscode-html-css", // HTML CSS Support
+	"eg2.vscode-npm-script", // npm
+	"alefragnani.project-manager", // Project Manager
+	"davidanson.vscode-markdownlint", // markdownlint
+	//"silverbulleters.sonarqube-inject", // SonarQube support for Visual Studio Code extension
+    // "sonarsource.sonarlint-vscode", // Sonarlint
+    "janisdd.vscode-edit-csv", // Edit csv
+    "tlent.jest-snapshot-language-support", // Syntax highlighting for Jest snapshots
+    "coenraads.bracket-pair-colorizer-2", // Bracket pair colorizer
+    "hollowtree.vue-snippets",  // Vue 2 Snippets
+    "octref.vetur" // Vetur
+  ],
+
+	// List of extensions recommended by VS Code that should not be recommended for users of this workspace.
+	"unwantedRecommendations": [
+	]
+}

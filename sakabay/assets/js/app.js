@@ -9,16 +9,20 @@
 import '../css/app.css';
 import $ from 'jquery';
 import Vue from 'vue';
-import {BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import {
+  BootstrapVue,
+  IconsPlugin
+} from 'bootstrap-vue';
 import Toto from './components/toto';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-new Vue({ el: '#app',
-components:{
+new Vue({
+  el: '#app',
+  components: {
     Toto
-}
+  }
 })
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

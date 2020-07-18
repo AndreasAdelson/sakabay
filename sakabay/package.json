@@ -16,13 +16,22 @@
     "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.30.2",
+    "@symfony/webpack-encore": "^0.30.0",
+    "regenerator-runtime": "^0.13.2",
+    "webpack-notifier": "^1.6.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.4.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-vue": "^6.2.2",
     "node-sass": "^4.14.1",
-    "sass-loader": "^8.0.0",
-    "webpack-notifier": "^1.6.0"
+    "sass-loader": "^8.0.0"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "../utils/encore_watch.sh",
+    "build": "encore production --progress"
   }
 }

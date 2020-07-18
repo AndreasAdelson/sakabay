@@ -1,0 +1,8 @@
+#https://stackoverflow.com/questions/18329621/storing-git-config-as-part-of-the-repository
+[core]
+	eol = lf
+	autocrlf = input
+[pull]
+	rebase = preserve
+[url "https://"]
+	insteadOf = git://

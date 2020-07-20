@@ -1,4 +1,4 @@
-FROM php:7-fpm-alpine
+FROM alpine:3.10
 
 RUN apk add --update \
   gnu-libiconv \

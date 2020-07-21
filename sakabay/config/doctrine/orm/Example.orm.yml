@@ -1,0 +1,24 @@
+App\Domain\Model\Example:
+    type: entity
+    table: example
+    options:
+        comment: Example d'un crud.
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+            options:
+                comment: Identifiant technique d'un example
+    fields:
+        nom:
+            type: string
+            length: 100
+            column: nom
+            nullable: true
+        consigne:
+            type: string
+            length: 300
+            column: consigne
+            nullable: true

@@ -2,3 +2,28 @@ home:
     path: /home
     controller: App\Infrastructure\Http\Web\Controller\HomeController::index
     methods: [GET, POST]
+user_index:
+   path: /
+   controller: App\Infrastructure\Http\Web\Controller\UserController::index
+   methods: [GET, POST]
+
+# Routes for Example object
+example_index:
+    path: /example
+    controller: App\Infrastructure\Http\Web\Controller\ExampleController::index
+    methods: [GET]
+
+example_new:
+    path: /example/new
+    controller: App\Infrastructure\Http\Web\Controller\ExampleController::new
+    methods: [GET, POST]
+
+example_show:
+    path: /example/show/{id}
+    controller: App\Infrastructure\Http\Web\Controller\ExampleController::show
+    methods: [GET, POST]
+
+example_delete:
+    path: /example/delete/{id}
+    controller: App\Infrastructure\Http\Web\Controller\ExampleController::delete
+    methods: [GET, POST]

@@ -12,11 +12,14 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        $words = ['sky', 'cloud', 'wood', 'rock', 'forest',
-            'mountain', 'breeze'];
+        $words = [
+            'sky', 'cloud', 'wood', 'rock', 'forest',
+            'mountain', 'breeze'
+        ];
 
         return $this->render('user/home.html.twig', [
-            'words' => $words,'controller_name' => 'HomeController',
+            'words' => $words,
+            'controller_name' => 'HomeController',
         ]);
     }
 }

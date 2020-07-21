@@ -7,17 +7,17 @@
       <li :key="word.id" v-for="word in words">{{ word }}</li>
     </ul>
     
-  <formulaire></formulaire>
+  <formulaire></formulaire>>
   
   </div>
 </template>
 
 <script>
-import Formulaire from './formulaire';
+import formulaire from './formulaire';
 
 export default {
-  components: {
-    Formulaire
+  components:{
+    formulaire,
   },
   data() {
     return {

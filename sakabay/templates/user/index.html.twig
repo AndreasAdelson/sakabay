@@ -4,16 +4,8 @@
 
 {% block body %}
 
-  <div>
-    <badge-primary href="#" type="primary">Primary</badge-primary>
-    <badge href="#" type="info">Info</badge>
-    <badge href="#" type="success">Success</badge>
-    <badge href="#" type="danger">Danger</badge>
-    <badge href="#" type="warning">Warning</badge>
-    <badge href="#" type="default">Default</badge>
-  </div>
 
- <navbar v-for="type in types" :key="type"
+ {# <navbar v-for="type in types" :key="type"
           :type="type"
           :transparent="false"
           menu-classes="ml-auto"
@@ -39,7 +31,7 @@
            </a>
          </li>
         </template>
-   </navbar>
+   </navbar> #}
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
@@ -50,13 +42,7 @@
     </ul>
 </div>
 
-<div ref="words" data-words="{{ words|join(',') }}">
-1
-</div>
-
 <div id="app">
-    <app></app>
 </div>
 <toto></toto>
-<form></form>
 {% endblock %}

@@ -44,8 +44,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
   export default {
     data() {
       return {
@@ -58,11 +56,7 @@ import axios from 'axios';
     },
     methods: {
       onSubmit() {
-        return axios.post('/api/user',this.form).then(response => {
-          console.log(response);
-        }).catch(e =>{
-          return e;
-        })
+        return "ok!!";
       },
       onReset(evt) {
         evt.preventDefault()

@@ -14,6 +14,7 @@ import {
   IconsPlugin
 } from 'bootstrap-vue';
 import Toto from './components/toto';
+import Home from './components/home';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -21,7 +22,8 @@ Vue.use(IconsPlugin);
 new Vue({
   el: '#app',
   components: {
-    Toto
+    Toto,
+    Home
   }
 })
 

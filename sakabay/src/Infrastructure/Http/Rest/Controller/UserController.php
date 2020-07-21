@@ -14,7 +14,7 @@ class UserController extends FOSRestController
     public function __construct() {
     }
     /**
-     * @Rest\View()
+     * 
      * @Rest\Post("/user")
      *
      * 

@@ -1,10 +1,11 @@
 <?php
 
+// src/Repository/UserRepository.php
 namespace App\Infrastructure\Repository;
 
-use App\Domain\Model\User;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)

@@ -32,3 +32,20 @@ App\Domain\Model\User:
             length: 300
             column: email
             nullable: true
+        firstName:
+            type: string
+            length: 300
+            column: firstName
+            nullable: true
+        plainPassword:
+            type: string
+            length: 300
+            column: plainPassword
+            nullable: true
+        lastName:
+            type: string
+            length: 300
+            column: lastName
+            nullable: true 
+                    
+            

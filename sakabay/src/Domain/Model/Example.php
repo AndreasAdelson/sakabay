@@ -2,27 +2,44 @@
 
 namespace App\Domain\Model;
 
-use App\Infrastructure\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
+
 
 /**
  * @ORM\Entity(repositoryClass=ExampleRepository::class)
+ *
+ * @ExclusionPolicy("all")
+ *
  */
 class Example
 {
     /**
-     *
      * @var int
+     * @Expose
+     * @Groups({
+     * "api_examples"
+     * })
      */
     private $id;
 
     /**
      * @var string
+     * @Expose
+     * @Groups({
+     * "api_examples"
+     * })
      */
     private $nom;
 
     /**
      * @var string
+     * @Expose
+     * @Groups({
+     * "api_example"
+     * })
      */
     private $consigne;
 

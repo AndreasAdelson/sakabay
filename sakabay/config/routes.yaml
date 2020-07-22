@@ -2,9 +2,9 @@ home:
     path: /home
     controller: App\Infrastructure\Http\Web\Controller\HomeController::index
     methods: [GET, POST]
-user_index:
+utilisateur_index:
    path: /
-   controller: App\Infrastructure\Http\Web\Controller\UserController::index
+   controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::index
    methods: [GET, POST]
 
 # Routes for Example object

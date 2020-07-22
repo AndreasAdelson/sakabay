@@ -4,13 +4,13 @@ namespace App\Infrastructure\Http\Rest\Controller;
 
 use App\Application\Service\ExampleService;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ExampleController extends FOSRestController
+final class ExampleController extends AbstractFOSRestController
 {
     private $entityManager;
     private $exampleService;

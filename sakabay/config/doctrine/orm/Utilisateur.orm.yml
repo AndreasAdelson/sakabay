@@ -1,6 +1,6 @@
-App\Domain\Model\User:
+App\Domain\Model\Utilisateur:
     type: entity
-    table: user
+    table: utilisateur
     options:
         comment: Entité représentant un user
 
@@ -9,7 +9,7 @@ App\Domain\Model\User:
             type: integer
             generator:
                 strategy: AUTO
-            options: 
+            options:
                 comment: Identifiant technique d'un user
     fields:
         nom:
@@ -35,17 +35,16 @@ App\Domain\Model\User:
         firstName:
             type: string
             length: 300
-            column: firstName
+            column: first_name
             nullable: true
-        plainPassword:
+        password:
             type: string
             length: 300
-            column: plainPassword
+            column: password
             nullable: true
         lastName:
             type: string
             length: 300
-            column: lastName
-            nullable: true 
-                    
-            
+            column: last_name
+            nullable: true
+

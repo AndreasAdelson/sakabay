@@ -7,71 +7,59 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  */
-class User implements UserInterface
+class Utilisateur implements UserInterface
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
     private $id;
-    
+
     /**
      * @var string|null
      *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
     private $firstName;
-    
+
     /**
      * @var string|null
      *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     private $nom;
-        
+
     /**
      * @var string|null
      *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     private $plainPassword;
-    
+
     /**
      * @var string|null
      *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     private $lastName;
 
        /**
      * @var string|null
      *
-     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
-    
+
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
      */
     private $login;
 
     /**
-     * @ORM\Column(type="json")
+     *
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
-     * @ORM\Column(type="string")
+     *
      */
     private $password;
 
@@ -80,7 +68,7 @@ class User implements UserInterface
     {
         return $this->id;
     }
-    
+
     public function getFirstName(): ?string
     {
         return $this->firstName;
@@ -92,7 +80,7 @@ class User implements UserInterface
 
         return $this;
     }
-    
+
     public function getLastName(): ?string
     {
         return $this->lastName;
@@ -128,7 +116,7 @@ class User implements UserInterface
     }
 
     /**
-     * @see UserInterface
+     * @see UtilisateurInterface
      */
     public function getRoles(): array
     {
@@ -147,7 +135,7 @@ class User implements UserInterface
     }
 
     /**
-     * @see UserInterface
+     * @see UtilisateurInterface
      */
     public function getPassword(): string
     {
@@ -162,7 +150,7 @@ class User implements UserInterface
     }
 
     /**
-     * @see UserInterface
+     * @see UtilisateurInterface
      */
     public function getSalt()
     {
@@ -170,7 +158,7 @@ class User implements UserInterface
     }
 
     /**
-     * @see UserInterface
+     * @see UtilisateurInterface
      */
     public function eraseCredentials()
     {
@@ -182,7 +170,7 @@ class User implements UserInterface
      * Get the value of nom
      *
      * @return  string|null
-     */ 
+     */
     public function getNom()
     {
         return $this->nom;
@@ -194,7 +182,7 @@ class User implements UserInterface
      * @param  string|null  $nom
      *
      * @return  self
-     */ 
+     */
     public function setNom($nom)
     {
         $this->nom = $nom;
@@ -206,7 +194,7 @@ class User implements UserInterface
      * Get the value of prenom
      *
      * @return  string|null
-     */ 
+     */
     public function getPrenom()
     {
         return $this->prenom;
@@ -218,7 +206,7 @@ class User implements UserInterface
      * @param  string|null  $prenom
      *
      * @return  self
-     */ 
+     */
     public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
@@ -228,7 +216,7 @@ class User implements UserInterface
 
     /**
      * Get the value of login
-     */ 
+     */
     public function getLogin()
     {
         return $this->login;
@@ -238,7 +226,7 @@ class User implements UserInterface
      * Set the value of login
      *
      * @return  self
-     */ 
+     */
     public function setLogin($login)
     {
         $this->login = $login;
@@ -250,7 +238,7 @@ class User implements UserInterface
      * Get the value of plainPassword
      *
      * @return  string|null
-     */ 
+     */
     public function getPlainPassword()
     {
         return $this->plainPassword;
@@ -262,7 +250,7 @@ class User implements UserInterface
      * @param  string|null  $plainPassword
      *
      * @return  self
-     */ 
+     */
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;

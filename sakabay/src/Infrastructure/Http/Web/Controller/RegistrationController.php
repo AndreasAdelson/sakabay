@@ -3,8 +3,8 @@
 // app/src/Controller/RegistrationController.php
 namespace App\Infrastructure\Http\Web\Controller;
 
-use App\Domain\Model\User;
-use App\Infrastructure\Http\Web\Controller\RegistrationFormType;
+use App\Domain\Model\Utilisateur;
+use App\Application\Form\Type\RegistrationFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,27 +18,29 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $utilisateur = new Utilisateur();
+        $form = $this->createForm(RegistrationFormType::class, $utilisateur);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
-            $user->setPassword(
+            $utilisateur->setPassword(
                 $passwordEncoder->encodePassword(
-                    $user,
+                    $utilisateur,
                     $form->get('plainPassword')->getData()
                 )
+
             );
+            dump($utilisateur);
 
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
+            $entityManager->persist($utilisateur);
             $entityManager->flush();
 
-            
+
             // do anything else you need here, like send an email
             // in this example, we are just redirecting to the homepage
-            return $this->redirectToRoute('app_index');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/register.html.twig', [

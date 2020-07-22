@@ -1,9 +1,9 @@
 <?php
 
 // app/src/Form/RegistrationFormType.php
-namespace App\Infrastructure\Http\Web\Controller;
+namespace App\Application\Form\Type;
 
-use App\Domain\Model\User;
+use App\Domain\Model\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -57,7 +57,7 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Utilisateur::class,
         ]);
     }
 }

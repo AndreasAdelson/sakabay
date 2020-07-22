@@ -4,7 +4,7 @@
             <navbar></navbar>
             <carousel></carousel>
     </div>
-    
+
     <b-input-group size="sm" class="mb-2">
       <b-input-group-prepend is-text>
         <b-icon icon="search"></b-icon>

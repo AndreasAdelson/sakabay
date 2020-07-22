@@ -20,6 +20,17 @@ class UtilisateurRepository extends ServiceEntityRepository
         parent::__construct($registry,  Utilisateur::class);
     }
 
+    public function loadUserByUsername($usernameOrEmail)
+    {
+        return $this->createQuery(
+                'SELECT u
+                FROM App\Domain\Model\Utilisateur u
+                WHERE u.email = :query'
+            )
+            ->setParameter('query', $usernameOrEmail)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

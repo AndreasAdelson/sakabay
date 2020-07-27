@@ -47,4 +47,15 @@ App\Domain\Model\Utilisateur:
             length: 300
             column: last_name
             nullable: true
-
+    manyToMany:
+        groups:
+            targetEntity: Group
+            inversedBy: utilisateurs
+            joinTable:
+                name: utilisateurs_groupes
+                joinColumns:
+                    id_user:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    id_group:
+                        referencedColumnName: id

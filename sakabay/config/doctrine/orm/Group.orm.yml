@@ -1,0 +1,50 @@
+App\Domain\Model\Group:
+    type: entity
+    table: group
+    options:
+        comment: Entité technique regroupant les rôles de l'application. On associe un utilisateur à un groupe pour donner à cet utilisateur les droits du groupe.
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+            options:
+                comment: Identifiant technique de la group
+    fields:
+        name:
+            type: string
+            length: 50
+            nullable: false
+            column: name
+            options:
+                comment: Nom du groupe
+        code:
+            type: string
+            length: 255
+            nullable: true
+            column: code
+            options:
+                comment: Code du groupe
+
+    uniqueConstraints:
+        uniqueGroupCode:
+            columns: [code]
+
+    manyToMany:
+        roles:
+            targetEntity: Role
+            inversedBy: groups
+            joinTable:
+                name: groupes_roles
+                joinColumns:
+                    id_group:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    id_role:
+                        referencedColumnName: id
+        utilisateurs:
+            targetEntity: Utilisateur
+            mappedBy: groups
+            orderBy:
+                nom: ASC

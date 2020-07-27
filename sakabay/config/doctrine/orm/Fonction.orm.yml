@@ -1,0 +1,37 @@
+App\Domain\Model\Fonction:
+    type: entity
+    table: fonction
+    options:
+        comment: Entité technique regroupant les fonctions de l'application. On associe une fonction à un rôle pour donner à ce rôle les droits sur cette fonction.
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+            options:
+                comment: Identifiant technique de la fonction
+    fields:
+        code:
+            type: string
+            length: 50
+            nullable: false
+            column: code
+            options:
+                comment: Code de la fonction
+        description:
+            type: string
+            length: 255
+            nullable: true
+            column: description
+            options:
+                comment: Nom de la fonction
+
+    uniqueConstraints:
+        uniqueFonctionCode:
+            columns: [code]
+
+    manyToMany:
+        roles:
+            targetEntity: Role
+            mappedBy: fonctions

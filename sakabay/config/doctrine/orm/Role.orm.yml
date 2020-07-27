@@ -1,0 +1,38 @@
+App\Domain\Model\Role:
+    type: entity
+    table: role
+    options:
+        comment: Entité représentant une Role.
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+            options:
+                comment: Identifiant technique d'un role
+    fields:
+        name:
+            type: string
+            length: 300
+            column: name
+            nullable: true
+        code:
+            type: string
+            length: 100
+            column: code
+            nullable: true
+    manyToMany:
+        #Owing side
+        fonctions:
+            targetEntity: Fonction
+            inversedBy: roles
+            joinTable:
+                name: roles_fontions
+                joinColumns:
+                    id_role:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    id_fonction:
+                        referencedColumnName: id
+

@@ -1,8 +1,8 @@
 <?php
 
-// src/Entity/User.php
 namespace App\Domain\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -11,6 +11,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Utilisateur implements UserInterface
 {
+    /**
+     * @var string
+     */
+    const PREFIX_ROLE = 'ROLE_';
+
+
     private $id;
 
     /**
@@ -37,7 +43,7 @@ class Utilisateur implements UserInterface
      */
     private $lastName;
 
-       /**
+    /**
      * @var string|null
      *
      */
@@ -62,6 +68,17 @@ class Utilisateur implements UserInterface
      *
      */
     private $password;
+
+    /**
+     * @var Group[]
+     *
+     */
+    private $groups;
+
+    public function __construct()
+    {
+        $this->groups = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -113,25 +130,6 @@ class Utilisateur implements UserInterface
     public function getUsername(): string
     {
         return (string) $this->email;
-    }
-
-    /**
-     * @see UtilisateurInterface
-     */
-    public function getRoles(): array
-    {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
-    }
-
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
     }
 
     /**
@@ -256,5 +254,96 @@ class Utilisateur implements UserInterface
         $this->plainPassword = $plainPassword;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Group[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(Group $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+            $this->addRolesOfGroup($group);
+        }
+
+        return $this;
+    }
+
+    public function removeGroup(Group $group): self
+    {
+        if ($this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+            $this->updateRoles();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Return the security roles of the users. Security roles are the user's functions.
+     * Return an array of all user's functions in uppercase prefixed by 'ROLE_'. This
+     * array does not contain duplication.
+     *
+     * @return string[]
+     */
+    public function getRoles(): array
+    {
+        $securityRoles = [];
+
+        foreach ($this->getGroups() as $group) {
+            foreach ($group->getRoles() as $role) {
+                foreach ($role->getFonctions() as $fonction) {
+                    $securityRoleName = Utilisateur::PREFIX_ROLE . mb_strtoupper($fonction->getLbCode());
+                    $securityRoles[] = $securityRoleName;
+                }
+            }
+        }
+        // if ($this->getDefaultRole()) {
+        //     foreach ($this->getDefaultRole()->getFonctions() as $fonction) {
+        //         $securityRoleName = Utilisateur::PREFIX_ROLE.mb_strtoupper($fonction->getLbCode());
+        //         $securityRoles[] = $securityRoleName;
+        //     }
+        // }
+
+        return array_values(array_unique($securityRoles));
+    }
+
+    /**
+     * Called when a group is added to the user.
+     * Add the functions of the group to the user's security roles.
+     */
+    private function addRolesOfGroup($group): void
+    {
+        foreach ($group->getRoles() as $role) {
+            foreach ($role->getFonctions() as $fonction) {
+                $securityRoleName = Utilisateur::PREFIX_ROLE . mb_strtoupper($fonction->getLbCode());
+                if (!in_array($securityRoleName, $this->roles)) {
+                    $this->roles[] = $securityRoleName;
+                }
+            }
+        }
+    }
+
+    /**
+     * Called when a group is deleted from the groups list.
+     * Remove the roles from this group which were not in other groups of the user.
+     */
+    private function updateRoles(): void
+    {
+        $tmpRoles = [];
+        foreach ($this->getGroups() as $group) {
+            foreach ($group->getRoles() as $role) {
+                foreach ($role->getFonctions() as $fonction) {
+                    $securityRoleName = User::PREFIX_ROLE . mb_strtoupper($fonction->getLbCode());
+                    $tmpRoles[] = $securityRoleName;
+                }
+            }
+        }
+        $this->roles = array_values(array_unique($tmpRoles));
     }
 }

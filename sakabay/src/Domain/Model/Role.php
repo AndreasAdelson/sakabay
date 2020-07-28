@@ -47,9 +47,15 @@ class Role
      */
     private $fonctions;
 
+    /**
+     * @var Group[]
+     */
+    private $groups;
+
     public function __construct()
     {
         $this->fonctions = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     /**
@@ -166,6 +172,32 @@ class Role
     {
         if ($this->fonctions->contains($fonction)) {
             $this->fonctions->removeElement($fonction);
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|Group[]
+     */
+    public function getGroups(): Collection
+    {
+        return $this->groups;
+    }
+
+    public function addGroup(Group $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups[] = $group;
+            $group->addRole($this);
+        }
+        return $this;
+    }
+
+    public function removeGroup(Group $group): self
+    {
+        if (!$this->groups->contains($group)) {
+            $this->groups->removeElement($group);
+            $group->removeRole($this);
         }
         return $this;
     }

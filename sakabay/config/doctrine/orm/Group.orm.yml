@@ -1,6 +1,6 @@
 App\Domain\Model\Group:
     type: entity
-    table: group
+    table: groupe
     options:
         comment: Entité technique regroupant les rôles de l'application. On associe un utilisateur à un groupe pour donner à cet utilisateur les droits du groupe.
 
@@ -10,7 +10,7 @@ App\Domain\Model\Group:
             generator:
                 strategy: AUTO
             options:
-                comment: Identifiant technique de la group
+                comment: Identifiant technique d'un group
     fields:
         name:
             type: string
@@ -22,7 +22,7 @@ App\Domain\Model\Group:
         code:
             type: string
             length: 255
-            nullable: true
+            nullable: false
             column: code
             options:
                 comment: Code du groupe
@@ -47,4 +47,4 @@ App\Domain\Model\Group:
             targetEntity: Utilisateur
             mappedBy: groups
             orderBy:
-                nom: ASC
+                firstName: ASC

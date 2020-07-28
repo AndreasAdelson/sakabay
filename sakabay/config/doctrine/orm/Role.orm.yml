@@ -2,7 +2,7 @@ App\Domain\Model\Role:
     type: entity
     table: role
     options:
-        comment: Entité représentant une Role.
+        comment: Entité représentant un Role.
 
     id:
         id:
@@ -16,12 +16,12 @@ App\Domain\Model\Role:
             type: string
             length: 300
             column: name
-            nullable: true
+            nullable: false
         code:
             type: string
             length: 100
             column: code
-            nullable: true
+            nullable: false
     manyToMany:
         #Owing side
         fonctions:
@@ -35,4 +35,6 @@ App\Domain\Model\Role:
                 inverseJoinColumns:
                     id_fonction:
                         referencedColumnName: id
-
+        groups:
+            targetEntity: Group
+            mappedBy: roles

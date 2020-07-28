@@ -3,6 +3,7 @@
 namespace App\Domain\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -25,11 +26,6 @@ class Utilisateur implements UserInterface
      */
     private $firstName;
 
-    /**
-     * @var string|null
-     *
-     */
-    private $nom;
 
     /**
      * @var string|null
@@ -42,12 +38,6 @@ class Utilisateur implements UserInterface
      *
      */
     private $lastName;
-
-    /**
-     * @var string|null
-     *
-     */
-    private $prenom;
 
     /**
      */
@@ -165,54 +155,6 @@ class Utilisateur implements UserInterface
     }
 
     /**
-     * Get the value of nom
-     *
-     * @return  string|null
-     */
-    public function getNom()
-    {
-        return $this->nom;
-    }
-
-    /**
-     * Set the value of nom
-     *
-     * @param  string|null  $nom
-     *
-     * @return  self
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of prenom
-     *
-     * @return  string|null
-     */
-    public function getPrenom()
-    {
-        return $this->prenom;
-    }
-
-    /**
-     * Set the value of prenom
-     *
-     * @param  string|null  $prenom
-     *
-     * @return  self
-     */
-    public function setPrenom($prenom)
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    /**
      * Get the value of login
      */
     public function getLogin()
@@ -298,14 +240,14 @@ class Utilisateur implements UserInterface
         foreach ($this->getGroups() as $group) {
             foreach ($group->getRoles() as $role) {
                 foreach ($role->getFonctions() as $fonction) {
-                    $securityRoleName = Utilisateur::PREFIX_ROLE . mb_strtoupper($fonction->getLbCode());
+                    $securityRoleName = Utilisateur::PREFIX_ROLE . mb_strtoupper($fonction->getCode());
                     $securityRoles[] = $securityRoleName;
                 }
             }
         }
         // if ($this->getDefaultRole()) {
         //     foreach ($this->getDefaultRole()->getFonctions() as $fonction) {
-        //         $securityRoleName = Utilisateur::PREFIX_ROLE.mb_strtoupper($fonction->getLbCode());
+        //         $securityRoleName = Utilisateur::PREFIX_ROLE.mb_strtoupper($fonction->getCode());
         //         $securityRoles[] = $securityRoleName;
         //     }
         // }
@@ -321,7 +263,7 @@ class Utilisateur implements UserInterface
     {
         foreach ($group->getRoles() as $role) {
             foreach ($role->getFonctions() as $fonction) {
-                $securityRoleName = Utilisateur::PREFIX_ROLE . mb_strtoupper($fonction->getLbCode());
+                $securityRoleName = Utilisateur::PREFIX_ROLE . mb_strtoupper($fonction->getCode());
                 if (!in_array($securityRoleName, $this->roles)) {
                     $this->roles[] = $securityRoleName;
                 }
@@ -339,7 +281,7 @@ class Utilisateur implements UserInterface
         foreach ($this->getGroups() as $group) {
             foreach ($group->getRoles() as $role) {
                 foreach ($role->getFonctions() as $fonction) {
-                    $securityRoleName = User::PREFIX_ROLE . mb_strtoupper($fonction->getLbCode());
+                    $securityRoleName = User::PREFIX_ROLE . mb_strtoupper($fonction->getCode());
                     $tmpRoles[] = $securityRoleName;
                 }
             }

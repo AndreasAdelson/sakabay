@@ -12,16 +12,6 @@ App\Domain\Model\Utilisateur:
             options:
                 comment: Identifiant technique d'un user
     fields:
-        nom:
-            type: string
-            length: 100
-            column: nom
-            nullable: true
-        prenom:
-            type: string
-            length: 200
-            column: prenom
-            nullable: true
         login:
             type: string
             length: 300

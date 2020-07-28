@@ -4,6 +4,7 @@ namespace App\Domain\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Domain\Model\Role;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -117,7 +118,6 @@ class Fonction
     }
 
     /**
-     * Get the value of roles
      * @return Collection|Role[]
      */
     public function getRoles(): Collection
@@ -125,6 +125,11 @@ class Fonction
         return $this->roles;
     }
 
+    /**
+     * Set the value of roles
+     * @param  Roles[]  $roles
+     * @return  self
+     */
     public function addRole(Role $role): self
     {
         if (!$this->roles->contains($role)) {
@@ -135,11 +140,7 @@ class Fonction
         return $this;
     }
 
-    /**
-     * Set the value of roles
-     * @param  Roles[]  $roles
-     * @return  self
-     */
+
     public function removeRole(Role $role): self
     {
         if ($this->roles->contains($role)) {

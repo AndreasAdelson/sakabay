@@ -5,6 +5,7 @@ namespace App\Domain\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Domain\Model\Role;
 use App\Domain\Model\Utilisateur;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;

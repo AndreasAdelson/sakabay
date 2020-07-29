@@ -281,7 +281,7 @@ class Utilisateur implements UserInterface
         foreach ($this->getGroups() as $group) {
             foreach ($group->getRoles() as $role) {
                 foreach ($role->getFonctions() as $fonction) {
-                    $securityRoleName = User::PREFIX_ROLE . mb_strtoupper($fonction->getCode());
+                    $securityRoleName = Utilisateur::PREFIX_ROLE . mb_strtoupper($fonction->getCode());
                     $tmpRoles[] = $securityRoleName;
                 }
             }

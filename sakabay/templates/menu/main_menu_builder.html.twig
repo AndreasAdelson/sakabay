@@ -1,0 +1,89 @@
+<nav class="navbar p-0 m-0">
+  <button type="button" id="sidebarCollapse" class="btn-menu p-0 w-50px btn">
+    <i class="icon-menu fas fa-bars"></i>
+  </button>
+  <button title="Connectez-vous" href="/login" type="button" class="w-50px p-0 btn-user btn">
+    <i class="icon-login far fa-user"></i>
+  </button>
+  <button title="Inscription" type="button" class="w-50px p-0 btn-connect btn">
+    <a href="/register"><i class="icon-user fas fa-user-plus"></i></a>
+  </button>
+
+</nav>
+<div class="overlay">
+</div>
+<div class="wrapper">
+    <!-- Sidebar -->
+  <nav id="sidebar">
+      <div id="dismiss">
+          <i class="fas fa-arrow-left"></i>
+      </div>
+      <div class="sidebar-header">
+          <h3>Bootstrap Sidebar</h3>
+      </div>
+      <ul class="list-unstyled components">
+          <p>Dummy Heading</p>
+          <li class="active">
+              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+              <ul class="collapse list-unstyled" id="homeSubmenu">
+                  <li>
+                      <a href="#">Home 1</a>
+                  </li>
+                  <li>
+                      <a href="#">Home 2</a>
+                  </li>
+                  <li>
+                      <a href="#">Home 3</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#">About</a>
+              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                  <li>
+                      <a href="#">Page 1</a>
+                  </li>
+                  <li>
+                      <a href="#">Page 2</a>
+                  </li>
+                  <li>
+                      <a href="#">Page 3</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+              <a href="#">Portfolio</a>
+          </li>
+          <li>
+              <a href="#">Contact</a>
+          </li>
+      </ul>
+  </nav>
+  <div id="content">
+  </div>
+</div>
+<nav class="fixed-sous-nav w-100" id="sousNav">
+  <div class="container">
+    <div class="row">
+      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+        <a href="#" class="fontSKB fontSize16">{{ 'local_business'|trans }}</a>
+      </div>
+      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+        <a href="#" class="fontSKB fontSize16">{{ 'formules'|trans }}</a>
+      </div>
+      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+        <a href="#" class="fontSKB fontSize16">{{ 'company_director'|trans }}</a>
+      </div>
+      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+        <a href="#" class="fontSKB fontSize16">{{ 'who_is'|trans }}</a>
+      </div>
+      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+        <a href="#" class="fontSKB fontSize16">{{ 'contact_us'|trans }}</a>
+      </div>
+      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+        <a href="#" class="fontSKB fontSize16">{{ 'recruit'|trans }}</a>
+      </div>
+    </div>
+  </div>
+</nav>

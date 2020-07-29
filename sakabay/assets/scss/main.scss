@@ -1,0 +1,424 @@
+// @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+/*
+    DEMO STYLE
+*/
+
+@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa;
+}
+
+p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+  color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.navbar {
+  background: #038c3e;
+  border: none;
+  border-radius: 0;
+  margin-bottom: 40px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+  box-shadow: none;
+  outline: none !important;
+  border: none;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #038c3e;
+  margin: 40px 0;
+}
+
+/*---------------------------------
+    HEADINGS & FONTS
+-----------------------------------*/
+@font-face {
+  font-family: 'PatuaOneSKB';
+  src: url('../fonts/PatuaOne-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.fontSKB {
+  font-family: 'PatuaOneSKB', sans-serif !important;
+}
+
+.fontArial {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+.fontSize10 {
+  font-size: 0.625em !important;
+}
+
+.fontSize11 {
+  font-size: 0.7em !important;
+}
+
+.fontSize12 {
+  font-size: 0.75em !important;
+}
+
+.fontSize13 {
+  font-size: 0.8em !important;
+}
+
+.fontSize14 {
+  font-size: 0.875em !important;
+}
+
+.fontSize15 {
+  font-size: 0.95em !important;
+}
+
+.fontSize16 {
+  font-size: 1em !important;
+}
+
+.fontSize17 {
+  font-size: 1.05em !important;
+}
+
+.fontSize18 {
+  font-size: 1.125em !important;
+}
+
+.fontSize19 {
+  font-size: 1.2em !important;
+}
+
+.fontSize20 {
+  font-size: 1.25em !important;
+}
+
+.fontSize21 {
+  font-size: 1.3em !important;
+}
+
+.fontSize22 {
+  font-size: 1.4em !important;
+}
+
+.fontSize24 {
+  font-size: 1.5em !important;
+}
+
+.fontSize26 {
+  font-size: 1.6em !important;
+}
+
+.fontSize32 {
+  font-size: 2em !important;
+}
+
+.fontSize36 {
+  font-size: 2.25em !important;
+}
+
+.fontSize40 {
+  font-size: 2.45em !important;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+#sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100vh;
+  z-index: 999;
+  background: #7386D5;
+  color: #fff;
+  transition: all 0.3s;
+  // overflow-y: scroll;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+#sidebar.active {
+  left: 0;
+}
+
+#dismiss {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background: #7386D5;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+#dismiss:hover {
+  background: #fff;
+  color: #7386D5;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 998;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: #6d7fcc;
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+  border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+  color: #fff;
+  padding: 10px;
+}
+
+#sidebar ul li a {
+  padding: 10px;
+  font-size: 1.1em;
+  display: block;
+}
+
+#sidebar ul li a:hover {
+  color: #7386D5;
+  background: #fff;
+}
+
+#sidebar ul li.active>a,
+a[aria-expanded="true"] {
+  color: #fff;
+  background: #6d7fcc;
+}
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #6d7fcc;
+}
+
+ul.CTAs {
+  padding: 20px;
+}
+
+ul.CTAs a {
+  text-align: center;
+  font-size: 0.9em !important;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+a.download {
+  background: #fff;
+  color: #7386D5;
+}
+
+a.article,
+a.article:hover {
+  background: #6d7fcc !important;
+  color: #fff !important;
+}
+
+
+//Sakabay Style
+
+// body {
+//   padding-top: 50px;
+// }
+
+.headerMain {
+  height: 50px;
+}
+
+.headerMain .navbar {
+  height: 50px;
+}
+
+.fixed-sous-nav {
+  background-color: white;
+  border-color: #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  position: fixed;
+  top: 50px;
+  left: 0;
+  right: 0;
+  z-index: 998;
+}
+
+.sous-nav-bar-item {
+  text-align: center;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.sous-nav-bar-item:hover {
+  background-color: #e5e5e5;
+}
+
+//Width
+.w-50px {
+  width: 50px;
+}
+
+//Background-colors
+.green-bg-skb {
+  background-color: #038c3e; //remettre du vert ou changer le nom de la classe et changer partout où elle est appelée dans le projet.
+}
+
+.red-bg-skb {
+  background-color: red;
+}
+
+//Color
+.yellow-skb {
+  color: #f2d785;
+}
+
+.yellow2-skb {
+  color: #F2A413;
+}
+
+.orange-skb {
+  color: #F26513;
+}
+
+.red-skb {
+  color: #8C1B24;
+}
+
+// Bouttons de l''apli
+
+.btn-menu {
+  color: #f2d785;
+  width: 50px;
+  height: 50px;
+  background-color: #038c3e;
+  border-color: transparent;
+}
+
+.btn-menu:hover {
+  color: #ffffff;
+  background-color: #2798a0;
+}
+
+.btn-user {
+  position: fixed;
+  right: 50px;
+  color: #f2d785;
+  width: 50px;
+  height: 50px;
+  background-color: #038c3e;
+}
+
+.btn-user:hover {
+  color: #ffffff;
+  background-color: #2798a0;
+}
+
+.btn-connect {
+  position: fixed;
+  right: 0px;
+  color: #f2d785;
+  width: 50px;
+  height: 50px;
+  background-color: #038c3e;
+}
+
+.btn-connect:hover {
+  color: #ffffff;
+  background-color: #2798a0;
+}
+
+.btn-register {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  background-color: #038c3e;
+  color: #f2d785;
+}
+
+.icon-user {
+  width: 30px !important;
+  height: 30px;
+  color: inherit;
+  background-color: transparent;
+}
+
+.icon-login {
+  width: 25px !important;
+  height: 25px;
+  color: inherit;
+  background-color: transparent;
+}
+
+.icon-menu {
+  width: 23px !important;
+  height: 23px;
+  color: inherit;
+  background-color: transparent;
+}
+
+.icon-menu:hover {
+  color: inherit;
+  background-color: transparent;
+}
+
+
+.icon-user:hover {
+  color: inherit;
+  background-color: transparent;
+}
+
+.icon-login:hover {
+  color: inherit;
+  background-color: transparent;
+}

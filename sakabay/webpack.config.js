@@ -32,6 +32,8 @@ Encore
   .addEntry('js/app', './assets/js/app.js')
   .addStyleEntry('css/bootstrap', './node_modules/bootstrap/dist/css/bootstrap.min.css')
   .addStyleEntry('css/bootstrap-vue', './node_modules/bootstrap-vue/dist/bootstrap-vue.min.css')
+  .addStyleEntry('css/main', './assets/scss/main.scss')
+  .addStyleEntry('css/app', './assets/css/app.css')
   .enableSassLoader()
   //.addStyleEntry('css/main', './assets/scss/main.scss')
 
@@ -66,5 +68,9 @@ Encore
 // requires WebpackEncoreBundle 1.4 or higher
 //.enableIntegrityHashes(Encore.isProduction())
 ;
+var config = Encore.getWebpackConfig();
 
-module.exports = Encore.getWebpackConfig();
+config.resolve.extensions.push('.json');
+config.resolve.modules = ['assets/js', 'node_modules'];
+
+module.exports = config;

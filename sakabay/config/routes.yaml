@@ -1,8 +1,4 @@
 home:
-    path: /home
-    controller: App\Infrastructure\Http\Web\Controller\HomeController::index
-    methods: [GET, POST]
-utilisateur_index:
    path: /
    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::index
    methods: [GET, POST]

@@ -16,7 +16,7 @@ import {
   BootstrapVue,
   IconsPlugin
 } from 'bootstrap-vue';
-import Toto from './components/toto';
+import Login from './components/utilisateur/login';
 import Home from './components/home/home';
 import ExampleForm from './components/example/form';
 import SousNavBar from './components/commons/navBar';
@@ -35,7 +35,7 @@ Vue.use(VeeValidate, {
 new Vue({
   el: '#app',
   components: {
-    Toto,
+    Login,
     Home,
     ExampleForm,
     SousNavBar

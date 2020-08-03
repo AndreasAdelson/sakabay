@@ -38,7 +38,7 @@ new Vue({
     Login,
     Home,
     ExampleForm,
-    SousNavBar
+    SousNavBar,
   }
 })
 

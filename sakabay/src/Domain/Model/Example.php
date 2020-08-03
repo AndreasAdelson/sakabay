@@ -38,7 +38,7 @@ class Example
      * @var string
      * @Expose
      * @Groups({
-     * "api_example"
+     * "api_examples"
      * })
      */
     private $consigne;

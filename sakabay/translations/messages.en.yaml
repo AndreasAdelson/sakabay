@@ -3,6 +3,15 @@ formules: "Our prices"
 company_director: "You are contractor ?"
 who_is: "Who we are ?"
 contact_us: "Contact us"
+menu_admin_actions: "Admin actions"
+menu_role_actions: "Right Management"
+menu_all_role: Roles entity
+menu_all_group: Groups entity
+menu_all_user: Users entity
+menu_all_function: Function entity
+menu_company_actions: Company action
+menu_company_page: My presentation page
+logout: Log out
 recruit: "We recruit"
 login_placeholder: "Username"
 first_name_placeholder: "First name"
@@ -24,5 +33,6 @@ remember_me: "Remember me"
 forgot_password: "Forgot password?"
 create_account: "Create account?"
 error_message_unique_login: "This username is already in use. Choose another one."
+
 
 

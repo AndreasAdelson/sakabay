@@ -85,23 +85,23 @@ export default {
     getAllExamples () {
       return axios.get("/api/examples")
         .then(response => {
-          console.log(response.data);
-          console.log(response.status);
-          console.log(response.statusText);
-          console.log(response.headers);
-          console.log(response.config);
-          this.examples = response[0].data;
+          console.log(response);
+          // console.log(response.status);
+          // console.log(response.statusText);
+          // console.log(response.headers);
+          // console.log(response.config);
+          this.examples = response.data;
         });
     },
 
     submitForm () {
       return axios.post("/api/examples", this.formFields)
         .then(response => {
-          console.log(response.data);
-          console.log(response.status);
-          console.log(response.statusText);
-          console.log(response.headers);
-          console.log(response.config);
+          console.log(response);
+          // console.log(response.status);
+          // console.log(response.statusText);
+          // console.log(response.headers);
+          // console.log(response.config);
         });
     }
   },

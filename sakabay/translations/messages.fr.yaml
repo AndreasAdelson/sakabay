@@ -24,6 +24,17 @@ remember_me: "Se souvenir de moi"
 forgot_password: "Mot de passe oublié?"
 create_account: "Créer un compte?"
 error_message_unique_login: "Ce pseudonyme est déjà utilisé. Choisissez-en un autre."
+menu_admin_actions: "Actions admin"
+menu_role_actions: "Gestion des droits"
+menu_all_role: Entités Rôles
+menu_all_group: Entité Groupes
+menu_all_user: Entité Utilisateurs
+menu_all_function: Entité Fonctions
+menu_company_actions: Actions entreprise
+menu_company_page: Ma page de présentation
+logout: "Se déconnecter"
+
+
 
 
 

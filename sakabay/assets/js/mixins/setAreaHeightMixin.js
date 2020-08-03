@@ -6,10 +6,10 @@ export default {
   },
 
   mounted() {
+    this.$setAreaHeight();
     this.$nextTick(function () {
       window.addEventListener('resize', () => this.$setAreaHeight());
       this.$setAreaHeight();
-      console.log('fait');
     });
   },
 };

@@ -5,7 +5,24 @@
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 
-$yellow_orange_color: #f39c12;
+
+/*---------------------------------
+    VARIABLES
+-----------------------------------*/
+$yellow_light_color: #f2d785;
+$blue_light_color:#2798a0;
+$grey_light_color: #e5e5e5;
+$grey_light_2_color: #a2acba;
+$yellow_login_color: #f39c12;
+$blue_logo_color: #60a3bc;
+$orange_login_color: #c0392b;
+
+$green_color: #038c3e;
+$yellow_color: #F2A413;
+$orange_color: #F26513;
+$red_color: #8C1B24;
+$white_color: #fff;
+$black_color: #000;
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -29,7 +46,7 @@ a:focus {
 }
 
 .navbar {
-  background: #038c3e;
+  background: $yellow_login_color;
   border: none;
   border-radius: 0;
   margin-bottom: 40px;
@@ -45,7 +62,7 @@ a:focus {
 .line {
   width: 100%;
   height: 1px;
-  border-bottom: 1px dashed #038c3e;
+  border-bottom: 1px dashed $green_color;
   margin: 40px 0;
 }
 
@@ -60,14 +77,57 @@ a:focus {
 }
 
 @font-face {
+  font-family: 'Helvetica';
+  src: url('../fonts/Helvetica.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica-Bold';
+  src: url('../fonts/Helvetica-Bold.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Helvetica-Oblique';
+  src: url('../fonts/Helvetica-Oblique.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+@font-face {
   font-family: 'Ubuntu';
   src: url('../fonts/Ubuntu-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
-.fontSKB {
+.fontPatua {
   font-family: 'PatuaOneSKB', sans-serif !important;
+}
+
+.fontLogin {
+  font-family: 'Ubuntu', sans-serif !important;
+}
+
+.fontSideBar {
+  font-family: 'Ubuntu', sans-serif !important;
+  font-weight: bolder;
+}
+
+.fontHelvetica {
+  font-family: 'Helvetica', 'sans-serif' !important;
+}
+
+.fontHelveticaOblique {
+  font-family: 'Helvetica-Oblique', 'sans-serif' !important;
+}
+
+.fontHelveticaBold {
+  font-family: 'Helvetica-Bold', 'sans-serif' !important;
 }
 
 .fontArial {
@@ -157,8 +217,8 @@ a:focus {
   left: -250px;
   height: 100vh;
   z-index: 999;
-  background: #7386D5;
-  color: #fff;
+  background: $white_color;
+  color: $black_color;
   transition: all 0.3s;
   // overflow-y: scroll;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
@@ -173,7 +233,7 @@ a:focus {
   height: 35px;
   line-height: 35px;
   text-align: center;
-  background: #7386D5;
+  background: $white_color;
   position: absolute;
   top: 10px;
   right: 10px;
@@ -184,8 +244,8 @@ a:focus {
 }
 
 #dismiss:hover {
-  background: #fff;
-  color: #7386D5;
+  background: $white_color;
+  color: $orange_color;
 }
 
 .overlay {
@@ -206,83 +266,63 @@ a:focus {
 
 #sidebar .sidebar-header {
   padding: 20px;
-  background: #6d7fcc;
+  background: $white_color;
+  border-bottom: 1px solid $grey_light_2_color;
+  margin-bottom: 10px;
 }
 
-#sidebar ul.components {
-  padding: 20px 0;
-  border-bottom: 1px solid #47748b;
+.menu-category {
+  font-family: 'Ubuntu', sans-serif !important;
+  font-weight: bold;
+  text-decoration: underline;
+  color: $orange_login_color;
 }
 
-#sidebar ul p {
-  color: #fff;
-  padding: 10px;
+.menu-category .menu-sub-category li {
+  padding: 10px 0px 10px 2px;
 }
 
-#sidebar ul li a {
-  padding: 10px;
-  font-size: 1.1em;
-  display: block;
+.menu-sub-link li {
+  padding: 0px 0px 5px 15px;
+}
+
+.menu-sub-category li.active {
+  padding: 5px 0px 5px 0px;
 }
 
 #sidebar ul li a:hover {
-  color: #7386D5;
-  background: #fff;
-}
-
-#sidebar ul li.active>a,
-a[aria-expanded="true"] {
-  color: #fff;
-  background: #6d7fcc;
+  color: $yellow_login_color;
 }
 
 a[data-toggle="collapse"] {
   position: relative;
 }
 
-.dropdown-toggle::after {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
+.logo-home-user {
+  position: fixed;
+  top: 0;
+  left: 50px;
 }
 
-ul ul a {
-  font-size: 0.9em !important;
-  padding-left: 30px !important;
-  background: #6d7fcc;
+.logo-home-user img {
+  width: 50px;
+  height: 50px;
 }
 
-ul.CTAs {
-  padding: 20px;
+.logo-home {
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-ul.CTAs a {
-  text-align: center;
-  font-size: 0.9em !important;
-  display: block;
-  border-radius: 5px;
-  margin-bottom: 5px;
+.logo-home img {
+  width: 50px;
+  height: 50px;
 }
 
-a.download {
-  background: #fff;
-  color: #7386D5;
-}
-
-a.article,
-a.article:hover {
-  background: #6d7fcc !important;
-  color: #fff !important;
-}
-
-
-//Sakabay Style
-
-// body {
-//   padding-top: 50px;
-// }
+/**************************
+* SAKABAY STYLE
+***************************/
 
 .headerMain {
   height: 50px;
@@ -294,8 +334,8 @@ a.article:hover {
 
 .fixed-sous-nav {
   background-color: white;
-  border-color: #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
+  border-color: $grey_light_color;
+  border-bottom: 1px solid $grey_light_color;
   position: fixed;
   top: 50px;
   left: 0;
@@ -310,7 +350,7 @@ a.article:hover {
 }
 
 .sous-nav-bar-item:hover {
-  background-color: #e5e5e5;
+  background-color: $grey_light_color;
 }
 
 //Width
@@ -320,79 +360,75 @@ a.article:hover {
 
 //Background-colors
 .green-bg-skb {
-  background-color: #038c3e; //remettre du vert ou changer le nom de la classe et changer partout où elle est appelée dans le projet.
-}
-
-.red-bg-skb {
-  background-color: red;
+  background-color: $green_color; //remettre du vert ou changer le nom de la classe et changer partout où elle est appelée dans le projet.
 }
 
 //Color
 .yellow-skb {
-  color: #f2d785;
+  color: $yellow_light_color;
 }
 
 .yellow2-skb {
-  color: #F2A413;
+  color: $yellow_color;
 }
 
 .orange-skb {
-  color: #F26513;
+  color: $orange_color;
 }
 
 .red-skb {
-  color: #8C1B24;
+  color: $red_color;
 }
 
-// Bouttons de l''apli
+// Bouttons de l'apli
 
 .btn-menu {
-  color: #f2d785;
+  color: $yellow_light_color;
   width: 50px;
   height: 50px;
-  background-color: #038c3e;
+  background-color: $yellow_login_color;
   border-color: transparent;
 }
 
 .btn-menu:hover {
-  color: #ffffff;
-  background-color: #2798a0;
+  color: $white_color;
+  background-color: $green_color;
 }
 
 .btn-user {
   position: fixed;
   right: 50px;
-  color: #f2d785;
+  color: $yellow_light_color;
   width: 50px;
   height: 50px;
-  background-color: #038c3e;
+  background-color: $yellow_login_color;
 }
 
 .btn-user:hover {
-  color: #ffffff;
-  background-color: #2798a0;
+  color: $white_color;
+  background-color: $green_color;
 }
 
 .btn-connect {
   position: fixed;
   right: 0px;
-  color: #f2d785;
+  color: $yellow_light_color;
   width: 50px;
   height: 50px;
-  background-color: #038c3e;
+  background-color: $yellow_login_color;
 }
 
 .btn-connect:hover {
-  color: #ffffff;
-  background-color: #2798a0;
+  color: $white_color;
+  background-color: $green_color;
 }
 
 .btn-register {
   position: fixed;
   width: 50px;
   height: 50px;
-  background-color: #038c3e;
-  color: #f2d785;
+  background-color: $green_color;
+  color: $yellow_light_color;
 }
 
 .icon-user {
@@ -441,16 +477,12 @@ a.article:hover {
   color: blue;
 }
 
-.fontLogin {
-  font-family: 'Ubuntu', sans-serif !important;
-}
-
 .user_card {
   height: 400px;
   width: 350px;
   margin-top: auto;
   margin-bottom: auto;
-  background: $yellow_orange_color;
+  background: $yellow_login_color;
   position: relative;
   display: flex;
   justify-content: center;
@@ -465,20 +497,13 @@ a.article:hover {
 
 .brand_logo_container {
   position: absolute;
-  height: 170px;
-  width: 170px;
   top: -75px;
-  border-radius: 50%;
-  background: #60a3bc;
   padding: 10px;
-  text-align: center;
 }
 
 .brand_logo {
   height: 150px;
   width: 150px;
-  border-radius: 50%;
-  border: 2px solid white;
 }
 
 .form_container {
@@ -526,7 +551,7 @@ a.article:hover {
   height: 600px;
   margin: 0 auto;
   width: 500px;
-  background: $yellow_orange_color;
+  background: $yellow_login_color;
   position: relative;
   display: flex;
   justify-content: center;
@@ -540,13 +565,8 @@ a.article:hover {
 
 .brand_logo_container_register {
   position: absolute;
-  height: 170px;
-  width: 170px;
   top: -175px;
-  border-radius: 50%;
-  background: #60a3bc;
   padding: 10px;
-  text-align: center;
 }
 
 .card-register-pt {
@@ -646,4 +666,62 @@ a.article:hover {
 
 .error-message {
   font-weight: bold;
+}
+
+.form_container {
+  margin-top: 130px;
+}
+
+.login_btn {
+  width: 100%;
+  background: #c0392b !important;
+  color: white !important;
+}
+
+.login_btn:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+
+.login_container {
+  padding: 0 2rem;
+}
+
+.logout-btn {
+  color: $red_color;
+  text-decoration: underline;
+}
+
+.logout-btn:hover {
+  color: $yellow_login_color;
+}
+
+.input-group-text {
+  background: #c0392b !important;
+  color: white !important;
+  border: 0 !important;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+.input_user,
+.input_pass:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+  background-color: #c0392b !important;
+}
+
+.card-login-pt {
+  padding-top: 7rem !important;
+}
+
+.inscription {
+  text-decoration: underline;
+  color: blue;
+}
+
+.footer-skb {
+  background-color: $yellow_login_color;
 }

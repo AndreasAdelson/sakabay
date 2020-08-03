@@ -1,64 +1,81 @@
 <nav class="navbar p-0 m-0">
-  <button type="button" id="sidebarCollapse" class="btn-menu p-0 w-50px btn">
-    <i class="icon-menu fas fa-bars"></i>
-  </button>
-  <button title="Connectez-vous" onclick="window.location.href='/login'" type="button" class="w-50px p-0 btn-user btn">
-    <i class="icon-login far fa-user"></i>
-  </button>
-  <button href="/register" title="Inscription" onclick="window.location.href='/register'" type="button" class="w-50px p-0 btn-connect btn">
-    <i class="icon-user fas fa-user-plus"></i>
-  </button>
+  {% if app.user %}
+    <button type="button" id="sidebarCollapse" class="btn-menu p-0 w-50px btn">
+      <i class="icon-menu fas fa-bars"></i>
+    </button>
+    <a href="/" class="logo-home-user">
+      <img src="{{ asset('build/images/logo.png') }}"/>
+    </a>
+  {% else %}
+  <a href="/" class="logo-home">
+      <img src="{{ asset('build/images/logo.png') }}"/>
+  </a>
+    <button title="Connectez-vous" type="button" class="w-50px p-0 btn-user btn">
+      <a href="/login"><i class="icon-login far fa-user"></i></a>
+    </button>
+    <button title="Inscription" type="button" class="w-50px p-0 btn-connect btn">
+      <a href="/register"><i class="icon-user fas fa-user-plus"></i></a>
+    </button>
+  {% endif %}
 
 </nav>
 <div class="overlay">
 </div>
 <div class="wrapper">
     <!-- Sidebar -->
-  <nav id="sidebar">
+  <nav id="sidebar" class="fontLogin">
       <div id="dismiss">
           <i class="fas fa-arrow-left"></i>
       </div>
       <div class="sidebar-header">
-          <h3>Bootstrap Sidebar</h3>
+          <h3 class="pb-1">Sakabay</h3>
+          <a href="/logout" class="logout-btn">{{ 'logout'|trans }}</a>
       </div>
-      <ul class="list-unstyled components">
-          <p>Dummy Heading</p>
+      {% for breadcrumb_category in knp_menu_get('main') %}
+        <div class="p-1 pl-3 menu-category fontSize18">
+          {{ breadcrumb_category.label|trans }}
+        </div>
+        <ul class="list-unstyled menu-sub-category m-0">
+        {% for breadcrumb_subcategory in breadcrumb_category %}
           <li class="active">
-              <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
-              <ul class="collapse list-unstyled" id="homeSubmenu">
-                  <li>
-                      <a href="#">Home 1</a>
-                  </li>
-                  <li>
-                      <a href="#">Home 2</a>
-                  </li>
-                  <li>
-                      <a href="#">Home 3</a>
-                  </li>
+          {% if (breadcrumb_subcategory.children|length != 0)%}
+              <div class="container-fluid dropdown-category">
+                <a class="fontSize16" href="#{{ breadcrumb_subcategory.label }}" data-toggle="collapse" aria-expanded="false">
+                  <div class="row">
+                    <div class="col-12 pb-2">
+                      <i class="fas fa-caret-right mr-2" ></i>
+                      {{ breadcrumb_subcategory.label|trans }}
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <ul class="collapse list-unstyled menu-sub-link" id="{{ breadcrumb_subcategory.label }}">
+                {% for breadcrumb_link in breadcrumb_subcategory %}
+                  {% if (breadcrumb_link.uri != "") %}
+                    <li>
+                        <a href="{{ breadcrumb_link.uri }}">{{ breadcrumb_link.label|trans }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
               </ul>
+          {% else %}
+            {% if (breadcrumb_subcategory.uri != "") %}
+            <div class="container-fluid menu-link">
+              <div class="row">
+                <div class="col-12">
+                  <a class="fontSize16" href="{{ breadcrumb_subcategory.uri }}">
+                    {{ breadcrumb_subcategory.label|trans }}
+                  </a>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          {% endif %}
           </li>
-          <li>
-              <a href="#">About</a>
-              <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-              <ul class="collapse list-unstyled" id="pageSubmenu">
-                  <li>
-                      <a href="#">Page 1</a>
-                  </li>
-                  <li>
-                      <a href="#">Page 2</a>
-                  </li>
-                  <li>
-                      <a href="#">Page 3</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-              <a href="#">Portfolio</a>
-          </li>
-          <li>
-              <a href="#">Contact</a>
-          </li>
-      </ul>
+
+        {% endfor %}
+        </ul>
+      {% endfor %}
   </nav>
   <div id="content">
   </div>
@@ -67,22 +84,22 @@
   <div class="container">
     <div class="row">
       <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
-        <a href="#" class="fontSKB fontSize18">{{ 'local_business'|trans }}</a>
+        <a href="/" class="fontPatua fontSize16">{{ 'local_business'|trans }}</a>
       </div>
       <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
-        <a href="#" class="fontSKB fontSize18">{{ 'formules'|trans }}</a>
+        <a href="#" class="fontPatua fontSize16">{{ 'formules'|trans }}</a>
       </div>
       <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
-        <a href="#" class="fontSKB fontSize18">{{ 'company_director'|trans }}</a>
+        <a href="#" class="fontPatua fontSize16">{{ 'company_director'|trans }}</a>
       </div>
       <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
-        <a href="#" class="fontSKB fontSize18">{{ 'who_is'|trans }}</a>
+        <a href="#" class="fontPatua fontSize16">{{ 'who_is'|trans }}</a>
       </div>
       <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
-        <a href="#" class="fontSKB fontSize18">{{ 'contact_us'|trans }}</a>
+        <a href="#" class="fontPatua fontSize16">{{ 'contact_us'|trans }}</a>
       </div>
       <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
-        <a href="#" class="fontSKB fontSize18">{{ 'recruit'|trans }}</a>
+        <a href="#" class="fontPatua fontSize16">{{ 'recruit'|trans }}</a>
       </div>
     </div>
   </div>

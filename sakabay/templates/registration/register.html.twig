@@ -4,59 +4,66 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
-    {{ form_start(registrationForm) }}
-    {# If there are any errors on the form, display them #}
-    {% set formErrors = registrationForm.vars.errors.form.getErrors(true) %}
-    {% if formErrors|length %}
-        <div class="alert alert-danger">
-            <ul>
-                {% for error in formErrors %}
-                    <li>{{ error.message }}</li>
-                {% endfor %}
-            </ul>
+<div class="card-register-pt">
+  {{ form_start(registrationForm) }}
+  <div class="register-card">
+    <div class="row user-header-card">
+      <div class ="col">
+        <div class="d-flex justify-content-center">
+          <div class="brand_logo_container_register">
+            <img src="{{ asset('build/images/logo.png') }}" class="brand_logo" alt="Logo">
+          </div>
         </div>
-    {% endif %}
-
-    {# Render the Form #}
-{#
-        {{ form_row(registrationForm.firstName) }}
-        {{ form_row(registrationForm.lastName) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }} #}
-
-
-  <div class="signup-form">
+      </div>
+    </div>
     <form method="POST">
-		<h2>Register</h2>
-		<p class="hint-text">Create your account. It's free and only takes a minute.</p>
+        <div class="">
         <div class="form-group">
-			<div class="row">
+          {{ form_widget(registrationForm.login, {'attr': {'class': 'form-control', 'placeholder': 'login_placeholder'|trans }}) }}
+          {% if form_errors(registrationForm.login) %}
+            <div class="fontLogin error-message">
+              {{ form_errors(registrationForm.login) }}
+            </div>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col">{{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control', 'placeholder': 'last_name_placeholder'|trans }}) }}</div>
+            <div class="col">{{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control', 'placeholder': 'first_name_placeholder'|trans }}) }}</div>
+          </div>
+        </div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'email_placeholder'|trans, 'required': 'required' }}) }}
+          {% if form_errors(registrationForm.login) %}
+            <div class="fontLogin error-message">
+              {{ form_errors(registrationForm.login) }}
+            </div>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'password_placeholder'|trans, 'required': 'required' }}) }}
+        </div>
+        <div class="form-group">
+          {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'password_confirmation_placeholder'|trans, 'required': 'required' }}) }}
+          {% if form_errors(registrationForm.plainPassword.first) or form_errors(registrationForm.plainPassword.second) %}
+            <div class="fontLogin error-message">
+              {{ form_errors(registrationForm.plainPassword.first) }}
+            </div>
+          {% endif %}
+        </div>
 
-				<div class="col">{{ form_row(registrationForm.firstName) }}</div>
-				{# <div class="col"><input type="text" class="form-control" name="first_name" placeholder="First Name" required="required"></div> #}
-				<div class="col"><input type="text" class="form-control" name="last_name" placeholder="Last Name" required="required"></div>
-			</div>
+        <div class="form-group">
+          <label class="form-check-label fontLogin">
+            {{ form_widget(registrationForm.agreeTerms, {'attr': {'required': 'required' }}) }}
+            {{'accept_terms_begin_message'|trans}} <a href="#" class="inscription">{{'accept_terms_end_message'|trans}}</a>
+          </label>
         </div>
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+          <button type="submit" class="btn login_btn btn-lg fontLogin inscription">{{ 'register_now'|trans }}</button>
         </div>
-		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-        </div>
-		<div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
-        </div>
-        <div class="form-group">
-			<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-		</div>
-		<div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
-        </div>
+      <div class="text-center fontLogin">{{ 'already_have_an_account'|trans }} <a href="#" class="inscription">{{ 'sign_in'|trans }}</a></div>
     </form>
-	<div class="text-center">Already have an account? <a href="#">Sign in</a></div>
+  </div>
 </div>
-{{ form_rest(registrationForm)}}
 {{ form_end(registrationForm) }}
 {% endblock %}

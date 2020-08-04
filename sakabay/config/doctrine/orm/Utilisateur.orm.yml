@@ -16,27 +16,30 @@ App\Domain\Model\Utilisateur:
             type: string
             length: 300
             column: login
-            nullable: true
+            nullable: false
         email:
             type: string
             length: 300
             column: email
-            nullable: true
+            nullable: false
         firstName:
             type: string
             length: 300
             column: first_name
-            nullable: true
+            nullable: false
         password:
             type: string
             length: 300
             column: password
-            nullable: true
+            nullable: false
         lastName:
             type: string
             length: 300
             column: last_name
-            nullable: true
+            nullable: false
+    uniqueConstraints:
+        uniqueGroupCode:
+            columns: [login, email]
     manyToMany:
         groups:
             targetEntity: Group
@@ -49,3 +52,4 @@ App\Domain\Model\Utilisateur:
                 inverseJoinColumns:
                     id_group:
                         referencedColumnName: id
+

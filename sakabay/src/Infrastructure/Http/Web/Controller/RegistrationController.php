@@ -1,6 +1,5 @@
 <?php
 
-// app/src/Controller/RegistrationController.php
 namespace App\Infrastructure\Http\Web\Controller;
 
 use App\Domain\Model\Utilisateur;
@@ -10,16 +9,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
+
+    private $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
     /**
      * @Route("/register", name="app_register")
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $utilisateur = new Utilisateur();
-        $form = $this->createForm(RegistrationFormType::class, $utilisateur);
+        $formOptions = ['translator' => $this->translator];
+        $form = $this->createForm(RegistrationFormType::class, $utilisateur, $formOptions);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

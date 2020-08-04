@@ -6,12 +6,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
+ * @UniqueEntity(fields={"login"})
+ * @UniqueEntity(fields={"email"})
  */
 class Utilisateur implements UserInterface
 {
+
     /**
      * @var string
      */
@@ -64,6 +68,7 @@ class Utilisateur implements UserInterface
      *
      */
     private $groups;
+
 
     public function __construct()
     {

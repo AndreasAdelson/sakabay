@@ -53,7 +53,9 @@ final class Version20200727132904 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_2D7645A559DB3928 ON roles_fontions (id_fonction)');
         $this->addSql('COMMENT ON COLUMN roles_fontions.id_role IS \'Identifiant technique d\'\'un role\'');
         $this->addSql('COMMENT ON COLUMN roles_fontions.id_fonction IS \'Identifiant technique de la fonction\'');
-        $this->addSql('CREATE TABLE utilisateur (id INT NOT NULL, login VARCHAR(300) DEFAULT NULL, email VARCHAR(300) DEFAULT NULL, first_name VARCHAR(300) DEFAULT NULL, password VARCHAR(300) DEFAULT NULL, last_name VARCHAR(300) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE utilisateur (id INT NOT NULL, login VARCHAR(300) NOT NULL, email VARCHAR(300) NOT NULL, first_name VARCHAR(300) NOT NULL, password VARCHAR(300) NOT NULL, last_name VARCHAR(300) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX uniqueUtilisateurLogin ON "utilisateur" (login)');
+        $this->addSql('CREATE UNIQUE INDEX uniqueUtilisateurEmail ON "utilisateur" (email)');
         $this->addSql('COMMENT ON TABLE utilisateur IS \'Entité représentant un user\'');
         $this->addSql('COMMENT ON COLUMN utilisateur.id IS \'Identifiant technique d\'\'un user\'');
         $this->addSql('CREATE TABLE utilisateurs_groupes (id_user INT NOT NULL, id_group INT NOT NULL, PRIMARY KEY(id_user, id_group))');
@@ -80,12 +82,12 @@ final class Version20200727132904 extends AbstractMigration
         $this->addSql('ALTER TABLE utilisateurs_groupes DROP CONSTRAINT FK_59950F8C6B3CA4B');
         $this->addSql('DROP SEQUENCE example_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE fonction_id_seq CASCADE');
-        $this->addSql('DROP SEQUENCE group_id_seq CASCADE');
+        $this->addSql('DROP SEQUENCE groupe_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE role_id_seq CASCADE');
         $this->addSql('DROP SEQUENCE utilisateur_id_seq CASCADE');
         $this->addSql('DROP TABLE example');
         $this->addSql('DROP TABLE fonction');
-        $this->addSql('DROP TABLE "group"');
+        $this->addSql('DROP TABLE groupe');
         $this->addSql('DROP TABLE groupes_roles');
         $this->addSql('DROP TABLE role');
         $this->addSql('DROP TABLE roles_fontions');

@@ -3,7 +3,6 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<login></login>
 
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -33,7 +32,7 @@
         <div class="d-flex justify-content-center h-100">
           <div class="user_card">
            <div class="row user-header-card">
-            <div class ="col">
+              <div class ="col">
                 <div class="d-flex justify-content-center">
                   <div class="brand_logo_container">
                     <img src="{{ asset('build/images/logo.png') }}" class="brand_logo" alt="Logo">
@@ -61,23 +60,23 @@
                 <div class="form-group">
                   <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="customControlInline">
-                    <label class="custom-control-label fontLogin" for="customControlInline">Remember me</label>
+                    <label class="custom-control-label fontLogin" for="customControlInline">{{ 'remember_me'|trans }}</label>
                   </div>
                 </div>
                   <div class="d-flex justify-content-center mt-3 login_container">
                       <button class="btn login_btn fontLogin inscription" type="submit">
-                        Sign in
+                        {{ 'sign_in'|trans }}
                       </button>
               </div>
               </form>
             </div>
 
             <div class="mt-4">
-              <div class="d-flex justify-content-center links">
-                Creer un compte ? <a href="/register" class="ml-2 fontLogin inscription">Inscription</a>
+              <div class="d-flex justify-content-center fontLogin">
+                {{ 'create_account'|trans }} <a href="/register" class="ml-2 fontLogin inscription">{{ 'register'|trans }}</a>
               </div>
-              <div class="d-flex justify-content-center links">
-                <a href="#" class="fontLogin inscription">Forgot your password?</a>
+              <div class="d-flex justify-content-center">
+                <a href="#" class="fontLogin inscription">{{ 'forgot_password'|trans }}</a>
               </div>
             </div>
           </div>

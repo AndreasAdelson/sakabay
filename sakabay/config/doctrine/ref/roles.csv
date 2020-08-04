@@ -3,3 +3,4 @@ GUTILISATEUR;Gestionnaire des utilisateurs;CUTILISATEUR|RUTILISATEUR|UUTILISATEU
 GGROUP;Gestionnaire des groupes;CGROUP|RGROUP|UGROUP|DGROUP
 GFONCTION;Gestionnaire des fonctions;CFONCTION|RFONCTION|UFONCTION|DFONCTION
 GROLE;Gestionnaire des rôles;CROLE|RROLE|UROLE|DROLE
+GADMIN;Groupe de Gestionnaire du site;ADMIN

@@ -18,3 +18,4 @@ CFONCTION; Création d'une fonction
 RFONCTION; Consultation d'une fonction
 UFONCTION; Modification d'une fonction
 DFONCTION; Suppression d'une fonction
+ADMIN; Administrateur du site

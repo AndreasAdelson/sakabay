@@ -17,24 +17,34 @@ import {
   IconsPlugin
 } from 'bootstrap-vue';
 import Login from './components/utilisateur/login';
+import ListUser from './components/admin/utilisateur';
+import EditUser from './components/admin/utilisateur/form';
 import Home from './components/home/home';
 import ExampleForm from './components/example/form';
 import SousNavBar from './components/commons/navBar';
 import cnsRenderUtils from './plugins/cnsRenderUtils';
+import cnsFormUtils from 'plugins/cnsFormUtils';
+import i18n from 'plugins/i18n';
+
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(cnsRenderUtils);
+Vue.use(cnsFormUtils);
+
 Vue.use(VeeValidate, {
   inject: true,
   events: '', // Automatic validation is desactivated
-  fieldsBagName: 'veeFields',
-  errorBagName: 'errors',
+  // fieldsBagName: 'veeFields',
+  // errorBagName: 'errors',
 });
 
 new Vue({
   el: '#app',
+  i18n,
   components: {
+    EditUser,
+    ListUser,
     Login,
     Home,
     ExampleForm,

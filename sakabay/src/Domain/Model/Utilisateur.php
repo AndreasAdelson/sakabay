@@ -2,70 +2,107 @@
 
 namespace App\Domain\Model;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  * @UniqueEntity(fields={"login"})
  * @UniqueEntity(fields={"email"})
+ * @ExclusionPolicy("all")
  */
 class Utilisateur implements UserInterface
 {
 
-    /**
-     * @var string
-     */
     const PREFIX_ROLE = 'ROLE_';
 
-
+    /**
+     * @var integer
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
+     */
     private $id;
 
     /**
      * @var string|null
-     *
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $firstName;
 
 
     /**
      * @var string|null
-     *
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $plainPassword;
 
     /**
      * @var string|null
-     *
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $lastName;
 
     /**
+     * @var string
+     * @Assert\Email()
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $email;
 
 
     /**
+     * @var string
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $login;
 
     /**
-     *
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
-     *
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $password;
 
     /**
      * @var Group[]
-     *
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $groups;
 

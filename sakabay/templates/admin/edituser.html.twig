@@ -3,6 +3,6 @@
 {% block title %}Modifier un utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Modifier un utilisateur</h1>
-    {{ form(userForm) }}
+<h1 class="fontUbuntu orange-skb text-center p-1">Modifier un utilisateur</h1>
+<edit-user :utilisateur-id="{{ utilisateurId }}" ></edit-user>
 {% endblock %}

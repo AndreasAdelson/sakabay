@@ -4,8 +4,8 @@
 namespace App\Infrastructure\Repository;
 
 use App\Domain\Model\Utilisateur;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
  * @method Utilisateur|null find($id, $lockMode = null, $lockVersion = null)
@@ -13,24 +13,37 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  * @method Utilisateur[]    findAll()
  * @method Utilisateur[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UtilisateurRepository extends ServiceEntityRepository
+class UtilisateurRepository extends AbstractRepository implements UtilisateurRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        parent::__construct($registry,  Utilisateur::class);
+        parent::__construct($entityManager, new ClassMetadata(Utilisateur::class));
     }
 
     public function loadUserByUsername($usernameOrEmail)
     {
         return $this->createQuery(
-                'SELECT u
+            'SELECT u
                 FROM App\Domain\Model\Utilisateur u
                 WHERE u.email = :query'
-            )
+        )
             ->setParameter('query', $usernameOrEmail)
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function save(Utilisateur $utilisateur): void
+    {
+        $this->_em->persist($utilisateur);
+        $this->_em->flush($utilisateur);
+    }
+
+    public function delete(Utilisateur $utilisateur): void
+    {
+        $this->_em->remove($utilisateur);
+        $this->_em->flush($utilisateur);
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

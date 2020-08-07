@@ -24,6 +24,11 @@ $red_color: #8C1B24;
 $white_color: #fff;
 $black_color: #000;
 
+/*---------------------------------
+    Couleurs
+-----------------------------------*/
+
+
 body {
   font-family: 'Poppins', sans-serif;
   background: #fafafa;
@@ -43,6 +48,11 @@ a:focus {
   color: inherit;
   text-decoration: none;
   transition: all 0.3s;
+}
+
+// Style title
+.text-center {
+  text-align: center;
 }
 
 .navbar {
@@ -109,7 +119,7 @@ a:focus {
   font-family: 'PatuaOneSKB', sans-serif !important;
 }
 
-.fontLogin {
+.fontUbuntu {
   font-family: 'Ubuntu', sans-serif !important;
 }
 
@@ -358,12 +368,24 @@ a[data-toggle="collapse"] {
   width: 50px;
 }
 
-//Background-colors
+/*---------------------------------
+    back-ground-color
+-----------------------------------*/
 .green-bg-skb {
   background-color: $green_color; //remettre du vert ou changer le nom de la classe et changer partout où elle est appelée dans le projet.
 }
 
-//Color
+/*---------------------------------
+    border-color
+-----------------------------------*/
+
+.border-danger-skb {
+  border-color: $red_color !important;
+}
+
+/*---------------------------------
+    Couleurs
+-----------------------------------*/
 .yellow-skb {
   color: $yellow_light_color;
 }
@@ -407,6 +429,28 @@ a[data-toggle="collapse"] {
 .btn-user:hover {
   color: $white_color;
   background-color: $green_color;
+}
+
+.btn-close {
+  position: fixed;
+  width: 50px;
+  margin: 0.4rem;
+  height: 50px;
+  z-index: 1;
+  background-color: $yellow_login_color;
+}
+
+.btn-close:hover {
+  color: $white_color;
+}
+
+.btn.active.focus,
+.btn.active:focus,
+.btn.focus,
+.btn.focus:active,
+.btn:active:focus,
+.btn:focus {
+  box-shadow: none !important;
 }
 
 .btn-connect {
@@ -510,13 +554,13 @@ a[data-toggle="collapse"] {
   margin-top: 100px;
 }
 
-.login_btn {
+.submit_button {
   width: 100%;
   background: #c0392b !important;
   color: white !important;
 }
 
-.login_btn:focus {
+.submit_button:focus {
   box-shadow: none !important;
   outline: 0px !important;
 }
@@ -672,13 +716,13 @@ a[data-toggle="collapse"] {
   margin-top: 130px;
 }
 
-.login_btn {
+.submit_button {
   width: 100%;
   background: #c0392b !important;
   color: white !important;
 }
 
-.login_btn:focus {
+.submit_button:focus {
   box-shadow: none !important;
   outline: 0px !important;
 }
@@ -724,4 +768,13 @@ a[data-toggle="collapse"] {
 
 .footer-skb {
   background-color: $yellow_login_color;
+}
+
+.tablestyle {
+  border-block-end-style: dashed;
+  border-block-color: $orange_color;
+}
+
+.tableitem {
+  background-color: #f39c12;
 }

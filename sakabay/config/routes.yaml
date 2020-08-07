@@ -2,14 +2,14 @@ home:
    path: /
    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::index
    methods: [GET, POST]
-admin:
-    path: /admin
-    controller: App\Infrastructure\Http\Web\Controller\AdminController::index
-    methods: [GET, POST]
 user_admin_index:
     path: /admin/utilisateur
-    controller: App\Infrastructure\Http\Web\Controller\AdminController::usersList
-    methods: [GET]
+    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::usersList
+    methods:  [GET, POST]
+user_edit_admin_index:
+    path: /admin/utilisateur/edit/{id}
+    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::editUser
+    methods: [POST,GET]
 # Routes for Example object
 example_index:
     path: /example

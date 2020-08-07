@@ -1,0 +1,20 @@
+{
+  "commons": {
+    "actions": "Actions",
+    "edit": "Edit"
+  },
+  "admin": {
+    "user": {
+      "title": "Users table",
+      "fields": {
+        "email": "Email",
+        "login": "Login",
+        "first_name": "First Name",
+        "last_name": "Last Name"
+      }
+    }
+  },
+  "error_message_required": "This field is mandatory. Thank you for filling it in.",
+  "error_message_required_login": "La taille de votre login ne doit pas être inférieure à 5 caractères ni supérieur à 10 caractères",
+  "error_message_email": "Please enter a valid email"
+}

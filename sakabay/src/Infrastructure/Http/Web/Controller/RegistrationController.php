@@ -41,7 +41,6 @@ class RegistrationController extends AbstractController
                     $utilisateur,
                     $form->get('plainPassword')->getData()
                 )
-
             );
             dump($utilisateur);
 

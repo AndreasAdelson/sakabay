@@ -23,35 +23,45 @@ class Group
     /**
      * @var int
      * @Expose
-     * @Groups({})
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $id;
 
     /**
      * @var string
      * @Expose
-     * @Groups({})
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $code;
 
     /**
      * @var string
      * @Expose
-     * @Groups({})
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $name;
 
     /**
      * @var Role[]
      * @Expose
-     * @Groups({})
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $roles;
 
     /**
      * @var Utilisateur[]
      * @Expose
-     * @Groups({})
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $utilisateurs;
 

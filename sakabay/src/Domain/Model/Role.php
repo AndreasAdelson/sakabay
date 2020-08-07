@@ -22,28 +22,36 @@ class Role
     /**
      * @var int
      * @Expose
-     * @Groups({})
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $id;
 
     /**
      * @var string
      * @Expose
-     * @Groups({})
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $name;
 
     /**
      * @var string
      * @Expose
-     * @Groups({})
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $code;
 
     /**
      * @var Fonction[]
      * @Expose
-     * @Groups({})
+     * @Groups({
+     * "api_utilisateurs"
+     * })
      */
     private $fonctions;
 

@@ -85,11 +85,6 @@ export default {
     getAllExamples () {
       return axios.get("/api/examples")
         .then(response => {
-          console.log(response);
-          // console.log(response.status);
-          // console.log(response.statusText);
-          // console.log(response.headers);
-          // console.log(response.config);
           this.examples = response.data;
         });
     },
@@ -97,11 +92,6 @@ export default {
     submitForm () {
       return axios.post("/api/examples", this.formFields)
         .then(response => {
-          console.log(response);
-          // console.log(response.status);
-          // console.log(response.statusText);
-          // console.log(response.headers);
-          // console.log(response.config);
         });
     }
   },

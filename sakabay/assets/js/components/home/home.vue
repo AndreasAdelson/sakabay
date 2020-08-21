@@ -10,9 +10,6 @@
           center
           alt="Center image"
         ></b-img>
-        <p>toto</p>
-        <h1>Sakabay</h1>
-
         <!-- <img :src="images.logo" alt="logo"> -->
       </b-col>
     </b-row>

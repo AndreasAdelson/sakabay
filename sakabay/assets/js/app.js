@@ -19,6 +19,7 @@ import {
 import Login from './components/utilisateur/login';
 import ListUser from './components/admin/utilisateur';
 import EditUser from './components/admin/utilisateur/form';
+import EditAccount from './components/utilisateur/editAccount';
 import Home from './components/home/home';
 import ExampleForm from './components/example/form';
 import SousNavBar from './components/commons/navBar';
@@ -35,8 +36,6 @@ Vue.use(cnsFormUtils);
 Vue.use(VeeValidate, {
   inject: true,
   events: '', // Automatic validation is desactivated
-  // fieldsBagName: 'veeFields',
-  // errorBagName: 'errors',
 });
 
 new Vue({
@@ -49,6 +48,7 @@ new Vue({
     Home,
     ExampleForm,
     SousNavBar,
+    EditAccount
   }
 })
 

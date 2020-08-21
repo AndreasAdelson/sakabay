@@ -37,12 +37,33 @@ class UtilisateurController extends AbstractController
 
     /**
      * @Security("is_granted('ROLE_ADMIN')")
-     * @Route("/admin/utilisateur/edit/{id}", name="modifier_utilisateur")
+     * @Route("/admin/utilisateur/edit/{id}", name="user_edit_admin_index")
      */
-    public function editUser(int $id)
+    public function editUserAdmin(int $id)
     {
         return $this->render('admin/edituser.html.twig', [
             'utilisateurId' => $id,
         ]);
+    }
+
+    /**
+     * Rajouter le rôle permettant de gérer la modification de son propre profil
+     * @Route("/utilisateur/edit/{id}", name="user_edit_admin_index")
+     */
+    public function editUser(int $id)
+    {
+        return $this->render('utilisateur/edituser.html.twig', [
+            'utilisateurId' => $id,
+            'urlPrecedente' => $this->urlPrecedente(),
+        ]);
+    }
+
+    private function urlPrecedente()
+    {
+        $urlPrecedente = "/";
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $urlPrecedente = $_SERVER['HTTP_REFERER'];
+        }
+        return $urlPrecedente;
     }
 }

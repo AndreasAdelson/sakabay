@@ -37,6 +37,17 @@ App\Domain\Model\Utilisateur:
             length: 300
             column: last_name
             nullable: false
+        imageProfil:
+            type: string
+            length: 100
+            column: image_profil
+            nullable: false
+        updated:
+            type: datetime
+            nullable: true
+            options:
+                default: CURRENT_TIMESTAMP
+
     uniqueConstraints:
         uniqueGroupCode:
             columns: [login, email]

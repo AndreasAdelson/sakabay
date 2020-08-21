@@ -4,11 +4,11 @@
       <i class="icon-menu fas fa-bars"></i>
     </button>
     <a href="/" class="logo-home-user">
-      <img src="{{ asset('build/images/logo.png') }}"/>
+      <img src="{{ asset('build/logo.png') }}"/>
     </a>
   {% else %}
   <a href="/" class="logo-home">
-      <img src="{{ asset('build/images/logo.png') }}"/>
+      <img src="{{ asset('build/logo.png') }}"/>
   </a>
     <button title="Connectez-vous" type="button" class="w-50px p-0 btn-user btn">
       <a href="/login"><i class="icon-login far fa-user"></i></a>
@@ -28,8 +28,26 @@
           <i class="fas fa-arrow-left"></i>
       </div>
       <div class="sidebar-header">
-          <h3 class="pb-1">Sakabay</h3>
-          <a href="/logout" class="logout-btn">{{ 'logout'|trans }}</a>
+      {% if app.user %}
+        <div class="row user-info mb-1 pb-2">
+          <div class="col-3 my-auto">
+            <img class="rounded-circle logo-size-50" src="{{ asset('build/default_user.png') }}"/>
+          </div>
+          <div class="col-9 pr-1 pl-3 my-auto">
+            {{ app.user.login }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <a href="/utilisateur/edit/{{ app.user.id }}" class="edit_account">{{ 'edit_account'|trans }}</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <a href="/logout" class="logout-btn">{{ 'logout'|trans }}</a>
+          </div>
+        </div>
+        {% endif %}
       </div>
       {% for breadcrumb_category in knp_menu_get('main') %}
         <div class="p-1 pl-3 menu-category fontSize18">
@@ -83,22 +101,22 @@
 <nav class="fixed-sous-nav w-100" id="sousNav">
   <div class="container">
     <div class="row">
-      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+      <div class="col sous-nav-bar-item align-items-center d-flex justify-content-center">
         <a href="/" class="fontPatua fontSize16">{{ 'local_business'|trans }}</a>
       </div>
-      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+      {# <div class="col sous-nav-bar-item align-items-center d-flex justify-content-center">
         <a href="#" class="fontPatua fontSize16">{{ 'formules'|trans }}</a>
-      </div>
-      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+      </div> #}
+      <div class="col sous-nav-bar-item align-items-center d-flex justify-content-center">
         <a href="#" class="fontPatua fontSize16">{{ 'company_director'|trans }}</a>
       </div>
-      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+      <div class="col sous-nav-bar-item align-items-center d-flex justify-content-center">
         <a href="#" class="fontPatua fontSize16">{{ 'who_is'|trans }}</a>
       </div>
-      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+      <div class="col sous-nav-bar-item align-items-center d-flex justify-content-center">
         <a href="#" class="fontPatua fontSize16">{{ 'contact_us'|trans }}</a>
       </div>
-      <div class="col-2 sous-nav-bar-item align-items-center d-flex justify-content-center">
+      <div class="col sous-nav-bar-item align-items-center d-flex justify-content-center">
         <a href="#" class="fontPatua fontSize16">{{ 'recruit'|trans }}</a>
       </div>
     </div>

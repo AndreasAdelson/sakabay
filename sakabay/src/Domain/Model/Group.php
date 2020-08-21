@@ -24,7 +24,6 @@ class Group
      * @var int
      * @Expose
      * @Groups({
-     * "api_utilisateurs"
      * })
      */
     private $id;
@@ -51,7 +50,6 @@ class Group
      * @var Role[]
      * @Expose
      * @Groups({
-     * "api_utilisateurs"
      * })
      */
     private $roles;
@@ -60,7 +58,6 @@ class Group
      * @var Utilisateur[]
      * @Expose
      * @Groups({
-     * "api_utilisateurs"
      * })
      */
     private $utilisateurs;

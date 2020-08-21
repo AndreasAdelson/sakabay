@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
@@ -22,6 +23,7 @@ class Utilisateur implements UserInterface
 {
 
     const PREFIX_ROLE = 'ROLE_';
+    const SERVER_PATH_TO_IMAGE_FOLDER = '../../../sharedFiles';
 
     /**
      * @var integer
@@ -105,6 +107,27 @@ class Utilisateur implements UserInterface
      * })
      */
     private $groups;
+
+    /**
+     * @var string
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs"
+     * })
+     */
+    private $imageProfil;
+
+    /**
+     * Unmapped property to handle file uploads
+     */
+    private $file;
+
+
+    /**
+     * @var DateTime
+     *
+     */
+    private $updated;
 
 
     public function __construct()
@@ -329,5 +352,57 @@ class Utilisateur implements UserInterface
             }
         }
         $this->roles = array_values(array_unique($tmpRoles));
+    }
+
+    /**
+     * @return  string
+     */
+    public function getImageProfil()
+    {
+        return $this->imageProfil;
+    }
+
+    /**
+     * @param  string  $imageProfil
+     *
+     * @return  self
+     */
+    public function setImageProfil(string $imageProfil)
+    {
+
+        $this->imageProfil = $imageProfil;
+        return $this;
+    }
+
+    /**
+     * Get the value of updated
+     *
+     * @return  datetime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set the value of updated
+     *
+     * @param  datetime  $updated
+     *
+     * @return  self
+     */
+    public function setUpdated(\DateTimeInterface $updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Updates the hash value to force the preUpdate and postUpdate events to fire.
+     */
+    public function refreshUpdated()
+    {
+        $this->setUpdated(new \DateTime());
     }
 }

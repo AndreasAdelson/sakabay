@@ -3,7 +3,9 @@
 namespace App\Infrastructure\Http\Rest\Controller;
 
 use App\Application\Form\Type\EditUtilisateurType;
+use App\Application\Form\Type\EditAccountType;
 use App\Application\Service\UtilisateurService;
+use App\Application\Service\FileUploader;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
@@ -97,6 +99,42 @@ final class UtilisateurController extends AbstractFOSRestController
         $this->entityManager->flush($utilisateur);
 
         $ressourceLocation = $this->generateUrl('user_admin_index');
+        return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
+    }
+
+    /**
+     * @Rest\View()
+     * @Rest\Post("/utilisateur/edit/{utilisateurId}")
+     *
+     * @return View
+     */
+    public function editAccount(int $utilisateurId, Request $request, string $uploadDir, FileUploader $uploader)
+    {
+        $utilisateur = $this->utilisateurService->getUtilisateur($utilisateurId);
+
+        if (!$utilisateur) {
+            throw new EntityNotFoundException('Utilisateur with id ' . $utilisateurId . ' does not exist!');
+        }
+        $file = $request->files->get('file');
+
+        if (!empty($file)) {
+            $filename = $file->getClientOriginalName();
+            $uploader->upload($uploadDir, $file, $filename);
+        }
+
+        $formOptions = [
+            'translator' => $this->translator,
+        ];
+
+        $form = $this->createForm(EditAccountType::class, $utilisateur, $formOptions);
+        $form->submit($request->request->all());
+        if (!$form->isValid()) {
+            return $form;
+        }
+        $this->entityManager->persist($utilisateur);
+        $this->entityManager->flush($utilisateur);
+
+        $ressourceLocation = $this->generateUrl('home');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 

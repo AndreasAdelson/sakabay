@@ -84,11 +84,81 @@ const CnsFormUtils = {
         let underscoreField = this.$camelCaseToUnderscoreCase(field);
         this.formFields[field] = data[underscoreField];
       });
-    }
+    };
 
     Vue.prototype.$camelCaseToUnderscoreCase = function (field) {
       return field.replace(/([A-Z])/g, "_$1").toLowerCase();
-    }
+    };
+
+    /**
+     * Redirect to given URL
+     * @param {String} url
+     */
+    Vue.prototype.$goTo = function (url) {
+      window.location.assign(url);
+    };
+
+    Vue.prototype.$getTransformedValue = function (value) {
+      let transformedValue = undefined;
+      if (value instanceof Date) {
+        transformedValue = {
+          day: value.getDate(),
+          month: value.getMonth() + 1,
+          year: value.getFullYear(),
+        };
+      } else if (value instanceof Array) {
+        if (value.length) {
+          let newValueArray = new Array();
+          value.forEach(elem => {
+            const tsf = this.$getTransformedValue(elem);
+            if (tsf !== undefined) {
+              newValueArray.push(tsf);
+            }
+          });
+          if (newValueArray.length) {
+            transformedValue = newValueArray;
+          }
+        }
+      } else if (value instanceof Object) {
+        if (Object.keys(value).length) {
+          if (value.id) {
+            transformedValue = value.id;
+          } else {
+            let newValueObject = new Object();
+            for (let key in value) {
+              const tsf = this.$getTransformedValue(value[key]);
+              if (tsf !== undefined) {
+                newValueObject[key] = tsf;
+              }
+            }
+            if (Object.keys(newValueObject).length) {
+              transformedValue = newValueObject;
+            }
+          }
+        }
+      } else if (![null, undefined, '', false].includes(value)) {
+        transformedValue = value;
+      }
+      return transformedValue;
+    };
+
+    Vue.prototype.$getFormFieldsData = function (formFields = this.formFields, formData = new FormData()) {
+      let transformedFormFields = this.$getTransformedValue(formFields);
+      _.forEach(_.keys(transformedFormFields), field => {
+        if (transformedFormFields[field] instanceof Array) {
+          transformedFormFields[field].forEach(elem => {
+            formData.append(field + '[]', elem);
+          });
+        } else if (transformedFormFields[field] instanceof Object) {
+          for (let key in transformedFormFields[field]) {
+            formData.append(`${field}[${key}]`, transformedFormFields[field][key]);
+          }
+        } else {
+          formData.append(field, transformedFormFields[field]);
+        }
+      });
+      return formData;
+    };
   }
 }
 

@@ -10,6 +10,11 @@ user_edit_admin_index:
     path: /admin/utilisateur/edit/{id}
     controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::editUser
     methods: [POST,GET]
+user_edit_index:
+    path: /utilisateur/edit/{id}
+    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::editUser
+    methods: [POST, GET]
+
 # Routes for Example object
 example_index:
     path: /example

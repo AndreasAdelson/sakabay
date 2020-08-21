@@ -39,15 +39,16 @@ Encore
 
   ////images
   .copyFiles({
-             from: './assets/pictures',
-             // optional target path, relative to the output dir
-             //to: 'images/[path][name].[ext]',
+    from: './assets/pictures',
+    // to: 'images'
+    // optional target path, relative to the output dir
+    //to: 'images/[path][name].[ext]',
 
-             // if versioning is enabled, add the file hash too
-             //to: 'images/[path][name].[hash:8].[ext]',
+    // if versioning is enabled, add the file hash too
+    //to: 'images/[path][name].[hash:8].[ext]',
 
-             // only copy files matching this pattern
-             //pattern: /\.(png|jpg|jpeg)$/
+    // only copy files matching this pattern
+    //pattern: /\.(png|jpg|jpeg)$/
   })
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   // .splitEntryChunks()
@@ -84,5 +85,4 @@ var config = Encore.getWebpackConfig();
 
 config.resolve.extensions.push('.json');
 config.resolve.modules = ['assets/js', 'node_modules'];
-
 module.exports = config;

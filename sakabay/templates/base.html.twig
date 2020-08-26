@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{{ 'sakabay'|trans }}{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('build/css/bootstrap-vue.css') }}">
             <link rel="stylesheet" href="{{ asset('build/css/bootstrap.css') }}">
@@ -38,8 +38,13 @@
             let headerMainHeight = document.getElementById('headerMain').clientHeight;
             let sousNavHeight = document.getElementById('sousNav').clientHeight;
             let totalHeaderHeight = headerMainHeight + sousNavHeight;
+            let footerHeight = document.getElementById('footer-skb').clientHeight;
+            let pageTotalHeight = document.documentElement.clientHeight;
+            let bodyHeightLeft = pageTotalHeight - totalHeaderHeight - footerHeight;
 
             $('body').css('padding-top', totalHeaderHeight);
+            $('.error-body').css('height', bodyHeightLeft);
+            $('.home-body').css('min-height', bodyHeightLeft)
 
             $('#dismiss, .overlay').on('click', function () {
               // hide sidebar
@@ -60,7 +65,7 @@
           </script>
         {% endblock %}
     </body>
-    <footer class="footer-skb">
+    <footer class="footer-skb" id="footer-skb">
     {% block footer %}
       <div class="container">
         <div class="row p-5">

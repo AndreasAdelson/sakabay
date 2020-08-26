@@ -2,12 +2,11 @@
 
 namespace App\Infrastructure\Http\Web\Controller;
 
-use App\Domain\Model\Utilisateur;
 use App\Infrastructure\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UtilisateurController extends AbstractController
 {
@@ -16,12 +15,7 @@ class UtilisateurController extends AbstractController
      */
     public function index()
     {
-        $words = [
-            'sky', 'cloud', 'wood', 'rock', 'forest',
-            'mountain', 'breeze'
-        ];
         return $this->render('utilisateur/index.html.twig', [
-            'words' => $words,
             'controller_name' => 'UtilisateurController',
         ]);
     }
@@ -52,6 +46,9 @@ class UtilisateurController extends AbstractController
      */
     public function editUser(int $id)
     {
+        if ($this->getUser()->getId() != $id) {
+            throw new AccessDeniedException('Ceci n\'est pas ta page');
+        }
         return $this->render('utilisateur/edituser.html.twig', [
             'utilisateurId' => $id,
             'urlPrecedente' => $this->urlPrecedente(),

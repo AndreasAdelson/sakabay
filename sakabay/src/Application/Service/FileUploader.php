@@ -23,4 +23,13 @@ class FileUploader
             throw new FileException('Failed to upload file');
         }
     }
+
+    public function deleteOldFile($uploadDir, $filename)
+    {
+        try {
+            unlink($uploadDir . '/' . $filename);
+        } catch (FileException $e) {
+            throw new FileException('Failed to delete file');
+        }
+    }
 }

@@ -6,9 +6,9 @@ use App\Application\Form\Type\EditUtilisateurType;
 use App\Application\Form\Type\EditAccountType;
 use App\Application\Service\UtilisateurService;
 use App\Application\Service\FileUploader;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
@@ -69,6 +69,10 @@ final class UtilisateurController extends AbstractFOSRestController
     public function getUtilisateur(int $utilisateurId): View
     {
         $utilisateur = $this->utilisateurService->getUtilisateur($utilisateurId);
+        if (!$utilisateur) {
+            throw $this->createNotFoundException('Utilisateur with id ' . $utilisateurId . ' does not exist!');
+            return View::create([], Response::HTTP_NOT_FOUND);
+        }
 
         return View::create($utilisateur, Response::HTTP_OK);
     }
@@ -84,7 +88,7 @@ final class UtilisateurController extends AbstractFOSRestController
         $utilisateur = $this->utilisateurService->getUtilisateur($utilisateurId);
 
         if (!$utilisateur) {
-            throw new EntityNotFoundException('Utilisateur with id ' . $utilisateurId . ' does not exist!');
+            throw new NotFoundHttpException('Utilisateur with id ' . $utilisateurId . ' does not exist!');
         }
 
         $formOptions = [
@@ -118,10 +122,16 @@ final class UtilisateurController extends AbstractFOSRestController
         $file = $request->files->get('file');
 
         if (!empty($file)) {
-            $filename = $file->getClientOriginalName();
-            $uploader->upload($uploadDir, $file, $filename);
+            $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFileName);
+            $newFileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+            $uploader->upload($uploadDir, $file, $newFileName);
+            $request->request->set('imageProfil', $newFileName);
+            $oldImage = $utilisateur->getImageProfil();
+            if (!empty($oldImage)) {
+                $uploader->deleteOldFile($uploadDir, $oldImage);
+            }
         }
-
         $formOptions = [
             'translator' => $this->translator,
         ];
@@ -146,8 +156,13 @@ final class UtilisateurController extends AbstractFOSRestController
      */
     public function deleteUtilisateurs(int $utilisateurId): View
     {
-        $utilisateur = $this->utilisateurService->deleteUtilisateur($utilisateurId);
+        try {
+            $utilisateur = $this->utilisateurService->deleteUtilisateur($utilisateurId);
+        } catch (EntityNotFoundException $e) {
+            throw new NotFoundHttpException($e->getMessage());
+        }
+        $ressourceLocation = $this->generateUrl('user_admin_index');
 
-        return View::create($utilisateur, Response::HTTP_NO_CONTENT);
+        return View::create($utilisateur, Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 }

@@ -60,7 +60,7 @@ export default {
     deleteUtilisateur (utilisateurId, index) {
       return axios.delete("/api/admin/utilisateurs/" + utilisateurId)
         .then(response => {
-          this.utilisateurs.splice(index, 1);
+          window.location.assign(response.headers.location);
         });
     },
   },

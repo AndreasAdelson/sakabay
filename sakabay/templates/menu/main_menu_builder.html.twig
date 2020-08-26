@@ -31,7 +31,11 @@
       {% if app.user %}
         <div class="row user-info mb-1 pb-2">
           <div class="col-3 my-auto">
+          {% if app.user.imageProfil %}
+            <img class="rounded-circle logo-size-50" src="{{ asset('build/images/uploads/' ~ app.user.imageProfil) }}"/>
+          {% else %}
             <img class="rounded-circle logo-size-50" src="{{ asset('build/default_user.png') }}"/>
+          {% endif %}
           </div>
           <div class="col-9 pr-1 pl-3 my-auto">
             {{ app.user.login }}

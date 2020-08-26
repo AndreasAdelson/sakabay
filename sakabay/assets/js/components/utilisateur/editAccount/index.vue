@@ -191,7 +191,7 @@ export default {
         login: [],
       },
       urlImageProfil: null,
-      imageProfil: '',
+      imageProfilSelected: null,
       utilisateur: null,
       imageName: ''
     };
@@ -212,9 +212,9 @@ export default {
         .then(response => {
           this.$setEditForm(response.data);
           this.utilisateur = response.data;
-        if (this.utilisateur.image_profil) {
-          this.urlImageProfil = '../../../sharedFiles/' + this.utilisateur.image_profil;
-        }
+          if (this.utilisateur.image_profil) {
+            this.urlImageProfil = "/build/images/uploads/" + this.utilisateur.image_profil;
+          }
         }).catch(e => {
           console.log(e);
         });
@@ -224,19 +224,19 @@ export default {
   methods: {
     onFileSelected () {
       console.log(this.$refs.imageProfil.files[0], 'test');
-      this.imageProfil = this.$refs.imageProfil.files[0];
+      this.imageProfilSelected = this.$refs.imageProfil.files[0];
       this.imageName = this.$refs.imageProfil.files[0].name;
-      this.urlImageProfil = URL.createObjectURL(this.imageProfil);
+      this.urlImageProfil = URL.createObjectURL(this.imageProfilSelected);
     },
 
     submitForm () {
       let formData = this.$getFormFieldsData(this.formFields, formData);
-      formData.append('file', this.imageProfil);
-      formData.append('imageProfil', this.imageName);
+      if (this.imageProfilSelected) {
+        formData.append('file', this.imageProfilSelected);
+      }
       return axios.post("/api/utilisateur/edit/" + this.utilisateurId, formData)
         .then(response => {
-          console.log(formData, 'formData2');
-          // window.location.assign(response.headers.location);
+          window.location.assign(response.headers.location);
         }).catch(e => {
           if (e.response && e.response.status && e.response.status == 400) {
             this.$handleFormError(e.response.data);

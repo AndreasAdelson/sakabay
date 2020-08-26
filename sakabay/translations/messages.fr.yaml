@@ -1,11 +1,27 @@
+sakabay: Sakabay
+
 user_title_page: "Page admin"
 user_title_edit_page: "Modifier un utilisateur"
+
+#Navbar
 local_business: "Business local"
 formules: "Nos formules"
 company_director: "Vous êtes entrepreneurs ?"
 who_is: "Qui sommes nous ?"
 contact_us: "Nous contacter"
 recruit: "Nous recrutons"
+
+#sidebar-menu
+menu_admin_actions: "Actions admin"
+menu_role_actions: "Gestion des droits"
+menu_all_role: Entités Rôles
+menu_all_group: Entité Groupes
+menu_all_user: Entité Utilisateurs
+menu_all_function: Entité Fonctions
+menu_company_actions: Actions entreprise
+menu_company_page: Ma page de présentation
+
+#form-user
 login_placeholder: "Pseudonyme"
 first_name_placeholder: "Prénom"
 last_name_placeholder: "Nom"
@@ -26,16 +42,20 @@ remember_me: "Se souvenir de moi"
 forgot_password: "Mot de passe oublié?"
 create_account: "Créer un compte?"
 error_message_unique_login: "Ce pseudonyme est déjà utilisé. Choisissez-en un autre."
-menu_admin_actions: "Actions admin"
-menu_role_actions: "Gestion des droits"
-menu_all_role: Entités Rôles
-menu_all_group: Entité Groupes
-menu_all_user: Entité Utilisateurs
-menu_all_function: Entité Fonctions
-menu_company_actions: Actions entreprise
-menu_company_page: Ma page de présentation
 logout: "Se déconnecter"
 edit_account: "Modifier son compte"
+
+# Page d'erreur 404
+
+error_notfound_menu: "Page non trouvée !"
+error_notfound_message: "La page recherchée n'est pas accessible. Vérifiez que l'URL que vous avez saisie est correcte ou "
+error_notfound_message_link: "revenez à la page d'accueil"
+
+# Page d'erreur générique
+
+error_generic_title: "Erreur"
+error_generic_message: "Une erreur est survenue."
+error_application_access_message: "Vous ne disposez pas des droits pour afficher cette page."
 
 
 

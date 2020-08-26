@@ -367,9 +367,8 @@ class Utilisateur implements UserInterface
      *
      * @return  self
      */
-    public function setImageProfil(string $imageProfil)
+    public function setImageProfil(?string $imageProfil)
     {
-
         $this->imageProfil = $imageProfil;
         return $this;
     }

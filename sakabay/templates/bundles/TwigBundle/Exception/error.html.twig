@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'error_generic_title'|trans }} {{ status_code }} {{ status_text }}{% endblock %}
+
+{% block body %}
+<body>
+  <div class="container">
+    <div class="text-center p-3 error-body">
+      <h1>{{ 'error_generic_title'|trans }}</h1>
+
+      {% if status_code != 403 %}
+        <div>
+          {{ 'error_generic_message'|trans }}
+        </div>
+      {% else %}
+        <div>
+          {{ 'error_application_access_message'|trans }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</body>
+{% endblock %}

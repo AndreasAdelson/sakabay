@@ -1,12 +1,12 @@
 <template>
   <b-container
     fluid
-    class="p-4"
+    class="p-4 home-body"
   >
     <b-row>
       <b-col>
         <b-img
-          :src="images.default"
+          :src="images"
           center
           alt="Center image"
         ></b-img>
@@ -22,7 +22,7 @@ import setAreaHeightMixin from 'mixins/setAreaHeightMixin';
 export default {
   data () {
     return {
-      images: require('../../../pictures/logo.png')
+      images: '/build/logo.png'
     }
   },
   components: {

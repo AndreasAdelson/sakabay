@@ -20,7 +20,7 @@ final class Version20200824143449 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE utilisateur ADD image_profil VARCHAR(100) NOT NULL, ADD updated DATETIME DEFAULT CURRENT_TIMESTAMP');
+        $this->addSql('ALTER TABLE utilisateur ADD image_profil VARCHAR(100) DEFAULT NULL, ADD updated DATETIME DEFAULT CURRENT_TIMESTAMP');
     }
 
     public function down(Schema $schema): void

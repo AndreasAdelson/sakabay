@@ -26,7 +26,7 @@ import SousNavBar from './components/commons/navBar';
 import cnsRenderUtils from './plugins/cnsRenderUtils';
 import cnsFormUtils from 'plugins/cnsFormUtils';
 import i18n from 'plugins/i18n';
-
+import Avatar from 'vue-avatar';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -42,6 +42,7 @@ new Vue({
   el: '#app',
   i18n,
   components: {
+    Avatar,
     EditUser,
     ListUser,
     Login,

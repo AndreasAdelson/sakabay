@@ -41,7 +41,7 @@ App\Domain\Model\Utilisateur:
             type: string
             length: 100
             column: image_profil
-            nullable: false
+            nullable: true
         updated:
             type: datetime
             nullable: true

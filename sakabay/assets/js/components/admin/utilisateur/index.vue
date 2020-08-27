@@ -1,74 +1,148 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="table-responsive tablestyle">
-        <table class="table table-hover">
-          <caption class="fontUbuntu orange-skb">{{ this.$t('admin.user.title') }}</caption>
-          <thead class="thead tableitem">
-            <tr>
-              <th scope="col">{{ this.$t('admin.user.fields.email') }}</th>
-              <th scope="col">{{ this.$t('admin.user.fields.login') }}</th>
-              <th scope="col">{{ this.$t('admin.user.fields.first_name') }}</th>
-              <th scope="col">{{ this.$t('admin.user.fields.last_name') }}</th>
-              <th scope="col">{{ this.$t('commons.actions') }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-for="(utilisateur, index) in utilisateurs"
-              :key="'utilisateur_info'+utilisateur.login"
-            >
-              <td>{{ utilisateur.email }}</td>
-              <td>{{ utilisateur.login }}</td>
-              <td>{{ utilisateur.first_name }}</td>
-              <td>{{ utilisateur.last_name }}</td>
-              <td>
-                <a :href="'/admin/utilisateur/edit/'+ utilisateur.id">
-                  <button
-                    class="btn btn-secondary"
-                    type="button"
-                  >
-                    <i class="fas fa-edit"></i>
-                  </button>
-                </a>
-                <button
-                  class="btn btn-secondary"
-                  type="button"
-                  @click="deleteUtilisateur(utilisateur.id,index)"
-                >
-                  <i class="fas fa-trash"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <div class="container-fluid skb-body">
+    <div class="row my-4">
+      <div class="col-4">
+        <h1 class="fontUbuntu orange-skb">{{ this.$t('admin.user.title') }}</h1>
+      </div>
+      <div class="col-2">
+        <vue-loaders-ball-beat
+          color="red"
+          scale="1"
+        ></vue-loaders-ball-beat>
+      </div>
+      <div class="col-5">
+        <b-form-group
+          horizontal
+          class="mb-0"
+        >
+          <b-input-group>
+            <b-form-input
+              v-model="currentFilter"
+              :placeholder="$t('commons.rechercher')"
+              @keydown.enter.native="applyFilter()"
+            />
+            <b-input-group-append>
+              <b-btn
+                :disabled="!currentFilter"
+                @click="applyFilter()"
+              ><i class="fas fa-search"></i></b-btn>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form-group>
       </div>
     </div>
+    <!-- Table -->
+    <b-row>
+      <b-col cols="12">
+        <b-table
+          class="tablestyle"
+          ref="table"
+          :items="refreshData"
+          :fields="table.field"
+          :current-page="pager.currentPage"
+          :per-page="pager.perPage"
+          :busy.sync="table.isBusy"
+          :filter="table.filter"
+          :sort-by.sync="table.sortBy"
+          :sort-desc.sync="table.sortDesc"
+          small
+          bordered
+          responsive
+          fixed
+        >
+          <template v-slot:cell(actions)="data">
+            <b-button-group>
+              <a :href="'/utilisateur/show/' + data.value ">
+                <b-button><i class="fas fa-eye"></i></b-button>
+              </a>
+              <a
+                :href="'/utilisateur/edit/' + data.value "
+                class="mx-1"
+              >
+                <b-button><i class="fas fa-edit"></i></b-button>
+              </a>
+              <b-button @click="deleteUtilisateur(data.value)"><i class="fas fa-trash"></i></b-button>
+            </b-button-group>
+          </template>
+        </b-table>
+      </b-col>
+    </b-row>
+    <b-row align-h="center">
+      <b-col cols="12">
+        <b-pagination
+          v-model="pager.currentPage"
+          :total-rows="pager.totalRows"
+          :per-page="pager.perPage"
+          align="center"
+        ></b-pagination>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import paginationMixin from 'mixins/paginationMixin';
 
 export default {
+  mixins: [paginationMixin],
+  props: {
+    canEdit: {
+      type: Boolean,
+      default: false
+    },
+    canCreate: {
+      type: Boolean,
+      default: false
+    },
+  },
   data () {
     return {
-      utilisateurs: [],
-    }
+      currentFilter: '',
+      table: {
+        field: [
+          { key: 'email', label: this.$t('admin.user.fields.email'), sortable: true, thClass: "tableitem" },
+          { key: 'login', label: this.$t('admin.user.fields.login'), sortable: true, thClass: "tableitem" },
+          { key: 'lastName', label: this.$t('admin.user.fields.last_name'), sortable: true, thClass: "tableitem" },
+          { key: 'firstName', label: this.$t('admin.user.fields.first_name'), sortable: true, thClass: "tableitem" },
+          { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-9', thClass: "tableitem" },
+        ],
+        sortBy: 'lastName'
+      }
+    };
   },
   methods: {
-    deleteUtilisateur (utilisateurId, index) {
+    deleteUtilisateur (utilisateurId) {
       return axios.delete("/api/admin/utilisateurs/" + utilisateurId)
         .then(response => {
           window.location.assign(response.headers.location);
         });
     },
-  },
-  created () {
-    return axios.get("/api/admin/utilisateurs")
-      .then(response => {
-        this.utilisateurs = response.data;
+    refreshData () {
+      return axios.get("/api/admin/utilisateurs", {
+        params: {
+          filterFields: 'firstName,lastName,email,login',
+          filter: this.currentFilter,
+          sortBy: this.table.sortBy,
+          sortDesc: this.table.sortDesc,
+          currentPage: this.pager.currentPage,
+          perPage: this.pager.perPage
+        }
+      }).then(response => {
+        let items = _.map(response.data, utilisateur => _.assign(utilisateur, {
+          email: utilisateur.email,
+          login: utilisateur.login,
+          actions: utilisateur.id,
+          lastName: utilisateur.last_name,
+          firstName: utilisateur.first_name
+        }));
+        this.pager.totalRows = parseInt(response.headers['x-total-count']);
+        return items;
+      }).catch(error => {
+        console.log(error);
+        return [];
       });
-  }
+    },
+  },
 }
 </script>

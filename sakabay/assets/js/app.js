@@ -12,6 +12,7 @@ import '../css/app.css';
 import $ from 'jquery';
 import Vue from 'vue';
 import * as VeeValidate from 'vee-validate';
+import VueLoaders from 'vue-loaders';
 import {
   BootstrapVue,
   IconsPlugin
@@ -32,10 +33,12 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(cnsRenderUtils);
 Vue.use(cnsFormUtils);
+Vue.use(VueLoaders);
 
 Vue.use(VeeValidate, {
   inject: true,
   events: '', // Automatic validation is desactivated
+  fieldsBagName: 'veeFields',
 });
 
 new Vue({
@@ -52,6 +55,3 @@ new Vue({
     EditAccount
   }
 })
-
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');

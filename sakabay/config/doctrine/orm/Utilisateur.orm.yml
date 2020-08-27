@@ -14,27 +14,27 @@ App\Domain\Model\Utilisateur:
     fields:
         login:
             type: string
-            length: 300
+            length: 191
             column: login
             nullable: false
         email:
             type: string
-            length: 300
+            length: 191
             column: email
             nullable: false
         firstName:
             type: string
-            length: 300
+            length: 191
             column: first_name
             nullable: false
         password:
             type: string
-            length: 300
+            length: 191
             column: password
             nullable: false
         lastName:
             type: string
-            length: 300
+            length: 191
             column: last_name
             nullable: false
         imageProfil:

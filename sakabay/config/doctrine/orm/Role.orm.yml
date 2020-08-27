@@ -14,7 +14,7 @@ App\Domain\Model\Role:
     fields:
         name:
             type: string
-            length: 300
+            length: 191
             column: name
             nullable: false
         code:

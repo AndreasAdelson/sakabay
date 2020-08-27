@@ -1,7 +1,7 @@
 <template>
   <b-container
     fluid
-    class="p-4 home-body"
+    class="p-4 skb-body"
   >
     <b-row>
       <b-col>
@@ -15,7 +15,6 @@
     </b-row>
   </b-container>
 </template>
-
 
 <script>
 import setAreaHeightMixin from 'mixins/setAreaHeightMixin';

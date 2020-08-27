@@ -11,7 +11,9 @@ use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\View\View;
+use FOS\RestBundle\Request\ParamFetcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -32,32 +34,54 @@ final class UtilisateurController extends AbstractFOSRestController
         $this->utilisateurService = $utilisateurService;
     }
 
-    // /**
-    //  * @Rest\View()
-    //  * @Rest\Post("/utilisateurs")
-    //  * @param Request $request
-    //  *
-    //  * @return View
-    //  */
-    // public function createUtilisateur(Request $request): View
-    // {
-    //     $utilisateur = $this->utilisateurService->addUtillisateur($request->get('nom'), $request->get('consigne'));
-    //     // $formOptions = ['translator' => $this->translator]
-
-    //     return View::create($utilisateur, Response::HTTP_CREATED);
-    // }
-
     /**
      * @Rest\View(serializerGroups={"api_utilisateurs"})
      * @Rest\Get("/admin/utilisateurs")
      *
+     * @QueryParam(name="filterFields",
+     *             default="email,login,firstName,lastName",
+     *             description="Liste des champs sur lesquels le filtre s'appuie"
+     * )
+     * @QueryParam(name="filter",
+     *             default="",
+     *             description="Filtre"
+     * )
+     * @QueryParam(name="sortBy",
+     *             default="login",
+     *             description="Champ unique sur lequel s'opère le tri"
+     * )
+     * @QueryParam(name="sortDesc",
+     *             default="false",
+     *             description="Sens du tri"
+     * )
+     * @QueryParam(name="currentPage",
+     *             default="1",
+     *             description="Page courante"
+     * )
+     * @QueryParam(name="perPage",
+     *             default="1000000",
+     *             description="Taille de la page"
+     * )
      * @return View
      */
-    public function getUtilisateurs(): View
+    public function getUtilisateurs(ParamFetcher $paramFetcher): View
     {
-        $utilisateur = $this->utilisateurService->getAllUtilisateurs();
+        $filterFields = $paramFetcher->get('filterFields');
+        $filter = $paramFetcher->get('filter');
+        $sortBy = $paramFetcher->get('sortBy');
+        $sortDesc = $paramFetcher->get('sortDesc');
+        $currentPage = $paramFetcher->get('currentPage');
+        $perPage = $paramFetcher->get('perPage');
 
-        return View::create($utilisateur, Response::HTTP_OK);
+        $pager = $this->utilisateurService
+            ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage);
+        $utilisateurs = $pager->getCurrentPageResults();
+        $nbResults = $pager->getNbResults();
+        $datas = iterator_to_array($utilisateurs);
+        $view = $this->view($datas, Response::HTTP_OK);
+        $view->setHeader('X-Total-Count', $nbResults);
+
+        return $view;
     }
 
     /**

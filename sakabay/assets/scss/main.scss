@@ -421,7 +421,9 @@ a[data-toggle="collapse"] {
   color: $red_color;
 }
 
-// Bouttons de l'apli
+/*---------------------------------
+    Bouttons de l'apli
+-----------------------------------*/
 
 .btn-menu {
   color: $yellow_light_color;
@@ -609,7 +611,10 @@ a[data-toggle="collapse"] {
   padding-top: 7rem !important;
 }
 
-/// register style
+/*---------------------------------
+    register style
+-----------------------------------*/
+
 .register-card {
   height: 600px;
   margin: 0 auto;
@@ -803,5 +808,54 @@ a[data-toggle="collapse"] {
 }
 
 .tableitem {
-  background-color: #f39c12;
+  background-color: $yellow_login_color;
+}
+
+.col-size-4 {
+  width: 4%;
+}
+
+.col-size-5 {
+  width: 5%;
+}
+
+.col-size-9 {
+  width: 9%;
+}
+
+.col-size-10 {
+  width: 10%;
+}
+
+.col-size-20 {
+  width: 20%;
+}
+
+.col-size-30 {
+  width: 30%;
+}
+
+.col-size-40 {
+  width: 40%;
+}
+
+.col-size-50 {
+  width: 50%;
+}
+
+/*---------------------------------
+    Pagination overwrite
+-----------------------------------*/
+
+.page-item.active .page-link {
+  background-color: $yellow_login_color !important;
+  border-color: $yellow_login_color !important;
+}
+
+.page-item:hover {
+  color: $orange_login_color !important;
+}
+
+.page-link {
+  color: $orange_login_color !important;
 }

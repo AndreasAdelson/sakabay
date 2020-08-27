@@ -41,6 +41,7 @@ class UtilisateurService
 
         return $utilisateur;
     }
+
     // public function findOneBy(array $email): ?Utilisateur
     // {
     //     return $this->utilisateurRepository->findOneBy($email);
@@ -55,6 +56,33 @@ class UtilisateurService
     {
         return $this->utilisateurRepository->findAll();
     }
+
+    /**
+     * Retourne une page, potentiellement triée et filtrée.
+     *
+     * @author vbioret
+     *
+     * @param string $sortBy
+     * @param bool   $descending
+     * @param string $filterFields
+     * @param string $filterText
+     * @param int    $currentPage
+     * @param int    $perPage
+     *
+     * @return Pagerfanta
+     */
+    public function getPaginatedList(
+        $sortBy = 'id',
+        $descending = false,
+        $filterFields = '',
+        $filterText = '',
+        $currentPage = 1,
+        $perPage = PHP_INT_MAX ? PHP_INT_MAX : 10
+    ) {
+        return $this->utilisateurRepository
+            ->getPaginatedList($sortBy, $descending, $filterFields, $filterText, $currentPage, $perPage);
+    }
+
 
     public function deleteUtilisateur(int $utilisateurId): void
     {

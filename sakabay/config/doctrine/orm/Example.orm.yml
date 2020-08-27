@@ -19,6 +19,6 @@ App\Domain\Model\Example:
             nullable: true
         consigne:
             type: string
-            length: 300
+            length: 191
             column: consigne
             nullable: true

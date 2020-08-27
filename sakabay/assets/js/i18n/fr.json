@@ -1,16 +1,23 @@
 {
   "commons": {
     "actions": "Actions",
-    "edit": "Modifier"
+    "edit": "Modifier",
+    "rechercher": "Rechercher ..."
   },
   "admin": {
     "user": {
-      "title": "Table des utilisateurs",
+      "title": "Liste des utilisateurs",
       "fields": {
         "email": "Email",
         "login": "Pseudo",
         "first_name": "Prénom",
         "last_name": "Nom"
+      },
+      "placeholder": {
+        "email": "Renseignez votre email",
+        "first_name": "Renseignez votre prénom",
+        "last_name": "Renseigne votre nom ",
+        "username": "Choisissez un pseudo"
       }
     }
   },

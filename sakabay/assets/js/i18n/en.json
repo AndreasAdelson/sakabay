@@ -1,16 +1,23 @@
 {
   "commons": {
     "actions": "Actions",
-    "edit": "Edit"
+    "edit": "Edit",
+    "rechercher": "Search ..."
   },
   "admin": {
     "user": {
-      "title": "Users table",
+      "title": "Users list",
       "fields": {
         "email": "Email",
         "login": "Login",
         "first_name": "First Name",
         "last_name": "Last Name"
+      },
+      "placeholder": {
+        "email": "Enter email",
+        "first_name": "Enter first name",
+        "last_name": "Enter last name",
+        "username": "Choose an username"
       }
     }
   },

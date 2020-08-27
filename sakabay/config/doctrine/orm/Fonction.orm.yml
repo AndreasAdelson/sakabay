@@ -21,7 +21,7 @@ App\Domain\Model\Fonction:
                 comment: Code de la fonction
         description:
             type: string
-            length: 255
+            length: 191
             nullable: false
             column: description
             options:

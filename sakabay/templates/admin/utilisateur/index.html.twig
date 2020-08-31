@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'user_title_list_page'|trans }}{% endblock %}
+
+{% block body %}
+    <list-user
+    :can-edit="{{ canEdit|json_encode }}"
+    :can-delete="{{ canDelete|json_encode }}"
+    :can-read="{{ canRead|json_encode }}"
+    ></list-user>
+{% endblock %}

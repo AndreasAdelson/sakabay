@@ -8,8 +8,11 @@ user_admin_index:
     methods:  [GET, POST]
 user_edit_admin_index:
     path: /admin/utilisateur/edit/{id}
-    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::editUser
+    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::editUserAdmin
     methods: [POST,GET]
+user_show_admin_index:
+    path: /admin/utilisateur/show/{id}
+    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::showUserAdmin
 user_edit_index:
     path: /utilisateur/edit/{id}
     controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::editUser

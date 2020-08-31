@@ -107,7 +107,7 @@ final class UtilisateurController extends AbstractFOSRestController
      *
      * @return View
      */
-    public function editUtilisateurs(int $utilisateurId, Request $request)
+    public function editUtilisateur(int $utilisateurId, Request $request)
     {
         $utilisateur = $this->utilisateurService->getUtilisateur($utilisateurId);
 

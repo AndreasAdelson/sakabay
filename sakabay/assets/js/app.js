@@ -17,11 +17,11 @@ import {
   BootstrapVue,
   IconsPlugin
 } from 'bootstrap-vue';
-import Login from './components/utilisateur/login';
 import ListUser from './components/admin/utilisateur';
 import EditUser from './components/admin/utilisateur/form';
+import ShowUser from './components/admin/utilisateur/show';
 import EditAccount from './components/utilisateur/editAccount';
-import Home from './components/home/home';
+import Home from './components/home';
 import ExampleForm from './components/example/form';
 import SousNavBar from './components/commons/navBar';
 import cnsRenderUtils from './plugins/cnsRenderUtils';
@@ -48,7 +48,7 @@ new Vue({
     Avatar,
     EditUser,
     ListUser,
-    Login,
+    ShowUser,
     Home,
     ExampleForm,
     SousNavBar,

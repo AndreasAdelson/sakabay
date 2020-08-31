@@ -2,10 +2,11 @@
 
 namespace App\Infrastructure\Http\Web\Controller;
 
-use App\Infrastructure\Repository\UtilisateurRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UtilisateurController extends AbstractController
@@ -24,24 +25,42 @@ class UtilisateurController extends AbstractController
      * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/admin/utilisateur", name="user_admin_index")
      */
-    public function usersList(UtilisateurRepository $users)
+    public function usersList(AuthorizationCheckerInterface $authorizationChecker): Response
     {
-        return $this->render('admin/index.html.twig', []);
+        return $this->render('admin/utilisateur/index.html.twig', [
+            'canEdit' => $authorizationChecker->isGranted('ROLE_UUTILISATEUR'),
+            'canDelete' => $authorizationChecker->isGranted('ROLE_DUTILISATEUR'),
+            'canRead' => $authorizationChecker->isGranted('ROLE_RUTILISATEUR'),
+        ]);
     }
 
     /**
+     * Cette route permet à un admin de modifier un utilisateur de l'application
      * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/admin/utilisateur/edit/{id}", name="user_edit_admin_index")
      */
     public function editUserAdmin(int $id)
     {
-        return $this->render('admin/edituser.html.twig', [
+        return $this->render('admin/utilisateur/edituser.html.twig', [
             'utilisateurId' => $id,
         ]);
     }
 
     /**
-     * Rajouter le rôle permettant de gérer la modification de son propre profil
+     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("/admin/utilisateur/show/{id}", name="user_show_admin_index")
+     */
+    public function showUserAdmin(int $id, AuthorizationCheckerInterface $authorizationChecker)
+    {
+
+        return $this->render('admin/utilisateur/show.html.twig', [
+            'utilisateurId' => $id,
+            'canEdit' => $authorizationChecker->isGranted('ROLE_UUTILISATEUR'),
+        ]);
+    }
+
+    /**
+     * Cette route est celle qui permet de faire la modification de son propre compte/profil
      * @Route("/utilisateur/edit/{id}", name="user_edit_admin_index")
      */
     public function editUser(int $id)

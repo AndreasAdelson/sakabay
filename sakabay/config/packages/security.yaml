@@ -39,4 +39,6 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/admin/utilisateur, roles: ROLE_RUSER }
         - { path: ^/admin/utilisateur/edit, roles: ROLE_ADMIN }
+        - { path: ^/admin/utilisateur/show, roles: ROLE_ADMIN }
+
         - { path: ^/utilisateur/edit, roles: IS_AUTHENTICATED_FULLY }

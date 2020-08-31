@@ -48,7 +48,6 @@ class Utilisateur implements UserInterface
      * @var string|null
      * @Expose
      * @Groups({
-     * "api_utilisateurs"
      * })
      */
     private $plainPassword;
@@ -85,7 +84,6 @@ class Utilisateur implements UserInterface
     /**
      * @Expose
      * @Groups({
-     * "api_utilisateurs"
      * })
      */
     private $roles = [];
@@ -94,7 +92,6 @@ class Utilisateur implements UserInterface
      * @var string The hashed password
      * @Expose
      * @Groups({
-     * "api_utilisateurs"
      * })
      */
     private $password;
@@ -103,7 +100,6 @@ class Utilisateur implements UserInterface
      * @var Group[]
      * @Expose
      * @Groups({
-     * "api_utilisateurs"
      * })
      */
     private $groups;

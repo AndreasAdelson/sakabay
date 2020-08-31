@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'user_title_show_page'|trans }}{% endblock %}
+
+{% block body %}
+    <show-user
+    :utilisateur-id="{{ utilisateurId }}"
+    :can-edit="{{ canEdit|json_encode }}"
+    ></show-user>
+{% endblock %}

@@ -52,16 +52,23 @@
         >
           <template v-slot:cell(actions)="data">
             <b-button-group>
-              <a :href="'/utilisateur/show/' + data.value ">
+              <a
+                :href="'/admin/utilisateur/show/' + data.value "
+                v-if="canRead"
+              >
                 <b-button><i class="fas fa-eye"></i></b-button>
               </a>
               <a
-                :href="'/utilisateur/edit/' + data.value "
+                v-if="canEdit"
+                :href="'/admin/utilisateur/edit/' + data.value "
                 class="mx-1"
               >
                 <b-button><i class="fas fa-edit"></i></b-button>
               </a>
-              <b-button @click="deleteUtilisateur(data.value)"><i class="fas fa-trash"></i></b-button>
+              <b-button
+                v-if="canDelete"
+                @click="deleteUtilisateur(data.value)"
+              ><i class="fas fa-trash"></i></b-button>
             </b-button-group>
           </template>
         </b-table>
@@ -91,10 +98,18 @@ export default {
       type: Boolean,
       default: false
     },
-    canCreate: {
+    canEdit: {
       type: Boolean,
       default: false
     },
+    canDelete: {
+      type: Boolean,
+      default: false
+    },
+    canRead: {
+      type: Boolean,
+      default: false
+    }
   },
   data () {
     return {
@@ -105,7 +120,7 @@ export default {
           { key: 'login', label: this.$t('admin.user.fields.login'), sortable: true, thClass: "tableitem" },
           { key: 'lastName', label: this.$t('admin.user.fields.last_name'), sortable: true, thClass: "tableitem" },
           { key: 'firstName', label: this.$t('admin.user.fields.first_name'), sortable: true, thClass: "tableitem" },
-          { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-9', thClass: "tableitem" },
+          (!this.canRead && !this.canEdit && !this.canDelete) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-9', thClass: "tableitem" },
         ],
         sortBy: 'lastName'
       }

@@ -1,6 +1,9 @@
 sakabay: Sakabay
 
+user_title_list_page: "Users list"
 user_title_edit_page: "Edit user"
+user_title_show_page: "User details"
+
 
 #Navbar
 local_business: "Local business"

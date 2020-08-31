@@ -152,7 +152,7 @@
             <div class="col-6 offset-3">
               <button
                 type="button"
-                class="btn submit_button fontUbuntu"
+                class="btn button_skb fontUbuntu"
                 @click="$validateForm()"
               >{{ this.$t('commons.edit') }}</button>
             </div>

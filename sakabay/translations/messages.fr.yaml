@@ -1,6 +1,8 @@
 sakabay: Sakabay
 
+user_title_list_page: "Liste des utilisateurs"
 user_title_edit_page: "Modifier un utilisateur"
+user_title_show_page: "Détails de l'utilisateur"
 
 #Navbar
 local_business: "Business local"

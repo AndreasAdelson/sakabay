@@ -33,6 +33,7 @@ class CompanyListener
                 );
                 $urlName = strtolower(strtr($urlName, $unwanted_array));
                 $entity->setUrlName($urlName);
+                //TODO Faire une fonction qui génère un mdp aléatoire lorsqu'on se penche sur l'envoie d'un email pour vérifier le mdp envoyé.
                 $plainPassword = 'test';
                 $encoded = $this->encoder->encodePassword($entity->getUtilisateur(), $plainPassword);
                 $login = str_replace('-', '', $urlName);

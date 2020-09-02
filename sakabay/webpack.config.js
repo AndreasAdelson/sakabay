@@ -60,20 +60,14 @@ Encore
   .autoProvidejQuery()
 
 
-  /*
-   * FEATURE CONFIG
-   *
-   * Enable & configure other features below. For a full
-   * list of features, see:
-   * https://symfony.com/doc/current/frontend.html#adding-more-features
-   */
-  // .enableBuildNotifications()
-
-  // enables @babel/preset-env polyfills
-  .configureBabelPresetEnv((config) => {
-    config.useBuiltIns = 'usage';
-    config.corejs = 3;
-  })
+/*
+ * FEATURE CONFIG
+ *
+ * Enable & configure other features below. For a full
+ * list of features, see:
+ * https://symfony.com/doc/current/frontend.html#adding-more-features
+ */
+// .enableBuildNotifications()
 
 // uncomment if you use TypeScript
 //.enableTypeScriptLoader()

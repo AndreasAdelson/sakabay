@@ -69,12 +69,12 @@ a:focus {
   border: none;
 }
 
-.line {
-  width: 100%;
-  height: 1px;
-  border-bottom: 1px dashed $green_color;
-  margin: 40px 0;
-}
+// .line {
+//   width: 100%;
+//   height: 1px;
+//   border-bottom: 1px dashed $green_color;
+//   margin: 40px 0;
+// }
 
 /*---------------------------------
     HEADINGS & FONTS
@@ -445,6 +445,7 @@ a[data-toggle="collapse"] {
   width: 50px;
   height: 50px;
   background-color: $yellow_login_color;
+  padding-top: 12px;
 }
 
 .btn-user:hover {
@@ -491,6 +492,7 @@ a[data-toggle="collapse"] {
   width: 50px;
   height: 50px;
   background-color: $yellow_login_color;
+  padding-top: 10px;
 }
 
 .btn-connect:hover {

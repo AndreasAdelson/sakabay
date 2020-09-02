@@ -76,7 +76,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -99,21 +98,20 @@ export default {
   },
   data () {
     return {
-      utilisateur: null,
+      utilisateur: new Object(),
       loading: false
     }
   },
   async created () {
-    if (this.utilisateurId) {
-      this.loading = true;
-      return axios.get('/api/admin/utilisateurs/' + this.utilisateurId)
-        .then(response => {
-          this.utilisateur = response.data;
-          this.loading = false;
-        }).catch(error => {
-          console.log(error);
-        });
-    }
+    this.loading = true;
+    return axios.get('/api/admin/utilisateurs/' + this.utilisateurId)
+      .then(response => {
+        this.utilisateur = response.data;
+        this.loading = false;
+      }).catch(error => {
+        console.log(error);
+      });
+
   },
   methods: {
 

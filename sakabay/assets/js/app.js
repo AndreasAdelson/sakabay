@@ -39,7 +39,7 @@ import ListGroup from './components/admin/group';
 import FormGroup from './components/admin/group/form';
 import ShowGroup from './components/admin/group/show';
 import FormCategory from './components/category/form';
-import company from './components/company';
+import Company from './components/company';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -62,7 +62,7 @@ new Vue({
   i18n,
   components: {
     FormCategory,
-    company,
+    Company,
     Avatar,
     EditUser,
     ListUser,

@@ -7,15 +7,15 @@
       <img src="{{ asset('build/logo.png') }}"/>
     </a>
   {% else %}
-  <a href="/" class="logo-home">
-      <img src="{{ asset('build/logo.png') }}"/>
-  </a>
-    <button title="Connectez-vous" type="button" class="w-50px p-0 btn-user btn">
-      <a href="/login"><i class="icon-login far fa-user"></i></a>
-    </button>
-    <button title="Inscription" type="button" class="w-50px p-0 btn-connect btn">
-      <a href="/register"><i class="icon-user fas fa-user-plus"></i></a>
-    </button>
+    <a href="/" class="logo-home">
+        <img src="{{ asset('build/logo.png') }}"/>
+    </a>
+    <a href="/login" class="w-50px btn-user btn">
+        <i class="icon-login far fa-user"></i>
+    </a>
+    <a href="/register" class="w-50px btn-connect btn">
+      <i class="icon-user fas fa-user-plus"></i>
+    </a>
   {% endif %}
 
 </nav>
@@ -108,9 +108,6 @@
       <div class="col sous-nav-bar-item align-items-center d-flex justify-content-center">
         <a href="/" class="fontPatua fontSize16">{{ 'local_business'|trans }}</a>
       </div>
-      {# <div class="col sous-nav-bar-item align-items-center d-flex justify-content-center">
-        <a href="#" class="fontPatua fontSize16">{{ 'formules'|trans }}</a>
-      </div> #}
       <div class="col sous-nav-bar-item align-items-center d-flex justify-content-center">
         <a href="/company" class="fontPatua fontSize16">{{ 'company_director'|trans }}</a>
       </div>

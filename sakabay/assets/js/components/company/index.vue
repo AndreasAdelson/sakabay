@@ -17,20 +17,20 @@
             <div class="col-6">
               <div class="form-group">
                 <fieldset
-                  id="nom"
-                  class="nom"
+                  id="name"
+                  class="name"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('admin.role.fields.nom') }}</label>
+                  <label class="fontUbuntu fontSize14">{{ this.$t('admin.role.fields.name') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
                     name="name"
                     class="form-control"
-                    :placeholder="$t('admin.role.placeholder.nom')"
-                    v-model="formFields.nom"
+                    :placeholder="$t('admin.role.placeholder.name')"
+                    v-model="formFields.name"
                   >
                   <div
-                    v-for="errorText in formErrors.nom"
+                    v-for="errorText in formErrors.name"
                     :key="'name_' + errorText"
                   >
                     <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
@@ -68,20 +68,20 @@
             <div class="col-6">
               <div class="form-group">
                 <fieldset
-                  id="nomCostumer"
-                  class="nomCostumer"
+                  id="nameCostumer"
+                  class="nameCostumer"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('admin.role.fields.nomCostumer') }}</label>
+                  <label class="fontUbuntu fontSize14">{{ this.$t('admin.role.fields.nameCostumer') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
-                    name="nomCostumer"
+                    name="nameCostumer"
                     class="form-control"
-                    :placeholder="$t('admin.role.placeholder.nomCostumer')"
-                    v-model="formFields.nomCostumer"
+                    :placeholder="$t('admin.role.placeholder.nameCostumer')"
+                    v-model="formFields.nameCostumer"
                   >
                   <div
-                    v-for="errorText in formErrors.nomCostumer"
+                    v-for="errorText in formErrors.nameCostumer"
                     :key="'name_' + errorText"
                   >
                     <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
@@ -239,18 +239,18 @@ export default {
       fonctionsAtCreation: null,
       fonctions: [],
       formFields: {
-        nom: null,
+        name: null,
         numSiret: null,
-        // nomCostumer: null,
+        // nameCostumer: null,
         // lastNameCostumer: null,
         // email: null,
         // utilisateur: [],
         category: null,
       },
       formErrors: {
-        nom: [],
+        name: [],
         numSiret: [],
-        // nomCostumer: [],
+        // nameCostumer: [],
         // lastNameCostumer: [],
         // email: [],
         // imageProfil: [],
@@ -268,7 +268,6 @@ export default {
     return axios.get("/api/admin/categories")
       .then(response => {
         this.category = response.data;
-        console.log(response.data);
       }).catch(e => {
         console.log(e);
       });
@@ -279,7 +278,23 @@ export default {
     //   this.imageName = this.$refs.imageProfil.files[0].name;
     //   this.urlImageProfil = URL.createObjectURL(this.imageProfilSelected);
     // },
+    reformName (name) {
+      let reformedName = name.replaceAll(' ', '-').trim();
+      console.log(reformedName);
+      return reformedName;
+    }
   },
+  // watch: {
+  //   formFields: {
+  //     handler () {
+  //       if (this.formFields.name) {
+  //         let reformedName = this.reformName(this.formFields.name);
+  //         this.formFields.urlName = reformedName;
+  //       }
+  //     },
+  //     deep: true
+  //   }
+  // }
 
 }
 </script>

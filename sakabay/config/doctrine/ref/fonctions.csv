@@ -1,7 +1,3 @@
-CEXAMPLE; Création d'un example
-REXAMPLE; Consultation d'un example
-UEXAMPLE; Modification d'un example
-DEXAMPLE; Suppression d'un example
 CUTILISATEUR; Création d'un utilisateur
 RUTILISATEUR; Consultation d'un utilisateur
 UUTILISATEUR; Modification d'un utilisateur

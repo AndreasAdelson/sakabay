@@ -44,3 +44,7 @@ services:
         arguments: ["@knp_menu.factory", '@security.authorization_checker']
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
+
+    App\Infrastructure\EventListener\CompanyUrlName:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, connection: default }

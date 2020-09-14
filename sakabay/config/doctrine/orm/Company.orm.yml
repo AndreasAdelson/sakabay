@@ -12,17 +12,17 @@ App\Domain\Model\Company:
             options:
                 comment: Identifiant technique d'un company
     fields:
-        nom:
+        name:
             type: string
             length: 191
-            column: nom
+            column: name
             nullable: false
         numSiret:
-            type: integer
-            length: 100
+            type: string
+            length: 14
             column: num_siret
             nullable: false
-        url_name:
+        urlName:
             type: string
             length: 100
             column: url_name
@@ -33,8 +33,13 @@ App\Domain\Model\Company:
             cascade: [persist]
             inversedBy: category
             joinColumn:
-                name: id_categories
+                name: id_category
                 referencedColumnName: id
                 nullable: false
+    oneToOne:
+        utilisateur:
+            targetEntity: Utilisateur
+            inversedBy: company
+            nullable: false
 
 

@@ -36,12 +36,6 @@ class CategoryType extends AbstractType
                 'required' => true,
                 'attr' => ['class' => 'form-control'],
             ]);
-        // ->add('groups', EntityType::class, [
-        //     'by_reference' => false,
-        //     'class' => 'App:Group',
-        //     'constraints' => [],
-        //     'multiple' => true,
-        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -9,7 +9,7 @@ use App\Domain\Model\Role;
  */
 interface RoleRepositoryInterface
 {
-    public function save(Role $example): void;
+    public function save(Role $role): void;
 
-    public function delete(Role $example): void;
+    public function delete(Role $role): void;
 }

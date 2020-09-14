@@ -9,7 +9,7 @@ use App\Domain\Model\Company;
  */
 interface CompanyRepositoryInterface
 {
-    public function save(Company $example): void;
+    public function save(Company $company): void;
 
-    public function delete(Company $example): void;
+    public function delete(Company $company): void;
 }

@@ -63,4 +63,8 @@ App\Domain\Model\Utilisateur:
                 inverseJoinColumns:
                     id_group:
                         referencedColumnName: id
+    oneToOne:
+        company:
+            targetEntity: Company
+            mappedBy: utilisateur
 

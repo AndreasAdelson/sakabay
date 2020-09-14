@@ -21,7 +21,7 @@ class CompanyType extends AbstractType
         $translator = $options['translator'];
 
         $builder
-            ->add('nom', TextType::class, [
+            ->add('name', TextType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => $translator->trans('error_message_field_not_empty'),

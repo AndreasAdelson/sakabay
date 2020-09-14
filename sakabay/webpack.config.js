@@ -32,6 +32,7 @@ Encore
   .addEntry('js/app', './assets/js/app.js')
   .addStyleEntry('css/bootstrap', './node_modules/bootstrap/dist/css/bootstrap.min.css')
   .addStyleEntry('css/bootstrap-vue', './node_modules/bootstrap-vue/dist/bootstrap-vue.min.css')
+  .addStyleEntry('css/vue-multiselect', './node_modules/vue-multiselect/dist/vue-multiselect.min.css')
   .addStyleEntry('css/main', './assets/scss/main.scss')
   .addStyleEntry('css/app', './assets/css/app.css')
   .enableSassLoader()

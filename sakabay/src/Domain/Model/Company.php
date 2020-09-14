@@ -2,15 +2,18 @@
 
 namespace App\Domain\Model;
 
+use App\Domain\Model\Utilisateur;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use phpDocumentor\Reflection\Types\Integer;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 /**
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
- *
+ * @UniqueEntity("name")
  * @ExclusionPolicy("all")
  *
  */
@@ -45,7 +48,7 @@ class Company
      * "api_companies"
      * })
      */
-    private $nom;
+    private $name;
 
     /**
      * @var integer
@@ -63,39 +66,16 @@ class Company
      * "api_companies"
      * })
      */
-    private $url_name;
+    private $urlName;
+
     /**
-     * @var string
+     * @var Utilisateur
      * @Expose
      * @Groups({
      * "api_companies"
      * })
      */
-    private $email;
-    /**
-     * @var string
-     * @Expose
-     * @Groups({
-     * "api_companies"
-     * })
-     */
-    private $nomCostumer;
-    /**
-     * @var string
-     * @Expose
-     * @Groups({
-     * "api_companies"
-     * })
-     */
-    private $lastNameCostumer;
-    /**
-     * @var string
-     * @Expose
-     * @Groups({
-     * "api_companies"
-     * })
-     */
-    private $imageProfil;
+    private $utilisateur;
 
 
     public function getId(): ?int
@@ -103,34 +83,30 @@ class Company
         return $this->id;
     }
 
-
-
     /**
      * Get "api_companies"
      *
      * @return  string
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     /**
-     * Set "api_companies"
      *
-     * @param  string  $nom  "api_companies"
+     * @param  string  $name
      *
      * @return  self
      */
-    public function setNom(string $nom)
+    public function setName(string $name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get "api_companies"
      *
      * @return  string
      */
@@ -140,9 +116,8 @@ class Company
     }
 
     /**
-     * Set "api_companies"
      *
-     * @param  string  $numSiret  "api_companies"
+     * @param  string  $numSiret
      *
      * @return  self
      */
@@ -154,124 +129,28 @@ class Company
     }
 
     /**
-     * Get "api_companies"
      *
      * @return  string
      */
-    public function getUrl_name()
+    public function getUrlName()
     {
-        return $this->url_name;
+        return $this->urlName;
     }
 
     /**
-     * Set "api_companies"
      *
-     * @param  string  $url_name  "api_companies"
+     * @param  string  $urlName
      *
      * @return  self
      */
-    public function setUrl_name(string $url_name)
+    public function setUrlName(string $urlName)
     {
-        $this->url_name = $url_name;
+        $this->urlName = $urlName;
 
         return $this;
     }
 
-    /**
-     * Get "api_companies"
-     *
-     * @return  string
-     */
-    public function getImageProfil()
-    {
-        return $this->imageProfil;
-    }
 
-    /**
-     * Set "api_companies"
-     *
-     * @param  string  $imageProfil  "api_companies"
-     *
-     * @return  self
-     */
-    public function setImageProfil(string $imageProfil)
-    {
-        $this->imageProfil = $imageProfil;
-
-        return $this;
-    }
-
-    /**
-     * Get "api_companies"
-     *
-     * @return  string
-     */
-    public function getNomCostumer()
-    {
-        return $this->nomCostumer;
-    }
-
-    /**
-     * Set "api_companies"
-     *
-     * @param  string  $nomCostumer  "api_companies"
-     *
-     * @return  self
-     */
-    public function setNomCostumer(string $nomCostumer)
-    {
-        $this->nomCostumer = $nomCostumer;
-
-        return $this;
-    }
-
-    /**
-     * Get "api_companies"
-     *
-     * @return  string
-     */
-    public function getLastNameCostumer()
-    {
-        return $this->lastNameCostumer;
-    }
-
-    /**
-     * Set "api_companies"
-     *
-     * @param  string  $lastNameCostumer  "api_companies"
-     *
-     * @return  self
-     */
-    public function setLastNameCostumer(string $lastNameCostumer)
-    {
-        $this->lastNameCostumer = $lastNameCostumer;
-
-        return $this;
-    }
-
-    /**
-     * Get "api_companies"
-     *
-     * @return  string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set "api_companies"
-     *
-     * @param  string  $email  "api_companies"
-     *
-     * @return  self
-     */
-    public function setEmail(string $email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -281,6 +160,17 @@ class Company
     {
         $this->category = $category;
 
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
         return $this;
     }
 }

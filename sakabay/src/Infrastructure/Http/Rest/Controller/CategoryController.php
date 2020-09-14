@@ -37,7 +37,7 @@ final class CategoryController extends AbstractFOSRestController
 
     /**
      * @Rest\View()
-     * @Rest\Post("admin/categories/new")
+     * @Rest\Post("admin/categories")
      * @Security("is_granted('ROLE_ADMIN')")
      * @param Request $request
      *

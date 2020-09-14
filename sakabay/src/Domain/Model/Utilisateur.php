@@ -3,6 +3,7 @@
 namespace App\Domain\Model;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Domain\Model\Company;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -118,6 +119,14 @@ class Utilisateur implements UserInterface
      * })
      */
     private $imageProfil;
+
+    /**
+     * @var Company
+     * @Expose
+     * @Groups({
+     * })
+     */
+    private $company;
 
     /**
      * Unmapped property to handle file uploads
@@ -383,6 +392,17 @@ class Utilisateur implements UserInterface
     public function setImageProfil(?string $imageProfil)
     {
         $this->imageProfil = $imageProfil;
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company)
+    {
+        $this->company = $company;
         return $this;
     }
 

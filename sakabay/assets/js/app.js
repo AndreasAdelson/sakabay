@@ -25,7 +25,6 @@ import EditUser from './components/admin/utilisateur/form';
 import ShowUser from './components/admin/utilisateur/show';
 import EditAccount from './components/utilisateur/editAccount';
 import Home from './components/home';
-import ExampleForm from './components/example/form';
 import SousNavBar from './components/commons/navBar';
 import cnsRenderUtils from './plugins/cnsRenderUtils';
 import cnsFormUtils from 'plugins/cnsFormUtils';
@@ -68,7 +67,6 @@ new Vue({
     ListUser,
     ShowUser,
     Home,
-    ExampleForm,
     SousNavBar,
     EditAccount,
     ListFonction,

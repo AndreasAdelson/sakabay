@@ -36,12 +36,6 @@ class MainMenuBuilder
                 ]
             ],
         ],
-        "menu_company_actions" => [
-            "menu_company_page" => [
-                "route" => "example_new",
-                "roles" => ["ROLE_RUTILISATEUR"]
-            ],
-        ]
     ];
 
     /**

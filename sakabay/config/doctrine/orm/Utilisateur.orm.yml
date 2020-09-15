@@ -67,4 +67,5 @@ App\Domain\Model\Utilisateur:
         company:
             targetEntity: Company
             mappedBy: utilisateur
+            nullable: true
 

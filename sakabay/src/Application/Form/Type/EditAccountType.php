@@ -20,7 +20,7 @@ class EditAccountType extends AbstractType
             ->add('email', EmailType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Merci d\'entrer un e-mail',
+                        'message' => $translator->trans('error_message_field_not_empty'),
                     ]),
                 ],
                 'required' => true,
@@ -29,7 +29,7 @@ class EditAccountType extends AbstractType
             ->add('login', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Merci d\'entrer un login',
+                        'message' => $translator->trans('error_message_field_not_empty'),
                     ]),
                 ],
                 'required' => true,
@@ -38,7 +38,7 @@ class EditAccountType extends AbstractType
             ->add('firstName', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Merci d\'entrer un first name',
+                        'message' => $translator->trans('error_message_field_not_empty'),
                     ]),
                 ],
                 'required' => true,
@@ -47,7 +47,7 @@ class EditAccountType extends AbstractType
             ->add('lastName', TextType::class, [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Merci d\'entrer un last name',
+                        'message' => $translator->trans('error_message_field_not_empty'),
                     ]),
                 ],
                 'required' => true,

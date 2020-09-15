@@ -4,6 +4,7 @@ namespace App\Infrastructure\Http\Rest\Controller;
 
 use App\Application\Form\Type\CompanyType;
 use App\Application\Service\CompanyService;
+use App\Application\Service\FileUploader;
 use App\Domain\Model\Company;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -42,17 +43,30 @@ final class CompanyController extends AbstractFOSRestController
      *
      * @return View
      */
-    public function createCompany(Request $request)
+    public function createCompany(Request $request, FileUploader $uploader, string $uploadDir)
     {
         $company = new Company();
+        $file = $request->files->get('file');
+
+        if (!empty($file)) {
+            $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFileName);
+            $newFileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+            $uploader->upload($uploadDir, $file, $newFileName);
+            $requestUtilisateur = $request->request->get('utilisateur');
+            $requestUtilisateur['imageProfil'] = $newFileName;
+            $request->request->set('utilisateur', $requestUtilisateur);
+        }
         $formOptions = ['translator' => $this->translator];
         $form = $this->createForm(CompanyType::class, $company, $formOptions);
         $form->submit($request->request->all());
         if (!$form->isValid()) {
             return $form;
         }
+
         $this->entityManager->persist($company);
         $this->entityManager->flush();
+        sleep(20);
 
         $ressourceLocation = $this->generateUrl('company_index');
 

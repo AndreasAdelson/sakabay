@@ -4,9 +4,17 @@ namespace App\Infrastructure\EventListener;
 
 use App\Domain\Model\Company;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class CompanyUrlName
+class CompanyListener
 {
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
@@ -22,11 +30,13 @@ class CompanyUrlName
                 'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
                 'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y'
             );
-            $urlName = strtr($urlName, $unwanted_array);
-            $urlName = strtolower($urlName);
+            $urlName = strtolower(strtr($urlName, $unwanted_array));
             $entity->setUrlName($urlName);
-            // $generatePassword = '';
-            // $entity->getUtilisateur()->setPlainPassword($generatePassword);
+            $plainPassword = 'test';
+            $encoded = $this->encoder->encodePassword($entity->getUtilisateur(), $plainPassword);
+            $login = str_replace('-', '', $urlName);
+            $entity->getUtilisateur()->setLogin(strtoupper($login));
+            $entity->getUtilisateur()->setPassword($encoded);
         } else {
             return;
         }

@@ -4,14 +4,11 @@ namespace App\Application\Form\Type;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use App\Domain\Model\Company;
-use PhpParser\Parser\Multiple;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 class CompanyType extends AbstractType
@@ -28,7 +25,6 @@ class CompanyType extends AbstractType
                     ]),
                 ],
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
             ])
             ->add('numSiret', TextType::class, [
                 'constraints' => [
@@ -37,35 +33,7 @@ class CompanyType extends AbstractType
                     ]),
                 ],
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
             ])
-            // ->add('nomCostumer', TextType::class, [
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Merci d\'entrer un first name',
-            //         ]),
-            //     ],
-            //     'required' => true,
-            //     'attr' => ['class' => 'form-control'],
-            // ])
-            // ->add('lastNameCostumer', TextType::class, [
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Merci d\'entrer un last name',
-            //         ]),
-            //     ],
-            //     'required' => true,
-            //     'attr' => ['class' => 'form-control'],
-            // ])
-            // ->add('email', EmailType::class, [
-            //     'constraints' => [
-            //         new NotBlank([
-            //             'message' => 'Merci d\'entrer un last name',
-            //         ]),
-            //     ],
-            //     'required' => true,
-            //     'attr' => ['class' => 'form-control'],
-            // ])
             ->add('category', EntityType::class, [
                 'class' => 'App:Category',
                 'constraints' => [
@@ -74,8 +42,13 @@ class CompanyType extends AbstractType
                     ]),
                 ],
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
-            ]);
+            ])
+            ->add('utilisateur', CreateUtilisateurByCompanyType::class, [
+                'constraints' => [],
+                'translator' => $translator,
+                'required' => true,
+            ])
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

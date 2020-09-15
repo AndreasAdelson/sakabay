@@ -182,7 +182,6 @@ final class UtilisateurController extends AbstractFOSRestController
         }
         $this->entityManager->persist($utilisateur);
         $this->entityManager->flush();
-
         $ressourceLocation = $this->generateUrl('home');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }

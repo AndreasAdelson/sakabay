@@ -40,6 +40,11 @@ App\Domain\Model\Company:
         utilisateur:
             targetEntity: Utilisateur
             inversedBy: company
-            nullable: false
+            joinColumn:
+                name: utilisateur_id
+                referencedColumnName: id
+                onDelete: CASCADE
+                nullable: false
+            cascade: [persist,remove]
 
 

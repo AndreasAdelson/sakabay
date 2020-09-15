@@ -10,7 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EditUtilisateurType extends AbstractType
+class CreateUtilisateurByCompanyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -18,15 +18,6 @@ class EditUtilisateurType extends AbstractType
 
         $builder
             ->add('email', EmailType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => $translator->trans('error_message_field_not_empty'),
-                    ]),
-                ],
-                'required' => true,
-                'attr' => ['class' => 'form-control'],
-            ])
-            ->add('login', TextType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => $translator->trans('error_message_field_not_empty'),
@@ -52,6 +43,9 @@ class EditUtilisateurType extends AbstractType
                 ],
                 'required' => true,
                 'attr' => ['class' => 'form-control'],
+            ])
+            ->add('imageProfil', TextType::class, [
+                'required' => false
             ]);
     }
 

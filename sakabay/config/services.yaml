@@ -45,6 +45,7 @@ services:
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main }
 
-    App\Infrastructure\EventListener\CompanyUrlName:
+    App\Infrastructure\EventListener\CompanyListener:
+        arguments: ["@security.password_encoder"]
         tags:
             - { name: doctrine.event_listener, event: prePersist, connection: default }

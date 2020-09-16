@@ -4,6 +4,7 @@ namespace App\Application\Form\Type;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use App\Domain\Model\Company;
+use Symfony\Component\Validator\Constraints\Valid;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -44,11 +45,10 @@ class CompanyType extends AbstractType
                 'required' => true,
             ])
             ->add('utilisateur', CreateUtilisateurByCompanyType::class, [
-                'constraints' => [],
+                'constraints' => [new Valid()],
                 'translator' => $translator,
                 'required' => true,
-            ])
-            ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

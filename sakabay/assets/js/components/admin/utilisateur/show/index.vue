@@ -44,10 +44,10 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('admin.user.fields.last_name') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('user.fields.last_name') }}</span>
           </div>
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('admin.user.fields.first_name') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('user.fields.first_name') }}</span>
           </div>
         </div>
         <div class="row mb-2">
@@ -60,10 +60,10 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('admin.user.fields.email') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('user.fields.email') }}</span>
           </div>
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('admin.user.fields.login') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('user.fields.login') }}</span>
           </div>
         </div>
         <div class="row mb-2">

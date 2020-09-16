@@ -20,13 +20,13 @@
                   id="name"
                   class="name"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('admin.group.fields.name') }}</label>
+                  <label class="fontUbuntu fontSize16">{{ this.$t('group.fields.name') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
                     name="name"
                     class="form-control"
-                    :placeholder="$t('admin.group.placeholder.name')"
+                    :placeholder="$t('group.placeholder.name')"
                     v-model="formFields.name"
                   >
                   <div
@@ -44,13 +44,13 @@
                   id="code"
                   class="code"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('admin.group.fields.code') }}</label>
+                  <label class="fontUbuntu fontSize16">{{ this.$t('group.fields.code') }}</label>
                   <input
                     v-validate="'required'"
                     name="code"
                     type="text"
                     class="form-control"
-                    :placeholder="$t('admin.group.placeholder.code')"
+                    :placeholder="$t('group.placeholder.code')"
                     v-model="formFields.code"
                   >
                   <div
@@ -69,7 +69,7 @@
               id="roles"
               class="col-12 roles"
             >
-              <label class="fontUbuntu fontSize16">{{ $t('admin.group.fields.roles') }}</label>
+              <label class="fontUbuntu fontSize16">{{ $t('group.fields.roles') }}</label>
               <dual-list
                 v-if="rolesAtCreation !== null"
                 :items="roles"
@@ -97,7 +97,7 @@
               id="utilisateurs"
               class="col-12 utilisateurs"
             >
-              <label class="fontUbuntu fontSize16">{{ $t('admin.group.fields.utilisateurs') }}</label>
+              <label class="fontUbuntu fontSize16">{{ $t('group.fields.utilisateurs') }}</label>
               <autocomplete
                 ref="autocomplete"
                 :min="3"
@@ -106,7 +106,7 @@
                 :on-select="setUser"
                 :on-before-ajax="() => loading = true"
                 :on-ajax-loaded="onUsersAjaxLoaded"
-                :placeholder="$t('admin.group.placeholder.utilisateurs')"
+                :placeholder="$t('group.placeholder.utilisateurs')"
                 param="autocomplete"
                 url="/api/admin/utilisateurs"
                 anchor="label"

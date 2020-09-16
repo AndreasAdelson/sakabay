@@ -2,7 +2,7 @@
   <div class="container-fluid skb-body">
     <div class="row my-4">
       <div class="col-4">
-        <h1 class="fontUbuntu orange-skb">{{ this.$t('admin.user.title') }}</h1>
+        <h1 class="fontUbuntu orange-skb">{{ this.$t('user.title') }}</h1>
       </div>
       <div class="col-2">
         <vue-loaders-ball-beat
@@ -116,10 +116,10 @@ export default {
       currentFilter: '',
       table: {
         field: [
-          { key: 'email', label: this.$t('admin.user.fields.email'), sortable: true, thClass: "tableitem" },
-          { key: 'login', label: this.$t('admin.user.fields.login'), sortable: true, thClass: "tableitem" },
-          { key: 'lastName', label: this.$t('admin.user.fields.last_name'), sortable: true, thClass: "tableitem" },
-          { key: 'firstName', label: this.$t('admin.user.fields.first_name'), sortable: true, thClass: "tableitem" },
+          { key: 'email', label: this.$t('user.fields.email'), sortable: true, thClass: "tableitem" },
+          { key: 'login', label: this.$t('user.fields.login'), sortable: true, thClass: "tableitem" },
+          { key: 'lastName', label: this.$t('user.fields.last_name'), sortable: true, thClass: "tableitem" },
+          { key: 'firstName', label: this.$t('user.fields.first_name'), sortable: true, thClass: "tableitem" },
           (!this.canRead && !this.canEdit && !this.canDelete) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-9', thClass: "tableitem" },
         ],
         sortBy: 'lastName'

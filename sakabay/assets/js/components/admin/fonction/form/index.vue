@@ -21,13 +21,13 @@
                     id="code"
                     class="code"
                   >
-                    <label class="fontUbuntu fontSize16">{{ this.$t('admin.fonction.fields.code') }}</label>
+                    <label class="fontUbuntu fontSize16">{{ this.$t('fonction.fields.code') }}</label>
                     <input
                       v-validate="'required'"
                       type="text"
                       name="code"
                       class="form-control"
-                      :placeholder="$t('admin.fonction.placeholder.code')"
+                      :placeholder="$t('fonction.placeholder.code')"
                       v-model="formFields.code"
                     >
                     <div
@@ -45,13 +45,13 @@
                     id="description"
                     class="description"
                   >
-                    <label class="fontUbuntu fontSize16">{{ this.$t('admin.fonction.placeholder.description') }}</label>
+                    <label class="fontUbuntu fontSize16">{{ this.$t('fonction.placeholder.description') }}</label>
                     <input
                       v-validate="'required'"
                       name="description"
                       type="text"
                       class="form-control"
-                      :placeholder="$t('admin.fonction.placeholder.description')"
+                      :placeholder="$t('fonction.placeholder.description')"
                       v-model="formFields.description"
                     >
                     <div

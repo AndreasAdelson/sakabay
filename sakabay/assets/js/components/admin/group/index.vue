@@ -2,7 +2,7 @@
   <div class="container-fluid skb-body">
     <div class="row my-4">
       <div class="col-4">
-        <h1 class="fontUbuntu orange-skb">{{ this.$t('admin.group.title') }}</h1>
+        <h1 class="fontUbuntu orange-skb">{{ this.$t('group.title') }}</h1>
       </div>
       <div class="col-1">
       </div>
@@ -127,10 +127,10 @@ export default {
       currentFilter: '',
       table: {
         field: [
-          { key: 'name', label: this.$t('admin.group.fields.name'), sortable: true, thClass: "tableitem" },
-          { key: 'code', label: this.$t('admin.group.fields.code'), sortable: true, thClass: "tableitem" },
-          { key: 'roles', label: this.$t('admin.group.fields.roles'), sortable: true, thClass: "tableitem" },
-          { key: 'utilisateurs', label: this.$t('admin.group.fields.utilisateurs'), thClass: "tableitem" },
+          { key: 'name', label: this.$t('group.fields.name'), sortable: true, thClass: "tableitem" },
+          { key: 'code', label: this.$t('group.fields.code'), sortable: true, thClass: "tableitem" },
+          { key: 'roles', label: this.$t('group.fields.roles'), sortable: true, thClass: "tableitem" },
+          { key: 'utilisateurs', label: this.$t('group.fields.utilisateurs'), thClass: "tableitem" },
           (!this.canDelete & !this.canEdit & !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-9', thClass: "tableitem" },
         ],
         sortBy: 'name'

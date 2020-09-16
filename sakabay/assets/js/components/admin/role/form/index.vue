@@ -20,13 +20,13 @@
                   id="name"
                   class="name"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('admin.role.fields.name') }}</label>
+                  <label class="fontUbuntu fontSize16">{{ this.$t('role.fields.name') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
                     name="name"
                     class="form-control"
-                    :placeholder="$t('admin.role.placeholder.name')"
+                    :placeholder="$t('role.placeholder.name')"
                     v-model="formFields.name"
                   >
                   <div
@@ -44,13 +44,13 @@
                   id="code"
                   class="code"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('admin.role.fields.code') }}</label>
+                  <label class="fontUbuntu fontSize16">{{ this.$t('role.fields.code') }}</label>
                   <input
                     v-validate="'required'"
                     name="code"
                     type="text"
                     class="form-control"
-                    :placeholder="$t('admin.role.placeholder.code')"
+                    :placeholder="$t('role.placeholder.code')"
                     v-model="formFields.code"
                   >
                   <div
@@ -69,7 +69,7 @@
               id="fonctions"
               class="col-12 fonctions"
             >
-              <label class="fontUbuntu fontSize16">{{ $t('admin.role.fields.fonctions') }}</label>
+              <label class="fontUbuntu fontSize16">{{ $t('role.fields.fonctions') }}</label>
               <dual-list
                 v-if="fonctionsAtCreation !== null"
                 :items="fonctions"
@@ -98,7 +98,7 @@
               id="groups"
               class="col-12 groups"
             >
-              <label class="fontUbuntu fontSize16">{{ $t('admin.role.fields.groups') }}</label>
+              <label class="fontUbuntu fontSize16">{{ $t('role.fields.groups') }}</label>
               <dual-list
                 v-if="groupsAtCreation !== null"
                 :items="groups"

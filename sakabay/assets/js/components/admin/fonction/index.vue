@@ -2,7 +2,7 @@
   <div class="container-fluid skb-body">
     <div class="row my-4">
       <div class="col-4">
-        <h1 class="fontUbuntu orange-skb">{{ this.$t('admin.fonction.title') }}</h1>
+        <h1 class="fontUbuntu orange-skb">{{ this.$t('fonction.title') }}</h1>
       </div>
       <div class="col-1"></div>
       <div class="col-5">
@@ -98,7 +98,7 @@ export default {
       currentFilter: '',
       table: {
         field: [
-          { key: 'description', label: this.$t('admin.fonction.fields.description'), sortable: true, thClass: "tableitem" },
+          { key: 'description', label: this.$t('fonction.fields.description'), sortable: true, thClass: "tableitem" },
           (!this.canDelete) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-4', thClass: "tableitem" },
         ],
         sortBy: 'description'

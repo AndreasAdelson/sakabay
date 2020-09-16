@@ -10,59 +10,68 @@
     "undo_change": "Annulez les modifications",
     "go_back": "Revenir en arrière"
   },
-  "admin": {
-    "user": {
-      "title": "Liste des utilisateurs",
-      "fields": {
-        "email": "Email",
-        "login": "Pseudo",
-        "first_name": "Prénom",
-        "last_name": "Nom"
-      },
-      "placeholder": {
-        "email": "Renseignez votre email",
-        "first_name": "Renseignez votre prénom",
-        "last_name": "Renseigne votre nom ",
-        "username": "Choisissez un pseudo"
-      }
+  "user": {
+    "title": "Liste des utilisateurs",
+    "fields": {
+      "email": "Email",
+      "login": "Pseudo",
+      "first_name": "Prénom",
+      "last_name": "Nom"
     },
-    "fonction": {
-      "title": "Liste des fonctions",
-      "fields": {
-        "code": "Code",
-        "description": "Description"
-      },
-      "placeholder": {
-        "code": "Entrez un code",
-        "description": "Renseignez la description"
-      }
+    "placeholder": {
+      "email": "Renseignez votre email",
+      "first_name": "Renseignez votre prénom",
+      "last_name": "Renseignez votre nom ",
+      "username": "Choisissez un pseudo",
+      "image_profil": "Logo"
+    }
+  },
+  "fonction": {
+    "title": "Liste des fonctions",
+    "fields": {
+      "code": "Code",
+      "description": "Description"
     },
-    "role": {
-      "title": "Liste des roles",
-      "fields": {
-        "fonctions": "Fonctions",
-        "code": "Code",
-        "name": "Nom",
-        "groups": "Groupes"
-      },
-      "placeholder": {
-        "code": "Entrez un code",
-        "name": "Renseignez un nom"
-      }
+    "placeholder": {
+      "code": "Entrez un code",
+      "description": "Renseignez la description"
+    }
+  },
+  "role": {
+    "title": "Liste des roles",
+    "fields": {
+      "fonctions": "Fonctions",
+      "code": "Code",
+      "name": "Nom",
+      "groups": "Groupes"
     },
-    "group": {
-      "title": "Liste des groupes",
-      "fields": {
-        "roles": "Roles",
-        "code": "Code",
-        "name": "Nom",
-        "utilisateurs": "Utilisateurs"
-      },
-      "placeholder": {
-        "code": "Entrez un code",
-        "name": "Renseignez un nom",
-        "utilisateurs": "Renseignez les 3 premières lettre du nom ou prénom ou pseudo"
-      }
+    "placeholder": {
+      "code": "Entrez un code",
+      "name": "Renseignez un nom"
+    }
+  },
+  "group": {
+    "title": "Liste des groupes",
+    "fields": {
+      "roles": "Roles",
+      "code": "Code",
+      "name": "Nom",
+      "utilisateurs": "Utilisateurs"
+    },
+    "placeholder": {
+      "code": "Entrez un code",
+      "name": "Renseignez un nom",
+      "utilisateurs": "Renseignez les 3 premières lettre du nom ou prénom ou pseudo"
+    }
+  },
+  "company": {
+    "fields": {
+      "name": "Nom de votre entreprise",
+      "numSiret": "Numéro de SIRET"
+    },
+    "placeholder": {
+      "name": "Renseignez un nom",
+      "numSiret": "Numéro de SIRET"
     }
   },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",

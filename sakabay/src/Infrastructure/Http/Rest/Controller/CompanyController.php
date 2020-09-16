@@ -66,7 +66,7 @@ final class CompanyController extends AbstractFOSRestController
 
         $this->entityManager->persist($company);
         $this->entityManager->flush();
-        sleep(20);
+        sleep(5);
 
         $ressourceLocation = $this->generateUrl('company_index');
 

@@ -52,6 +52,7 @@ Vue.use(VeeValidate, {
   inject: true,
   events: '', // Automatic validation is desactivated
   fieldsBagName: 'veeFields',
+  errorBagName: 'errors'
 });
 
 Vue.component('multiselect', MultiSelect);

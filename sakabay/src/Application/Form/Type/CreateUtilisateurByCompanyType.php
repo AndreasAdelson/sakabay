@@ -31,6 +31,7 @@ class CreateUtilisateurByCompanyType extends AbstractType
                     new NotBlank([
                         'message' => $translator->trans('error_message_field_not_empty'),
                     ]),
+
                 ],
                 'required' => true,
                 'attr' => ['class' => 'form-control'],

@@ -29,10 +29,10 @@
 
         <div class="row">
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('admin.group.fields.name') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('group.fields.name') }}</span>
           </div>
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('admin.group.fields.code') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('group.fields.code') }}</span>
           </div>
         </div>
         <div class="row mb-2">
@@ -45,10 +45,10 @@
         </div>
         <div class="row">
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('admin.group.fields.roles') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('group.fields.roles') }}</span>
           </div>
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('admin.group.fields.utilisateurs') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('group.fields.utilisateurs') }}</span>
           </div>
         </div>
         <div class="row mb-2">

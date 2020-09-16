@@ -9,8 +9,14 @@ export default {
     formFields: {
       handler() {
         Object.keys(this.formErrors).forEach(field => {
-          if (this.formErrors[field].length > 0 && this.$isValid(this.formFields[field], field)) {
-            this.$removeFieldErrors(field);
+          if (this.formFields[field]) {
+            if (this.formErrors[field].length > 0) {
+              this.$removeFieldErrors(field);
+            }
+          } else if (this.formFields.utilisateur[field]) {
+            if (this.formErrors[field].length > 0) {
+              this.$removeFieldErrors(field);
+            }
           }
         });
       },

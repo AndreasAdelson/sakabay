@@ -16,12 +16,29 @@ const CnsFormUtils = {
       });
     };
 
+    /**
+     * Complete form error when Symfony Validator throw error on forms
+     * @param {object} errorsData
+     */
     Vue.prototype.$handleFormError = function (errorsData) {
       let receivedFormError = errorsData.errors.children;
+      console.log(receivedFormError, 'receivedFormError');
       Object.keys(receivedFormError).forEach(field => {
         const fieldErrors = receivedFormError[field].errors;
         if (fieldErrors) {
+          console.log(field, 'field');
           this.$addErrorInFormError(field, fieldErrors);
+        } else {
+          // Gestion du cas de création d'une entité enfant
+          let receivedFormErrorChildren = receivedFormError[field].children;
+          if (receivedFormErrorChildren) {
+            Object.keys(receivedFormErrorChildren).forEach(children => {
+              const childErrors = receivedFormErrorChildren[children].errors;
+              if (childErrors) {
+                this.$addErrorInFormError(children, childErrors);
+              }
+            });
+          }
         }
       });
     };
@@ -58,6 +75,7 @@ const CnsFormUtils = {
             if (!customRulesList.includes(error.rule)) {
               errorMessage = this.$t('error_message_' + error.rule);
             }
+
             if (fieldErrors instanceof Array) {
               fieldErrors.push(errorMessage);
             } else {

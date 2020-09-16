@@ -10,59 +10,69 @@
     "undo_change": "Undo change",
     "go_back": "Revenir en arrière"
   },
-  "admin": {
-    "user": {
-      "title": "Users list",
-      "fields": {
-        "email": "Email",
-        "login": "Login",
-        "first_name": "First Name",
-        "last_name": "Last Name"
-      },
-      "placeholder": {
-        "email": "Enter email",
-        "first_name": "Enter first name",
-        "last_name": "Enter last name",
-        "username": "Choose an username"
-      }
+  "user": {
+    "title": "Users list",
+    "fields": {
+      "email": "Email",
+      "login": "Login",
+      "first_name": "First Name",
+      "last_name": "Last Name"
     },
-    "fonction": {
-      "title": "Fonctions list",
-      "fields": {
-        "code": "Code",
-        "description": "Description"
-      },
-      "placeholder": {
-        "code": "Enter a code",
-        "description": "Enter a description"
-      }
+    "placeholder": {
+      "email": "Enter email",
+      "first_name": "Enter first name",
+      "last_name": "Enter last name",
+      "username": "Choose an username",
+      "image_profil": "Logo"
+
+    }
+  },
+  "fonction": {
+    "title": "Fonctions list",
+    "fields": {
+      "code": "Code",
+      "description": "Description"
     },
-    "role": {
-      "title": "Roles list",
-      "fields": {
-        "fonctions": "Fonctions",
-        "code": "Code",
-        "name": "Name",
-        "groups": "Groups"
-      },
-      "placeholder": {
-        "code": "Enter a code",
-        "name": "Enter a name"
-      }
+    "placeholder": {
+      "code": "Enter a code",
+      "description": "Enter a description"
+    }
+  },
+  "role": {
+    "title": "Roles list",
+    "fields": {
+      "fonctions": "Fonctions",
+      "code": "Code",
+      "name": "Name",
+      "groups": "Groups"
     },
-    "group": {
-      "title": "Groups list",
-      "fields": {
-        "roles": "Roles",
-        "code": "Code",
-        "name": "Name",
-        "utilisateurs": "Users"
-      },
-      "placeholder": {
-        "code": "Enter a code",
-        "name": "Enter a name",
-        "utilisateurs": "Fill in the first 3 letters of the surname or first name or last name."
-      }
+    "placeholder": {
+      "code": "Enter a code",
+      "name": "Enter a name"
+    }
+  },
+  "group": {
+    "title": "Groups list",
+    "fields": {
+      "roles": "Roles",
+      "code": "Code",
+      "name": "Name",
+      "utilisateurs": "Users"
+    },
+    "placeholder": {
+      "code": "Enter a code",
+      "name": "Enter a name",
+      "utilisateurs": "Fill in the first 3 letters of the surname or first name or last name."
+    }
+  },
+  "company": {
+    "fields": {
+      "name": "Company name",
+      "numSiret": "SIRET number"
+    },
+    "placeholder": {
+      "name": "Enter a name",
+      "numSiret": "Enter SIRET number"
     }
   },
   "error_message_required": "This field is mandatory. Thank you for filling it in.",

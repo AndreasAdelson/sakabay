@@ -56,13 +56,13 @@
                   id="email"
                   class="email"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('admin.user.fields.email') }}</label>
+                  <label class="fontUbuntu fontSize16">{{ this.$t('user.fields.email') }}</label>
                   <input
                     v-validate="'required|email'"
                     type="text"
                     name="email"
                     class="form-control"
-                    :placeholder="$t('admin.user.placeholder.email')"
+                    :placeholder="$t('user.placeholder.email')"
                     v-model="formFields.email"
                   >
                   <div
@@ -80,13 +80,13 @@
                   id="firstName"
                   class="firstName"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('admin.user.fields.first_name') }}</label>
+                  <label class="fontUbuntu fontSize16">{{ this.$t('user.fields.first_name') }}</label>
                   <input
                     v-validate="'required'"
                     name="firstName"
                     type="text"
                     class="form-control"
-                    :placeholder="$t('admin.user.placeholder.first_name')"
+                    :placeholder="$t('user.placeholder.first_name')"
                     v-model="formFields.firstName"
                   >
                   <div
@@ -107,11 +107,11 @@
                   id="lastName"
                   class="lastName"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('admin.user.fields.last_name') }}</label>
+                  <label class="fontUbuntu fontSize16">{{ this.$t('user.fields.last_name') }}</label>
                   <input
                     type="text"
                     class="form-control"
-                    :placeholder="$t('admin.user.placeholder.last_name')"
+                    :placeholder="$t('user.placeholder.last_name')"
                     v-model="formFields.lastName"
                   >
                   <div
@@ -129,13 +129,13 @@
                   id="login"
                   class="login"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('admin.user.fields.login') }}</label>
+                  <label class="fontUbuntu fontSize16">{{ this.$t('user.fields.login') }}</label>
                   <input
                     v-validate="'required_login'"
                     type="text"
                     name="login"
                     class="form-control"
-                    :placeholder="$t('admin.user.placeholder.username')"
+                    :placeholder="$t('user.placeholder.username')"
                     v-model="formFields.login"
                   >
                   <div

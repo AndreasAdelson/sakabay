@@ -20,13 +20,13 @@
                   id="name"
                   class="name"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('admin.role.fields.name') }}</label>
+                  <label class="fontUbuntu fontSize14">{{ this.$t('company.fields.name') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
                     name="name"
                     class="form-control"
-                    :placeholder="$t('admin.role.placeholder.name')"
+                    :placeholder="$t('company.placeholder.name')"
                     v-model="formFields.name"
                   >
                   <div
@@ -44,13 +44,13 @@
                   id="numSiret"
                   class="numSiret"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('admin.role.fields.numSiret') }}</label>
+                  <label class="fontUbuntu fontSize14">{{ this.$t('company.fields.numSiret') }}</label>
                   <input
                     v-validate="'required'"
                     name="numSiret"
                     type="text"
                     class="form-control"
-                    :placeholder="$t('admin.role.placeholder.numSiret')"
+                    :placeholder="$t('company.placeholder.numSiret')"
                     v-model="formFields.numSiret"
                   >
                   <div
@@ -71,17 +71,23 @@
                   id="lastName"
                   class="lastName"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('admin.user.fields.last_name') }}</label>
+                  <label class="fontUbuntu fontSize14">{{ this.$t('user.fields.last_name') }}</label>
                   <input
-                    v-validate="'required'"
+                    v-validate="{ required: true, regex:/^\D*$/ }"
                     name="lastName"
                     type="text"
+                    maxlength="100"
                     class="form-control"
-                    :placeholder="$t('admin.user.placeholder.last_name')"
+                    :placeholder="$t('user.placeholder.last_name')"
                     v-model="formFields.utilisateur.lastName"
+                    onkeypress="return event.charCode === 0  ||
+                                      (event.charCode >= 65 && event.charCode <= 90) ||
+                                      (event.charCode >= 97 && event.charCode <= 122) ||
+                                      (event.charCode >= 224 && event.charCode <= 246) ||
+                                      (event.charCode >= 249 && event.charCode <= 255)"
                   >
                   <div
-                    v-for="errorText in formErrors.utilisateur.lastName"
+                    v-for="errorText in formErrors.lastName"
                     :key="'code_' + errorText"
                   >
                     <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
@@ -96,17 +102,22 @@
                   id="firstName"
                   class="firstName"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('admin.user.fields.first_name') }}</label>
+                  <label class="fontUbuntu fontSize14">{{ this.$t('user.fields.first_name') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
                     name="firstName"
                     class="form-control"
-                    :placeholder="$t('admin.user.placeholder.first_name')"
+                    :placeholder="$t('user.placeholder.first_name')"
+                    onkeypress="return event.charCode === 0  ||
+                                      (event.charCode >= 65 && event.charCode <= 90) ||
+                                      (event.charCode >= 97 && event.charCode <= 122) ||
+                                      (event.charCode >= 224 && event.charCode <= 246) ||
+                                      (event.charCode >= 249 && event.charCode <= 255)"
                     v-model="formFields.utilisateur.firstName"
                   >
                   <div
-                    v-for="errorText in formErrors.utilisateur.firstName"
+                    v-for="errorText in formErrors.firstName"
                     :key="'name_' + errorText"
                   >
                     <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
@@ -122,17 +133,17 @@
                   id="email"
                   class="email"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('admin.user.fields.email') }}</label>
+                  <label class="fontUbuntu fontSize14">{{ this.$t('user.fields.email') }}</label>
                   <input
                     v-validate="'required|email'"
                     type="text"
                     name="email"
                     class="form-control"
-                    :placeholder="$t('admin.user.placeholder.email')"
+                    :placeholder="$t('user.placeholder.email')"
                     v-model="formFields.utilisateur.email"
                   >
                   <div
-                    v-for="errorText in formErrors.utilisateur.email"
+                    v-for="errorText in formErrors.email"
                     :key="'email_' + errorText"
                   >
                     <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
@@ -142,19 +153,13 @@
             </div>
             <div class="col-6 my-auto">
               <div class="row">
-                <div class="col-3">
-                  <b-img
-                    v-if="urlImageProfil"
-                    class="rounded-circle logo-size-75"
-                    :src="urlImageProfil"
-                  />
-                </div>
-                <div class="col-9 my-auto">
+                <div class="col-8 my-auto">
                   <div class="form-group mb-0">
                     <fieldset
                       id="imageProfil"
                       class="imageProfil"
                     >
+                      <label class="fontUbuntu fontSize14"> {{ $t('user.placeholder.image_profil') }}</label>
                       <input
                         name="imageProfil"
                         type="file"
@@ -170,6 +175,13 @@
                     </fieldset>
                   </div>
                 </div>
+                <div class="col-4">
+                  <b-img
+                    v-if="urlImageProfil"
+                    class="rounded-circle logo-size-75"
+                    :src="urlImageProfil"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -180,8 +192,10 @@
                 class="category"
               >
                 <multiselect
+                  v-validate="'required'"
                   v-model="formFields.category"
                   :options="category"
+                  name="category"
                   placeholder="Selectionner categorie"
                   :searchable="false"
                   :close-on-select="false"
@@ -190,6 +204,12 @@
                   track-by="name"
                 >
                 </multiselect>
+                <div
+                  v-for="errorText in formErrors.category"
+                  :key="'category_' + errorText"
+                >
+                  <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                </div>
               </fieldset>
             </div>
           </div>
@@ -240,7 +260,10 @@ export default {
       formErrors: {
         name: [],
         numSiret: [],
-        utilisateur: [],
+        firstName: [],
+        lastName: [],
+        email: [],
+        imageProfil: [],
         category: []
       },
       urlImageProfil: null,

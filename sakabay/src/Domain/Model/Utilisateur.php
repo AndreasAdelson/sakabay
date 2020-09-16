@@ -17,7 +17,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
  * @UniqueEntity(fields={"login"})
- * @UniqueEntity(fields={"email"})
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Un compte utilise déjà cet email"
+ * )
  * @ExclusionPolicy("all")
  */
 class Utilisateur implements UserInterface

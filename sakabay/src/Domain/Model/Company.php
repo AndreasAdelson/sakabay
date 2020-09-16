@@ -13,7 +13,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=CompanyRepository::class)
- * @UniqueEntity("name")
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="Une entreprise existe déjà avec ce nom"
+ * )
  * @ExclusionPolicy("all")
  *
  */

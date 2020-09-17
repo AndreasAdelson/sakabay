@@ -8,7 +8,9 @@
     "add": "Ajouter",
     "remove": "Retirer",
     "undo_change": "Annulez les modifications",
-    "go_back": "Revenir en arrière"
+    "go_back": "Revenir en arrière",
+    "validate": "Valider",
+    "decline": "Refuser"
   },
   "user": {
     "title": "Liste des utilisateurs",
@@ -65,13 +67,24 @@
     }
   },
   "company": {
+    "title_subscribed": "Liste des entreprises",
+    "title_registered": "Liste demande d'inscription",
+    "table": {
+      "fields": {
+        "name": "Nom",
+        "url_name": "Nom url",
+        "utilisateur": "Pseudo utilisateur",
+        "category": "Categorie"
+      }
+    },
     "fields": {
       "name": "Nom de votre entreprise",
-      "numSiret": "Numéro de SIRET"
+      "num_siret": "Numéro de SIRET"
     },
     "placeholder": {
       "name": "Renseignez un nom",
-      "numSiret": "Numéro de SIRET"
+      "num_siret": "Numéro de SIRET",
+      "url_name": "Renseignez le nom d'url"
     }
   },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",

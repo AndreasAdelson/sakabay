@@ -3,3 +3,5 @@ GGROUP;Gestionnaire des groupes;CGROUP|RGROUP|UGROUP|DGROUP
 GFONCTION;Gestionnaire des fonctions;CFONCTION|RFONCTION|UFONCTION|DFONCTION
 GROLE;Gestionnaire des rôles;CROLE|RROLE|UROLE|DROLE
 GADMIN;Groupe de Gestionnaire du site;ADMIN
+GCOMPANY;Groupe de gestionaire des entreprises;CCOMPANY|RCOMPANY|UCOMPANY|DCOMPANY
+GCATEGORY;Groupe de gestionaire des entreprises;CCATEGORY|RCATEGORY|UCATEGORY|DCATEGORY

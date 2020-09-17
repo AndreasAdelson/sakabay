@@ -3,10 +3,11 @@
 namespace App\Infrastructure\Http\Rest\Controller;
 
 use App\Application\Form\Type\CompanyType;
+use App\Application\Form\Type\CompanySubscribedEditType;
+use App\Application\Service\CategoryService;
 use App\Application\Service\CompanyService;
 use App\Application\Service\FileUploader;
 use App\Domain\Model\Company;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -24,16 +25,18 @@ final class CompanyController extends AbstractFOSRestController
 {
     private $entityManager;
     private $companyService;
+    private $categoryService;
     private $translator;
 
     /**
      * CompanyRestController constructor.
      */
-    public function __construct(EntityManagerInterface $entityManager, CompanyService $companyService, TranslatorInterface $translator)
+    public function __construct(EntityManagerInterface $entityManager, CompanyService $companyService, CategoryService $categoryService, TranslatorInterface $translator)
     {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
         $this->companyService = $companyService;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -67,7 +70,7 @@ final class CompanyController extends AbstractFOSRestController
         $this->entityManager->persist($company);
         $this->entityManager->flush();
 
-        $ressourceLocation = $this->generateUrl('company_index');
+        $ressourceLocation = $this->generateUrl('home');
 
         return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
     }
@@ -76,8 +79,11 @@ final class CompanyController extends AbstractFOSRestController
      * @Rest\View(serializerGroups={"api_companies"})
      * @Rest\Get("/companies")
      *
+     * - - - - - - - - - - - - Query group for paginated admin list - - - - - - - - - - - - -
+     * Retrieves sorted list of all companies
+     * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      * @QueryParam(name="filterFields",
-     *             default="description",
+     *             default="name",
      *             description="Liste des champs sur lesquels le filtre s'appuie"
      * )
      * @QueryParam(name="filter",
@@ -85,7 +91,7 @@ final class CompanyController extends AbstractFOSRestController
      *             description="Filtre"
      * )
      * @QueryParam(name="sortBy",
-     *             default="description",
+     *             default="name",
      *             description="Champ unique sur lequel s'opère le tri"
      * )
      * @QueryParam(name="sortDesc",
@@ -100,6 +106,10 @@ final class CompanyController extends AbstractFOSRestController
      *             default="1000000",
      *             description="Taille de la page"
      * )
+     * @QueryParam(name="codeStatut",
+     *             default="",
+     *             description="Statut d'une entreprise"
+     * )
      * @return View
      */
 
@@ -111,9 +121,10 @@ final class CompanyController extends AbstractFOSRestController
         $sortDesc = $paramFetcher->get('sortDesc');
         $currentPage = $paramFetcher->get('currentPage');
         $perPage = $paramFetcher->get('perPage');
+        $codeStatut = $paramFetcher->get('codeStatut');
 
         $pager = $this->companyService
-            ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage);
+            ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage, $codeStatut);
         $companies = $pager->getCurrentPageResults();
         $nbResults = $pager->getNbResults();
         $datas = iterator_to_array($companies);
@@ -137,12 +148,12 @@ final class CompanyController extends AbstractFOSRestController
 
     /**
      * @Rest\View()
-     * @Rest\Post("companies/{companyId}")
-     * @Security("is_granted('ROLE_UROLE')")
+     * @Rest\Post("admin/companies/{companyId}")
+     * @Security("is_granted('ROLE_UCOMPANY')")
      *
      * @return View
      */
-    public function editCompany(int $companyId, Request $request)
+    public function editSubscribedCompany(int $companyId, Request $request)
     {
         $company = $this->companyService->getCompany($companyId);
 
@@ -153,7 +164,7 @@ final class CompanyController extends AbstractFOSRestController
         $formOptions = [
             'translator' => $this->translator,
         ];
-        $form = $this->createForm(CompanyType::class, $company, $formOptions);
+        $form = $this->createForm(CompanySubscribedEditType::class, $company, $formOptions);
         $form->submit($request->request->all());
         if (!$form->isValid()) {
             return $form;
@@ -161,14 +172,39 @@ final class CompanyController extends AbstractFOSRestController
         $this->entityManager->persist($company);
         $this->entityManager->flush($company);
 
-        $ressourceLocation = $this->generateUrl('company_index');
+        $ressourceLocation = $this->generateUrl('company_subscribed_index');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 
     /**
      * @Rest\View()
-     * @Rest\Delete("companies/{companyId}")
-     * @Security("is_granted('ROLE_DROLE')")
+     * @Rest\Post("admin/companies/{companyId}/validation")
+     * @Security("is_granted('ROLE_UCOMPANY')")
+     *
+     * @return View
+     */
+    public function validateCompany(int $companyId, Request $request)
+    {
+        $company = $this->companyService->getCompany($companyId);
+
+        if (!$company) {
+            throw new EntityNotFoundException('Company with id ' . $companyId . ' does not exist!');
+        }
+        $category = $this->categoryService->getValidateCode()[0];
+
+        $company->setCategory($category);
+
+        $this->entityManager->persist($company);
+        $this->entityManager->flush($company);
+
+        $ressourceLocation = $this->generateUrl('company_subscribed_index');
+        return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
+    }
+
+    /**
+     * @Rest\View()
+     * @Rest\Delete("admin/companies/{companyId}")
+     * @Security("is_granted('ROLE_DCOMPANY')")
      *
      * @return View
      */
@@ -179,7 +215,7 @@ final class CompanyController extends AbstractFOSRestController
         } catch (EntityNotFoundException $e) {
             throw new NotFoundHttpException($e->getMessage());
         }
-        $ressourceLocation = $this->generateUrl('company_index');
+        $ressourceLocation = $this->generateUrl('company_registered_index');
 
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }

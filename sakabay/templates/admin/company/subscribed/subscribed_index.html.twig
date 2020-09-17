@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'company_subscribed_title_list_page'|trans }}{% endblock %}
+
+{% block body %}
+  <list-company-subscribed
+  :can-delete="{{ canDelete|json_encode }}"
+  :can-edit="{{ canEdit|json_encode }}"
+  :can-read="{{ canRead|json_encode }}"
+  >
+  </list-company-subscribed>
+{% endblock %}

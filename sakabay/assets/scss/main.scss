@@ -599,6 +599,10 @@ a[data-toggle="collapse"] {
   outline: 0px !important;
 }
 
+.button_skb:hover {
+  background: red !important;
+}
+
 .login_container {
   padding: 0 2rem;
 }
@@ -815,6 +819,18 @@ a[data-toggle="collapse"] {
 
 .col-size-5 {
   width: 5%;
+}
+
+.col-size-6 {
+  width: 6%;
+}
+
+.col-size-7 {
+  width: 7%;
+}
+
+.col-size-8 {
+  width: 8%;
 }
 
 .col-size-9 {

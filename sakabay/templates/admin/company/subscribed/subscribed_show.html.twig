@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'company_subscribed_title_show_page'|trans }}{% endblock %}
+
+{% block body %}
+    <company-subscribed-show
+    :company-id="{{ companyId }}"
+    :can-edit="{{ canEdit|json_encode }}"
+    ></company-subscribed-show>
+{% endblock %}

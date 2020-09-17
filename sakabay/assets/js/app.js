@@ -40,6 +40,14 @@ import FormGroup from './components/admin/group/form';
 import ShowGroup from './components/admin/group/show';
 import FormCategory from './components/category/form';
 import Company from './components/company';
+import ListCompanySubscribed from './components/admin/company/subscribed';
+import CompanySubscribedShow from './components/admin/company/subscribed/show';
+import CompanySubscribedForm from './components/admin/company/subscribed/form';
+import ListCompanyRegistered from './components/admin/company/registered';
+import CompanyRegisteredShow from './components/admin/company/registered/show';
+import CompanyRegisteredForm from './components/admin/company/registered/form';
+
+
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -77,6 +85,12 @@ new Vue({
     ListRole,
     FormGroup,
     ListGroup,
-    ShowGroup
+    ShowGroup,
+    ListCompanySubscribed,
+    ListCompanyRegistered,
+    CompanySubscribedShow,
+    CompanySubscribedForm,
+    CompanyRegisteredShow,
+    CompanyRegisteredForm
   }
 })

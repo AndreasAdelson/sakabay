@@ -126,7 +126,6 @@ export default {
     }
     return Promise.all(promises).then(res => {
       this.fonctions = res[0].data;
-      console.log(res, 'res');
       if (this.categoryId) {
         let category = res[1].data;
         this.$removeFieldsNotInForm(category, Object.keys(this.formFields));

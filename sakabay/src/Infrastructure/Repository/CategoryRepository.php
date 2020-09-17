@@ -8,6 +8,12 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 
 class CategoryRepository extends AbstractRepository implements CategoryRepositoryInterface
 {
+
+    /**
+     * Category code field for type "Beauté"
+     */
+    const BEAUTY_CODE = 'BEAUTE';
+
     /**
      * CategoryRepository constructor.
      */
@@ -27,4 +33,15 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
         $this->_em->remove($category);
         $this->_em->flush($category);
     }
+
+    public function getValidateCode()
+    {
+        $query = $this->createQueryBuilder('ca')->distinct(true);
+        $query->where('ca.code = (:codes)');
+        $query->setParameter('codes', CategoryRepository::BEAUTY_CODE);
+
+        return $query->getQuery()->getResult();
+    }
+
+
 }

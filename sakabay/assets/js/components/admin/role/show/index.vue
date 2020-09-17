@@ -68,12 +68,8 @@
 </template>
 <script>
 import axios from 'axios';
-import Avatar from 'vue-avatar';
 
 export default {
-  components: {
-    Avatar
-  },
   props: {
     roleId: {
       type: Number,

@@ -22,24 +22,6 @@ class RoleService
         $this->roleRepository = $roleRepository;
     }
 
-    public function addRole(string $name, string $code)
-    {
-        $role = new Role();
-        $role->setName($name);
-        $role->setCode($code);
-        $this->roleRepository->save($role);
-    }
-
-    ///Editer un Role
-    public function editRole(string $name, string $code, int $roleId)
-    {
-        $role = $this->roleRepository->findById($roleId);
-        $role->setName($name);
-        $role->setCode($code);
-
-        return $role;
-    }
-
     /// Afficher un Role
     public function getRole(int $roleId): ?Role
     {
@@ -63,7 +45,6 @@ class RoleService
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *
-     * @author vbioret
      *
      * @param string $sortBy
      * @param bool   $descending

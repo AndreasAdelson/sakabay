@@ -60,7 +60,6 @@ class UtilisateurService
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *
-     * @author vbioret
      *
      * @param string $sortBy
      * @param bool   $descending

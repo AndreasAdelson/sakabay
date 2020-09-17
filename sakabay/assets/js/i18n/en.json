@@ -8,7 +8,9 @@
     "add": "Add",
     "remove": "Remove",
     "undo_change": "Undo change",
-    "go_back": "Revenir en arrière"
+    "go_back": "Go back",
+    "validate": "Validate",
+    "decline": "Decline"
   },
   "user": {
     "title": "Users list",
@@ -66,13 +68,24 @@
     }
   },
   "company": {
+    "title_subscribed": "Companies list",
+    "title_registered": "Company registration request list",
+    "table": {
+      "fields": {
+        "name": "Name",
+        "url_name": "Url name",
+        "utilisateur": "User login",
+        "category": "Categorie"
+      }
+    },
     "fields": {
       "name": "Company name",
-      "numSiret": "SIRET number"
+      "num_siret": "SIRET number"
     },
     "placeholder": {
       "name": "Enter a name",
-      "numSiret": "Enter SIRET number"
+      "num_siret": "Enter SIRET number",
+      "url_name": "Enter url name"
     }
   },
   "error_message_required": "This field is mandatory. Thank you for filling it in.",

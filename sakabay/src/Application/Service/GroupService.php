@@ -22,15 +22,6 @@ class GroupService
         $this->groupRepository = $groupRepository;
     }
 
-    public function addGroup(string $name, string $code)
-    {
-        $group = new Group();
-        $group->setName($name);
-        $group->setCode($code);
-        $this->groupRepository->save($group);
-    }
-    
-    /// Afficher un Group
     public function getGroup(int $groupId): ?Group
     {
         return $this->groupRepository->find($groupId);
@@ -53,7 +44,7 @@ class GroupService
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *
-     * @author vbioret
+
      *
      * @param string $sortBy
      * @param bool   $descending

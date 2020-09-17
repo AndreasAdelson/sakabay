@@ -1,9 +1,9 @@
 sakabay: Sakabay
 
+#Users's pages
 user_title_list_page: "Users list"
 user_title_edit_page: "Edit user"
 user_title_show_page: "User details"
-
 
 #Navbar
 local_business: "Local business"
@@ -23,6 +23,9 @@ menu_all_function: Function entity
 menu_all_categories: Category entity
 menu_company_actions: Company action
 menu_company_page: My presentation page
+menu_management_company: Company Management
+menu_subscribed_company: Companies
+menu_registered_company: Register
 
 #form-user
 login_placeholder: "Username"
@@ -61,18 +64,28 @@ error_generic_message: "An error occured."
 error_application_access_message: "You do not have access to this part of the application."
 
 #Fonction's pages
-fonction_title_list_page: "Functions list"
+fonction_title_list_page: "List of functions"
 fonction_title_form_page: "Edit a function"
 
 #Role's pages
-role_title_list_page: "Roles list"
+role_title_list_page: "List of roles"
 role_title_edit_page: "Edit a role"
 role_title_create_page: "Create a role"
-role_title_show_page: "Role detail"
+role_title_show_page: "Detail of role"
 
 #Group's pages
-group_title_list_page: "Groups list"
+group_title_list_page: "List of groups"
 group_title_edit_page: "Edit a group"
 group_title_create_page: "Create a group"
-group_title_show_page: "Group detail"
+group_title_show_page: "Detail of group"
 
+#Company's pages
+company_subscribed_title_list_page: "List of companies"
+company_subscribed_title_form_page: "Edit a company"
+company_subscribed_title_show_page: "Detail of a company"
+
+company_registered_title_list_page: "Company registration request list"
+company_registered_title_form_page: "Edit registration"
+company_registered_title_show_page: "Dteail of the registration"
+
+company_register_title_page: "reference yourself"

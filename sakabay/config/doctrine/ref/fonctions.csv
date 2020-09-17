@@ -14,4 +14,12 @@ CFONCTION; Création d'une fonction
 RFONCTION; Consultation d'une fonction
 UFONCTION; Modification d'une fonction
 DFONCTION; Suppression d'une fonction
+CCOMPANY; Création d'une entreprise
+RCOMPANY; Consultation d'une entreprise
+UCOMPANY; Modification d'une entreprise
+DCOMPANY; Suppression d'une entreprise
+CCATEGORY; Création d'une catégorie
+RCATEGORY; Consultation d'une catégorie
+UCATEGORY; Modification d'une catégorie
+DCATEGORY; Suppression d'une catégorie
 ADMIN; Administrateur du site

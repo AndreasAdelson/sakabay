@@ -49,6 +49,12 @@ class CategoryService
         return $this->categoryRepository->find($categoryId);
     }
 
+    public function getValidateCode(): ?array
+    {
+        return $this->categoryRepository->getValidateCode();
+    }
+
+
     public function getAllCategorys(): ?array
     {
         return $this->categoryRepository->findAll();
@@ -66,7 +72,6 @@ class CategoryService
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *
-     * @author vbioret
      *
      * @param string $sortBy
      * @param bool   $descending

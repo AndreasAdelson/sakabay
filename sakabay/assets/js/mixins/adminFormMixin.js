@@ -13,7 +13,7 @@ export default {
             if (this.formErrors[field].length > 0) {
               this.$removeFieldErrors(field);
             }
-          } else if (this.formFields.utilisateur[field]) {
+          } else if (this.formFields.utilisateur && this.formFields.utilisateur[field]) {
             if (this.formErrors[field].length > 0) {
               this.$removeFieldErrors(field);
             }

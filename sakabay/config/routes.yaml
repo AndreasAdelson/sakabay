@@ -77,23 +77,57 @@ category_show:
     methods: [GET, POST]
 
 # Routes for Company object
-company_index:
-    path: company
-    controller: App\Infrastructure\Http\Web\Controller\CompanyController::index
+#Route for list of subscribed companies
+company_subscribed_index:
+    path: admin/entreprise
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::subscribedIndex
     methods: [GET]
 
+company_subscribed_show:
+    path: admin/entreprise/show/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::showSubscribed
+    methods: [GET]
+
+company_subscribed_edit:
+    path: admin/entreprise/edit/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::editSubscribed
+    methods: [GET]
+
+#Route for list of registered companies
+company_registered_index:
+    path: admin/registered/entreprise
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::registeredIndex
+    methods: [GET]
+
+company_registered_show:
+    path: admin/registered/entreprise/show/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::showRegistered
+    methods: [GET]
+
+company_registered_edit:
+    path: admin/registered/entreprise/edit/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::editRegistered
+    methods: [GET]
+
+#Route for the page before a user register a company
+company_register_index:
+    path: entreprise
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::registerIndex
+    methods: [GET]
+
+#Route for user register his company
 company_new:
-    path: company/new
+    path: entreprise/new
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::new
     methods: [GET, POST]
 
 company_edit:
-    path: company/edit/{id}
+    path: entreprise/edit/{id}
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::edit
     methods: [GET, POST]
 
 company_show:
-    path: company/show/{id}
+    path: entreprise/show/{id}
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::show
     methods: [GET, POST]
 

@@ -23,6 +23,9 @@ menu_all_function: Entité Fonctions
 menu_all_categories: Entité Catégories
 menu_company_actions: Actions entreprise
 menu_company_page: Ma page de présentation
+menu_management_company: Gestion des entreprises
+menu_subscribed_company: Entreprises
+menu_registered_company: Inscriptions
 
 #form-user
 login_placeholder: "Pseudonyme"
@@ -76,5 +79,13 @@ group_title_edit_page: "Modifier un groupe"
 group_title_create_page: "Créer un groupe"
 group_title_show_page: "Détails d'un groupe"
 
+#Company's pages
+company_subscribed_title_list_page: "Liste des entreprises"
+company_subscribed_title_form_page: "Modifier une entreprise"
+company_subscribed_title_show_page: "Détails d'une entreprise"
 
+company_registered_title_list_page: "Liste demande d'inscription entreprise"
+company_registered_title_form_page: "Modifier une inscription"
+company_registered_title_show_page: "Détail d'une inscription"
 
+company_register_title_page: "Référencez-vous"

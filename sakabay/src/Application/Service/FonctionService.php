@@ -23,27 +23,6 @@ class FonctionService
         $this->fonctionRepository = $fonctionRepository;
     }
 
-    public function addFonction(string $name, string $code)
-    {
-        $fonction = new Fonction();
-        $fonction->setName($name);
-        $fonction->setCode($code);
-        $this->fonctionRepository->save($fonction);
-    }
-
-    ///Editer un Fonction
-    public function editFonction(string $name, string $code, int $fonctionId)
-    {
-        $fonction = $this->fonctionRepository->findById($fonctionId);
-        $fonction->setName($name);
-        $fonction->setCode($code);
-
-        return $fonction;
-    }
-    // public function findOneBy(array $email): ?Fonction
-    // {
-    //     return $this->FonctionRepository->findOneBy($email);
-    // }
     /// Afficher un Fonction
     public function getFonction(int $fonctionId): ?Fonction
     {
@@ -58,7 +37,6 @@ class FonctionService
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *
-     * @author vbioret
      *
      * @param string $sortBy
      * @param bool   $descending

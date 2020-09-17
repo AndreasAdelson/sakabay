@@ -8,6 +8,7 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
 use \LogicException;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
 
 abstract class AbstractRepository extends EntityRepository
 {
@@ -16,7 +17,6 @@ abstract class AbstractRepository extends EntityRepository
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *
-     * @author vbioret
      *
      * @param string $sortBy
      * @param bool   $descending
@@ -45,13 +45,7 @@ abstract class AbstractRepository extends EntityRepository
             $qb->setParameter('searchPattern', '%' . mb_strtolower($filterText) . '%');
         }
         if (!empty($sortBy)) {
-            //Faut revoir quesque ça fait rée
-            // if (false !== mb_strpos($sortBy, '.')) {
-            //     $qb->leftJoin('o.' . mb_substr($sortBy, 0, mb_strpos($sortBy, '.')), 'utilisateur');
-            //     $qb->orderBy('utilisateur.' . mb_substr($sortBy, mb_strpos($sortBy, '.') + 1, mb_strlen($sortBy) - mb_strpos($sortBy, '.') + 1), $descending ? 'DESC' : 'ASC');
-            // } else {
             $qb->orderBy('o.' . $sortBy, $descending ? 'DESC' : 'ASC');
-            // }
         }
 
         return $this->paginate($qb, $perPage, $currentPage);
@@ -60,7 +54,7 @@ abstract class AbstractRepository extends EntityRepository
     /**
      * Retourne une page en fonction d'une requète, d'une taille et d'une position.
      *
-     * @author vbioret
+
      *
      * @param int $perPage
      * @param int $currentPage
@@ -77,7 +71,7 @@ abstract class AbstractRepository extends EntityRepository
         if (0 >= $currentPage) {
             throw new \LogicException('$currentPage must be greater than 0.');
         }
-        $pager = new Pagerfanta(new DoctrineORMAdapter($qb));
+        $pager = new Pagerfanta(new QueryAdapter($qb));
         $pager->setMaxPerPage((int) $perPage);
         $pager->setCurrentPage((int) $currentPage);
 

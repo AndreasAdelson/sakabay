@@ -9,8 +9,12 @@ const CnsFormUtils = {
      * @param {array} keptFields
      */
     Vue.prototype.$removeFieldsNotInForm = function (entity, keptFields) {
+      let finalKeptFields = [];
+      keptFields.forEach(keptField => {
+        finalKeptFields.push(this.$camelCaseToUnderscoreCase(keptField));
+      });
       Object.keys(entity).forEach(field => {
-        if (!keptFields.includes(field)) {
+        if (!finalKeptFields.includes(field)) {
           delete entity[field];
         }
       });
@@ -22,11 +26,9 @@ const CnsFormUtils = {
      */
     Vue.prototype.$handleFormError = function (errorsData) {
       let receivedFormError = errorsData.errors.children;
-      console.log(receivedFormError, 'receivedFormError');
       Object.keys(receivedFormError).forEach(field => {
         const fieldErrors = receivedFormError[field].errors;
         if (fieldErrors) {
-          console.log(field, 'field');
           this.$addErrorInFormError(field, fieldErrors);
         } else {
           // Gestion du cas de création d'une entité enfant
@@ -135,6 +137,7 @@ const CnsFormUtils = {
     };
 
     Vue.prototype.$getTransformedValue = function (value) {
+      console.log(value, 'value');
       let transformedValue = undefined;
       if (value instanceof Date) {
         transformedValue = {
@@ -185,6 +188,7 @@ const CnsFormUtils = {
      */
     Vue.prototype.$getFormFieldsData = function (formFields = this.formFields, formData = new FormData()) {
       let transformedFormFields = this.$getTransformedValue(formFields);
+      console.log(transformedFormFields, 'transformedFormFields');
       _.forEach(_.keys(transformedFormFields), field => {
         if (transformedFormFields[field] instanceof Array) {
           transformedFormFields[field].forEach(elem => {

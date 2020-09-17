@@ -82,12 +82,8 @@
 </template>
 <script>
 import axios from 'axios';
-import Avatar from 'vue-avatar';
 
 export default {
-  components: {
-    Avatar
-  },
   props: {
     groupId: {
       type: Number,

@@ -1,6 +1,6 @@
 <template>
   <div class="skb-body container">
-    <a href="/home">
+    <a href="/">
       <button
         title="Annulez "
         type="button"
@@ -44,13 +44,13 @@
                   id="numSiret"
                   class="numSiret"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('company.fields.numSiret') }}</label>
+                  <label class="fontUbuntu fontSize14">{{ this.$t('company.fields.num_siret') }}</label>
                   <input
                     v-validate="'required'"
                     name="numSiret"
                     type="text"
                     class="form-control"
-                    :placeholder="$t('company.placeholder.numSiret')"
+                    :placeholder="$t('company.placeholder.num_siret')"
                     onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
                     v-model="formFields.numSiret"
                   >
@@ -242,16 +242,10 @@ export default {
     adminFormMixin
   ],
   props: {
-    categoryId: {
-      type: Number,
-      default: null,
-    }
   },
   data () {
     return {
       API_URL: '/api/companies',
-      fonctionsAtCreation: null,
-      fonctions: [],
       formFields: {
         name: null,
         numSiret: null,
@@ -289,7 +283,7 @@ export default {
     },
 
     submitForm () {
-      let formData = this.$getFormFieldsData(this.formFields, formData);
+      let formData = this.$getFormFieldsData(this.formFields);
       if (this.imageProfilSelected) {
         formData.append('file', this.imageProfilSelected);
       }

@@ -23,31 +23,7 @@ class CompanyService
         $this->companyRepository = $companyRepository;
     }
 
-    public function addCompany(string $nom, string $num_siret)
-    {
-        $company = new Company();
-        $company->setNom($nom);
-        $company->setNumSiret($num_siret);
-        // $company->setLastNameCostumer($LastNameCostumer);
-        // $company->setNomCostumer($NomCostumer);
-        // $company->setEmail($Email);
-        // $company->setImageProfil($ImageProfil);
-        $this->companyRepository->save($company);
-    }
 
-    // ///Editer un Company
-    // public function editCompany(string $name, string $code, int $companyId)
-    // {
-    //     $company = $this->companyRepository->findById($companyId);
-    //     $company->setNom($name);
-    //     $company->setNum_siret($code);
-
-    //     return $company;
-    // }
-    // public function findOneBy(array $email): ?Company
-    // {
-    //     return $this->CompanyRepository->findOneBy($email);
-    // }
     /// Afficher un Company
     public function getCompany(int $companyId): ?Company
     {
@@ -66,5 +42,31 @@ class CompanyService
             throw new EntityNotFoundException('Company with id ' . $companyId . ' does not exist!');
         }
         $this->companyRepository->delete($company);
+    }
+
+    /**
+     * Retourne une page, potentiellement triée et filtrée.
+     *
+     *
+     * @param string $sortBy
+     * @param bool   $descending
+     * @param string $filterFields
+     * @param string $filterText
+     * @param int    $currentPage
+     * @param int    $perPage
+     *
+     * @return Pagerfanta
+     */
+    public function getPaginatedList(
+        $sortBy = 'id',
+        $descending = false,
+        $filterFields = '',
+        $filterText = '',
+        $currentPage = 1,
+        $perPage = PHP_INT_MAX ? PHP_INT_MAX : 10,
+        $codeStatut = ''
+    ) {
+        return $this->companyRepository
+            ->getPaginatedList($sortBy, $descending, $filterFields, $filterText, $currentPage, $perPage, $codeStatut);
     }
 }

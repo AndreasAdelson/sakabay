@@ -35,6 +35,16 @@ class MainMenuBuilder
                     "roles" => ["ROLE_ADMIN"]
                 ]
             ],
+            "menu_management_company" => [
+                "menu_subscribed_company" => [
+                    "route" => "company_subscribed_index",
+                    "roles" => ["ROLE_ADMIN"]
+                ],
+                "menu_registered_company" => [
+                    "route" => "company_registered_index",
+                    "roles" => ["ROLE_ADMIN"]
+                ]
+            ]
         ],
     ];
 

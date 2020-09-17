@@ -24,7 +24,8 @@ class Category
      * @var int
      * @Expose
      * @Groups({
-     * "api_categories"
+     * "api_categories",
+     * "api_companies"
      * })
      */
     private $id;
@@ -33,7 +34,8 @@ class Category
      * @var string
      * @Expose
      * @Groups({
-     * "api_categories"
+     * "api_categories",
+     * "api_companies"
      * })
      */
     private $name;
@@ -52,7 +54,6 @@ class Category
      * @var Company[]
      * @Expose
      * @Groups({
-     * "api_companies"
      * })
      */
     private $company;

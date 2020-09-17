@@ -227,7 +227,7 @@ export default {
     },
 
     submitForm () {
-      let formData = this.$getFormFieldsData(this.formFields, formData);
+      let formData = this.$getFormFieldsData(this.formFields);
       if (this.imageProfilSelected) {
         formData.append('file', this.imageProfilSelected);
       }

@@ -131,6 +131,26 @@ company_show:
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::show
     methods: [GET, POST]
 
+######### routes for company status ###########
+company_statut_index:
+    path: admin/companystatut
+    controller: App\Infrastructure\Http\Web\Controller\CompanyStatutController::index
+    methods: [GET]
+
+company_statut_show:
+    path: admin/companystatut/show/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CompanyStatutController::show
+    methods: [GET, POST]
+
+company_statut_new:
+    path: admin/companystatut/new
+    controller: App\Infrastructure\Http\Web\Controller\CompanyStatutController::new
+    methods: [GET, POST]
+
+company_statut_edit:
+    path: company/edit/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CompanyStatutController::edit
+    methods: [GET, POST]
 # Routes for Group object
 group_index:
     path: admin/group

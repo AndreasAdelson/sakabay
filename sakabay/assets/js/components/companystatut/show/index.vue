@@ -13,13 +13,13 @@
         <div class="col-6 justify-content-end">
           <a
             class="float-right"
-            :href="'/admin/role/edit/' + roleId"
+            :href="'/admin/companystatut/edit/' + companyStatutId"
           >
             <b-button class="button_skb">{{ this.$t('commons.edit') }}</b-button>
           </a>
         </div>
       </div>
-      <a href="/admin/role">
+      <a href="/admin/companystatut">
         <button
           :title="$t('commons.go_back')"
           type="button"
@@ -32,36 +32,18 @@
 
         <div class="row">
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('role.fields.name') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('companyStatut.fields.name') }}</span>
           </div>
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('role.fields.code') }}</span>
-          </div>
-        </div>
-        <div class="row mb-2">
-          <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.role.name.toUpperCase() }}</span>
-          </div>
-          <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.role.code }}</span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('role.fields.fonctions') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('companyStatut.fields.code') }}</span>
           </div>
         </div>
         <div class="row mb-2">
           <div class="col-6">
-            <ul>
-              <li
-                v-for="(fonction, index) in role.fonctions"
-                :key="'fonction_'+ index"
-                class="fontHelveticaOblique fontSize18"
-              >
-                {{ fonction.description }}
-              </li>
-            </ul>
+            <span class="fontHelveticaOblique fontSize18">{{ this.companyStatut.name.toUpperCase() }}</span>
+          </div>
+          <div class="col-6">
+            <span class="fontHelveticaOblique fontSize18">{{ this.companyStatut.code }}</span>
           </div>
         </div>
       </div>
@@ -71,10 +53,14 @@
 </template>
 <script>
 import axios from 'axios';
+import Avatar from 'vue-avatar';
 
 export default {
+  components: {
+    Avatar
+  },
   props: {
-    roleId: {
+    companyStatutId: {
       type: Number,
       default: null
     },
@@ -85,16 +71,16 @@ export default {
   },
   data () {
     return {
-      role: null,
+      companyStatut: null,
       loading: false
     }
   },
   async created () {
-    if (this.roleId) {
+    if (this.companyStatutId) {
       this.loading = true;
-      return axios.get('/api/admin/roles/' + this.roleId)
+      return axios.get('/api/admin/companystatut/' + this.companyStatutId)
         .then(response => {
-          this.role = response.data;
+          this.companyStatut = response.data;
           this.loading = false;
         }).catch(error => {
           console.log(error);

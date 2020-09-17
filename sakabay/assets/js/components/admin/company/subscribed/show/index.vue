@@ -90,7 +90,6 @@ export default {
       this.loading = true;
       return axios.get('/api/companies/' + this.companyId)
         .then(response => {
-          console.log(response);
           this.company = response.data;
           this.loading = false;
         }).catch(error => {

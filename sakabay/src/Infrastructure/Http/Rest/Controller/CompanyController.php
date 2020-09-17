@@ -4,7 +4,7 @@ namespace App\Infrastructure\Http\Rest\Controller;
 
 use App\Application\Form\Type\CompanyType;
 use App\Application\Form\Type\CompanySubscribedEditType;
-use App\Application\Service\CategoryService;
+use App\Application\Service\CompanyStatutService;
 use App\Application\Service\CompanyService;
 use App\Application\Service\FileUploader;
 use App\Domain\Model\Company;
@@ -20,23 +20,26 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class CompanyController extends AbstractFOSRestController
 {
     private $entityManager;
     private $companyService;
-    private $categoryService;
+    private $companyStatutService;
     private $translator;
+    private $encoder;
 
     /**
      * CompanyRestController constructor.
      */
-    public function __construct(EntityManagerInterface $entityManager, CompanyService $companyService, CategoryService $categoryService, TranslatorInterface $translator)
+    public function __construct(EntityManagerInterface $entityManager, CompanyService $companyService, CompanyStatutService $companyStatutService, TranslatorInterface $translator, UserPasswordEncoderInterface $encoder)
     {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
         $this->companyService = $companyService;
-        $this->categoryService = $categoryService;
+        $this->companyStatutService = $companyStatutService;
+        $this->encoder = $encoder;
     }
 
     /**
@@ -67,8 +70,32 @@ final class CompanyController extends AbstractFOSRestController
             return $form;
         }
 
+        $urlName  = $company->getName();
+        $urlName = str_replace(' ', '-', $urlName);
+        $urlName = str_replace('\'', '', $urlName);
+        $unwanted_array = array(
+            'Š' => 'S', 'š' => 's', 'Ž' => 'Z', 'ž' => 'z', 'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
+            'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U',
+            'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss', 'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c',
+            'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o',
+            'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'þ' => 'b', 'ÿ' => 'y'
+        );
+        $urlName = strtolower(strtr($urlName, $unwanted_array));
+        $company->setUrlName($urlName);
+        //TODO Faire une fonction qui génère un mdp aléatoire lorsqu'on se penche sur l'envoie d'un email pour vérifier le mdp envoyé.
+        $plainPassword = 'test';
+        $encoded = $this->encoder->encodePassword($company->getUtilisateur(), $plainPassword);
+        $login = str_replace('-', '', $urlName);
+        $company->getUtilisateur()->setLogin(strtoupper($login));
+        $company->getUtilisateur()->setPassword($encoded);
+        $companyStatut = $this->companyStatutService->getENCCompanyStatut()[0];
+        $company->setCompanystatut($companyStatut);
+
+
         $this->entityManager->persist($company);
         $this->entityManager->flush();
+        //TODO Envoie de l'email
+
 
         $ressourceLocation = $this->generateUrl('home');
 
@@ -190,9 +217,9 @@ final class CompanyController extends AbstractFOSRestController
         if (!$company) {
             throw new EntityNotFoundException('Company with id ' . $companyId . ' does not exist!');
         }
-        $category = $this->categoryService->getValidateCode()[0];
+        $companyStatut = $this->companyStatutService->getVALCompanyStatut()[0];
 
-        $company->setCategory($category);
+        $company->setCompanyStatut($companyStatut);
 
         $this->entityManager->persist($company);
         $this->entityManager->flush($company);

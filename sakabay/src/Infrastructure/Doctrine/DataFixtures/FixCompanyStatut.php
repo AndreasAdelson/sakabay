@@ -3,14 +3,14 @@
 namespace App\Infrastructure\Doctrine\DataFixtures;
 
 use App\Application\Utils\StringUtils;
-use App\Domain\Model\Company;
+use App\Domain\Model\CompanyStatut;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FixCompany extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
+class FixCompanyStatut extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
@@ -29,22 +29,14 @@ class FixCompany extends Fixture implements OrderedFixtureInterface, ContainerAw
         foreach ($lines as $data) {
             list(
                 $name,
-                $numSiret,
-                $urlName,
-                $category,
-                $utilisateur,
-                $companyStatut
+                $code
             ) = explode(';', trim($data));
 
-            $company = new Company();
-            $company->setName($name);
-            $company->setNumSiret($numSiret);
-            $company->setUrlName($urlName);
-            $company->setCategory($this->getReference('category_' . $category));
-            $company->setUtilisateur($this->getReference('utilisateur_' . $utilisateur));
-            $company->setCompanystatut($this->getReference('companyStatut_' . $companyStatut));
-            $manager->persist($company);
-            $this->addReference('company_' . $name, $company);
+            $companyStatut = new CompanyStatut();
+            $companyStatut->setName($name);
+            $companyStatut->setCode($code);
+            $manager->persist($companyStatut);
+            $this->addReference('companyStatut_' . $code, $companyStatut);
         }
 
         $manager->flush();
@@ -57,6 +49,6 @@ class FixCompany extends Fixture implements OrderedFixtureInterface, ContainerAw
      */
     public function getOrder()
     {
-        return 3;
+        return 1;
     }
 }

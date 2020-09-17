@@ -36,6 +36,14 @@ App\Domain\Model\Company:
                 name: id_category
                 referencedColumnName: id
                 nullable: false
+        companystatut:
+            targetEntity: CompanyStatut
+            cascade: [persist]
+            inversedBy: companystatut
+            joinColumn:
+                name: id_companystatut
+                referencedColumnName: id
+                nullable: false
     oneToOne:
         utilisateur:
             targetEntity: Utilisateur

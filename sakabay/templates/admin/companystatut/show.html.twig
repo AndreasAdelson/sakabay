@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'companystatut_title_show_page'|trans }}{% endblock %}
+
+{% block body %}
+    <show-company-statut
+    :company-statut-id="{{ companyStatutId }}"
+    :can-edit="{{ canEdit|json_encode }}"
+    ></show-company-statut>
+{% endblock %}

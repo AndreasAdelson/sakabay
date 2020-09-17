@@ -1,0 +1,30 @@
+App\Domain\Model\CompanyStatut:
+    type: entity
+    table: company_statut
+    options:
+        comment: Entité représentant le statut de l entreprise.
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+            options:
+                comment: Identifiant technique d'un CompanyStatut
+    fields:
+        name:
+            type: string
+            length: 191
+            column: name
+            nullable: false
+        code:
+            type: string
+            length: 100
+            column: code
+            nullable: false
+    oneToMany:
+        company:
+            targetEntity: Company
+            orphanRemoval: true
+            cascade: [persist, remove]
+            mappedBy: companystatut

@@ -2,7 +2,7 @@
   <div class="container-fluid skb-body">
     <div class="row my-4">
       <div class="col-4">
-        <h1 class="fontUbuntu orange-skb">{{ this.$t('role.title') }}</h1>
+        <h1 class="fontUbuntu orange-skb">{{ this.$t('category.title') }}</h1>
       </div>
       <div class="col-1">
       </div>
@@ -30,7 +30,7 @@
         class="col-1"
         v-if="canCreate"
       >
-        <a href="/admin/role/new">
+        <a href="/admin/category/new">
           <b-button class="button_skb">{{ this.$t('commons.create') }}</b-button>
         </a>
       </div>
@@ -57,14 +57,14 @@
           <template v-slot:cell(actions)="data">
             <b-button-group>
               <a
-                :href="'/admin/role/show/' + data.value "
+                :href="'/admin/category/show/' + data.value "
                 v-if="canRead"
               >
                 <b-button><i class="fas fa-eye"></i></b-button>
               </a>
               <a
                 v-if="canEdit"
-                :href="'/admin/role/edit/' + data.value "
+                :href="'/admin/category/edit/' + data.value "
                 class="mx-1"
               >
                 <b-button><i class="fas fa-edit"></i></b-button>
@@ -124,9 +124,8 @@ export default {
       currentFilter: '',
       table: {
         field: [
-          { key: 'name', label: this.$t('role.fields.name'), sortable: true, thClass: "tableitem" },
-          { key: 'code', label: this.$t('role.fields.code'), sortable: true, thClass: "tableitem" },
-          { key: 'fonctions', label: this.$t('role.fields.fonctions'), sortable: true, thClass: "tableitem" },
+          { key: 'name', label: this.$t('category.fields.name'), sortable: true, thClass: "tableitem" },
+          { key: 'code', label: this.$t('category.fields.code'), sortable: true, thClass: "tableitem" },
           (!this.canDelete & !this.canEdit & !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-9', thClass: "tableitem" },
         ],
         sortBy: 'code'
@@ -134,14 +133,14 @@ export default {
     };
   },
   methods: {
-    deleteFonction (roleId) {
-      return axios.delete("/api/admin/roles/" + roleId)
+    deleteFonction (categoryId) {
+      return axios.delete("/api/admin/categories/" + categoryId)
         .then(response => {
           window.location.assign(response.headers.location);
         });
     },
     refreshData () {
-      return axios.get("/api/admin/roles", {
+      return axios.get("/api/admin/categories", {
         params: {
           filterFields: 'name,code',
           filter: this.currentFilter,
@@ -151,15 +150,10 @@ export default {
           perPage: this.pager.perPage
         }
       }).then(response => {
-        let items = _.map(response.data, role => _.assign(role, {
-          code: role.code,
-          name: role.name,
-          fonctions: _.take(
-            _.sortBy(
-              _.map(role.fonctions, 'description'), (description) => description), this.NB_MAX_DISPLAYED)
-            .join('<br />')
-            + (role.fonctions.length > this.NB_MAX_DISPLAYED ? '<br />' + this.$tc('commons.et_plus', role.fonctions.length - this.NB_MAX_DISPLAYED) : ''),
-          actions: role.id,
+        let items = _.map(response.data, category => _.assign(category, {
+          code: category.code,
+          name: category.name,
+          actions: category.id,
         }));
         this.pager.totalRows = parseInt(response.headers['x-total-count']);
         return items;

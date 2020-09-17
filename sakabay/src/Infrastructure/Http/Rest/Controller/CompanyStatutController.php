@@ -2,9 +2,9 @@
 
 namespace App\Infrastructure\Http\Rest\Controller;
 
-use App\Application\Form\Type\CategoryType;
-use App\Application\Service\CategoryService;
-use App\Domain\Model\Category;
+use App\Application\Form\Type\CompanyStatutType;
+use App\Application\Service\CompanyStatutService;
+use App\Domain\Model\CompanyStatut;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
@@ -19,50 +19,50 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class CategoryController extends AbstractFOSRestController
+final class CompanyStatutController extends AbstractFOSRestController
 {
     private $entityManager;
-    private $categoryService;
+    private $companyStatutService;
     private $translator;
 
     /**
-     * CategoryRestController constructor.
+     * CompanyStatutRestController constructor.
      */
-    public function __construct(EntityManagerInterface $entityManager, CategoryService $categoryService, TranslatorInterface $translator)
+    public function __construct(EntityManagerInterface $entityManager, CompanyStatutService $companyStatutService, TranslatorInterface $translator)
     {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
-        $this->categoryService = $categoryService;
+        $this->companyStatutService = $companyStatutService;
     }
 
     /**
      * @Rest\View()
-     * @Rest\Post("admin/categories")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Rest\Post("admin/companystatut")
+     * @Security("is_granted('ROLE_CROLE')")
      * @param Request $request
      *
      * @return View
      */
-    public function createCategory(Request $request)
+    public function createCompanyStatut(Request $request)
     {
-        $category = new Category();
+        $companyStatut = new CompanyStatut();
         $formOptions = ['translator' => $this->translator];
-        $form = $this->createForm(CategoryType::class, $category, $formOptions);
+        $form = $this->createForm(CompanyStatutType::class, $companyStatut, $formOptions);
         $form->submit($request->request->all());
         if (!$form->isValid()) {
             return $form;
         }
-        $this->entityManager->persist($category);
+        $this->entityManager->persist($companyStatut);
         $this->entityManager->flush();
 
-        $ressourceLocation = $this->generateUrl('category_index');
+        $ressourceLocation = $this->generateUrl('company_statut_index');
 
         return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
     }
 
     /**
-     * @Rest\View(serializerGroups={"api_categories"})
-     * @Rest\Get("/admin/categories")
+     * @Rest\View(serializerGroups={"api_companystatut"})
+     * @Rest\Get("/admin/companystatut")
      *
      * @QueryParam(name="filterFields",
      *             default="name",
@@ -91,7 +91,7 @@ final class CategoryController extends AbstractFOSRestController
      * @return View
      */
 
-    public function getCategories(ParamFetcher $paramFetcher): View
+    public function getCompanyStatuts(ParamFetcher $paramFetcher): View
     {
         $filterFields = $paramFetcher->get('filterFields');
         $filter = $paramFetcher->get('filter');
@@ -100,74 +100,74 @@ final class CategoryController extends AbstractFOSRestController
         $currentPage = $paramFetcher->get('currentPage');
         $perPage = $paramFetcher->get('perPage');
 
-        $pager = $this->categoryService
+        $pager = $this->companyStatutService
             ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage);
-        $categories = $pager->getCurrentPageResults();
+        $companyStatuts = $pager->getCurrentPageResults();
         $nbResults = $pager->getNbResults();
-        $datas = iterator_to_array($categories);
+        $datas = iterator_to_array($companyStatuts);
         $view = $this->view($datas, Response::HTTP_OK);
         $view->setHeader('X-Total-Count', $nbResults);
 
         return $view;
     }
     /**
-     * @Rest\View(serializerGroups={"api_categories"})
-     * @Rest\Get("admin/categories/{categoryId}")
+     * @Rest\View(serializerGroups={"api_companystatut"})
+     * @Rest\Get("admin/companystatut/{companyStatutId}")
      *
      * @return View
      */
-    public function getCategory(int $categoryId): View
+    public function getCompanyStatut(int $companyStatutId): View
     {
-        $category = $this->categoryService->getCategory($categoryId);
+        $companyStatut = $this->companyStatutService->getCompanyStatut($companyStatutId);
 
-        return View::create($category, Response::HTTP_OK);
+        return View::create($companyStatut, Response::HTTP_OK);
     }
 
     /**
      * @Rest\View()
-     * @Rest\Post("admin/categories/{categoryId}")
+     * @Rest\Post("admin/companystatut/{companyStatutId}")
      * @Security("is_granted('ROLE_ADMIN')")
      *
      * @return View
      */
-    public function editCategory(int $categoryId, Request $request)
+    public function editCompanyStatut(int $companyStatutId, Request $request)
     {
-        $category = $this->categoryService->getCategory($categoryId);
+        $companyStatut = $this->companyStatutService->getCompanyStatut($companyStatutId);
 
-        if (!$category) {
-            throw new EntityNotFoundException('Category with id ' . $categoryId . ' does not exist!');
+        if (!$companyStatut) {
+            throw new EntityNotFoundException('CompanyStatut with id ' . $companyStatutId . ' does not exist!');
         }
 
         $formOptions = [
             'translator' => $this->translator,
         ];
-        $form = $this->createForm(CategoryType::class, $category, $formOptions);
+        $form = $this->createForm(CompanyStatutType::class, $companyStatut, $formOptions);
         $form->submit($request->request->all());
         if (!$form->isValid()) {
             return $form;
         }
-        $this->entityManager->persist($category);
-        $this->entityManager->flush($category);
+        $this->entityManager->persist($companyStatut);
+        $this->entityManager->flush();
 
-        $ressourceLocation = $this->generateUrl('category_index');
+        $ressourceLocation = $this->generateUrl('company_statut_index');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 
     /**
      * @Rest\View()
-     * @Rest\Delete("admin/categories/{categoryId}")
+     * @Rest\Delete("admin/companystatut/{companyStatutId}")
      * @Security("is_granted('ROLE_ADMIN')")
      *
      * @return View
      */
-    public function deleteCategories(int $categoryId): View
+    public function deleteCompanyStatuts(int $companyStatutId): View
     {
         try {
-            $this->categoryService->deleteCategory($categoryId);
+            $this->companyStatutService->deleteCompanyStatut($companyStatutId);
         } catch (EntityNotFoundException $e) {
             throw new NotFoundHttpException($e->getMessage());
         }
-        $ressourceLocation = $this->generateUrl('category_index');
+        $ressourceLocation = $this->generateUrl('company_statut_index');
 
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }

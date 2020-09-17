@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'category_title_show_page'|trans }}{% endblock %}
+
+{% block body %}
+    <show-category
+    :category-id="{{ categoryId }}"
+    :can-edit="{{ canEdit|json_encode }}"
+    ></show-category>
+{% endblock %}

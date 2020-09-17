@@ -26,6 +26,7 @@ menu_company_page: My presentation page
 menu_management_company: Company Management
 menu_subscribed_company: Companies
 menu_registered_company: Register
+menu_all_companustatus: Company Status page
 
 #form-user
 login_placeholder: "Username"
@@ -72,6 +73,12 @@ role_title_list_page: "List of roles"
 role_title_edit_page: "Edit a role"
 role_title_create_page: "Create a role"
 role_title_show_page: "Detail of role"
+
+#Company Status pages
+companystatut_title_list_page: "Company status list"
+companystatut_title_edit_page: "Edit a company status "
+companystatut_title_create_page: "Create a company status "
+companystatut_title_show_page: "Company status  detail"
 
 #Group's pages
 group_title_list_page: "List of groups"

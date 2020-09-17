@@ -35,6 +35,16 @@ class Company
     private $id;
 
     /**
+     * @Expose
+     * @Groups({
+     * "api_companystatut"
+     * })
+     * @var CompanyStatut
+     *
+     */
+    private $companystatut;
+
+    /**
      * @var string
      * @Expose
      * @Groups({
@@ -175,6 +185,28 @@ class Company
     public function setUtilisateur(?Utilisateur $utilisateur): self
     {
         $this->utilisateur = $utilisateur;
+        return $this;
+    }
+
+    /**
+     *
+     * @return  CompanyStatut
+     */
+    public function getCompanystatut()
+    {
+        return $this->companystatut;
+    }
+
+    /**
+     *
+     * @param  CompanyStatut
+     *
+     * @return  self
+     */
+    public function setCompanystatut(CompanyStatut $companystatut)
+    {
+        $this->companystatut = $companystatut;
+
         return $this;
     }
 }

@@ -2,10 +2,11 @@
   <div class="container-fluid skb-body">
     <div class="row my-4">
       <div class="col-4">
-        <h1 class="fontUbuntu orange-skb">{{ this.$t('company.title_subscribed') }}</h1>
+        <h1 class="fontUbuntu orange-skb">{{ this.$t('companyStatut.title') }}</h1>
       </div>
-      <div class="col-1"></div>
-      <div class="col-6">
+      <div class="col-1">
+      </div>
+      <div class="col-5">
         <b-form-group
           horizontal
           class="mb-0"
@@ -24,6 +25,14 @@
             </b-input-group-append>
           </b-input-group>
         </b-form-group>
+      </div>
+      <div
+        class="col-1"
+        v-if="canCreate"
+      >
+        <a href="/admin/companystatut/new">
+          <b-button class="button_skb">{{ this.$t('commons.create') }}</b-button>
+        </a>
       </div>
     </div>
     <!-- Table -->
@@ -48,14 +57,14 @@
           <template v-slot:cell(actions)="data">
             <b-button-group>
               <a
-                :href="'/admin/entreprise/show/' + data.value "
+                :href="'/admin/companystatut/show/' + data.value "
                 v-if="canRead"
               >
                 <b-button><i class="fas fa-eye"></i></b-button>
               </a>
               <a
                 v-if="canEdit"
-                :href="'/admin/entreprise/edit/' + data.value "
+                :href="'/admin/companystatut/edit/' + data.value "
                 class="mx-1"
               >
                 <b-button><i class="fas fa-edit"></i></b-button>
@@ -65,6 +74,9 @@
                 @click="deleteFonction(data.value)"
               ><i class="fas fa-trash"></i></b-button>
             </b-button-group>
+          </template>
+          <template v-slot:cell(fonctions)="data">
+            <div v-html="data.value"></div>
           </template>
         </b-table>
       </b-col>
@@ -85,15 +97,19 @@
 <script>
 import axios from 'axios';
 import paginationMixin from 'mixins/paginationMixin';
-
+import _ from 'lodash';
 export default {
   mixins: [paginationMixin],
   props: {
-    canRead: {
+    canCreate: {
       type: Boolean,
       default: false
     },
     canEdit: {
+      type: Boolean,
+      default: false
+    },
+    canRead: {
       type: Boolean,
       default: false
     },
@@ -104,46 +120,40 @@ export default {
   },
   data () {
     return {
+      NB_MAX_DISPLAYED: 5,
       currentFilter: '',
       table: {
         field: [
-          { key: 'name', label: this.$t('company.table.fields.name'), sortable: true, thClass: "tableitem" },
-          { key: 'numSiret', label: this.$t('company.fields.num_siret'), thClass: "tableitem", class: 'col-size-10' },
-          { key: 'url_name', label: this.$t('company.table.fields.url_name'), thClass: "tableitem" },
-          { key: 'utilisateur', label: this.$t('company.table.fields.utilisateur'), thClass: "tableitem" },
-          { key: 'category', label: this.$t('company.table.fields.category'), thClass: "tableitem" },
-          (!this.canDelete && !this.canEdit && !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-8', thClass: "tableitem" },
+          { key: 'name', label: this.$t('companyStatut.fields.name'), sortable: true, thClass: "tableitem" },
+          { key: 'code', label: this.$t('companyStatut.fields.code'), sortable: true, thClass: "tableitem" },
+          (!this.canDelete & !this.canEdit & !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-12', thClass: "tableitem" },
         ],
-        sortBy: 'name'
+        sortBy: 'code'
       }
     };
   },
   methods: {
-    deleteFonction (companyId) {
-      return axios.delete("/api/companies/" + companyId)
+    deleteFonction (companyStatutId) {
+      return axios.delete("/api/admin/companystatut/" + companyStatutId)
         .then(response => {
           window.location.assign(response.headers.location);
         });
     },
     refreshData () {
-      return axios.get("/api/companies" , {
+      return axios.get("/api/admin/companystatut", {
         params: {
-          filterFields: 'name',
+          filterFields: 'name,code',
           filter: this.currentFilter,
           sortBy: this.table.sortBy,
           sortDesc: this.table.sortDesc,
           currentPage: this.pager.currentPage,
-          perPage: this.pager.perPage,
-          codeStatut: 'VAL'
+          perPage: this.pager.perPage
         }
       }).then(response => {
-        let items = _.map(response.data, company => _.assign(company, {
-          name: company.name,
-          numSiret: company.num_siret,
-          urlName: company.url_name,
-          utilisateur: company.utilisateur.login,
-          category: company.category.name,
-          actions: company.id,
+        let items = _.map(response.data, companyStatut => _.assign(companyStatut, {
+          code: companyStatut.code,
+          name: companyStatut.name,
+          actions: companyStatut.id,
         }));
         this.pager.totalRows = parseInt(response.headers['x-total-count']);
         return items;

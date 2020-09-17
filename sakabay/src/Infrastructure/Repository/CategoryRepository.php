@@ -10,11 +10,6 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
 {
 
     /**
-     * Category code field for type "Beauté"
-     */
-    const BEAUTY_CODE = 'BEAUTE';
-
-    /**
      * CategoryRepository constructor.
      */
     public function __construct(EntityManagerInterface $entityManager)
@@ -33,15 +28,4 @@ class CategoryRepository extends AbstractRepository implements CategoryRepositor
         $this->_em->remove($category);
         $this->_em->flush($category);
     }
-
-    public function getValidateCode()
-    {
-        $query = $this->createQueryBuilder('ca')->distinct(true);
-        $query->where('ca.code = (:codes)');
-        $query->setParameter('codes', CategoryRepository::BEAUTY_CODE);
-
-        return $query->getQuery()->getResult();
-    }
-
-
 }

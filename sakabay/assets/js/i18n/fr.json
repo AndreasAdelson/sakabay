@@ -3,6 +3,7 @@
     "create": "Créer",
     "actions": "Actions",
     "edit": "Modifier",
+    "detail": "Page de détail",
     "rechercher": "Rechercher ...",
     "select_all": "Tout sélectionner",
     "add": "Ajouter",
@@ -85,6 +86,28 @@
       "name": "Renseignez un nom",
       "num_siret": "Numéro de SIRET",
       "url_name": "Renseignez le nom d'url"
+    }
+  },
+  "companyStatut": {
+    "title": "Liste des statuts des entreprises",
+    "fields": {
+      "name": "Statut de l'entreprise",
+      "code": "Code de statut"
+    },
+    "placeholder": {
+      "name": "Renseignez un statut",
+      "code": "Renseignez un Code du statut"
+    }
+  },
+  "category": {
+    "title": "Liste des catégories",
+    "fields": {
+      "name": "Nom de la catégorie",
+      "code": "Code de la catégorie"
+    },
+    "placeholder": {
+      "name": "Renseignez un nom d'une catégorie",
+      "code": "Renseignez un Code d'une catégorie"
     }
   },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",

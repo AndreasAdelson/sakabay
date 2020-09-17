@@ -3,6 +3,7 @@
     "create": "Create",
     "actions": "Actions",
     "edit": "Edit",
+    "detail": "Detail page",
     "rechercher": "Search ...",
     "select_all": "Select all",
     "add": "Add",
@@ -86,6 +87,28 @@
       "name": "Enter a name",
       "num_siret": "Enter SIRET number",
       "url_name": "Enter url name"
+    }
+  },
+  "companyStatut": {
+    "title": "List of company status",
+    "fields": {
+      "name": "Company status",
+      "code": "Code number"
+    },
+    "placeholder": {
+      "name": "Enter a name",
+      "code": "Enter code number"
+    }
+  },
+  "category": {
+    "title": "List of categories",
+    "fields": {
+      "name": "Category name",
+      "code": "Code of the category"
+    },
+    "placeholder": {
+      "name": "Enter a name",
+      "code": "Enter code number"
     }
   },
   "error_message_required": "This field is mandatory. Thank you for filling it in.",

@@ -49,12 +49,6 @@ class CategoryService
         return $this->categoryRepository->find($categoryId);
     }
 
-    public function getValidateCode(): ?array
-    {
-        return $this->categoryRepository->getValidateCode();
-    }
-
-
     public function getAllCategorys(): ?array
     {
         return $this->categoryRepository->findAll();

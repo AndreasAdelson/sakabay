@@ -26,6 +26,7 @@ menu_company_page: Ma page de présentation
 menu_management_company: Gestion des entreprises
 menu_subscribed_company: Entreprises
 menu_registered_company: Inscriptions
+menu_all_companustatus: Entité statut des entreprises
 
 #form-user
 login_placeholder: "Pseudonyme"
@@ -72,6 +73,12 @@ role_title_list_page: "Liste des roles"
 role_title_edit_page: "Modifier un role"
 role_title_create_page: "Créer un role"
 role_title_show_page: "Détails d'un role"
+
+#Company statut pages
+companystatut_title_list_page: "Liste des statut des entreprises"
+companystatut_title_edit_page: "Modifier un statut d'entreprise"
+companystatut_title_create_page: "Créer un statut d'entreprise"
+companystatut_title_show_page: "Détails d'un statut d'entreprise"
 
 #Group's pages
 group_title_list_page: "Liste des groupes"

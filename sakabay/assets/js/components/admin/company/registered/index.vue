@@ -126,7 +126,7 @@ export default {
           sortDesc: this.table.sortDesc,
           currentPage: this.pager.currentPage,
           perPage: this.pager.perPage,
-          codeStatut: 'HOTEL'
+          codeStatut: 'ENC'
         }
       }).then(response => {
         let items = _.map(response.data, company => _.assign(company, {

@@ -33,6 +33,10 @@ class MainMenuBuilder
                 "menu_all_categories" => [
                     "route" => "category_index",
                     "roles" => ["ROLE_ADMIN"]
+                ],
+                "menu_all_companustatus" => [
+                    "route" => "company_statut_index",
+                    "roles" => ["ROLE_ADMIN"]
                 ]
             ],
             "menu_management_company" => [

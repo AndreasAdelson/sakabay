@@ -7,14 +7,18 @@
         v-if="canEdit"
         class="row mt-3 "
       >
-        <div class="col-2 offset-10 justify-content-end">
+        <div class="col-6">
+          <h1 class="fontUbuntu orange-skb">{{ this.$t('commons.detail') }}</h1>
+        </div>
+        <div class="col-6 justify-content-end">
           <a
             class="float-right"
             :href="'/admin/utilisateur/edit/' + utilisateurId"
           >
-            <b-button class="button_skb">{{ this.$t('commons.edit') }}</b-button>
+            <b-button class="pull-right  button_skb">{{ this.$t('commons.edit') }}</b-button>
           </a>
         </div>
+
       </div>
       <a href="/admin/utilisateur">
         <button

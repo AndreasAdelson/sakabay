@@ -4,7 +4,6 @@ namespace App\Domain\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use App\Domain\Model\Category;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -12,20 +11,18 @@ use JMS\Serializer\Annotation\Groups;
 
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @ORM\Entity(repositoryClass=CompanyStatutRepository::class)
  *
  * @ExclusionPolicy("all")
  *
  */
-class Category
+class CompanyStatut
 {
     /**
-     *
      * @var int
      * @Expose
      * @Groups({
-     * "api_categories",
-     * "api_companies"
+     * "api_companystatut"
      * })
      */
     private $id;
@@ -34,8 +31,7 @@ class Category
      * @var string
      * @Expose
      * @Groups({
-     * "api_categories",
-     * "api_companies"
+     * "api_companystatut"
      * })
      */
     private $name;
@@ -44,32 +40,28 @@ class Category
      * @var string
      * @Expose
      * @Groups({
-     * "api_categories"
+     * "api_companystatut"
      * })
      */
     private $code;
-
 
     /**
      * @var Company[]
      * @Expose
      * @Groups({
+     * "api_companies"
      * })
      */
     private $company;
 
-
     public function __construct()
 
     {
-        $this->id = 1;
         $this->company = new ArrayCollection();
+        $this->fonctions = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
-    /**
-     * Get the value of id
-     * @return  int
-     */
     public function getId()
     {
         return $this->id;
@@ -130,70 +122,7 @@ class Category
     }
 
     /**
-     * Get the value of description
-     * @return  string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set the value of description
-     * @param  string  $description
-     * @return  self
-     */
-    public function setDescription(string $description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategory(): Collection
-    {
-        return $this->fonctions;
-    }
-
-    /**
-     * Get the value of categorys
-     * @return  Categorys[]
-     */
-    public function addCategory(Category $fonction): self
-    {
-        if (!$this->fonctions->contains($fonction)) {
-            $this->fonctions[] = $fonction;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the value of fonctions
-     * @param  Categorys[]  $fonctions
-     * @return  self
-     */
-    public function removeCategory(Category $fonction): self
-    {
-        if ($this->fonctions->contains($fonction)) {
-            $this->fonctions->removeElement($fonction);
-        }
-        return $this;
-    }
-
-    public function removeGroup(Group $group): self
-    {
-        if (!$this->groups->contains($group)) {
-            $this->groups->removeElement($group);
-            $group->removeCategory($this);
-        }
-        return $this;
-    }
-    /**
-     * @return Collection|Company[]
+     * @return Company[]
      */
     public function getCompany(): Collection
     {
@@ -204,6 +133,7 @@ class Category
     {
         if (!$this->company->contains($company)) {
             $this->company[] = $company;
+            $company->setCompanystatut($this);
         }
 
         return $this;
@@ -214,7 +144,6 @@ class Category
         if ($this->companys->contains($company)) {
             $this->companys->removeElement($company);
         }
-
         return $this;
     }
 }

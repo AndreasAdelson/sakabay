@@ -39,6 +39,12 @@ import ListGroup from './components/admin/group';
 import FormGroup from './components/admin/group/form';
 import ShowGroup from './components/admin/group/show';
 import FormCategory from './components/category/form';
+import ShowCategory from './components/category/show';
+import ListCategory from './components/category';
+import FormCompanyStatut from './components/companystatut/form';
+import ShowCompanyStatut from './components/companystatut/show';
+import ListCompanyStatut from './components/companystatut';
+
 import Company from './components/company';
 import ListCompanySubscribed from './components/admin/company/subscribed';
 import CompanySubscribedShow from './components/admin/company/subscribed/show';
@@ -69,6 +75,11 @@ new Vue({
   el: '#app',
   i18n,
   components: {
+    ShowCategory,
+    ListCategory,
+    ListCompanyStatut,
+    ShowCompanyStatut,
+    FormCompanyStatut,
     FormCategory,
     Company,
     Avatar,

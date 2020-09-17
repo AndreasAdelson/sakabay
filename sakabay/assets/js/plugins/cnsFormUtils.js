@@ -137,7 +137,6 @@ const CnsFormUtils = {
     };
 
     Vue.prototype.$getTransformedValue = function (value) {
-      console.log(value, 'value');
       let transformedValue = undefined;
       if (value instanceof Date) {
         transformedValue = {
@@ -188,7 +187,6 @@ const CnsFormUtils = {
      */
     Vue.prototype.$getFormFieldsData = function (formFields = this.formFields, formData = new FormData()) {
       let transformedFormFields = this.$getTransformedValue(formFields);
-      console.log(transformedFormFields, 'transformedFormFields');
       _.forEach(_.keys(transformedFormFields), field => {
         if (transformedFormFields[field] instanceof Array) {
           transformedFormFields[field].forEach(elem => {

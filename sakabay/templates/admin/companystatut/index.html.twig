@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'category_title_list_page'|trans }}{% endblock %}
+{% block title %}{{ 'companystatut_title_list_page'|trans }}{% endblock %}
 
 {% block body %}
 
 <div class="role-wrapper">
-    <list-category
+    <list-company-statut
     :can-create="{{ canCreate|json_encode }}"
     :can-read="{{ canRead|json_encode }}"
     :can-edit="{{ canEdit|json_encode }}"
     :can-delete="{{ canDelete|json_encode }}"
-    ></list-category>
+    ></list-company-statut>
 </div>
 {% endblock %}

@@ -27,7 +27,7 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
         $this->_em->remove($company);
         $this->_em->flush($company);
     }
-    
+
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *
@@ -53,8 +53,8 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
     ) {
         $qb = $this->createQueryBuilder('o');
         if (!empty($codeStatut)) {
-            $qb->leftJoin('o.category', 'category')
-                ->andWhere('category.code = :codeCategory')
+            $qb->leftJoin('o.companystatut', 'companystatut')
+                ->andWhere('companystatut.code = :codeCategory')
                 ->setParameter('codeCategory', $codeStatut);
         }
         if (!empty($filterText)) {

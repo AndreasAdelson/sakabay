@@ -51,6 +51,7 @@
                     type="text"
                     class="form-control"
                     :placeholder="$t('company.placeholder.numSiret')"
+                    onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
                     v-model="formFields.numSiret"
                   >
                   <div

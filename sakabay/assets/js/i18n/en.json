@@ -78,5 +78,6 @@
   "error_message_required": "This field is mandatory. Thank you for filling it in.",
   "error_message_required_login": "The size of your login must not be less than 5 characters and not more than 10 characters.",
   "error_message_email": "Please enter a valid email",
+  "error_message_regex": "This field does not respect the expected format",
   "user_does_not_exist": "This user does not exists"
 }

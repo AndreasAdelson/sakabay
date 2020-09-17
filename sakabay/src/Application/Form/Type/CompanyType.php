@@ -5,6 +5,7 @@ namespace App\Application\Form\Type;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use App\Domain\Model\Company;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Validator\Constraints\Luhn;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,11 +29,7 @@ class CompanyType extends AbstractType
                 'required' => true,
             ])
             ->add('numSiret', TextType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => $translator->trans('error_message_field_not_empty'),
-                    ]),
-                ],
+                'constraints' => [new Luhn()],
                 'required' => true,
             ])
             ->add('category', EntityType::class, [

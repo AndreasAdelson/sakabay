@@ -11,7 +11,27 @@
     "undo_change": "Undo change",
     "go_back": "Go back",
     "validate": "Validate",
-    "decline": "Decline"
+    "decline": "Decline",
+    "yes": "Oui",
+    "no": "Non",
+    "confirm_modal": {
+      "validate": {
+        "company": {
+          "title": "Validate the registration",
+          "text": "You are about to validate a company's application. Are you sure you want to validate it?"
+        }
+      },
+      "decline": {
+        "company": {
+          "title": "Refuse registration",
+          "text": "You are about to reject a company's candidacy. Are you sure you want to refuse it? If so, the company's data will be directly deleted."
+        }
+      },
+      "delete": {
+        "title": "Deletion of an entity",
+        "text": "Are you sure you want to delete this item ?"
+      }
+    }
   },
   "user": {
     "title": "Users list",
@@ -76,7 +96,8 @@
         "name": "Name",
         "url_name": "Url name",
         "utilisateur": "User login",
-        "category": "Categorie"
+        "category": "Categorie",
+        "statut": "Status"
       }
     },
     "fields": {

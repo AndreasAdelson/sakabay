@@ -35,16 +35,6 @@ class Company
     private $id;
 
     /**
-     * @Expose
-     * @Groups({
-     * "api_companystatut"
-     * })
-     * @var CompanyStatut
-     *
-     */
-    private $companystatut;
-
-    /**
      * @var string
      * @Expose
      * @Groups({
@@ -90,6 +80,17 @@ class Company
      *
      */
     private $category;
+
+    /**
+     * @Expose
+     * @Groups({
+     * "api_companystatut",
+     * "api_companies"
+     * })
+     * @var CompanyStatut
+     *
+     */
+    private $companystatut;
 
 
     public function getId(): ?int

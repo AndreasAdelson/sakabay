@@ -224,7 +224,7 @@ final class CompanyController extends AbstractFOSRestController
         $this->entityManager->persist($company);
         $this->entityManager->flush($company);
 
-        $ressourceLocation = $this->generateUrl('company_subscribed_index');
+        $ressourceLocation = $this->generateUrl('company_registered_index');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 
@@ -235,7 +235,26 @@ final class CompanyController extends AbstractFOSRestController
      *
      * @return View
      */
-    public function deleteCompanys(int $companyId): View
+    public function deleteCompany(int $companyId): View
+    {
+        try {
+            $this->companyService->deleteCompany($companyId);
+        } catch (EntityNotFoundException $e) {
+            throw new NotFoundHttpException($e->getMessage());
+        }
+        $ressourceLocation = $this->generateUrl('company_subscribed_index');
+
+        return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
+    }
+
+    /**
+     * @Rest\View()
+     * @Rest\Delete("admin/companies/{companyId}/decline")
+     * @Security("is_granted('ROLE_DCOMPANY')")
+     *
+     * @return View
+     */
+    public function declineCompany(int $companyId): View
     {
         try {
             $this->companyService->deleteCompany($companyId);

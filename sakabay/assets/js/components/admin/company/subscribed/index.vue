@@ -62,7 +62,9 @@
               </a>
               <b-button
                 v-if="canDelete"
-                @click="deleteFonction(data.value)"
+                data-toggle="modal"
+                :data-target="'#' + DELETE_CONFIRM_MODAL_ID"
+                @click="currentId = data.value"
               ><i class="fas fa-trash"></i></b-button>
             </b-button-group>
           </template>
@@ -79,14 +81,27 @@
         ></b-pagination>
       </b-col>
     </b-row>
+    <confirm-modal
+      :id="DELETE_CONFIRM_MODAL_ID"
+      :title-text="$t('commons.confirm_modal.delete.title')"
+      :body-text="$t('commons.confirm_modal.delete.text')"
+      :button-yes-text="$t('commons.yes')"
+      :button-no-text="$t('commons.no')"
+      :are-buttons-on-same-line="true"
+      @confirm-modal-yes="$deleteEntity('/api/admin/companies/')"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import paginationMixin from 'mixins/paginationMixin';
+import ConfirmModal from 'components/commons/confirm-modal';
 
 export default {
+  components: {
+    ConfirmModal
+  },
   mixins: [paginationMixin],
   props: {
     canRead: {
@@ -104,6 +119,8 @@ export default {
   },
   data () {
     return {
+      DELETE_CONFIRM_MODAL_ID: 'delete_confirmModal',
+      currentId: null,
       currentFilter: '',
       table: {
         field: [
@@ -112,6 +129,7 @@ export default {
           { key: 'url_name', label: this.$t('company.table.fields.url_name'), thClass: "tableitem" },
           { key: 'utilisateur', label: this.$t('company.table.fields.utilisateur'), thClass: "tableitem" },
           { key: 'category', label: this.$t('company.table.fields.category'), thClass: "tableitem" },
+          { key: 'statut', label: this.$t('company.table.fields.statut'), thClass: "tableitem", class: 'col-size-10' },
           (!this.canDelete && !this.canEdit && !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-8', thClass: "tableitem" },
         ],
         sortBy: 'name'
@@ -119,14 +137,8 @@ export default {
     };
   },
   methods: {
-    deleteFonction (companyId) {
-      return axios.delete("/api/companies/" + companyId)
-        .then(response => {
-          window.location.assign(response.headers.location);
-        });
-    },
     refreshData () {
-      return axios.get("/api/companies" , {
+      return axios.get("/api/companies", {
         params: {
           filterFields: 'name',
           filter: this.currentFilter,
@@ -143,6 +155,7 @@ export default {
           urlName: company.url_name,
           utilisateur: company.utilisateur.login,
           category: company.category.name,
+          statut: company.companystatut.name,
           actions: company.id,
         }));
         this.pager.totalRows = parseInt(response.headers['x-total-count']);

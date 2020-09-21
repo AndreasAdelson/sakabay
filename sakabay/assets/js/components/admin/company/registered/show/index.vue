@@ -61,28 +61,63 @@
             <span class="fontHelveticaOblique fontSize18">{{ this.company.category.name }}</span>
           </div>
         </div>
+        <div class="row">
+          <div class="col-6">
+            <span class="fontPatua fontSize20">{{ $t('company.table.fields.statut') }}</span>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-6">
+            <span class="fontHelveticaOblique fontSize18">{{ this.company.companystatut.name }}</span>
+          </div>
+        </div>
       </div>
       <div class="row justify-content-center my-3">
         <div class="col-2">
           <b-button
-            class="button_skb"
-            @click="declineCompany()"
-          >{{ this.$t('commons.decline') }}</b-button>
+            data-toggle="modal"
+            :data-target="'#' + DECLINE_CONFIRM_MODAL_ID"
+            class="btn button_skb"
+          >{{ $t('commons.decline') }}</b-button>
         </div>
         <div class="col-2">
           <b-button
+            data-toggle="modal"
+            :data-target="'#' + VALIDATE_CONFIRM_MODAL_ID"
             class="btn btn-success w-100"
-            @click="validateCompany()"
           >{{ this.$t('commons.validate') }}</b-button>
         </div>
       </div>
     </div>
+    <confirm-modal
+      :id="DECLINE_CONFIRM_MODAL_ID"
+      :title-text="$t('commons.confirm_modal.decline.company.title')"
+      :body-text="$t('commons.confirm_modal.decline.company.text')"
+      :button-yes-text="$t('commons.yes')"
+      :button-no-text="$t('commons.no')"
+      :are-buttons-on-same-line="true"
+      @confirm-modal-yes="declineCompany()"
+    />
+
+    <confirm-modal
+      :id="VALIDATE_CONFIRM_MODAL_ID"
+      :title-text="$t('commons.confirm_modal.validate.company.title')"
+      :body-text="$t('commons.confirm_modal.validate.company.text')"
+      :button-yes-text="$t('commons.yes')"
+      :button-no-text="$t('commons.no')"
+      :are-buttons-on-same-line="true"
+      @confirm-modal-yes="validateCompany()"
+    />
   </div>
 </template>
 <script>
 import axios from 'axios';
+import ConfirmModal from 'components/commons/confirm-modal';
 
 export default {
+  components: {
+    ConfirmModal
+  },
   props: {
     companyId: {
       type: Number,
@@ -95,6 +130,8 @@ export default {
   },
   data () {
     return {
+      DECLINE_CONFIRM_MODAL_ID: 'decline_confirmModal',
+      VALIDATE_CONFIRM_MODAL_ID: 'validate_confirmModal',
       company: null,
       loading: false
     }
@@ -124,7 +161,7 @@ export default {
     },
     declineCompany () {
       this.loading = true;
-      return axios.delete('/api/admin/companies/' + this.companyId)
+      return axios.delete('/api/admin/companies/' + this.companyId + '/decline')
         .then(response => {
           this.loading = false;
           window.location.assign(response.headers.location);

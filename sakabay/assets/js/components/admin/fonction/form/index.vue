@@ -71,7 +71,7 @@
                   type="button"
                   class="btn button_skb fontUbuntu"
                   @click="$validateForm()"
-                >{{ this.$t('commons.edit') }}</button>
+                >{{ this.$t('commons.create') }}</button>
               </div>
             </div>
           </div>

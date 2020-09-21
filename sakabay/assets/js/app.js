@@ -9,7 +9,10 @@
 require('@fortawesome/fontawesome-free/css/all.min.css');
 require('@fortawesome/fontawesome-free/js/all.js');
 require('vue2-autocomplete-js/dist/style/vue2-autocomplete.css');
-import '../css/app.css';
+import 'es6-promise/auto';
+import 'bootstrap';
+import 'babel-polyfill';
+
 import $ from 'jquery';
 import Vue from 'vue';
 import * as VeeValidate from 'vee-validate';
@@ -41,10 +44,9 @@ import ShowGroup from './components/admin/group/show';
 import FormCategory from './components/category/form';
 import ShowCategory from './components/category/show';
 import ListCategory from './components/category';
-import FormCompanyStatut from './components/companystatut/form';
-import ShowCompanyStatut from './components/companystatut/show';
-import ListCompanyStatut from './components/companystatut';
-
+import FormCompanyStatut from './components/admin/companystatut/form';
+import ShowCompanyStatut from './components/admin/companystatut/show';
+import ListCompanyStatut from './components/admin/companystatut';
 import Company from './components/company';
 import ListCompanySubscribed from './components/admin/company/subscribed';
 import CompanySubscribedShow from './components/admin/company/subscribed/show';
@@ -104,4 +106,6 @@ new Vue({
     CompanyRegisteredShow,
     CompanyRegisteredForm
   }
-})
+});
+
+global.$ = global.jQuery = $;

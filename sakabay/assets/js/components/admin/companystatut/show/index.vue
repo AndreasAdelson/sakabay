@@ -78,7 +78,7 @@ export default {
   async created () {
     if (this.companyStatutId) {
       this.loading = true;
-      return axios.get('/api/admin/companystatut/' + this.companyStatutId)
+      return axios.get('/api/admin/companystatuts/' + this.companyStatutId)
         .then(response => {
           this.companyStatut = response.data;
           this.loading = false;

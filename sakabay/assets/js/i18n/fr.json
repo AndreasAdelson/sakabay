@@ -11,8 +11,29 @@
     "undo_change": "Annulez les modifications",
     "go_back": "Revenir en arrière",
     "validate": "Valider",
-    "decline": "Refuser"
+    "decline": "Refuser",
+    "yes": "Oui",
+    "no": "Non",
+    "confirm_modal": {
+      "validate": {
+        "company": {
+          "title": "Valider l'inscription",
+          "text": "Vous êtes sur le point de valider la candidature d'une entreprise. Êtes-vous sur de bien vouloir la valider ?"
+        }
+      },
+      "decline": {
+        "company": {
+          "title": "Refuser l'inscription",
+          "text": "Vous êtes sur le point de refuser la candidature d'une entreprise. Êtes-vous sur de bien vouloir la refuser ? Si oui les données concernant l'entreprise seront directement supprimées."
+        }
+      },
+      "delete": {
+        "title": "Suppression d'une entité",
+        "text": "Êtes-vous sur de vouloir supprimer cet élément ?"
+      }
+    }
   },
+
   "user": {
     "title": "Liste des utilisateurs",
     "fields": {
@@ -75,7 +96,8 @@
         "name": "Nom",
         "url_name": "Nom url",
         "utilisateur": "Pseudo utilisateur",
-        "category": "Categorie"
+        "category": "Categorie",
+        "statut": "Statut"
       }
     },
     "fields": {

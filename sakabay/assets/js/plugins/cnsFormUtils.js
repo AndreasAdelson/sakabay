@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import axios from 'axios';
 
 const CnsFormUtils = {
   install(Vue, options) {
@@ -243,6 +244,25 @@ const CnsFormUtils = {
       formFields[fieldName] = _.pickBy(formFields[fieldName], (entity, index) => {
         return index != indexOfDeletedItem;
       });
+    };
+
+    /**
+     * Hide/show the modal of confirmModal.
+     * @param {string} id  The identifiant of the confirmModal
+     */
+    Vue.prototype.$toggleModal = function (id, testId) {
+      $('#' + id).modal('toggle');
+    };
+
+    /**
+     *  Delete an entity on confirm Modal. Need currentId to be defined in component datas
+     * @param {string} url the delete url api to request
+     */
+    Vue.prototype.$deleteEntity = function (url) {
+      return axios.delete(url + this.currentId)
+        .then(response => {
+          window.location.assign(response.headers.location);
+        });
     };
   }
 }

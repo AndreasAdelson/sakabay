@@ -37,7 +37,7 @@ final class CompanyStatutController extends AbstractFOSRestController
 
     /**
      * @Rest\View()
-     * @Rest\Post("admin/companystatut")
+     * @Rest\Post("admin/companystatuts")
      * @Security("is_granted('ROLE_CROLE')")
      * @param Request $request
      *
@@ -62,7 +62,7 @@ final class CompanyStatutController extends AbstractFOSRestController
 
     /**
      * @Rest\View(serializerGroups={"api_companystatut"})
-     * @Rest\Get("/admin/companystatut")
+     * @Rest\Get("/admin/companystatuts")
      *
      * @QueryParam(name="filterFields",
      *             default="name",
@@ -112,7 +112,7 @@ final class CompanyStatutController extends AbstractFOSRestController
     }
     /**
      * @Rest\View(serializerGroups={"api_companystatut"})
-     * @Rest\Get("admin/companystatut/{companyStatutId}")
+     * @Rest\Get("admin/companystatuts/{companyStatutId}")
      *
      * @return View
      */
@@ -125,7 +125,7 @@ final class CompanyStatutController extends AbstractFOSRestController
 
     /**
      * @Rest\View()
-     * @Rest\Post("admin/companystatut/{companyStatutId}")
+     * @Rest\Post("admin/companystatuts/{companyStatutId}")
      * @Security("is_granted('ROLE_ADMIN')")
      *
      * @return View
@@ -155,7 +155,7 @@ final class CompanyStatutController extends AbstractFOSRestController
 
     /**
      * @Rest\View()
-     * @Rest\Delete("admin/companystatut/{companyStatutId}")
+     * @Rest\Delete("admin/companystatuts/{companyStatutId}")
      * @Security("is_granted('ROLE_ADMIN')")
      *
      * @return View

@@ -54,11 +54,21 @@
         <div class="row mb-2">
           <div class="col-6">
             <a :href="'/admin/utilisateur/show/' + this.company.utilisateur.id">
-              <span class="fontHelveticaOblique fontSize18">{{ this.company.utilisateur.login }}</span>
+              <span class="fontHelveticaOblique fontSize18 inscription">{{ this.company.utilisateur.login }}</span>
             </a>
           </div>
           <div class="col-6">
             <span class="fontHelveticaOblique fontSize18">{{ this.company.category.name }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <span class="fontPatua fontSize20">{{ $t('company.table.fields.statut') }}</span>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-6">
+            <span class="fontHelveticaOblique fontSize18">{{ this.company.companystatut.name }}</span>
           </div>
         </div>
       </div>

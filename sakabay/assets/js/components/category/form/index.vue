@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <a href="/">
+    <a href="/admin/category">
       <button
         title="Annulez les modifications"
         type="button"
@@ -113,10 +113,6 @@ export default {
       type: Number,
       default: null,
     },
-    nameOfCategory: {
-      type: String,
-      default: null,
-    }
   },
   created () {
     let promises = [];

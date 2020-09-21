@@ -66,7 +66,7 @@ error_application_access_message: "You do not have access to this part of the ap
 
 #Fonction's pages
 fonction_title_list_page: "List of functions"
-fonction_title_form_page: "Edit a function"
+fonction_title_form_page: "Create a function"
 
 #Role's pages
 role_title_list_page: "List of roles"
@@ -93,6 +93,12 @@ company_subscribed_title_show_page: "Detail of a company"
 
 company_registered_title_list_page: "Company registration request list"
 company_registered_title_form_page: "Edit registration"
-company_registered_title_show_page: "Dteail of the registration"
+company_registered_title_show_page: "Detail of the registration"
 
-company_register_title_page: "reference yourself"
+company_register_title_page: "Reference yourself"
+
+#Category's pages
+category_title_list_page: "List of categories"
+category_title_edit_page: "Edit a category"
+category_title_create_page: "Create a category"
+category_title_show_page: "Detail of category"

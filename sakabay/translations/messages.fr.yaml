@@ -66,7 +66,7 @@ error_application_access_message: "Vous ne disposez pas des droits pour afficher
 
 #Fonction's pages
 fonction_title_list_page: "Liste des fonctions"
-fonction_title_form_page: "Modifier une fonction"
+fonction_title_form_page: "Créer une fonction"
 
 #Role's pages
 role_title_list_page: "Liste des roles"
@@ -96,3 +96,9 @@ company_registered_title_form_page: "Modifier une inscription"
 company_registered_title_show_page: "Détail d'une inscription"
 
 company_register_title_page: "Référencez-vous"
+
+#Category's pages
+category_title_list_page: "Liste des categories"
+category_title_edit_page: "Modifier une categorie"
+category_title_create_page: "Créer une categorie"
+category_title_show_page: "Détails d'une categorie"

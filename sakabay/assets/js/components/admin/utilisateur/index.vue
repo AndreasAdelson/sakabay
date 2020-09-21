@@ -67,9 +67,12 @@
               </a>
               <b-button
                 v-if="canDelete"
-                @click="deleteUtilisateur(data.value)"
+                data-toggle="modal"
+                :data-target="'#' + DELETE_CONFIRM_MODAL_ID"
+                @click="currentId = data.value"
               ><i class="fas fa-trash"></i></b-button>
             </b-button-group>
+
           </template>
         </b-table>
       </b-col>
@@ -84,14 +87,27 @@
         ></b-pagination>
       </b-col>
     </b-row>
+    <confirm-modal
+      :id="DELETE_CONFIRM_MODAL_ID"
+      :title-text="$t('commons.confirm_modal.delete.title')"
+      :body-text="$t('commons.confirm_modal.delete.text')"
+      :button-yes-text="$t('commons.yes')"
+      :button-no-text="$t('commons.no')"
+      :are-buttons-on-same-line="true"
+      @confirm-modal-yes="$deleteEntity('/api/admin/utilisateurs/')"
+    />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import paginationMixin from 'mixins/paginationMixin';
+import ConfirmModal from 'components/commons/confirm-modal';
 
 export default {
+  components: {
+    ConfirmModal
+  },
   mixins: [paginationMixin],
   props: {
     canEdit: {
@@ -113,6 +129,8 @@ export default {
   },
   data () {
     return {
+      DELETE_CONFIRM_MODAL_ID: 'delete_confirmModal',
+      currentId: null,
       currentFilter: '',
       table: {
         field: [
@@ -127,12 +145,6 @@ export default {
     };
   },
   methods: {
-    deleteUtilisateur (utilisateurId) {
-      return axios.delete("/api/admin/utilisateurs/" + utilisateurId)
-        .then(response => {
-          window.location.assign(response.headers.location);
-        });
-    },
     refreshData () {
       return axios.get("/api/admin/utilisateurs", {
         params: {

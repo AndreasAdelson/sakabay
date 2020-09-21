@@ -93,7 +93,7 @@ export default {
   ],
   data () {
     return {
-      API_URL: '/api/admin/companystatut' + (this.companyStatutId ? `/${this.companyStatutId}` : ''),
+      API_URL: '/api/admin/companystatuts' + (this.companyStatutId ? `/${this.companyStatutId}` : ''),
       fonctionsAtCreation: null,
       fonctions: [],
       formFields: {

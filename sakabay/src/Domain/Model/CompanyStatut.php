@@ -22,7 +22,8 @@ class CompanyStatut
      * @var int
      * @Expose
      * @Groups({
-     * "api_companystatut"
+     * "api_companystatut",
+     * "api_companies"
      * })
      */
     private $id;
@@ -31,7 +32,8 @@ class CompanyStatut
      * @var string
      * @Expose
      * @Groups({
-     * "api_companystatut"
+     * "api_companystatut",
+     * "api_companies"
      * })
      */
     private $name;
@@ -40,7 +42,8 @@ class CompanyStatut
      * @var string
      * @Expose
      * @Groups({
-     * "api_companystatut"
+     * "api_companystatut",
+     * "api_companies"
      * })
      */
     private $code;
@@ -49,7 +52,6 @@ class CompanyStatut
      * @var Company[]
      * @Expose
      * @Groups({
-     * "api_companies"
      * })
      */
     private $company;

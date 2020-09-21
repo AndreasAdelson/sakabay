@@ -104,19 +104,14 @@ export default {
           { key: 'url_name', label: this.$t('company.table.fields.url_name'), thClass: "tableitem" },
           { key: 'utilisateur', label: this.$t('company.table.fields.utilisateur'), thClass: "tableitem" },
           { key: 'category', label: this.$t('company.table.fields.category'), thClass: "tableitem" },
-          (!this.canDelete && !this.canEdit && !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-8', thClass: "tableitem" },
+          { key: 'statut', label: this.$t('company.table.fields.statut'), thClass: "tableitem" },
+          (!this.canDelete && !this.canEdit && !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-6', thClass: "tableitem" },
         ],
         sortBy: 'name'
       }
     };
   },
   methods: {
-    deleteFonction (companyId) {
-      return axios.delete("/api/companies/" + companyId)
-        .then(response => {
-          window.location.assign(response.headers.location);
-        });
-    },
     refreshData () {
       return axios.get("/api/companies", {
         params: {
@@ -135,6 +130,7 @@ export default {
           urlName: company.url_name,
           utilisateur: company.utilisateur.login,
           category: company.category.name,
+          statut: company.companystatut.name,
           actions: company.id,
         }));
         this.pager.totalRows = parseInt(response.headers['x-total-count']);

@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-class CompanyType extends AbstractType
+class CompanyAdminEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -41,15 +41,19 @@ class CompanyType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('utilisateur', CreateUtilisateurByCompanyType::class, [
-                'constraints' => [new Valid()],
-                'translator' => $translator,
+            ->add('url_name', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => $translator->trans('error_message_field_not_empty'),
+                    ]),
+                ],
                 'required' => true,
             ])
-            ->add('address', AddressType::class, [
+            ->add('address', AddressEditType::class, [
                 'constraints' => [new Valid()],
                 'translator' => $translator,
                 'required' => true,
+                'by_reference' => false
             ]);
     }
 

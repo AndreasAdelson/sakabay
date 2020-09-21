@@ -6418,6 +6418,11 @@ last-call-webpack-plugin@^3.0.0:
     lodash "^4.17.5"
     webpack-sources "^1.1.0"
 
+leaflet@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.7.1.tgz#10d684916edfe1bf41d688a3b97127c0322a2a19"
+  integrity sha512-/xwPEBidtg69Q3HlqPdU3DnrXQOvQU/CCHA1tcDQVzOwm91YMYaILjNp7L4Eaw5Z4sOYdbBz6koWyibppd8Zqw==
+
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
@@ -10038,6 +10043,11 @@ vue2-autocomplete-js@^0.2.2:
   integrity sha1-t6GILZeMsJJbuHjV6g3UdVomH5U=
   dependencies:
     vue "^2.4.2"
+
+vue2-leaflet@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/vue2-leaflet/-/vue2-leaflet-2.6.0.tgz#c83c60a745fbc2a74d9dbd0f75b2a5ae07d220a9"
+  integrity sha512-JG+w9TtNuk1yRpPta+RjzH6J+opdRUPzSo8UuBnwk+a/6XD0f2tsaB6g3D6ZpBgIE4wZA2dbZ0dZFz2ulYMj3A==
 
 vue2-transitions@^0.3.0:
   version "0.3.0"

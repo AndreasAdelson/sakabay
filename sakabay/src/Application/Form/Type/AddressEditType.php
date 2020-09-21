@@ -3,58 +3,62 @@
 namespace App\Application\Form\Type;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
-use App\Domain\Model\Company;
-use Symfony\Component\Validator\Constraints\Valid;
-use Symfony\Component\Validator\Constraints\Luhn;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Length;
+use App\Domain\Model\Address;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotNull;
 
-class CompanySubscribedEditType extends AbstractType
+class AddressEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $translator = $options['translator'];
 
         $builder
-            ->add('name', TextType::class, [
+            ->add('postal_address', TextType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => $translator->trans('error_message_field_not_empty')
+                    ]),
+                    new Length(['max' => 191]),
+                ],
+                'required' => true,
+            ])
+            ->add('postal_code', NumberType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => $translator->trans('error_message_field_not_empty'),
                     ]),
+                    new Length(['max' => 5]),
                 ],
                 'required' => true,
             ])
-            ->add('numSiret', TextType::class, [
-                'constraints' => [new Luhn()],
-                'required' => true,
-            ])
-            ->add('category', EntityType::class, [
-                'class' => 'App:Category',
+            ->add('latitude', NumberType::class, [
                 'constraints' => [
                     new NotNull([
-                        'message' => $translator->trans('error_message_field_not_empty'),
+                        'message' => $translator->trans('error_message_field_not_empty')
                     ]),
-                ],
-                'required' => true,
+                    new Length(['max' => 11])
+                ]
             ])
-            ->add('url_name', TextType::class, [
+            ->add('longitude', NumberType::class, [
                 'constraints' => [
-                    new NotBlank([
-                        'message' => $translator->trans('error_message_field_not_empty'),
+                    new NotNull([
+                        'message' => $translator->trans('error_message_field_not_empty')
                     ]),
-                ],
-                'required' => true,
+                    new Length(['max' => 11])
+                ]
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Company::class,
+            'data_class' => Address::class,
             'csrf_protection' => false,
         ]);
         $resolver->setRequired('translator');

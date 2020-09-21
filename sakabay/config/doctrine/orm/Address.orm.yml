@@ -1,0 +1,42 @@
+App\Domain\Model\Address:
+    type: entity
+    table: address
+    options:
+        comment: Entité représentant une adresse.
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+            options:
+                comment: Identifiant technique d'un address
+    fields:
+        postalAddress:
+            type: string
+            length: 191
+            column: postal_address
+            nullable: false
+        postalCode:
+            type: integer
+            length: 5
+            column: postal_code
+            nullable: false
+        latitude:
+            type: decimal
+            precision: 9
+            scale: 6
+            column: latitude
+            nullable: false
+        longitude:
+            type: decimal
+            precision: 9
+            scale: 6
+            column: longitude
+            nullable: false
+
+    oneToOne:
+        company:
+            targetEntity: Company
+            mappedBy: address
+            nullable: false

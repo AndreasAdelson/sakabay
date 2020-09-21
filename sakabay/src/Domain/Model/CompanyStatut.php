@@ -23,7 +23,7 @@ class CompanyStatut
      * @Expose
      * @Groups({
      * "api_companystatut",
-     * "api_companies"
+     * "api_admin_companies"
      * })
      */
     private $id;
@@ -33,7 +33,7 @@ class CompanyStatut
      * @Expose
      * @Groups({
      * "api_companystatut",
-     * "api_companies"
+     * "api_admin_companies"
      * })
      */
     private $name;
@@ -43,7 +43,7 @@ class CompanyStatut
      * @Expose
      * @Groups({
      * "api_companystatut",
-     * "api_companies"
+     * "api_admin_companies"
      * })
      */
     private $code;

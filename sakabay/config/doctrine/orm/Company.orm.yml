@@ -31,7 +31,7 @@ App\Domain\Model\Company:
         category:
             targetEntity: Category
             cascade: [persist]
-            inversedBy: category
+            inversedBy: company
             joinColumn:
                 name: id_category
                 referencedColumnName: id
@@ -39,7 +39,7 @@ App\Domain\Model\Company:
         companystatut:
             targetEntity: CompanyStatut
             cascade: [persist]
-            inversedBy: companystatut
+            inversedBy: company
             joinColumn:
                 name: id_companystatut
                 referencedColumnName: id
@@ -54,5 +54,16 @@ App\Domain\Model\Company:
                 onDelete: CASCADE
                 nullable: false
             cascade: [persist,remove]
+
+        address:
+            targetEntity: Address
+            inversedBy: company
+            joinColumn:
+                name: id_address
+                referencedColumnName: id
+                onDelete: CASCADE
+                nullable: false
+            cascade: [persist,remove]
+
 
 

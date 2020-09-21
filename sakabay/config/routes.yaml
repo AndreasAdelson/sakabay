@@ -77,7 +77,7 @@ category_show:
     methods: [GET, POST]
 
 # Routes for Company object
-#Route for list of subscribed companies
+#Route for subscribed companies
 company_subscribed_index:
     path: admin/entreprise
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::subscribedIndex
@@ -93,7 +93,7 @@ company_subscribed_edit:
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::editSubscribed
     methods: [GET]
 
-#Route for list of registered companies
+#Route for registered companies
 company_registered_index:
     path: admin/registered/entreprise
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::registeredIndex
@@ -107,6 +107,12 @@ company_registered_show:
 company_registered_edit:
     path: admin/registered/entreprise/edit/{id}
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::editRegistered
+    methods: [GET]
+
+#Route for the searchable page of companies
+company_list:
+    path: entreprises/list
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::listIndex
     methods: [GET]
 
 #Route for the page before a user register a company
@@ -127,7 +133,7 @@ company_edit:
     methods: [GET, POST]
 
 company_show:
-    path: entreprise/show/{id}
+    path: entreprise/{slug}
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::show
     methods: [GET, POST]
 

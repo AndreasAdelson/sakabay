@@ -41,4 +41,39 @@ security:
         - { path: ^/admin/utilisateur/edit, roles: ROLE_ADMIN }
         - { path: ^/admin/utilisateur/show, roles: ROLE_ADMIN }
 
+        - { path: ^/admin/fonction/new, roles: ROLE_CFONCTION }
+        - { path: ^/admin/fonction, roles: ROLE_RFONCTION }
+
+        - { path: ^/admin/role, roles: ROLE_RROLE }
+        - { path: ^/admin/role/new, roles: ROLE_CROLE }
+        - { path: ^/admin/role/edit, roles: ROLE_UROLE }
+        - { path: ^/admin/role/show, roles: ROLE_RROLE }
+
+        - { path: ^/admin/category, roles: ROLE_RCATEGORY }
+        - { path: ^/admin/category/new, roles: ROLE_CCATEGORY }
+        - { path: ^/admin/category/edit, roles: ROLE_UCATEGORY }
+        - { path: ^/admin/category/show, roles: ROLE_RCATEGORY }
+
+        # - { path: ^/admin/entreprise, roles: ROLE_RCOMPANY }
+        - { path: ^/admin/entreprise/show, roles: ROLE_RCOMPANY }
+        - { path: ^/admin/entreprise/edit, roles: ROLE_UCOMPANY }
+        - { path: ^/admin/registered/entreprise, roles: ROLE_RCOMPANY }
+        - { path: ^/admin/registered/entreprise/show, roles: ROLE_RCOMPANY }
+        - { path: ^/admin/registered/entreprise/edit, roles: ROLE_UCOMPANY }
+
+        - { path: ^/admin/companystatut, roles: ROLE_RCOMPANYSTATUT }
+        - { path: ^/admin/companystatut/show, roles: ROLE_RCOMPANYSTATUT }
+        - { path: ^/admin/companystatut/edit, roles: ROLE_UCOMPANYSTATUT }
+        - { path: ^/admin/companystatut/new, roles: ROLE_CCOMPANYSTATUT }
+
+        - { path: ^/admin/group, roles: ROLE_RGROUP }
+        - { path: ^/admin/group/new, roles: ROLE_CGROUP }
+        - { path: ^/admin/group/edit, roles: ROLE_UGROUP }
+        - { path: ^/admin/group/show, roles: ROLE_RGROUP }
+
+
+
+
+
+
         - { path: ^/utilisateur/edit, roles: IS_AUTHENTICATED_FULLY }

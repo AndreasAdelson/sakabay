@@ -113,7 +113,7 @@ export default {
   },
   methods: {
     refreshData () {
-      return axios.get("/api/companies", {
+      return axios.get("/api/admin/companies", {
         params: {
           filterFields: 'name',
           filter: this.currentFilter,

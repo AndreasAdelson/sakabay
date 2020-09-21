@@ -13,11 +13,14 @@ import 'es6-promise/auto';
 import 'bootstrap';
 import 'babel-polyfill';
 
+
 import $ from 'jquery';
 import Vue from 'vue';
 import * as VeeValidate from 'vee-validate';
 import VueLoaders from 'vue-loaders';
 import MultiSelect from 'vue-multiselect';
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import { Icon } from 'leaflet';
 
 import {
   BootstrapVue,
@@ -47,15 +50,14 @@ import ListCategory from './components/category';
 import FormCompanyStatut from './components/admin/companystatut/form';
 import ShowCompanyStatut from './components/admin/companystatut/show';
 import ListCompanyStatut from './components/admin/companystatut';
-import Company from './components/company';
+import RegisterCompany from './components/company/register';
 import ListCompanySubscribed from './components/admin/company/subscribed';
 import CompanySubscribedShow from './components/admin/company/subscribed/show';
-import CompanySubscribedForm from './components/admin/company/subscribed/form';
 import ListCompanyRegistered from './components/admin/company/registered';
 import CompanyRegisteredShow from './components/admin/company/registered/show';
-import CompanyRegisteredForm from './components/admin/company/registered/form';
-
-
+import CompanyAdminForm from './components/admin/company/form';
+import CompanyListing from './components/company/list';
+import CompanyShow from './components/company/show';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -63,7 +65,6 @@ Vue.use(cnsRenderUtils);
 Vue.use(cnsFormUtils);
 Vue.use(VueLoaders);
 Vue.use(MultiSelect);
-
 Vue.use(VeeValidate, {
   inject: true,
   events: '', // Automatic validation is desactivated
@@ -71,7 +72,17 @@ Vue.use(VeeValidate, {
   errorBagName: 'errors'
 });
 
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png').default,
+  iconUrl: require('leaflet/dist/images/marker-icon.png').default,
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png').default,
+});
+
 Vue.component('multiselect', MultiSelect);
+Vue.component('v-map', LMap);
+Vue.component('v-tile-layer', LTileLayer);
+Vue.component('v-marker', LMarker);
 
 new Vue({
   el: '#app',
@@ -83,7 +94,7 @@ new Vue({
     ShowCompanyStatut,
     FormCompanyStatut,
     FormCategory,
-    Company,
+    RegisterCompany,
     Avatar,
     EditUser,
     ListUser,
@@ -102,10 +113,12 @@ new Vue({
     ListCompanySubscribed,
     ListCompanyRegistered,
     CompanySubscribedShow,
-    CompanySubscribedForm,
+    CompanyAdminForm,
     CompanyRegisteredShow,
-    CompanyRegisteredForm
+    CompanyListing,
+    CompanyShow
   }
 });
+
 
 global.$ = global.jQuery = $;

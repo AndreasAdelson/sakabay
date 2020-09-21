@@ -33,27 +33,6 @@
           {{ bodyText }}
         </div>
         <div
-          v-if="hasComment"
-          class="pl-3 pr-3"
-        >
-          <label
-            v-if="commentLabel"
-            class="fontSize-10 fontNavalGroup"
-            for="notification-content"
-          >{{ commentLabel }}</label>
-          <textarea
-            id="notification-content"
-            v-model="notificationContent"
-            :maxlength="notificationContentMaxLength"
-            :placeholder="$t('common.type_in_comment')"
-            :rows="Math.round(notificationContentMaxLength / 70)"
-          />
-          <div
-            :class="!$getNbCharactersLeft(notificationContent, notificationContentMaxLength) ? 'redtxt' : 'blacktxt'"
-            class="text-right pt-2 fontSize10"
-          >{{ $tc('n_charaters_left', $getNbCharactersLeft(notificationContent, notificationContentMaxLength)) }}</div>
-        </div>
-        <div
           v-if="areButtonsOnSameLine"
           key="areButtonsOnSameLine"
           class="modal-footer border-top-0"

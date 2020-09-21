@@ -17,6 +17,10 @@ export default {
             if (this.formErrors[field].length > 0) {
               this.$removeFieldErrors(field);
             }
+          } else if (this.formFields.address && this.formFields.address[field]) {
+            if (this.formErrors[field].length > 0) {
+              this.$removeFieldErrors(field);
+            }
           }
         });
       },
@@ -37,6 +41,7 @@ export default {
      */
     submitForm() {
       let fieldsDataFunction = this.getFormFieldsData || this.$getFormFieldsData;
+      console.log(fieldsDataFunction.bind(this)(this.formFields),'submiting');
       return axios
         .post(this.API_URL, fieldsDataFunction.bind(this)(this.formFields))
         .then(response => {
@@ -45,7 +50,7 @@ export default {
         .catch(e => {
           this.loading = false;
           if (e.response && e.response.status && e.response.status === 400) {
-            this.$handleFormErrors(e.response.data);
+            this.$handleFormError(e.response.data);
           } else {
             this.$handleError(e);
           }

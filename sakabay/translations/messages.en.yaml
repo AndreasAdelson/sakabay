@@ -96,6 +96,7 @@ company_registered_title_form_page: "Edit registration"
 company_registered_title_show_page: "Detail of the registration"
 
 company_register_title_page: "Reference yourself"
+company_list_title_page: "Search a company"
 
 #Category's pages
 category_title_list_page: "List of categories"

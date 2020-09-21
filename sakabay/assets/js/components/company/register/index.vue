@@ -69,6 +69,120 @@
             <div class="col-6">
               <div class="form-group">
                 <fieldset
+                  id="postalAddress"
+                  class="postalAddress"
+                >
+                  <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.address.postal_address') }}</label>
+                  <input
+                    v-validate="'required'"
+                    name="postalAddress"
+                    type="text"
+                    maxlength="255"
+                    class="form-control"
+                    v-on:blur="() => {
+                      if (formFields.address.postalCode) {
+                        getLongLat();
+                      }
+                    }"
+                    :placeholder="$t('company.placeholder.postal_address')"
+                    v-model="formFields.address.postalAddress"
+                  >
+                  <div
+                    v-for="errorText in formErrors.postalAddress"
+                    :key="'code_' + errorText"
+                  >
+                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+
+                <fieldset
+                  id="postalCode"
+                  class="postalCode"
+                >
+                  <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.address.postal_code') }}</label>
+                  <input
+                    v-validate="'required'"
+                    type="text"
+                    name="postalCode"
+                    class="form-control"
+                    :placeholder="$t('company.placeholder.postal_code')"
+                    v-on:blur="() => {
+                      if (formFields.address.postalAddress) {
+                        getLongLat();
+                      }
+                    }"
+                    onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
+                    v-model="formFields.address.postalCode"
+                  >
+                  <div
+                    v-for="errorText in formErrors.postalCode"
+                    :key="'name_' + errorText"
+                  >
+                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <!-- Map row -->
+          <div
+            class="col-12"
+            v-if="formFields.address.latitude && formFields.address.longitude"
+            style="height:300px"
+          >
+            <v-map
+              :zoom=16
+              :center="[formFields.address.latitude, formFields.address.longitude]"
+              style="height:300px"
+            >
+              <v-marker
+                :draggable="true"
+                :lat-lng.sync="position"
+              ></v-marker>
+              <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tile-layer>
+            </v-map>
+          </div>
+          <!-- third row -->
+          <div class="row mb-3">
+            <div class="col-12">
+              <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.category') }}</label>
+
+              <fieldset
+                id="category"
+                class="category"
+              >
+                <multiselect
+                  v-validate="'required'"
+                  v-model="formFields.category"
+                  :options="category"
+                  name="category"
+                  placeholder="Selectionner categorie"
+                  :searchable="false"
+                  :close-on-select="false"
+                  :show-labels="false"
+                  label="name"
+                  track-by="name"
+                >
+                </multiselect>
+                <div
+                  v-for="errorText in formErrors.category"
+                  :key="'category_' + errorText"
+                >
+                  <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+          <!-- fourth row -->
+
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
                   id="lastName"
                   class="lastName"
                 >
@@ -127,6 +241,7 @@
               </div>
             </div>
           </div>
+          <!-- fifth row -->
           <div class="row">
             <div class="col-6">
               <div class="form-group">
@@ -186,34 +301,7 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <fieldset
-                id="category"
-                class="category"
-              >
-                <multiselect
-                  v-validate="'required'"
-                  v-model="formFields.category"
-                  :options="category"
-                  name="category"
-                  placeholder="Selectionner categorie"
-                  :searchable="false"
-                  :close-on-select="false"
-                  :show-labels="false"
-                  label="name"
-                  track-by="name"
-                >
-                </multiselect>
-                <div
-                  v-for="errorText in formErrors.category"
-                  :key="'category_' + errorText"
-                >
-                  <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
-                </div>
-              </fieldset>
-            </div>
-          </div>
+
           <div class="row my-3">
             <div class="col-6 offset-3">
               <button
@@ -222,6 +310,13 @@
                 @click="$validateForm()"
               >{{ this.$t('commons.create') }}</button>
             </div>
+            <!-- <div class="col-3">
+              <button
+                type="button"
+                class="btn button_skb fontUbuntu"
+                @click="test()"
+              >Test</button>
+            </div> -->
           </div>
         </div>
       </div>
@@ -231,6 +326,7 @@
 <script>
 import axios from 'axios';
 import validatorRulesMixin from 'mixins/validatorRulesMixin';
+import _ from 'lodash';
 import adminFormMixin from 'mixins/adminFormMixin';
 import DualList from 'components/commons/dual-list';
 export default {
@@ -250,7 +346,12 @@ export default {
         name: null,
         numSiret: null,
         utilisateur: new Object(),
+        address: new Object(),
         category: null,
+      },
+      position: {
+        lng: null,
+        lat: null
       },
       formErrors: {
         name: [],
@@ -259,7 +360,9 @@ export default {
         lastName: [],
         email: [],
         imageProfil: [],
-        category: []
+        category: [],
+        postalAddress: [],
+        postalCode: []
       },
       urlImageProfil: null,
       imageProfilSelected: null,
@@ -276,13 +379,43 @@ export default {
       });
   },
   methods: {
+
     onFileSelected () {
       this.imageProfilSelected = this.$refs.imageProfil.files[0];
       this.imageName = this.$refs.imageProfil.files[0].name;
       this.urlImageProfil = URL.createObjectURL(this.imageProfilSelected);
     },
 
+    getLongLat () {
+      let query = this.formFields.address.postalAddress + ', ' + this.formFields.address.postalCode;
+      return axios.get('https://api-adresse.data.gouv.fr/search/', {
+        params: {
+          q: query,
+          limit: 10
+        }
+      }).then(response => {
+
+        if (response.data.features) {
+          this.$set(this.formFields.address, 'longitude', response.data.features[0].geometry.coordinates[0]);
+          this.$set(this.formFields.address, 'latitude', response.data.features[0].geometry.coordinates[1]);
+          this.position.lat = response.data.features[0].geometry.coordinates[1];
+          this.position.lng = response.data.features[0].geometry.coordinates[0];
+
+        } else {
+          this.$set(this.formFields.address, 'longitude', 0);
+          this.$set(this.formFields.address, 'latitude', 0);
+        }
+        console.log(response);
+      }).catch(e => {
+        console.log(e);
+      });
+    },
+
     submitForm () {
+      if (this.position.lat !== this.formFields.address.latitude && this.position.ngt !== this.formFields.address.longitude) {
+        this.formFields.address.longitude = this.position.lng.toFixed(6);
+        this.formFields.address.latitude = this.position.lat.toFixed(6);
+      }
       let formData = this.$getFormFieldsData(this.formFields);
       if (this.imageProfilSelected) {
         formData.append('file', this.imageProfilSelected);

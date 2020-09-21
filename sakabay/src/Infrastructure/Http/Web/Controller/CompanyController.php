@@ -14,6 +14,37 @@ class CompanyController extends AbstractController
 {
 
     /**
+     * @Route("entreprises/list", name="company_subscribed_index", methods="GET")
+     */
+    public function listIndex()
+    {
+        return $this->render('company/list.html.twig', []);
+    }
+
+    /**
+     * @Route("entreprise", name="company_register_index", methods="GET")
+     */
+    public function registerIndex(AuthorizationCheckerInterface $authorizationChecker)
+    {
+        return $this->render('company/index.html.twig', [
+            'canEdit' => $authorizationChecker->isGranted('ROLE_UCOMPANY'),
+            'canDelete' => $authorizationChecker->isGranted('ROLE_DCOMPANY'),
+        ]);
+    }
+
+    /**
+     * @Route("entreprise/{slug}", name="company_show", methods="GET")
+     */
+    public function show(string $slug)
+    {
+        $titlePage = ucfirst(str_replace('-', ' ', $slug));
+        return $this->render('company/show.html.twig', [
+            'companyUrlName' => $slug,
+            'titlePage' => $titlePage
+        ]);
+    }
+
+    /**
      * @Route("admin/entreprise", name="company_subscribed_index", methods="GET")
      */
     public function subscribedIndex(AuthorizationCheckerInterface $authorizationChecker)
@@ -37,16 +68,7 @@ class CompanyController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("entreprise", name="company_register_index", methods="GET")
-     */
-    public function registerIndex(AuthorizationCheckerInterface $authorizationChecker)
-    {
-        return $this->render('company/index.html.twig', [
-            'canEdit' => $authorizationChecker->isGranted('ROLE_UCOMPANY'),
-            'canDelete' => $authorizationChecker->isGranted('ROLE_DCOMPANY'),
-        ]);
-    }
+
 
     /**
      * @Route("entreprise/new", name="company_admin_new", methods="GET|POST")
@@ -63,6 +85,7 @@ class CompanyController extends AbstractController
     {
         return $this->render('admin/company/subscribed/subscribed_form.html.twig', [
             'companyId' => $id,
+            'isValidated' => true
         ]);
     }
 
@@ -84,6 +107,7 @@ class CompanyController extends AbstractController
     {
         return $this->render('admin/company/registered/registered_form.html.twig', [
             'companyId' => $id,
+            'isValidated' => false
         ]);
     }
 
@@ -91,21 +115,11 @@ class CompanyController extends AbstractController
     /**
      * @Route("admin/registered/entreprise/{id}", name="company_show", methods="GET")
      */
-    public function showRegistered(int $id, AuthorizationCheckerInterface $authorizationChecker )
+    public function showRegistered(int $id, AuthorizationCheckerInterface $authorizationChecker)
     {
         return $this->render('admin/company/registered/registered_show.html.twig', [
             'companyId' => $id,
             'canEdit' => $authorizationChecker->isGranted('ROLE_UCOMPANY')
-        ]);
-    }
-
-    /**
-     * @Route("entreprise/{id}", name="company_show", methods="GET")
-     */
-    public function show(int $id)
-    {
-        return $this->render('admin/company/show.html.twig', [
-            'companyId' => $id
         ]);
     }
 }

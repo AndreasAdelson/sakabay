@@ -26,7 +26,7 @@
         </button>
       </a>
       <div class="register-card mt-3 w-100 h-100">
-
+        <!-- Name and url name -->
         <div class="row">
           <div class="col-6">
             <span class="fontPatua fontSize20">{{ $t('company.table.fields.name') }}</span>
@@ -37,12 +37,14 @@
         </div>
         <div class="row mb-2">
           <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.company.name }}</span>
+            <span class="fontHelveticaOblique fontSize18">{{ company.name }}</span>
           </div>
           <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.company.url_name }}</span>
+            <span class="fontHelveticaOblique fontSize18">{{ company.url_name }}</span>
           </div>
         </div>
+
+        <!-- User login and category -->
         <div class="row">
           <div class="col-6">
             <span class="fontPatua fontSize20">{{ $t('company.table.fields.utilisateur') }}</span>
@@ -53,14 +55,15 @@
         </div>
         <div class="row mb-2">
           <div class="col-6">
-            <a :href="'/admin/utilisateur/show/' + this.company.utilisateur.id">
-              <span class="fontHelveticaOblique fontSize18">{{ this.company.utilisateur.login }}</span>
+            <a :href="'/admin/utilisateur/show/' + company.utilisateur.id">
+              <span class="fontHelveticaOblique fontSize18 inscription">{{ company.utilisateur.login }}</span>
             </a>
           </div>
           <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.company.category.name }}</span>
+            <span class="fontHelveticaOblique fontSize18">{{ company.category.name }}</span>
           </div>
         </div>
+        <!-- Statut  -->
         <div class="row">
           <div class="col-6">
             <span class="fontPatua fontSize20">{{ $t('company.table.fields.statut') }}</span>
@@ -68,9 +71,70 @@
         </div>
         <div class="row mb-2">
           <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.company.companystatut.name }}</span>
+            <span class="fontHelveticaOblique fontSize18">{{ company.companystatut.name }}</span>
           </div>
         </div>
+
+        <!-- Postal adress and postal code -->
+        <div class="row">
+          <div class="col-6">
+            <span class="fontPatua fontSize20">{{ $t('company.table.fields.address.postal_address') }}</span>
+          </div>
+          <div class="col-6">
+            <span class="fontPatua fontSize20">{{ $t('company.table.fields.address.postal_code') }}</span>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-6">
+            <span class="fontHelveticaOblique fontSize18">{{ company.address.postal_address }}</span>
+          </div>
+          <div class="col-6">
+            <span class="fontHelveticaOblique fontSize18">{{ company.address.postal_code }}</span>
+          </div>
+        </div>
+
+        <!-- Latitude and longitude -->
+        <div class="row">
+          <div class="col-6">
+            <span class="fontPatua fontSize20">{{ $t('company.table.fields.address.latitude') }}</span>
+          </div>
+          <div class="col-6">
+            <span class="fontPatua fontSize20">{{ $t('company.table.fields.address.longitude') }}</span>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-6">
+            <span class="fontHelveticaOblique fontSize18">{{ company.address.latitude }}</span>
+          </div>
+          <div class="col-6">
+            <span class="fontHelveticaOblique fontSize18">{{ company.address.longitude }}</span>
+          </div>
+        </div>
+
+        <!-- Message alerte longitude et latitude à corriger -->
+        <div
+          v-if="company.address.latitude === 0 && company.address.longitude === 0"
+          class="row mb-2"
+        >
+          <div class="col-12">
+            <span class="fontPatua fontSize14 red-skb">{{ $t('company.table.fields.address.error_geoloc') }}</span>
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="row">
+          <div class="col-12">
+            <v-map
+              :zoom=16
+              :center="[company.address.latitude, company.address.longitude]"
+              style="height:300px"
+            >
+              <v-marker :lat-lng="[company.address.latitude, company.address.longitude]"></v-marker>
+              <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tile-layer>
+            </v-map>
+          </div>
+        </div>
+
       </div>
       <div class="row justify-content-center my-3">
         <div class="col-2">
@@ -82,10 +146,11 @@
         </div>
         <div class="col-2">
           <b-button
+            :disabled="company.address.latitude === 0 && company.address.longitude === 0"
             data-toggle="modal"
             :data-target="'#' + VALIDATE_CONFIRM_MODAL_ID"
             class="btn btn-success w-100"
-          >{{ this.$t('commons.validate') }}</b-button>
+          >{{ $t('commons.validate') }}</b-button>
         </div>
       </div>
     </div>
@@ -139,7 +204,7 @@ export default {
   async created () {
     if (this.companyId) {
       this.loading = true;
-      return axios.get('/api/companies/' + this.companyId)
+      return axios.get('/api/admin/companies/' + this.companyId)
         .then(response => {
           this.company = response.data;
           this.loading = false;

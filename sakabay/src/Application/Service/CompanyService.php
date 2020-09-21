@@ -30,6 +30,11 @@ class CompanyService
         return $this->companyRepository->find($companyId);
     }
 
+    public function getCompanyByUrlName(string $urlName): ?Company
+    {
+        return $this->companyRepository->findOneBy(['urlName' => $urlName]);
+    }
+
     public function getAllCompanys(): ?array
     {
         return $this->companyRepository->findAll();
@@ -64,9 +69,10 @@ class CompanyService
         $filterText = '',
         $currentPage = 1,
         $perPage = PHP_INT_MAX ? PHP_INT_MAX : 10,
-        $codeStatut = ''
+        $codeStatut = '',
+        $category = ''
     ) {
         return $this->companyRepository
-            ->getPaginatedList($sortBy, $descending, $filterFields, $filterText, $currentPage, $perPage, $codeStatut);
+            ->getPaginatedList($sortBy, $descending, $filterFields, $filterText, $currentPage, $perPage, $codeStatut, $category);
     }
 }

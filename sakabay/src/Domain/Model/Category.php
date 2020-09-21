@@ -25,7 +25,7 @@ class Category
      * @Expose
      * @Groups({
      * "api_categories",
-     * "api_companies"
+     * "api_admin_companies"
      * })
      */
     private $id;
@@ -35,7 +35,8 @@ class Category
      * @Expose
      * @Groups({
      * "api_categories",
-     * "api_companies"
+     * "api_companies",
+     * "api_admin_companies"
      * })
      */
     private $name;

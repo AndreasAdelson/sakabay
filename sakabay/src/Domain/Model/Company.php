@@ -29,7 +29,8 @@ class Company
      * @var int
      * @Expose
      * @Groups({
-     * "api_companies"
+     * "api_companies",
+     * "api_admin_companies"
      * })
      */
     private $id;
@@ -38,7 +39,8 @@ class Company
      * @var string
      * @Expose
      * @Groups({
-     * "api_companies"
+     * "api_companies",
+     * "api_admin_companies"
      * })
      */
     private $name;
@@ -47,7 +49,7 @@ class Company
      * @var integer
      * @Expose
      * @Groups({
-     * "api_companies"
+     * "api_admin_companies"
      * })
      */
     private $numSiret;
@@ -56,7 +58,8 @@ class Company
      * @var string
      * @Expose
      * @Groups({
-     * "api_companies"
+     * "api_companies",
+     * "api_admin_companies"
      * })
      */
     private $urlName;
@@ -65,7 +68,8 @@ class Company
      * @var Utilisateur
      * @Expose
      * @Groups({
-     * "api_companies"
+     * "api_companies",
+     * "api_admin_companies"
      * })
      */
     private $utilisateur;
@@ -74,6 +78,7 @@ class Company
      * @Expose
      * @Groups({
      * "api_categories",
+     * "api_admin_companies",
      * "api_companies"
      * })
      * @var Categorie
@@ -85,13 +90,26 @@ class Company
      * @Expose
      * @Groups({
      * "api_companystatut",
-     * "api_companies"
+     * "api_admin_companies"
      * })
      * @var CompanyStatut
      *
      */
     private $companystatut;
 
+    /**
+     * @var Address
+     * @Expose
+     * @Groups({
+     * "api_companies",
+     * "api_admin_companies"
+     * })
+     */
+    private $address;
+
+    public function __construct()
+    {
+    }
 
     public function getId(): ?int
     {
@@ -153,15 +171,12 @@ class Company
     }
 
     /**
-     *
      * @param  string  $urlName
-     *
      * @return  self
      */
     public function setUrlName(string $urlName)
     {
         $this->urlName = $urlName;
-
         return $this;
     }
 
@@ -174,7 +189,6 @@ class Company
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
         return $this;
     }
 
@@ -207,7 +221,26 @@ class Company
     public function setCompanystatut(CompanyStatut $companystatut)
     {
         $this->companystatut = $companystatut;
+        return $this;
+    }
 
+    /**
+     * Get the value of address
+     * @return  Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set the value of address
+     * @param  Address  $address
+     * @return  self
+     */
+    public function setAddress(?Address $address)
+    {
+        $this->address = $address;
         return $this;
     }
 }

@@ -35,7 +35,7 @@ class Utilisateur implements UserInterface
      * @Groups({
      * "api_utilisateurs",
      * "api_groups",
-     * "api_companies"
+     * "api_admin_companies"
      * })
      */
     private $id;
@@ -87,7 +87,7 @@ class Utilisateur implements UserInterface
      * @Groups({
      * "api_utilisateurs",
      * "api_groups",
-     * "api_companies"
+     * "api_admin_companies"
      * })
      */
     private $login;
@@ -120,7 +120,8 @@ class Utilisateur implements UserInterface
      * @Expose
      * @Groups({
      * "api_utilisateurs",
-     * "api_groups"
+     * "api_groups",
+     * "api_companies"
      * })
      */
     private $imageProfil;

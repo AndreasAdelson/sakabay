@@ -14,6 +14,10 @@
     "decline": "Refuser",
     "yes": "Oui",
     "no": "Non",
+    "search_button": "Rechercher",
+    "placeholder": {
+      "search": "Que recherchez-vous ?"
+    },
     "confirm_modal": {
       "validate": {
         "company": {
@@ -97,7 +101,14 @@
         "url_name": "Nom url",
         "utilisateur": "Pseudo utilisateur",
         "category": "Categorie",
-        "statut": "Statut"
+        "statut": "Statut",
+        "address": {
+          "postal_address": "Adresse postale",
+          "postal_code":"Code postal",
+          "latitude": "Latitude",
+          "longitude": "Longitude",
+          "error_geoloc": "Veuillez modifier les coordonnées de géolocoalisation car l'adresse donnée n'a pas permis de déterminer automatiquement ces données. Merci d'avance :)."
+        }
       }
     },
     "fields": {
@@ -107,7 +118,19 @@
     "placeholder": {
       "name": "Renseignez un nom",
       "num_siret": "Numéro de SIRET",
-      "url_name": "Renseignez le nom d'url"
+      "url_name": "Renseignez le nom d'url",
+      "postal_address": "Adresse postale",
+      "postal_code": "Code postal",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
+    },
+    "nav_title": {
+      "presentation": "Présentation",
+      "job_offers": "Offres d'emplois",
+      "comments": "Avis"
+    } ,
+    "presentation": {
+      "title": "Informations"
     }
   },
   "companyStatut": {

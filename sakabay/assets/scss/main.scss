@@ -4,8 +4,7 @@
 */
 
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
-
+@import "~leaflet/dist/leaflet.css";
 /*---------------------------------
     VARIABLES
 -----------------------------------*/
@@ -13,6 +12,8 @@ $yellow_light_color: #f2d785;
 $blue_light_color:#2798a0;
 $grey_light_color: #e5e5e5;
 $grey_light_2_color: #a2acba;
+$grey: #999;
+$grey_body: #f1f1f1;
 $yellow_login_color: #f39c12;
 $blue_logo_color: #60a3bc;
 $orange_login_color: #c0392b;
@@ -31,7 +32,7 @@ $black_color: #000;
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #fafafa;
+  background-color: $grey_body;
 }
 
 p {
@@ -39,7 +40,7 @@ p {
   font-size: 1.1em;
   font-weight: 300;
   line-height: 1.7em;
-  color: #999;
+  color: $grey;
 }
 
 a,
@@ -395,6 +396,10 @@ a[data-toggle="collapse"] {
   background-color: $green_color; //remettre du vert ou changer le nom de la classe et changer partout où elle est appelée dans le projet.
 }
 
+.yellow-bg-skb {
+  background-color: $yellow_login_color;
+}
+
 /*---------------------------------
     border-color
 -----------------------------------*/
@@ -416,6 +421,10 @@ a[data-toggle="collapse"] {
 
 .orange-skb {
   color: $orange_color;
+}
+
+.orange-login-skb {
+  color: $orange_login_color;
 }
 
 .red-skb {
@@ -635,7 +644,7 @@ a[data-toggle="collapse"] {
 
 .register-card {
   height: 600px;
-  margin: 0 auto;
+  margin: 1rem auto;
   width: 500px;
   background: $yellow_login_color;
   position: relative;
@@ -949,4 +958,68 @@ a[data-toggle="collapse"] {
 .autocomplete-list li.focus-list {
   background: $orange_login_color;
   color: $white_color;
+}
+
+/*---------------------------------
+    Company card
+-----------------------------------*/
+
+.company-image {
+  width: 200px;
+  height: 200px;
+  border: solid 3px rgba(0, 0, 0, .125);
+}
+
+/*---------------------------------
+    Company Presentation
+-----------------------------------*/
+.header-main-info {
+  margin-left: 7rem;
+  margin-top: 1rem;
+}
+
+.logo-main-info {
+  height: 100px;
+  width: 100px;
+  float: left;
+  border: solid 1px rgba(0, 0, 0, .125);
+}
+
+.card-skb {
+  background-color: $white_color;
+  border-bottom: 1px solid $grey_body;
+  padding-bottom: .6rem;
+  padding-top: .6rem;
+}
+
+.navigation-menu .navigation-link {
+  padding: 0.7rem 1.14rem;
+  display: inline-block;
+  border-bottom: 4px solid $white_color;
+  color: $grey_light_2_color;
+}
+
+.navigation-link:hover {
+  background-color: $grey_body;
+  color: $black_color;
+  border-bottom: 4px solid $yellow_login_color;
+}
+
+.navigation-menu .navigation-link-active {
+  padding: 0.7rem 1.14rem;
+  display: inline-block;
+  border-bottom: 4px solid $yellow_login_color;
+}
+
+.details-card {
+  padding: 2rem 2.5rem 2.5rem 2.5rem;
+}
+
+.description-card {
+  padding: 2.5rem;
+}
+
+.description-card p {
+  text-align: justify;
+  color: $black_color;
 }

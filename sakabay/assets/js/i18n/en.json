@@ -47,7 +47,6 @@
       "last_name": "Enter last name",
       "username": "Choose an username",
       "image_profil": "Logo"
-
     }
   },
   "fonction": {
@@ -97,7 +96,14 @@
         "url_name": "Url name",
         "utilisateur": "User login",
         "category": "Categorie",
-        "statut": "Status"
+        "statut": "Status",
+        "address": {
+          "postal_address": "Postal address",
+          "postal_code":"Postal code",
+          "latitude": "Latitude",
+          "longitude": "Longitude",
+          "error_geoloc": "Please change the geolocation coordinates as the address given did not automatically determine this data. Thank you for your input :)."
+        }
       }
     },
     "fields": {
@@ -107,7 +113,19 @@
     "placeholder": {
       "name": "Enter a name",
       "num_siret": "Enter SIRET number",
-      "url_name": "Enter url name"
+      "url_name": "Enter url name",
+      "postal_address": "Postal address",
+      "postal_code": "Postal code",
+      "latitude": "Latitude",
+      "longitude": "Longitude"
+    },
+    "nav_title": {
+      "presentation": "Presentation",
+      "job_offers": "Job offers",
+      "comments": "Comments"
+    } ,
+    "presentation": {
+      "title": "Informations"
     }
   },
   "companyStatut": {

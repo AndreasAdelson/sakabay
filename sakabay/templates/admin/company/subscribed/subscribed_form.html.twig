@@ -4,7 +4,8 @@
 
 {% block body %}
 <h1 class="fontUbuntu orange-skb text-center p-1">{{ 'company_subscribed_title_form_page'|trans }}</h1>
-<company-subscribed-form
+<company-admin-form
 :company-id="{{ companyId }}"
-></company-subscribed-form>
+:is-validated="{{ isValidated|json_encode }}"
+></company-admin-form>
 {% endblock %}

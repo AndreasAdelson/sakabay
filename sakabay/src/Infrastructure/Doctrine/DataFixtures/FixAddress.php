@@ -3,14 +3,14 @@
 namespace App\Infrastructure\Doctrine\DataFixtures;
 
 use App\Application\Utils\StringUtils;
-use App\Domain\Model\Company;
+use App\Domain\Model\Address;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FixCompany extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
+class FixAddress extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
@@ -28,25 +28,19 @@ class FixCompany extends Fixture implements OrderedFixtureInterface, ContainerAw
 
         foreach ($lines as $data) {
             list(
-                $name,
-                $numSiret,
-                $urlName,
-                $category,
-                $utilisateur,
-                $companyStatut,
-                $address
+                $postalAddress,
+                $postalCode,
+                $latitude,
+                $longitude
             ) = explode(';', trim($data));
 
-            $company = new Company();
-            $company->setName($name);
-            $company->setNumSiret($numSiret);
-            $company->setUrlName($urlName);
-            $company->setCategory($this->getReference('category_' . $category));
-            $company->setUtilisateur($this->getReference('utilisateur_' . $utilisateur));
-            $company->setCompanystatut($this->getReference('companyStatut_' . $companyStatut));
-            $company->setAddress($this->getReference('address_' . $address));
-            $manager->persist($company);
-            $this->addReference('company_' . $name, $company);
+            $address = new Address();
+            $address->setPostalAddress($postalAddress);
+            $address->setPostalCode($postalCode);
+            $address->setLatitude($latitude);
+            $address->setLongitude($longitude);
+            $manager->persist($address);
+            $this->addReference('address_' . $postalAddress, $address);
         }
 
         $manager->flush();
@@ -59,6 +53,6 @@ class FixCompany extends Fixture implements OrderedFixtureInterface, ContainerAw
      */
     public function getOrder()
     {
-        return 3;
+        return 2;
     }
 }

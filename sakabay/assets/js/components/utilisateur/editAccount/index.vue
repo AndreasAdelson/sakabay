@@ -22,7 +22,7 @@
               <avatar
                 v-else-if="utilisateur"
                 class="p-0"
-                :username="utilisateur.first_name + ' ' + utilisateur.last_name"
+                :username="utilisateur.last_name + ' ' + utilisateur.first_name"
                 :size="75"
               ></avatar>
             </div>

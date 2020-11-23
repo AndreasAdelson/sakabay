@@ -1,6 +1,10 @@
 <template>
   <div class="skb-body container ">
     <div v-if="loading">
+      <div class="loader-container-full">
+        <div class="loader">
+        </div>
+      </div>
     </div>
     <div v-else>
       <div
@@ -198,18 +202,18 @@ export default {
       DECLINE_CONFIRM_MODAL_ID: 'decline_confirmModal',
       VALIDATE_CONFIRM_MODAL_ID: 'validate_confirmModal',
       company: null,
-      loading: false
+      loading: true
     }
   },
-  async created () {
+  created () {
     if (this.companyId) {
-      this.loading = true;
       return axios.get('/api/admin/companies/' + this.companyId)
         .then(response => {
           this.company = response.data;
           this.loading = false;
         }).catch(error => {
-          console.log(error);
+          this.$handleError(error);
+          this.loading = false;
         });
     }
   },
@@ -221,7 +225,8 @@ export default {
           this.loading = false;
           window.location.assign(response.headers.location);
         }).catch(e => {
-          console.log(e);
+          this.$handleError(e);
+          this.loading = false;
         });
     },
     declineCompany () {
@@ -231,7 +236,8 @@ export default {
           this.loading = false;
           window.location.assign(response.headers.location);
         }).catch(e => {
-          console.log(e);
+          this.$handleError(e);
+          this.loading = false;
         });
     }
   },

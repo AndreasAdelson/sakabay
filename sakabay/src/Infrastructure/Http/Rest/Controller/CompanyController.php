@@ -253,13 +253,16 @@ final class CompanyController extends AbstractFOSRestController
 
     /**
      * @Rest\View(serializerGroups={"api_companies"})
-     * @Rest\Get("companies/details/{urlName}")
+     * @Rest\Get("entreprise/{urlName}")
      *
      * @return View
      */
     public function getCompanyByUrlName(string $urlName): View
     {
         $company = $this->companyService->getCompanyByUrlName($urlName);
+        if (!$company) {
+            throw new NotFoundHttpException('Company with url_name ' . $urlName . ' does not exist!');
+        }
         return View::create($company, Response::HTTP_OK);
     }
 
@@ -273,8 +276,6 @@ final class CompanyController extends AbstractFOSRestController
     public function editAdminCompany(int $companyId, Request $request)
     {
         $company = $this->companyService->getCompany($companyId);
-
-
         if (!$company) {
             throw new EntityNotFoundException('Company with id ' . $companyId . ' does not exist!');
         }

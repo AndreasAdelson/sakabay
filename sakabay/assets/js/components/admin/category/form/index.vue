@@ -1,5 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container skb-body">
+    <div v-show="loading">
+      <div class="loader-container-full">
+        <div class="loader">
+        </div>
+      </div>
+    </div>
     <a href="/admin/category">
       <button
         title="Annulez les modifications"
@@ -93,6 +99,7 @@ export default {
   ],
   data () {
     return {
+      loading: true,
       API_URL: '/api/admin/categories' + (this.categoryId ? `/${this.categoryId}` : ''),
       fonctionsAtCreation: null,
       fonctions: [],
@@ -128,8 +135,10 @@ export default {
         this.$setEditForm(category);
       }
       this.fonctionsAtCreation = _.cloneDeep(this.formFields.fonctions);
+      this.loading = false;
     }).catch(e => {
-      console.log(e);
+      this.$handleError(e);
+      this.loading = false;
     });
   },
   methods: {

@@ -1,5 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container skb-body">
+    <div v-show="loading">
+      <div class="loader-container-full">
+        <div class="loader">
+        </div>
+      </div>
+    </div>
     <a href="/admin/group">
       <button
         :title="$t('commons.undo_change')"
@@ -168,6 +174,7 @@ export default {
   ],
   data () {
     return {
+      loading: true,
       API_URL: '/api/admin/groups' + (this.groupId ? `/${this.groupId}` : ''),
       rolesAtCreation: null,
       roles: [],
@@ -206,9 +213,10 @@ export default {
         this.$setEditForm(group);
       }
       this.rolesAtCreation = _.cloneDeep(this.formFields.roles);
-
+      this.loading = false;
     }).catch(e => {
-      console.log(e);
+      this.$handleError(e);
+      this.loading = false;
     });
   },
   methods: {

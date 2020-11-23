@@ -264,6 +264,21 @@ const CnsFormUtils = {
           window.location.assign(response.headers.location);
         });
     };
+
+    Vue.prototype.$requestAndSet = async function(queries) {
+      let promises = [];
+
+      queries.forEach(async query => {
+        const promise = axios.get(query.url, { params: query.params }).then(res => {
+          _.set(this, query.path, res.data);
+        }).catch(e => {
+          this.$handleError(e);
+        });
+        promises.push(promise);
+      });
+
+      return Promise.all(promises);
+    };
   }
 }
 

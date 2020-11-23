@@ -41,7 +41,12 @@
             ><span class="mr-3">{{ $t('commons.search_button') }}</span><i class="fas fa-search"></i></b-button>
           </div>
         </div>
-        <div v-if="companies">
+        <div
+          v-if="loading"
+          class="loader2"
+        >
+        </div>
+        <div v-else-if="companies">
           <div
             class="row"
             v-for="(companie, index) in companies"
@@ -99,7 +104,7 @@ export default {
       },
       category: [],
       companies: null,
-
+      loading: true,
     };
   },
   created () {
@@ -112,13 +117,16 @@ export default {
   methods: {
     applyFilter () {
       let sentFilter = this.setFilter();
+      this.loading = true;
       return axios.get("/api/companies", {
         params: sentFilter
       }).then(response => {
         this.companies = response.data;
         this.pager.totalRows = parseInt(response.headers['x-total-count']);
+        this.loading = false;
       }).catch(error => {
-        console.log(error);
+        this.$handleError(error);
+        this.loading = false;
       });
     },
   },

@@ -85,6 +85,38 @@ const CnsRenderUtils = {
       return label.trim();
     }
 
+    /**
+     * Print the given error message in the console.
+     * @param {Error} error
+     */
+    Vue.prototype.$handleError = function(error) {
+      if (error) {
+        const errorResponse = error.response;
+        if (errorResponse && errorResponse.data) {
+          this.$log.error(
+            this.$t('commons.error_code_message', [
+              errorResponse.data.code,
+              errorResponse.data.message,
+            ])
+          );
+        } else if (
+          errorResponse &&
+          errorResponse.headers &&
+          errorResponse.headers['x-message']
+        ) {
+          this.$log.error(
+            decodeURIComponent(errorResponse.headers['x-message'])
+          );
+        } else if (error.message) {
+          this.$log.error(error.message);
+        } else {
+          this.$log.error(error);
+        }
+      } else {
+        this.$log.error(this.$t('commons.error_occured'));
+      }
+    };
+
   },
 };
 

@@ -44,12 +44,13 @@ import ShowRole from './components/admin/role/show';
 import ListGroup from './components/admin/group';
 import FormGroup from './components/admin/group/form';
 import ShowGroup from './components/admin/group/show';
-import FormCategory from './components/category/form';
-import ShowCategory from './components/category/show';
-import ListCategory from './components/category';
+import FormCategory from './components/admin/category/form';
+import ShowCategory from './components/admin/category/show';
+import ListCategory from './components/admin/category';
 import FormCompanyStatut from './components/admin/companystatut/form';
 import ShowCompanyStatut from './components/admin/companystatut/show';
 import ListCompanyStatut from './components/admin/companystatut';
+import RegisterCompanyForm from './components/company/register/form';
 import RegisterCompany from './components/company/register';
 import ListCompanySubscribed from './components/admin/company/subscribed';
 import CompanySubscribedShow from './components/admin/company/subscribed/show';
@@ -58,6 +59,7 @@ import CompanyRegisteredShow from './components/admin/company/registered/show';
 import CompanyAdminForm from './components/admin/company/form';
 import CompanyListing from './components/company/list';
 import CompanyShow from './components/company/show';
+import 'utils/logger';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -85,7 +87,7 @@ Vue.component('v-tile-layer', LTileLayer);
 Vue.component('v-marker', LMarker);
 
 new Vue({
-  el: '#app',
+  el: '#root',
   i18n,
   components: {
     ShowCategory,
@@ -94,6 +96,7 @@ new Vue({
     ShowCompanyStatut,
     FormCompanyStatut,
     FormCategory,
+    RegisterCompanyForm,
     RegisterCompany,
     Avatar,
     EditUser,

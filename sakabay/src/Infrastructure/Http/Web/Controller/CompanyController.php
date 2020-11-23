@@ -2,17 +2,27 @@
 
 namespace App\Infrastructure\Http\Web\Controller;
 
+use App\Application\Service\CompanyService;
 use App\Domain\Model\Company;
 use App\Infrastructure\Repository\CompanyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class CompanyController extends AbstractController
 {
+    private $companyService;
 
+    /**
+     * CompanyRestController constructor.
+     */
+    public function __construct(CompanyService $companyService)
+    {
+        $this->companyService = $companyService;
+    }
     /**
      * @Route("entreprises/list", name="company_subscribed_index", methods="GET")
      */
@@ -37,6 +47,12 @@ class CompanyController extends AbstractController
      */
     public function show(string $slug)
     {
+        $company = $this->companyService->getCompanyByUrlName($slug);
+        if (!$company) {
+            throw new NotFoundHttpException('Company with url_name ' . $slug . ' does not exist!');
+        } else if ($company->getCompanystatut()->getCode() == "ENC") {
+            throw $this->createNotFoundException("This company does not exist");
+        }
         $titlePage = ucfirst(str_replace('-', ' ', $slug));
         return $this->render('company/show.html.twig', [
             'companyUrlName' => $slug,

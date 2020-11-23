@@ -72,8 +72,4 @@ security:
         - { path: ^/admin/group/show, roles: ROLE_RGROUP }
 
 
-
-
-
-
         - { path: ^/utilisateur/edit, roles: IS_AUTHENTICATED_FULLY }

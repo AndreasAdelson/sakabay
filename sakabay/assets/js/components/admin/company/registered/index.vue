@@ -1,80 +1,88 @@
 <template>
   <div class="container-fluid skb-body">
-    <div class="row my-4">
-      <div class="col-4">
-        <h1 class="fontUbuntu orange-skb">{{ this.$t('company.title_registered') }}</h1>
-      </div>
-      <div class="col-1"></div>
-      <div class="col-6">
-        <b-form-group
-          horizontal
-          class="mb-0"
-        >
-          <b-input-group>
-            <b-form-input
-              v-model="currentFilter"
-              :placeholder="$t('commons.rechercher')"
-              @keydown.enter.native="applyFilter()"
-            />
-            <b-input-group-append>
-              <b-btn
-                :disabled="!currentFilter"
-                @click="applyFilter()"
-              ><i class="fas fa-search"></i></b-btn>
-            </b-input-group-append>
-          </b-input-group>
-        </b-form-group>
+    <div v-show="loading">
+      <div class="loader-container-full">
+        <div class="loader">
+        </div>
       </div>
     </div>
-    <!-- Table -->
-    <b-row>
-      <b-col cols="12">
-        <b-table
-          class="tablestyle"
-          ref="table"
-          :items="refreshData"
-          :fields="table.field"
-          :current-page="pager.currentPage"
-          :per-page="pager.perPage"
-          :busy.sync="table.isBusy"
-          :filter="table.filter"
-          :sort-by.sync="table.sortBy"
-          :sort-desc.sync="table.sortDesc"
-          small
-          bordered
-          responsive
-          fixed
-        >
-          <template v-slot:cell(actions)="data">
-            <b-button-group>
-              <a
-                :href="'/admin/registered/entreprise/show/' + data.value "
-                v-if="canRead"
-              >
-                <b-button><i class="fas fa-eye"></i></b-button>
-              </a>
-              <a
-                v-if="canEdit"
-                :href="'/admin/registered/entreprise/edit/' + data.value "
-                class="mx-1"
-              >
-                <b-button><i class="fas fa-edit"></i></b-button>
-              </a>
-            </b-button-group>
-          </template>
-        </b-table>
-      </b-col>
-    </b-row>
-    <b-row align-h="center">
-      <b-col cols="12">
-        <b-pagination
-          v-model="pager.currentPage"
-          :total-rows="pager.totalRows"
-          :per-page="pager.perPage"
-          align="center"
-        ></b-pagination>
-      </b-col>
-    </b-row>
+    <div>
+      <div class="row my-4">
+        <div class="col-4">
+          <h1 class="fontUbuntu orange-skb">{{ this.$t('company.title_registered') }}</h1>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-6">
+          <b-form-group
+            horizontal
+            class="mb-0"
+          >
+            <b-input-group>
+              <b-form-input
+                v-model="currentFilter"
+                :placeholder="$t('commons.rechercher')"
+                @keydown.enter.native="applyFilter()"
+              />
+              <b-input-group-append>
+                <b-btn
+                  :disabled="!currentFilter"
+                  @click="applyFilter()"
+                ><i class="fas fa-search"></i></b-btn>
+              </b-input-group-append>
+            </b-input-group>
+          </b-form-group>
+        </div>
+      </div>
+      <!-- Table -->
+      <b-row>
+        <b-col cols="12">
+          <b-table
+            class="tablestyle"
+            ref="table"
+            :items="refreshData"
+            :fields="table.field"
+            :current-page="pager.currentPage"
+            :per-page="pager.perPage"
+            :busy.sync="table.isBusy"
+            :filter="table.filter"
+            :sort-by.sync="table.sortBy"
+            :sort-desc.sync="table.sortDesc"
+            small
+            bordered
+            responsive
+            fixed
+          >
+            <template v-slot:cell(actions)="data">
+              <b-button-group>
+                <a
+                  :href="'/admin/registered/entreprise/show/' + data.value "
+                  v-if="canRead"
+                >
+                  <b-button><i class="fas fa-eye"></i></b-button>
+                </a>
+                <a
+                  v-if="canEdit"
+                  :href="'/admin/registered/entreprise/edit/' + data.value "
+                  class="mx-1"
+                >
+                  <b-button><i class="fas fa-edit"></i></b-button>
+                </a>
+              </b-button-group>
+            </template>
+          </b-table>
+        </b-col>
+      </b-row>
+      <b-row align-h="center">
+        <b-col cols="12">
+          <b-pagination
+            v-model="pager.currentPage"
+            :total-rows="pager.totalRows"
+            :per-page="pager.perPage"
+            align="center"
+          ></b-pagination>
+        </b-col>
+      </b-row>
+    </div>
   </div>
 </template>
 
@@ -107,12 +115,14 @@ export default {
           { key: 'statut', label: this.$t('company.table.fields.statut'), thClass: "tableitem" },
           (!this.canDelete && !this.canEdit && !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-6', thClass: "tableitem" },
         ],
-        sortBy: 'name'
-      }
+        sortBy: 'name',
+      },
+      loading: false
     };
   },
   methods: {
     refreshData () {
+      this.loading = true;
       return axios.get("/api/admin/companies", {
         params: {
           filterFields: 'name',
@@ -134,9 +144,11 @@ export default {
           actions: company.id,
         }));
         this.pager.totalRows = parseInt(response.headers['x-total-count']);
+        this.loading = false;
         return items;
       }).catch(error => {
-        console.log(error);
+        this.$handleError(error);
+        this.loading = false;
         return [];
       });
     },

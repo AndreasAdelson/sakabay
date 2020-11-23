@@ -1,6 +1,10 @@
 <template>
   <div class="skb-body container">
     <div v-if="loading">
+      <div class="loader-container-full">
+        <div class="loader">
+        </div>
+      </div>
     </div>
     <div v-else>
       <div
@@ -72,18 +76,18 @@ export default {
   data () {
     return {
       category: null,
-      loading: false
+      loading: true
     }
   },
   async created () {
     if (this.categoryId) {
-      this.loading = true;
       return axios.get('/api/admin/categories/' + this.categoryId)
         .then(response => {
           this.category = response.data;
           this.loading = false;
         }).catch(error => {
-          console.log(error);
+          this.$handleError(error);
+          this.loading = false
         });
     }
   },

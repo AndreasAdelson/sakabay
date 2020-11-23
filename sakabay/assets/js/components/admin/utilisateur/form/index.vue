@@ -1,6 +1,12 @@
 <template>
   <div>
-    <div class="container">
+    <div class="container skb-body">
+      <div v-show="loading">
+        <div class="loader-container-full">
+          <div class="loader">
+          </div>
+        </div>
+      </div>
       <a href="/admin/utilisateur">
         <button
           :title="$t('commons.undo_change')"
@@ -138,6 +144,7 @@ export default {
   ],
   data () {
     return {
+      loading: false,
       formFields: {
         email: null,
         firstName: null,
@@ -160,11 +167,14 @@ export default {
   },
   created () {
     if (this.utilisateurId) {
+      this.loading = true;
       return axios.get("/api/admin/utilisateurs/" + this.utilisateurId)
         .then(response => {
           this.$setEditForm(response.data);
+          this.loading = false;
         }).catch(e => {
           console.log(e);
+          this.loading = false;
         });
     }
   },

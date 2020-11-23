@@ -90,7 +90,8 @@ class Company
      * @Expose
      * @Groups({
      * "api_companystatut",
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_companies"
      * })
      * @var CompanyStatut
      *

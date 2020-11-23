@@ -1,5 +1,11 @@
 <template>
   <div class="container-fluid skb-body">
+    <div v-show="loading">
+      <div class="loader-container-full">
+        <div class="loader">
+        </div>
+      </div>
+    </div>
     <div class="row my-4">
       <div class="col-4">
         <h1 class="fontUbuntu orange-skb">{{ this.$t('role.title') }}</h1>
@@ -147,11 +153,13 @@ export default {
           (!this.canDelete & !this.canEdit & !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-9', thClass: "tableitem" },
         ],
         sortBy: 'code'
-      }
+      },
+      loading: false
     };
   },
   methods: {
     refreshData () {
+      this.loading = true;
       return axios.get("/api/admin/roles", {
         params: {
           filterFields: 'name,code',
@@ -173,9 +181,11 @@ export default {
           actions: role.id,
         }));
         this.pager.totalRows = parseInt(response.headers['x-total-count']);
+        this.loading = false;
         return items;
       }).catch(error => {
-        console.log(error);
+        this.$handleError(error);
+        this.loading = false;
         return [];
       });
     },

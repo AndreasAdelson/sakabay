@@ -1,6 +1,12 @@
 <template>
-  <div class="container">
-    <a href="/">
+  <div class="container skb-body">
+    <div v-show="loading">
+      <div class="loader-container-full">
+        <div class="loader">
+        </div>
+      </div>
+    </div>
+    <a href="/admin/companystatut">
       <button
         title="Annulez les modifications"
         type="button"
@@ -93,18 +99,15 @@ export default {
   ],
   data () {
     return {
+      loading: true,
       API_URL: '/api/admin/companystatuts' + (this.companyStatutId ? `/${this.companyStatutId}` : ''),
-      fonctionsAtCreation: null,
-      fonctions: [],
       formFields: {
         name: null,
         code: null,
-        fonctions: [],
       },
       formErrors: {
         name: [],
         code: [],
-        fonctions: [],
       }
     };
   },
@@ -120,20 +123,15 @@ export default {
   },
   created () {
     let promises = [];
-    promises.push(axios.get('/api/admin/fonctions'));
-    if (this.companyStatutId) {
-      promises.push(axios.get(this.API_URL));
-    }
+    promises.push(axios.get(this.API_URL));
     return Promise.all(promises).then(res => {
-      this.fonctions = res[0].data;
-      if (this.companyStatutId) {
-        let companyStatut = res[1].data;
-        this.$removeFieldsNotInForm(companyStatut, Object.keys(this.formFields));
-        this.$setEditForm(companyStatut);
-      }
-      this.fonctionsAtCreation = _.cloneDeep(this.formFields.fonctions);
+      let companyStatut = res[0].data;
+      this.$removeFieldsNotInForm(companyStatut, Object.keys(this.formFields));
+      this.$setEditForm(companyStatut);
+      this.loading = false;
     }).catch(e => {
-      console.log(e);
+      this.$handleError(e);
+      this.loading = false;
     });
   },
   methods: {

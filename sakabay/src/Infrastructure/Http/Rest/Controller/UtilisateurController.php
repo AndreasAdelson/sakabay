@@ -108,7 +108,6 @@ final class UtilisateurController extends AbstractFOSRestController
         $utilisateur = $this->utilisateurService->getUtilisateur($utilisateurId);
         if (!$utilisateur) {
             throw $this->createNotFoundException('Utilisateur with id ' . $utilisateurId . ' does not exist!');
-            return View::create([], Response::HTTP_NOT_FOUND);
         }
 
         return View::create($utilisateur, Response::HTTP_OK);

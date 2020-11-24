@@ -9388,6 +9388,10 @@ svgo@^1.0.0:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
+swiftmailer-bundle@symfony/swiftmailer-bundle:
+  version "0.0.0"
+  resolved "https://codeload.github.com/symfony/swiftmailer-bundle/tar.gz/933be6a3196fb354615290f53ff7ff61e0bdde58"
+
 symbol-tree@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"

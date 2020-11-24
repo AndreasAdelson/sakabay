@@ -17,6 +17,7 @@
     "nouislider": "^14.6.0",
     "popper.js": "^1.16.1",
     "portal-vue": "^2.1.7",
+    "swiftmailer-bundle": "symfony/swiftmailer-bundle",
     "typescript": "^4.0.2",
     "vee-validate": "^2.1.0-beta.11",
     "vue": "^2.6.11",

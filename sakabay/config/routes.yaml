@@ -56,11 +56,6 @@ role_show:
     methods: [GET, POST]
 
 
-# Routes for validation entreprise mail
-email:
-    path: admin/email
-    controller: App\Infrastructure\Http\Web\Controller\ValidationController::index
-    methods: [GET, POST]
 # Routes for Category object
 category_index:
     path: admin/category

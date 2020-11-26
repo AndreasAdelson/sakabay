@@ -2,6 +2,10 @@
 
 namespace App\Infrastructure\Http\Rest\Controller;
 
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use App\Application\Form\Type\CompanyType;
 use App\Application\Form\Type\CompanyAdminEditType;
 use App\Application\Service\CompanyStatutService;
@@ -20,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Mime\Message;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class CompanyController extends AbstractFOSRestController
@@ -33,7 +38,7 @@ final class CompanyController extends AbstractFOSRestController
     /**
      * CompanyRestController constructor.
      */
-    public function __construct(EntityManagerInterface $entityManager, CompanyService $companyService, CompanyStatutService $companyStatutService, TranslatorInterface $translator, UserPasswordEncoderInterface $encoder)
+    public function __construct(EntityManagerInterface $entityManager, CompanyService $companyService, CompanyStatutService $companyStatutService, TranslatorInterface $translator, UserPasswordEncoderInterface $encoder, MailerInterface $mailer)
     {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
@@ -88,9 +93,11 @@ final class CompanyController extends AbstractFOSRestController
         //TODO Envoie de l'email
 
         $ressourceLocation = $this->generateUrl('home');
-        //Rediriger sur une page expliquant l'envoie de l'email et la validation du formulaire
+
+        $this->sendMail('L\'entreprise ' . $company->getName() . ' son inscription est en cours de validation');
         return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
     }
+
 
     /**
      * @Rest\View(serializerGroups={"api_companies"})
@@ -319,10 +326,39 @@ final class CompanyController extends AbstractFOSRestController
         $this->entityManager->persist($company);
         $this->entityManager->flush($company);
 
+
+        $this->sendMail($company->getName());
         $ressourceLocation = $this->generateUrl('company_registered_index');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 
+    //Méthode denvoie de mail
+    public function sendMail($companyName)
+    {
+        $dsn = $this->getParameter('url');
+        $transport = Transport::fromDsn($dsn);
+        // $transport = Transport::fromDsn('smtp://karisalman@sakabay.com:sakabay2020@smtp.sakabay.com:587');
+        $mailer = new Mailer($transport);
+
+        $email = (new Email())
+            ->from('no-reply@sakabay.com')
+            ->to('salman.kari@docaposte.fr')
+            ->addTo('andreasadelson@gmail.com')
+            ->cc('andreasadelson@gmail.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('L\'Entreprise ' . $companyName . ' est inscrite avec succès ! ')
+            ->text('Bonjour ' . $companyName . ' ,
+
+            Veuilez ne pas répondre car ce mail est un envoie automatique
+
+            Equipe Sakabay vous remercie d\'avance .')
+            // ->html('<p>See Twig integration for better HTML integration!</p>')
+        ;
+
+        $mailer->send($email);
+    }
     /**
      * @Rest\View()
      * @Rest\Delete("admin/companies/{companyId}")

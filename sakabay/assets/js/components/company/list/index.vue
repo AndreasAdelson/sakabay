@@ -104,7 +104,7 @@ export default {
       },
       category: [],
       companies: null,
-      loading: true,
+      loading: false,
     };
   },
   created () {

@@ -80,7 +80,7 @@
                     maxlength="255"
                     class="form-control"
                     v-on:blur="() => {
-                      if (formFields.address.postalCode) {
+                      if (formFields.address.postalCode && formFields.address.postalAddress) {
                         getLongLat();
                       }
                     }"
@@ -111,7 +111,7 @@
                     class="form-control"
                     :placeholder="$t('company.placeholder.postal_code')"
                     v-on:blur="() => {
-                      if (formFields.address.postalAddress) {
+                      if (formFields.address.postalCode && formFields.address.postalAddress) {
                         getLongLat();
                       }
                     }"
@@ -129,22 +129,32 @@
             </div>
           </div>
           <!-- Map row -->
+          <div v-if="loading">
+            <div class="loader3"></div>
+          </div>
           <div
-            class="col-12"
-            v-if="formFields.address.latitude && formFields.address.longitude"
-            style="height:300px"
+            class="row mb-3"
+            v-else-if="formFields.address.latitude && formFields.address.longitude"
           >
-            <v-map
-              :zoom=16
-              :center="[formFields.address.latitude, formFields.address.longitude]"
+            <div
+              class="col-12"
               style="height:300px"
             >
-              <v-marker
-                :draggable="true"
-                :lat-lng.sync="position"
-              ></v-marker>
-              <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tile-layer>
-            </v-map>
+              <v-map
+                :zoom=16
+                :center="[formFields.address.latitude, formFields.address.longitude]"
+                style="height:300px"
+              >
+                <v-marker
+                  :draggable="true"
+                  :lat-lng.sync="position"
+                ></v-marker>
+                <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tile-layer>
+              </v-map>
+            </div>
+            <div class="col-12 warning-message">
+              <span class="fontUbuntu fontSize16 red-skb">{{$t('company.table.fields.address.warning_message')}}</span>
+            </div>
           </div>
           <!-- third row -->
           <div class="row mb-3">
@@ -166,6 +176,7 @@
                   :show-labels="false"
                   label="name"
                   track-by="name"
+                  open-direction="below"
                 >
                 </multiselect>
                 <div
@@ -341,6 +352,7 @@ export default {
   },
   data () {
     return {
+      loading: false,
       API_URL: '/api/companies',
       formFields: {
         name: null,
@@ -388,13 +400,13 @@ export default {
 
     getLongLat () {
       let query = this.formFields.address.postalAddress + ', ' + this.formFields.address.postalCode;
+      this.loading = true;
       return axios.get('https://api-adresse.data.gouv.fr/search/', {
         params: {
           q: query,
           limit: 10
         }
       }).then(response => {
-
         if (response.data.features) {
           this.$set(this.formFields.address, 'longitude', response.data.features[0].geometry.coordinates[0]);
           this.$set(this.formFields.address, 'latitude', response.data.features[0].geometry.coordinates[1]);
@@ -405,9 +417,11 @@ export default {
           this.$set(this.formFields.address, 'longitude', 0);
           this.$set(this.formFields.address, 'latitude', 0);
         }
-        console.log(response);
+        this.loading = false;
       }).catch(e => {
-        console.log(e);
+        this.$handleError(e);
+        this.loading = false;
+
       });
     },
 

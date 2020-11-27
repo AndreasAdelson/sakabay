@@ -103,3 +103,9 @@ category_title_list_page: "List of categories"
 category_title_edit_page: "Edit a category"
 category_title_create_page: "Create a category"
 category_title_show_page: "Detail of category"
+
+#Emails
+email_register_confirmation_subject: "Confirmation of your registration"
+email_register_confirmation_body: "Hello, \n\nYour application for the company « %s », to be referenced on Sakabay is currently being processed.\n Our brand ensures that your company complies with our terms of use.\nYou can now log in and follow the progress of your application on the application using your login and password.\nYour login and password are:\nEmail:%s\nPassword:%s\nWe recommend that you change your password the first time you log in.\n\nThank you for your interest in Sakabay.\n\nThis email is automatic, so please do not reply to it."
+email_register_validation_subject: "Validation of your application"
+email_register_validation_body: "Hello, \n\n It is with pleasure that you announce that the registration of the company « %s » has been validated by our teams.\nWe therefore welcome you within our group with 2 months subscription free. You can now customize your presentation page from this link %s, accessible from the sliding menu of the application.\nThe Sakabay Team wishes you a good day.\n\nThank you for your interest in Sakabay.\n\nThis email is automatic, so please do not reply to it.\n\nThe Sakabay Team."

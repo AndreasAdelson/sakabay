@@ -93,8 +93,12 @@ final class CompanyController extends AbstractFOSRestController
         //TODO Envoie de l'email
 
         $ressourceLocation = $this->generateUrl('home');
+        // $email = $company->getUtilisateur()->getEmail();
+        $email = "andreasadelson@gmail.com";
+        $subject = $this->translator->trans('email_register_confirmation_subject');
+        $bodyMessage = sprintf($this->translator->trans('email_register_confirmation_body'), $company->getName(), $email, $plainPassword);
 
-        $this->sendMail('L\'entreprise ' . $company->getName() . ' son inscription est en cours de validation');
+        $this->sendMail($email, $subject, $bodyMessage);
         return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
     }
 
@@ -326,34 +330,33 @@ final class CompanyController extends AbstractFOSRestController
         $this->entityManager->persist($company);
         $this->entityManager->flush($company);
 
+        // $email = $company->getUtilisateur()->getEmail();
+        $email = "andreasadelson@gmail.com";
+        $subject = $this->translator->trans('email_register_validation_subject');
+        $bodyMessage = sprintf($this->translator->trans('email_register_validation_body'), $company->getName(), $this->generateUrl('home'));
 
-        $this->sendMail($company->getName());
+        $this->sendMail($email, $subject, $bodyMessage);
         $ressourceLocation = $this->generateUrl('company_registered_index');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 
     //Méthode denvoie de mail
-    public function sendMail($companyName)
+    public function sendMail($receiver, $subject, $bodyMessage)
     {
         $dsn = $this->getParameter('url');
         $transport = Transport::fromDsn($dsn);
-        // $transport = Transport::fromDsn('smtp://karisalman@sakabay.com:sakabay2020@smtp.sakabay.com:587');
         $mailer = new Mailer($transport);
 
         $email = (new Email())
             ->from('no-reply@sakabay.com')
-            ->to('salman.kari@docaposte.fr')
-            ->addTo('andreasadelson@gmail.com')
-            ->cc('andreasadelson@gmail.com')
+            ->to($receiver)
+            // ->addTo('andreasadelson@gmail.com')
+            // ->cc('karii.salman@gmail.com')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
-            //->priority(Email::PRIORITY_HIGH)
-            ->subject('L\'Entreprise ' . $companyName . ' est inscrite avec succès ! ')
-            ->text('Bonjour ' . $companyName . ' ,
-
-            Veuilez ne pas répondre car ce mail est un envoie automatique
-
-            Equipe Sakabay vous remercie d\'avance .')
+            ->priority(Email::PRIORITY_HIGH)
+            ->subject($subject)
+            ->text($bodyMessage)
             // ->html('<p>See Twig integration for better HTML integration!</p>')
         ;
 
@@ -411,17 +414,4 @@ final class CompanyController extends AbstractFOSRestController
 
         return $urlName = strtolower(strtr($urlName, $unwanted_array));
     }
-
-    // private function getLongLat()
-    // {
-    //     $ch = curl_init();
-    //     curl_setopt($ch, CURLOPT_URL, 'https://api-adresse.data.gouv.fr/search/?q=rue Julien sulbert 97350');
-    //     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); // Assuming you're requesting JSON
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-    //     $response = curl_exec($ch);
-
-    //     // If using JSON...
-    //     return json_decode($response);
-    // }
 }

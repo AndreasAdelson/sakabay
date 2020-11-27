@@ -236,7 +236,7 @@ export default {
       if (data.length) {
         this.formErrors.utilisateurs = [];
       } else {
-        this.formErrors.utilisateurs = [this.$t('utilisateur_does_not_exist')];
+        this.formErrors.utilisateurs = [this.$t('group.error.utilisateur_does_not_exist')];
       }
       this.loading = false;
     },

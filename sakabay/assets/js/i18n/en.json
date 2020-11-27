@@ -87,6 +87,9 @@
       "code": "Enter a code",
       "name": "Enter a name",
       "utilisateurs": "Fill in the first 3 letters of the surname or first name or last name."
+    },
+    "error": {
+      "utilisateur_does_not_exist": "This user does not exist"
     }
   },
   "company": {
@@ -104,6 +107,7 @@
           "postal_code":"Postal code",
           "latitude": "Latitude",
           "longitude": "Longitude",
+          "warning_message": "If the proposed location is not correct, please move the marker with the mouse to the exact location of your company.",
           "error_geoloc": "Please change the geolocation coordinates as the address given did not automatically determine this data. Thank you for your input :)."
         }
       }

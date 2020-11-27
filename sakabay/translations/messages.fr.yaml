@@ -103,3 +103,9 @@ category_title_list_page: "Liste des categories"
 category_title_edit_page: "Modifier une categorie"
 category_title_create_page: "Créer une categorie"
 category_title_show_page: "Détails d'une categorie"
+
+#Emails
+email_register_confirmation_subject: "Confirmation de votre inscription"
+email_register_confirmation_body: "Bonjour, \n\nVotre candidature pour que l'entreprise « %s », soit référencée sur Sakabay est en cours de traitement.\nNotre enseigne s'assure que votre entreprise respecte bien nos conditions d'utilisations.\nVous pouvez dès à présent vous connectez et suivre l'évolution de votre candidature sur l'application à l'aide de vos identifiants.\nVos identifiants de connection sont les suivants:\nEmail:  %s \nMot de passe:  %s \nNous vous recommandons de modifier votre mot de passe lors de votre première connection.\n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."
+email_register_validation_subject: "Validation de votre candidature"
+email_register_validation_body: "Bonjour, \n\nC'est avec plaisir que vous nous annoncons que l'inscription de l'entreprise « %s » à été validée par nos équipes.\nNous vous souhaitons donc la bienvenue au sein de notre groupe avec 2 mois d'abonnement offert. Vous pouvez dès maintenant personnaliser votre page de présentation depuis ce lien  %s , accessible depuis le menu glissant de l'application.\nL'Equipe Sakabay vous souhaite une bonne journée.\n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."

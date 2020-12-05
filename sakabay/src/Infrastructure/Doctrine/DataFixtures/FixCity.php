@@ -3,14 +3,14 @@
 namespace App\Infrastructure\Doctrine\DataFixtures;
 
 use App\Application\Utils\StringUtils;
-use App\Domain\Model\Company;
+use App\Domain\Model\City;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FixCompany extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
+class FixCity extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     private $container;
 
@@ -29,26 +29,12 @@ class FixCompany extends Fixture implements OrderedFixtureInterface, ContainerAw
         foreach ($lines as $data) {
             list(
                 $name,
-                $numSiret,
-                $urlName,
-                $category,
-                $utilisateur,
-                $companyStatut,
-                $address,
-                $city
             ) = explode(';', trim($data));
 
-            $company = new Company();
-            $company->setName($name);
-            $company->setNumSiret($numSiret);
-            $company->setUrlName($urlName);
-            $company->setCategory($this->getReference('category_' . $category));
-            $company->setUtilisateur($this->getReference('utilisateur_' . $utilisateur));
-            $company->setCompanystatut($this->getReference('companyStatut_' . $companyStatut));
-            $company->setAddress($this->getReference('address_' . $address));
-            $company->setCity($this->getReference('city_' . $city));
-            $manager->persist($company);
-            $this->addReference('company_' . $name, $company);
+            $city = new City();
+            $city->setName($name);
+            $manager->persist($city);
+            $this->addReference('city_' . $name, $city);
         }
 
         $manager->flush();
@@ -61,6 +47,6 @@ class FixCompany extends Fixture implements OrderedFixtureInterface, ContainerAw
      */
     public function getOrder()
     {
-        return 3;
+        return 2;
     }
 }

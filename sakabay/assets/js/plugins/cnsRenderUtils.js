@@ -85,6 +85,16 @@ const CnsRenderUtils = {
       return label.trim();
     }
 
+    Vue.prototype.$getCityLabel = function (city) {
+      let label = '';
+      if (city) {
+        if (city.name) {
+          label += city.name;
+        }
+      }
+      return label.trim();
+    }
+
     /**
      * Print the given error message in the console.
      * @param {Error} error

@@ -44,6 +44,14 @@ App\Domain\Model\Company:
                 name: id_companystatut
                 referencedColumnName: id
                 nullable: false
+        city:
+            targetEntity: City
+            cascade: [persist]
+            inversedBy: company
+            joinColumn:
+                name: id_city
+                referencedColumnName: id
+                nullable: false
     oneToOne:
         utilisateur:
             targetEntity: Utilisateur

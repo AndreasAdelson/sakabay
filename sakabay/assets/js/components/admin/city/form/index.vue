@@ -6,7 +6,7 @@
         </div>
       </div>
     </div>
-    <a href="/admin/category">
+    <a href="/admin/city">
       <button
         title="Annulez les modifications"
         type="button"
@@ -20,48 +20,24 @@
         <div class="register-card w-100 h-100">
           <!-- First row  -->
           <div class="row">
-            <div class="col-6">
+            <div class="col-12">
               <div class="form-group">
                 <fieldset
                   id="name"
                   class="name"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('category.fields.name') }}</label>
+                  <label class="fontUbuntu fontSize14">{{ this.$t('city.fields.name') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
                     name="name"
                     class="form-control"
-                    :placeholder="$t('category.placeholder.name')"
+                    :placeholder="$t('city.placeholder.name')"
                     v-model="formFields.name"
                   >
                   <div
                     v-for="errorText in formErrors.name"
                     :key="'name_' + errorText"
-                  >
-                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-                <fieldset
-                  id="code"
-                  class="code"
-                >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('category.fields.code') }}</label>
-                  <input
-                    v-validate="'required'"
-                    name="code"
-                    type="text"
-                    class="form-control"
-                    :placeholder="$t('category.placeholder.code')"
-                    v-model="formFields.code"
-                  >
-                  <div
-                    v-for="errorText in formErrors.code"
-                    :key="'code_' + errorText"
                   >
                     <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
                   </div>
@@ -75,7 +51,7 @@
                 type="button"
                 class="btn button_skb fontUbuntu"
                 @click="$validateForm()"
-              >{{ this.categoryId ? this.$t('commons.edit') :  this.$t('commons.create')}}</button>
+              >{{ this.cityId ? this.$t('commons.edit') :  this.$t('commons.create')}}</button>
             </div>
           </div>
         </div>
@@ -100,35 +76,32 @@ export default {
   data () {
     return {
       loading: true,
-      API_URL: '/api/admin/categories' + (this.categoryId ? `/${this.categoryId}` : ''),
+      API_URL: '/api/admin/cities' + (this.cityId ? `/${this.cityId}` : ''),
       fonctionsAtCreation: null,
-      fonctions: [],
       formFields: {
         name: null,
-        code: null,
       },
       formErrors: {
         name: [],
-        code: [],
       }
     };
   },
   props: {
-    categoryId: {
+    cityId: {
       type: Number,
       default: null,
     },
   },
   created () {
     let promises = [];
-    if (this.categoryId) {
+    if (this.cityId) {
       promises.push(axios.get(this.API_URL));
     }
     return Promise.all(promises).then(res => {
-      if (this.categoryId) {
-        let category = res[0].data;
-        this.$removeFieldsNotInForm(category, Object.keys(this.formFields));
-        this.$setEditForm(category);
+      if (this.cityId) {
+        let city = res[0].data;
+        this.$removeFieldsNotInForm(city, Object.keys(this.formFields));
+        this.$setEditForm(city);
       }
       this.loading = false;
     }).catch(e => {

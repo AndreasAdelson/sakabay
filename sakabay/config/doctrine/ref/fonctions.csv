@@ -22,4 +22,8 @@ CCATEGORY; Création d'une catégorie
 RCATEGORY; Consultation d'une catégorie
 UCATEGORY; Modification d'une catégorie
 DCATEGORY; Suppression d'une catégorie
+CCITY; Création d'une ville
+RCITY; Consultation d'une ville
+UCITY; Modification d'une ville
+DCITY; Suppression d'une ville
 ADMIN; Administrateur du site

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  {% if cityId is same as("null") %}
+    {{ 'city_title_create_page'|trans }}
+  {% else %}
+    {{ 'city_title_edit_page'|trans }}
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+  {% if cityId is same as("null") %}
+    <h1 class="fontUbuntu orange-skb text-center p-1">{{ 'city_title_create_page'|trans }}</h1>
+  {% else %}
+    <h1 class="fontUbuntu orange-skb text-center p-1">{{ 'city_title_edit_page'|trans }}</h1>
+  {% endif %}
+<form-city :city-id="{{ cityId }}"></form-city>
+{% endblock %}

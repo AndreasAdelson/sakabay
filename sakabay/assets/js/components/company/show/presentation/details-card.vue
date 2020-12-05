@@ -11,11 +11,11 @@
         </div>
         <div class="number-line py-2">
           <i class="fas fa-map-marker-alt"></i>
-          <span class="ml-2 fontHelvetica fontSize16">{{ company.address.postal_address }}, {{ company.address.postal_code }}</span>
+          <span class="ml-2 fontHelvetica fontSize16">{{ company.address.postal_address }}, {{ company.address.postal_code }} {{ company.city.name.toUpperCase() }}</span>
         </div>
         <div class="number-line py-2">
           <i class="fas fa-link"></i>
-          <span class="ml-2 fontHelvetica fontSize16">{{ company.address.postal_address }}, {{ company.address.postal_code }}</span>
+          <span class="ml-2 fontHelvetica fontSize16">{{ company.address.postal_address }}, {{ company.address.postal_code }} {{ company.city.name.toUpperCase() }}</span>
         </div>
       </div>
     </div>

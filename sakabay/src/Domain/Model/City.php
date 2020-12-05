@@ -4,6 +4,7 @@ namespace App\Domain\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -11,19 +12,22 @@ use JMS\Serializer\Annotation\Groups;
 
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
- *
+ * @ORM\Entity(repositoryClass=CityRepository::class)
+ * @UniqueEntity(
+ *     fields={"name"},
+ *     message="Une ville existe déjà avec ce nom"
+ * )
  * @ExclusionPolicy("all")
  *
  */
-class Category
+class City
 {
     /**
      *
      * @var int
      * @Expose
      * @Groups({
-     * "api_categories",
+     * "api_cities",
      * "api_admin_companies"
      * })
      */
@@ -33,21 +37,12 @@ class Category
      * @var string
      * @Expose
      * @Groups({
-     * "api_categories",
+     * "api_cities",
      * "api_companies",
      * "api_admin_companies"
      * })
      */
     private $name;
-
-    /**
-     * @var string
-     * @Expose
-     * @Groups({
-     * "api_categories"
-     * })
-     */
-    private $code;
 
 
     /**
@@ -108,39 +103,18 @@ class Category
     }
 
     /**
-     * Get the value of code
-     * @return  string
+     * @return Collection|City[]
      */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * Set the value of code
-     * @param  string  $code
-     * @return  self
-     */
-    public function setCode(string $code)
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategory(): Collection
+    public function getCity(): Collection
     {
         return $this->fonctions;
     }
 
     /**
      * Get the value of categorys
-     * @return  Categorys[]
+     * @return  City[]
      */
-    public function addCategory(Category $fonction): self
+    public function addCity(City $fonction): self
     {
         if (!$this->fonctions->contains($fonction)) {
             $this->fonctions[] = $fonction;
@@ -151,10 +125,10 @@ class Category
 
     /**
      * Set the value of fonctions
-     * @param  Categorys[]  $fonctions
+     * @param  City[]  $fonctions
      * @return  self
      */
-    public function removeCategory(Category $fonction): self
+    public function removeCity(City $fonction): self
     {
         if ($this->fonctions->contains($fonction)) {
             $this->fonctions->removeElement($fonction);
@@ -162,9 +136,8 @@ class Category
         return $this;
     }
 
-
     /**
-     * @return Collection|Company[]
+     * @return Company[]
      */
     public function getCompany(): Collection
     {
@@ -175,7 +148,7 @@ class Category
     {
         if (!$this->company->contains($company)) {
             $this->company[] = $company;
-            $company->setCategory($this);
+            $company->setCity($this);
         }
 
         return $this;
@@ -186,7 +159,6 @@ class Category
         if ($this->companys->contains($company)) {
             $this->companys->removeElement($company);
         }
-
         return $this;
     }
 }

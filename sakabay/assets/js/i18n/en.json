@@ -16,6 +16,12 @@
     "no": "Non",
     "error_code_message": "Erreur {0}: {1}",
     "error_occured": "An error occured.",
+    "search_button": "Search",
+    "placeholder": {
+      "search": "Whata re you looking for ?",
+      "category": "Select category",
+      "city": "Enter the 3rd letters of a city"
+    },
     "confirm_modal": {
       "validate": {
         "company": {
@@ -102,6 +108,7 @@
         "utilisateur": "User login",
         "category": "Categorie",
         "statut": "Status",
+        "city": "City",
         "address": {
           "postal_address": "Postal address",
           "postal_code":"Postal code",
@@ -123,7 +130,8 @@
       "postal_address": "Postal address",
       "postal_code": "Postal code",
       "latitude": "Latitude",
-      "longitude": "Longitude"
+      "longitude": "Longitude",
+      "city": "City"
     },
     "nav_title": {
       "presentation": "Presentation",

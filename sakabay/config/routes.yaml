@@ -178,3 +178,24 @@ group_show:
     path: admin/group/show/{id}
     controller: App\Infrastructure\Http\Web\Controller\GroupController::show
     methods: [GET, POST]
+
+# Routes for City object
+city_index:
+    path: admin/city
+    controller: App\Infrastructure\Http\Web\Controller\CityController::index
+    methods: [GET]
+
+city_new:
+    path: admin/city/new
+    controller: App\Infrastructure\Http\Web\Controller\CityController::new
+    methods: [GET, POST]
+
+city_edit:
+    path: admin/city/edit/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CityController::edit
+    methods: [GET, POST]
+
+city_show:
+    path: admin/city/show/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CityController::show
+    methods: [GET, POST]

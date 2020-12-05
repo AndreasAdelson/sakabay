@@ -72,10 +72,16 @@
           <div class="col-6">
             <span class="fontPatua fontSize20">{{ $t('company.table.fields.statut') }}</span>
           </div>
+          <div class="col-6">
+            <span class="fontPatua fontSize20">{{ $t('company.table.fields.city') }}</span>
+          </div>
         </div>
         <div class="row mb-2">
           <div class="col-6">
             <span class="fontHelveticaOblique fontSize18">{{ company.companystatut.name }}</span>
+          </div>
+          <div class="col-6">
+            <span class="fontHelveticaOblique fontSize18">{{ company.city.name }}</span>
           </div>
         </div>
 

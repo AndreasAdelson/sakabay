@@ -80,7 +80,7 @@
                     maxlength="255"
                     class="form-control"
                     v-on:blur="() => {
-                      if (formFields.address.postalCode && formFields.address.postalAddress) {
+                      if (formFields.address.postalCode && formFields.address.postalAddress && formFields.city) {
                         getLongLat();
                       }
                     }"
@@ -111,7 +111,7 @@
                     class="form-control"
                     :placeholder="$t('company.placeholder.postal_code')"
                     v-on:blur="() => {
-                      if (formFields.address.postalCode && formFields.address.postalAddress) {
+                      if (formFields.address.postalCode && formFields.address.postalAddress && formFields.city) {
                         getLongLat();
                       }
                     }"
@@ -158,13 +158,40 @@
           </div>
           <!-- third row -->
           <div class="row mb-3">
-            <div class="col-12">
-              <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.category') }}</label>
-
+            <div class="col-6">
+              <fieldset
+                id="city"
+                class="city"
+              >
+                <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.city') }}</label>
+                <autocomplete
+                  ref="autocomplete"
+                  :min="2"
+                  :debounce="500"
+                  :on-should-render-child="$getCityLabel"
+                  :on-select="setCity"
+                  :placeholder="$t('company.placeholder.city')"
+                  param="autocomplete"
+                  url="/api/admin/cities"
+                  anchor="label"
+                  v-model="formFields.city"
+                  :classes="{input: 'form-control'}"
+                />
+                <div
+                  v-for="errorText in formErrors.city"
+                  :key="'city_' + errorText"
+                >
+                  <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                </div>
+              </fieldset>
+            </div>
+            <div class="col-6">
               <fieldset
                 id="category"
                 class="category"
               >
+                <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.category') }}</label>
+
                 <multiselect
                   v-validate="'required'"
                   v-model="formFields.category"
@@ -336,13 +363,13 @@
 </template>
 <script>
 import axios from 'axios';
+import Autocomplete from 'vue2-autocomplete-js';
 import validatorRulesMixin from 'mixins/validatorRulesMixin';
 import _ from 'lodash';
 import adminFormMixin from 'mixins/adminFormMixin';
-import DualList from 'components/commons/dual-list';
 export default {
   components: {
-    DualList
+    Autocomplete
   },
   mixins: [
     validatorRulesMixin,
@@ -360,6 +387,7 @@ export default {
         utilisateur: new Object(),
         address: new Object(),
         category: null,
+        city: new Object()
       },
       position: {
         lng: null,
@@ -373,6 +401,7 @@ export default {
         email: [],
         imageProfil: [],
         category: [],
+        city: [],
         postalAddress: [],
         postalCode: []
       },
@@ -399,11 +428,13 @@ export default {
     },
 
     getLongLat () {
-      let query = this.formFields.address.postalAddress + ', ' + this.formFields.address.postalCode;
+      let query = this.formFields.address.postalAddress + ' ' + this.formFields.city;
+      let postalCode = this.formFields.address.postalCode;
       this.loading = true;
       return axios.get('https://api-adresse.data.gouv.fr/search/', {
         params: {
           q: query,
+          postcode: postalCode,
           limit: 10
         }
       }).then(response => {
@@ -423,6 +454,14 @@ export default {
         this.loading = false;
 
       });
+    },
+
+    setCity (city) {
+      if (this.formFields.address.postalAddress && this.formFields.address.postalCode) {
+        this.getLongLat();
+      }
+      this.formFields.city = city;
+      this.$refs.autocomplete.setValue(city.name);
     },
 
     submitForm () {

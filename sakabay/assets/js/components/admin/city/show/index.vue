@@ -17,13 +17,13 @@
         <div class="col-6 justify-content-end">
           <a
             class="float-right"
-            :href="'/admin/category/edit/' + categoryId"
+            :href="'/admin/city/edit/' + cityId"
           >
             <b-button class="button_skb">{{ this.$t('commons.edit') }}</b-button>
           </a>
         </div>
       </div>
-      <a href="/admin/category">
+      <a href="/admin/city">
         <button
           :title="$t('commons.go_back')"
           type="button"
@@ -35,24 +35,17 @@
       <div class="register-card mt-3 w-100 h-100">
 
         <div class="row">
-          <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('category.fields.name') }}</span>
-          </div>
-          <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('category.fields.code') }}</span>
+          <div class="col-12">
+            <span class="fontPatua fontSize20">{{ $t('city.fields.name') }}</span>
           </div>
         </div>
         <div class="row mb-2">
-          <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.category.name.toUpperCase() }}</span>
-          </div>
-          <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.category.code }}</span>
+          <div class="col-12">
+            <span class="fontHelveticaOblique fontSize18">{{ this.city.name.toUpperCase() }}</span>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 <script>
@@ -64,7 +57,7 @@ export default {
     Avatar
   },
   props: {
-    categoryId: {
+    cityId: {
       type: Number,
       default: null
     },
@@ -75,15 +68,15 @@ export default {
   },
   data () {
     return {
-      category: null,
+      city: null,
       loading: true
     }
   },
   async created () {
-    if (this.categoryId) {
-      return axios.get('/api/admin/categories/' + this.categoryId)
+    if (this.cityId) {
+      return axios.get('/api/admin/cities/' + this.cityId)
         .then(response => {
-          this.category = response.data;
+          this.city = response.data;
           this.loading = false;
         }).catch(error => {
           this.$handleError(error);

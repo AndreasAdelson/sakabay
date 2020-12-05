@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'city_title_show_page'|trans }}{% endblock %}
+
+{% block body %}
+    <show-city
+    :city-id="{{ cityId }}"
+    :can-edit="{{ canEdit|json_encode }}"
+    ></show-city>
+{% endblock %}

@@ -4,7 +4,7 @@
       <div class="container">
 
         <div class="row pt-5 pb-3">
-          <div class="col-4">
+          <div class="col-3">
             <b-form-group
               horizontal
               class="mb-0"
@@ -18,13 +18,13 @@
               </b-input-group>
             </b-form-group>
           </div>
-          <div class="col-4">
+          <div class="col-3">
             <multiselect
               v-validate="'required'"
               v-model="filters.category"
               :options="category"
               name="category"
-              placeholder="Selectionner categorie"
+              :placeholder="$t('commons.placeholder.category')"
               :searchable="false"
               :close-on-select="false"
               :show-labels="false"
@@ -33,11 +33,40 @@
             >
             </multiselect>
           </div>
-          <div class="col-4">
+          <div class="col-3">
+            <b-form-group
+              horizontal
+              class="mb-0"
+            >
+              <b-input-group>
+                <autocomplete
+                  ref="autocomplete"
+                  :min="3"
+                  :debounce="500"
+                  :on-should-render-child="$getCityLabel"
+                  :on-select="setCity"
+                  :placeholder="$t('commons.placeholder.city')"
+                  :on-blur="resetCity"
+                  param="autocomplete"
+                  url="/api/admin/cities"
+                  anchor="label"
+                  style="width:85%"
+                  :classes="{input: 'form-control'}"
+                />
+                <b-input-group-append>
+                  <b-btn
+                    disabled
+                    style="height:min-content"
+                  ><i class="fas fa-map-marker-alt"></i></b-btn>
+                </b-input-group-append>
+              </b-input-group>
+            </b-form-group>
+          </div>
+          <div class="col-2">
             <b-button
-              :disabled="!filters.filter && !filters.category"
+              :disabled="!filters.filter && !filters.category && !filters.city"
               @click="applyFilter()"
-              class="w-100 h-100"
+              class="w-100"
             ><span class="mr-3">{{ $t('commons.search_button') }}</span><i class="fas fa-search"></i></b-button>
           </div>
         </div>
@@ -75,10 +104,12 @@
 import axios from 'axios';
 import searchMixin from 'mixins/searchMixin';
 import CompanyCard from './company-card';
+import Autocomplete from 'vue2-autocomplete-js';
 
 export default {
   components: {
-    CompanyCard
+    CompanyCard,
+    Autocomplete
   },
   mixins: [
     searchMixin,
@@ -97,6 +128,7 @@ export default {
         currentPage: 1,
         perPage: 10,
         codeStatut: 'VAL',
+        city: null
       },
       pager: {
         pageOptions: [10, 50, 100],
@@ -129,6 +161,15 @@ export default {
         this.loading = false;
       });
     },
+    setCity (city) {
+      this.filters.city = city;
+      this.$refs.autocomplete.setValue(city.name);
+    },
+    resetCity () {
+      if (!this.$refs.autocomplete.value) {
+        this.filters.city = null;
+      }
+    }
   },
 }
 </script>

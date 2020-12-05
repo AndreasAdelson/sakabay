@@ -18,7 +18,9 @@
     "error_occured": "Une erreur est servenue.",
     "search_button": "Rechercher",
     "placeholder": {
-      "search": "Que recherchez-vous ?"
+      "search": "Que recherchez-vous ?",
+      "category": "Filtrer par categorie",
+      "city": "Filtrer par ville"
     },
     "confirm_modal": {
       "validate": {
@@ -107,6 +109,7 @@
         "utilisateur": "Pseudo utilisateur",
         "category": "Categorie",
         "statut": "Statut",
+        "city": "Ville",
         "address": {
           "postal_address": "Adresse postale",
           "postal_code":"Code postal",
@@ -128,7 +131,8 @@
       "postal_address": "Adresse postale",
       "postal_code": "Code postal",
       "latitude": "Latitude",
-      "longitude": "Longitude"
+      "longitude": "Longitude",
+      "city": "Ville"
     },
     "nav_title": {
       "presentation": "Présentation",
@@ -159,6 +163,15 @@
     "placeholder": {
       "name": "Renseignez un nom d'une catégorie",
       "code": "Renseignez un Code d'une catégorie"
+    }
+  },
+  "city": {
+    "title": "Liste des villes",
+    "fields": {
+      "name": "Nom de la ville"
+    },
+    "placeholder": {
+      "name": "Renseignez le nom d'une ville"
     }
   },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",

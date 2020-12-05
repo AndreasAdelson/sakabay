@@ -50,7 +50,8 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
         $currentPage = 1,
         $perPage = PHP_INT_MAX,
         $codeStatut = '',
-        $category = ''
+        $category = '',
+        $city = ''
     ) {
         $qb = $this->createQueryBuilder('c');
         if (!empty($codeStatut)) {
@@ -69,6 +70,11 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
             $qb->leftJoin('c.category', 'category')
                 ->andWhere('category.id = :categoryId')
                 ->setParameter('categoryId', $category);
+        }
+        if (!empty($city)) {
+            $qb->leftJoin('c.city', 'city')
+                ->andWhere('city.id = :cityId')
+                ->setParameter('cityId', $city);
         }
         if (!empty($sortBy)) {
             $qb->orderBy('c.' . $sortBy, $descending ? 'DESC' : 'ASC');

@@ -14,6 +14,7 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 class CompanyAdminEditType extends AbstractType
@@ -57,6 +58,16 @@ class CompanyAdminEditType extends AbstractType
                 'translator' => $translator,
                 'required' => true,
                 'by_reference' => false
+            ])
+            ->add('city', EntityType::class, [
+                'class' => 'App:City',
+                'constraints' => [
+                    new NotNull([
+                        'message' => $translator->trans('error_message_field_not_empty'),
+                    ]),
+                ],
+                'required' => true,
+                'multiple' => false
             ]);
     }
 

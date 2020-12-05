@@ -59,6 +59,9 @@ import CompanyRegisteredShow from './components/admin/company/registered/show';
 import CompanyAdminForm from './components/admin/company/form';
 import CompanyListing from './components/company/list';
 import CompanyShow from './components/company/show';
+import FormCity from './components/admin/city/form';
+import ShowCity from './components/admin/city/show';
+import ListCity from './components/admin/city';
 import 'utils/logger';
 
 Vue.use(BootstrapVue);
@@ -119,7 +122,10 @@ new Vue({
     CompanyAdminForm,
     CompanyRegisteredShow,
     CompanyListing,
-    CompanyShow
+    CompanyShow,
+    ShowCity,
+    ListCity,
+    FormCity
   }
 });
 

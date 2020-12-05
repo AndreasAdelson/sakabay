@@ -108,6 +108,16 @@ class Company
      */
     private $address;
 
+    /**
+     * @var City
+     * @Expose
+     * @Groups({
+     * "api_companies",
+     * "api_admin_companies"
+     * })
+     */
+    private $city;
+
     public function __construct()
     {
     }
@@ -242,6 +252,27 @@ class Company
     public function setAddress(?Address $address)
     {
         $this->address = $address;
+        return $this;
+    }
+
+    /**
+     *
+     * @return  City
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     *
+     * @param  City
+     *
+     * @return  self
+     */
+    public function setCity(City $city)
+    {
+        $this->city = $city;
         return $this;
     }
 }

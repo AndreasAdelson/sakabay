@@ -11,6 +11,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\NotNull;
 
 class CompanyType extends AbstractType
@@ -50,6 +51,18 @@ class CompanyType extends AbstractType
                 'constraints' => [new Valid()],
                 'translator' => $translator,
                 'required' => true,
+                'by_reference' => true
+            ])
+            ->add('city', EntityType::class, [
+                'by_reference' => false,
+                'class' => 'App:City',
+                'constraints' => [
+                    new NotNull([
+                        'message' => $translator->trans('error_message_field_not_empty'),
+                    ]),
+                ],
+                'required' => true,
+                'multiple' => false
             ]);
     }
 

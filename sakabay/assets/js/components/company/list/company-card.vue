@@ -17,7 +17,7 @@
               <div class="row">
                 <div class="col-12">
                   <i class="fas fa-map-marker-alt orange-login-skb"></i>
-                  <span class="fontPatua fontSize14"> Ville </span>
+                  <span class="fontPatua fontSize14"> {{ company.city.name }} </span>
                 </div>
               </div>
               <div class="row">

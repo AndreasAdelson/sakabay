@@ -126,7 +126,7 @@
                 </fieldset>
               </div>
             </div>
-            <!-- Third row -->
+            <!-- Postal Address and code -->
             <div class="row">
               <div class="col-6">
                 <div class="form-group">
@@ -173,6 +173,37 @@
                     <div
                       v-for="errorText in formErrors.postal_code"
                       :key="'name_' + errorText"
+                    >
+                      <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+            <!-- City -->
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <fieldset
+                    id="city"
+                    class="city"
+                  >
+                    <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.city') }}</label>
+                    <autocomplete
+                      ref="autocomplete"
+                      :min="2"
+                      :debounce="500"
+                      :on-should-render-child="$getCityLabel"
+                      :on-select="setCity"
+                      :placeholder="$t('company.placeholder.city')"
+                      param="autocomplete"
+                      url="/api/admin/cities"
+                      anchor="label"
+                      :classes="{input: 'form-control'}"
+                    />
+                    <div
+                      v-for="errorText in formErrors.city"
+                      :key="'city_' + errorText"
                     >
                       <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
                     </div>
@@ -273,8 +304,12 @@
 import axios from 'axios';
 import _ from 'lodash';
 import validatorRulesMixin from 'mixins/validatorRulesMixin';
+import Autocomplete from 'vue2-autocomplete-js';
 import adminFormMixin from 'mixins/adminFormMixin';
 export default {
+  components: {
+    Autocomplete
+  },
   mixins: [
     validatorRulesMixin,
     adminFormMixin
@@ -298,6 +333,7 @@ export default {
         category: null,
         url_name: null,
         address: {},
+        city: {},
         validated: this.isValidated
       },
       formErrors: {
@@ -308,7 +344,8 @@ export default {
         postalCode: [],
         postalAddress: [],
         latitude: [],
-        longitude: []
+        longitude: [],
+        city: []
       },
       category: [],
       loading: true,
@@ -323,13 +360,17 @@ export default {
       let company = res[1].data;
       this.$removeFieldsNotInForm(company, Object.keys(this.formFields));
       this.$setEditForm(company);
+      this.$refs.autocomplete.setValue(company.city.name);
       this.loading = false;
     }).catch(e => {
       this.$handleError(e);
     }).then(() => this.loading = false);
   },
   methods: {
-
+    setCity (city) {
+      this.formFields.city = city;
+      this.$refs.autocomplete.setValue(city.name);
+    },
   },
   computed: {
 

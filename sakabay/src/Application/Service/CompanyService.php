@@ -59,6 +59,8 @@ class CompanyService
      * @param string $filterText
      * @param int    $currentPage
      * @param int    $perPage
+     * @param int    $category
+     * @param int    $city
      *
      * @return Pagerfanta
      */
@@ -70,9 +72,10 @@ class CompanyService
         $currentPage = 1,
         $perPage = PHP_INT_MAX ? PHP_INT_MAX : 10,
         $codeStatut = '',
-        $category = ''
+        $category = '',
+        $city = ''
     ) {
         return $this->companyRepository
-            ->getPaginatedList($sortBy, $descending, $filterFields, $filterText, $currentPage, $perPage, $codeStatut, $category);
+            ->getPaginatedList($sortBy, $descending, $filterFields, $filterText, $currentPage, $perPage, $codeStatut, $category, $city);
     }
 }

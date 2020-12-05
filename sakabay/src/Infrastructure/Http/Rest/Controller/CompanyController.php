@@ -107,7 +107,7 @@ final class CompanyController extends AbstractFOSRestController
      * @Rest\View(serializerGroups={"api_companies"})
      * @Rest\Get("/companies")
      *
-     * - - - - - - - - - - - - Query group for paginated admin list - - - - - - - - - - - - -
+     * - - - - - - - - - - - - Query group for paginated list view - - - - - - - - - - - - -
      * Retrieves sorted list of all companies
      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      * @QueryParam(name="filterFields",
@@ -138,10 +138,13 @@ final class CompanyController extends AbstractFOSRestController
      *             default="",
      *             description="Statut d'une entreprise"
      * )
-     *
      * @QueryParam(name="category",
      *             default="",
      *             description="Identifiant d'une catégorie"
+     * )
+     * @QueryParam(name="city",
+     *             default="",
+     *             description="Identifiant d'une ville"
      * )
      * @return View
      */
@@ -156,10 +159,10 @@ final class CompanyController extends AbstractFOSRestController
         $perPage = $paramFetcher->get('perPage');
         $codeStatut = $paramFetcher->get('codeStatut');
         $category = $paramFetcher->get('category');
-
+        $city = $paramFetcher->get('city');
 
         $pager = $this->companyService
-            ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage, $codeStatut, $category);
+            ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage, $codeStatut, $category, $city);
         $companies = $pager->getCurrentPageResults();
         $nbResults = $pager->getNbResults();
         $datas = iterator_to_array($companies);

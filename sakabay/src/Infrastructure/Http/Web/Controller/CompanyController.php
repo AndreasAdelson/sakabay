@@ -4,9 +4,7 @@ namespace App\Infrastructure\Http\Web\Controller;
 
 use App\Application\Service\CompanyService;
 use App\Domain\Model\Company;
-use App\Infrastructure\Repository\CompanyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

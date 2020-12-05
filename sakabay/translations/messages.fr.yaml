@@ -16,17 +16,18 @@ recruit: "Nous recrutons"
 #sidebar-menu
 menu_admin_actions: "Actions admin"
 menu_role_actions: "Gestion des droits"
-menu_all_role: Entités Rôles
-menu_all_group: Entité Groupes
-menu_all_user: Entité Utilisateurs
-menu_all_function: Entité Fonctions
-menu_all_categories: Entité Catégories
+menu_all_role: Liste Rôles
+menu_all_group: Liste Groupes
+menu_all_user: Liste Utilisateurs
+menu_all_function: Liste Fonctions
+menu_all_categories: Liste Catégories
+menu_all_cities: Liste Villes
 menu_company_actions: Actions entreprise
 menu_company_page: Ma page de présentation
 menu_management_company: Gestion des entreprises
 menu_subscribed_company: Entreprises
 menu_registered_company: Inscriptions
-menu_all_companustatus: Entité statut des entreprises
+menu_all_companustatus: Liste statut des entreprises
 
 #form-user
 login_placeholder: "Pseudonyme"
@@ -103,6 +104,12 @@ category_title_list_page: "Liste des categories"
 category_title_edit_page: "Modifier une categorie"
 category_title_create_page: "Créer une categorie"
 category_title_show_page: "Détails d'une categorie"
+
+#City's pages
+city_title_list_page: "Liste des villes"
+city_title_edit_page: "Modifier une ville"
+city_title_create_page: "Créer une ville"
+city_title_show_page: "Détails d'une ville"
 
 #Emails
 email_register_confirmation_subject: "Confirmation de votre inscription"

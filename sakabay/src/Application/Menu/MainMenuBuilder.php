@@ -34,6 +34,10 @@ class MainMenuBuilder
                     "route" => "category_index",
                     "roles" => ["ROLE_ADMIN"]
                 ],
+                "menu_all_cities" => [
+                    "route" => "city_index",
+                    "roles" => ["ROLE_ADMIN"]
+                ],
                 "menu_all_companustatus" => [
                     "route" => "company_statut_index",
                     "roles" => ["ROLE_ADMIN"]

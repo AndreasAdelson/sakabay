@@ -27,7 +27,7 @@
                     id="name"
                     class="name"
                   >
-                    <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.name') }}</label>
+                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.name') }}</label>
                     <input
                       v-validate="'required'"
                       type="text"
@@ -40,7 +40,7 @@
                       v-for="errorText in formErrors.name"
                       :key="'name_' + errorText"
                     >
-                      <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                     </div>
                   </fieldset>
                 </div>
@@ -51,7 +51,7 @@
                     id="numSiret"
                     class="numSiret"
                   >
-                    <label class="fontUbuntu fontSize14">{{ this.$t('company.fields.num_siret') }}</label>
+                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.fields.num_siret') }}</label>
                     <input
                       v-validate="'required'"
                       name="numSiret"
@@ -65,7 +65,7 @@
                       v-for="errorText in formErrors.numSiret"
                       :key="'code_' + errorText"
                     >
-                      <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                     </div>
                   </fieldset>
                 </div>
@@ -79,7 +79,7 @@
                     id="url_name"
                     class="url_name"
                   >
-                    <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.url_name') }}</label>
+                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.url_name') }}</label>
                     <input
                       v-validate="'required'"
                       type="text"
@@ -92,7 +92,7 @@
                       v-for="errorText in formErrors.url_name"
                       :key="'url_name_' + errorText"
                     >
-                      <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                     </div>
                   </fieldset>
                 </div>
@@ -102,7 +102,7 @@
                   id="category"
                   class="category"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.category') }}</label>
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.category') }}</label>
 
                   <multiselect
                     v-validate="'required'"
@@ -121,7 +121,7 @@
                     v-for="errorText in formErrors.category"
                     :key="'category_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -134,7 +134,7 @@
                     id="postalAddress"
                     class="postalAddress"
                   >
-                    <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.address.postal_address') }}</label>
+                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_address') }}</label>
                     <input
                       v-validate="'required'"
                       name="postalAddress"
@@ -148,7 +148,7 @@
                       v-for="errorText in formErrors.postal_address"
                       :key="'code_' + errorText"
                     >
-                      <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                     </div>
                   </fieldset>
                 </div>
@@ -160,7 +160,7 @@
                     id="postalCode"
                     class="postalCode"
                   >
-                    <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.address.postal_code') }}</label>
+                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_code') }}</label>
                     <input
                       v-validate="'required'"
                       type="text"
@@ -174,7 +174,7 @@
                       v-for="errorText in formErrors.postal_code"
                       :key="'name_' + errorText"
                     >
-                      <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                     </div>
                   </fieldset>
                 </div>
@@ -188,7 +188,7 @@
                     id="city"
                     class="city"
                   >
-                    <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.city') }}</label>
+                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.city') }}</label>
                     <autocomplete
                       ref="autocomplete"
                       :min="2"
@@ -205,7 +205,7 @@
                       v-for="errorText in formErrors.city"
                       :key="'city_' + errorText"
                     >
-                      <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                     </div>
                   </fieldset>
                 </div>
@@ -220,7 +220,7 @@
                     id="latitude"
                     class="latitude"
                   >
-                    <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.address.latitude') }}</label>
+                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.latitude') }}</label>
                     <input
                       v-validate="'required'"
                       name="latitude"
@@ -236,7 +236,7 @@
                       v-for="errorText in formErrors.latitude"
                       :key="'code_' + errorText"
                     >
-                      <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                     </div>
                   </fieldset>
                 </div>
@@ -248,7 +248,7 @@
                     id="longitude"
                     class="longitude"
                   >
-                    <label class="fontUbuntu fontSize14">{{ this.$t('company.table.fields.address.longitude') }}</label>
+                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.longitude') }}</label>
                     <input
                       v-validate="'required'"
                       type="text"
@@ -264,7 +264,7 @@
                       v-for="errorText in formErrors.longitude"
                       :key="'name_' + errorText"
                     >
-                      <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                     </div>
                   </fieldset>
                 </div>
@@ -289,7 +289,7 @@
               <div class="col-6 offset-3">
                 <button
                   type="button"
-                  class="btn button_skb fontUbuntu"
+                  class="btn button_skb fontUbuntuItalic"
                   @click="$validateForm()"
                 >{{ this.$t('commons.edit') }}</button>
               </div>

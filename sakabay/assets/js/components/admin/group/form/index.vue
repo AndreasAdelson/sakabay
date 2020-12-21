@@ -26,7 +26,7 @@
                   id="name"
                   class="name"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('group.fields.name') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('group.fields.name') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
@@ -39,7 +39,7 @@
                     v-for="errorText in formErrors.name"
                     :key="'name_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -50,7 +50,7 @@
                   id="code"
                   class="code"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('group.fields.code') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('group.fields.code') }}</label>
                   <input
                     v-validate="'required'"
                     name="code"
@@ -63,7 +63,7 @@
                     v-for="errorText in formErrors.code"
                     :key="'code_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -75,7 +75,7 @@
               id="roles"
               class="col-12 roles"
             >
-              <label class="fontUbuntu fontSize16">{{ $t('group.fields.roles') }}</label>
+              <label class="fontUbuntuItalic fontSize16">{{ $t('group.fields.roles') }}</label>
               <dual-list
                 v-if="rolesAtCreation !== null"
                 :items="roles"
@@ -94,7 +94,7 @@
                 :key="'roles_' + errorText"
                 class="line-height-1"
               >
-                <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
               </div>
             </fieldset>
           </div>
@@ -103,7 +103,7 @@
               id="utilisateurs"
               class="col-12 utilisateurs"
             >
-              <label class="fontUbuntu fontSize16">{{ $t('group.fields.utilisateurs') }}</label>
+              <label class="fontUbuntuItalic fontSize16">{{ $t('group.fields.utilisateurs') }}</label>
               <autocomplete
                 ref="autocomplete"
                 :min="3"
@@ -129,7 +129,7 @@
                 :key="'utilisateurs_' + errorText"
                 class="line-height-1"
               >
-                <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
               </div>
             </fieldset>
             <user-card
@@ -144,7 +144,7 @@
             <div class="col-6 offset-3">
               <button
                 type="button"
-                class="btn button_skb fontUbuntu"
+                class="btn button_skb fontUbuntuItalic"
                 @click="$validateForm()"
               >{{ this.groupId ? this.$t('commons.edit') :  this.$t('commons.create')}}</button>
             </div>

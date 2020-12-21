@@ -15,6 +15,7 @@ recruit: "We recruit"
 
 #sidebar-menu
 menu_admin_actions: "Admin actions"
+menu_user_actions: "User actions"
 menu_role_actions: "Right Management"
 menu_all_role: Roles list
 menu_all_group: Groups list
@@ -28,6 +29,8 @@ menu_management_company: Company Management
 menu_subscribed_company: Companies
 menu_registered_company: Register
 menu_all_companustatus: Company Status page
+dashboard: "Dashboard"
+settings: "Settings"
 
 #form-user
 login_placeholder: "Username"

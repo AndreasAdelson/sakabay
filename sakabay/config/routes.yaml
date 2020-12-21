@@ -23,6 +23,10 @@ user_edit_index:
     controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::editUser
     methods: [POST, GET]
 
+dasboard:
+    path: /dashboard
+    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::dashboard
+    methods: [GET]
 # Routes for Fonction object
 fonction_index:
     path: admin/fonction

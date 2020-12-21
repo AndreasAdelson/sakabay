@@ -15,6 +15,7 @@ recruit: "Nous recrutons"
 
 #sidebar-menu
 menu_admin_actions: "Actions admin"
+menu_user_actions: "Actions utilisateur"
 menu_role_actions: "Gestion des droits"
 menu_all_role: Liste Rôles
 menu_all_group: Liste Groupes
@@ -28,6 +29,8 @@ menu_management_company: Gestion des entreprises
 menu_subscribed_company: Entreprises
 menu_registered_company: Inscriptions
 menu_all_companustatus: Liste statut des entreprises
+dashboard: "Tableau de bord"
+settings: "Paramètres"
 
 #form-user
 login_placeholder: "Pseudonyme"

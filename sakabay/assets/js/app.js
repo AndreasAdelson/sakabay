@@ -11,7 +11,6 @@ require('@fortawesome/fontawesome-free/js/all.js');
 require('vue2-autocomplete-js/dist/style/vue2-autocomplete.css');
 import 'es6-promise/auto';
 import 'bootstrap';
-import 'babel-polyfill';
 
 
 import $ from 'jquery';
@@ -62,6 +61,7 @@ import CompanyShow from './components/company/show';
 import FormCity from './components/admin/city/form';
 import ShowCity from './components/admin/city/show';
 import ListCity from './components/admin/city';
+import Dashboard from './components/utilisateur/dashboard';
 import 'utils/logger';
 
 Vue.use(BootstrapVue);
@@ -125,7 +125,8 @@ new Vue({
     CompanyShow,
     ShowCity,
     ListCity,
-    FormCity
+    FormCity,
+    Dashboard
   }
 });
 

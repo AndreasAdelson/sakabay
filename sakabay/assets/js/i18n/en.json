@@ -164,6 +164,28 @@
       "code": "Enter code number"
     }
   },
+  "city": {
+    "title": "City list",
+    "fields": {
+      "name": "Name of the city"
+    },
+    "placeholder": {
+      "name": "Enter a city"
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "recent_activity": "Recent activity",
+    "link": {
+      "n_company": "Your company | Your company | Your companies",
+      "company": "Company(ies)",
+      "subscription": "Subscriptions",
+      "recruit": "Recruit (HR)",
+      "opportunity": "Opportunity",
+      "nomination": "Nominations",
+      "papers": "CV & Cover letter"
+    }
+  },
   "error_message_required": "This field is mandatory. Thank you for filling it in.",
   "error_message_required_login": "The size of your login must not be less than 5 characters and not more than 10 characters.",
   "error_message_email": "Please enter a valid email",

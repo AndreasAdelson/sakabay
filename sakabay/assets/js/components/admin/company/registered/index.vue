@@ -9,7 +9,7 @@
     <div>
       <div class="row my-4">
         <div class="col-4">
-          <h1 class="fontUbuntu orange-skb">{{ this.$t('company.title_registered') }}</h1>
+          <h1 class="fontUbuntuItalic orange-skb">{{ this.$t('company.title_registered') }}</h1>
         </div>
         <div class="col-1"></div>
         <div class="col-6">

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'dashboard'|trans }}{% endblock %}
+
+{% block body %}
+    <dashboard
+    :utilisateur-id="{{ utilisateurId }}"
+    ></dashboard>
+{% endblock %}

@@ -74,6 +74,22 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
+    /**
+     * Cette route est celle qui permet d'accéder à son tableau de bord'
+     * @Route("/dashboard", name="dashboard")
+     */
+    public function dashboard()
+    {
+        #Check si l'user est connecté sinon redirige vers l'authentification
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        } else {
+        }
+        return $this->render('utilisateur/dashboard.html.twig', [
+            'utilisateurId' => $this->getUser()->getId(),
+        ]);
+    }
+
     private function urlPrecedente()
     {
         $urlPrecedente = "/";

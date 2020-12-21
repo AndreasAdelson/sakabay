@@ -15,10 +15,10 @@
           />
           <div class="header-main-info">
             <div class="company-name">
-              <h1 class="fontSize32 fontHelveticaBold m-0"> {{ company.name }} </h1>
+              <h1 class="fontSize32 fontPoppins m-0"> {{ company.name }} </h1>
             </div>
             <div class="activity-domain">
-              <span class="fontSize18 fontHelvetica">{{ company.category.name }}</span>
+              <span class="fontSize18 fontAlice">{{ company.category.name }}</span>
             </div>
           </div>
         </div>
@@ -30,19 +30,19 @@
         <div class="col-12">
           <a
             href="#presentation"
-            class="fontHelvetica"
+            class="fontPoppins"
             :class="presentationActive ? 'navigation-link-active': 'navigation-link'"
             @click="activePresentation()"
           >{{$t("company.nav_title.presentation")}}</a>
           <a
             href="#jobOffers"
-            class="fontHelvetica"
+            class="fontPoppins"
             :class="jobOfferActive ? 'navigation-link-active': 'navigation-link'"
             @click="activeJobOffer()"
           >{{$t("company.nav_title.job_offers")}}</a>
           <a
             href="#comments"
-            class="fontHelvetica"
+            class="fontPoppins"
             :class="commentActive ? 'navigation-link-active': 'navigation-link'"
             @click="activeComment()"
           >{{$t("company.nav_title.comments")}}</a>

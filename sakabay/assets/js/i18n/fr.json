@@ -174,6 +174,18 @@
       "name": "Renseignez le nom d'une ville"
     }
   },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "recent_activity": "Activité récente",
+    "link": {
+      "n_company": "Votre entreprise | Votre entreprise | Vos entreprises",
+      "subscription": "Abonnements",
+      "recruit": "Recrutement",
+      "opportunity": "Opportunités",
+      "nomination": "Candidatures",
+      "papers": "CV & Lettre de motivation"
+    }
+  },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",
   "error_message_required_login": "La taille de votre login ne doit pas être inférieure à 5 caractères ni supérieur à 10 caractères",
   "error_message_email": "Veuillez entrer un email valide",

@@ -42,7 +42,7 @@
                     v-for="errorText in formErrors.imageProfil"
                     :key="'imageProfil_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -56,7 +56,7 @@
                   id="email"
                   class="email"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('user.fields.email') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.email') }}</label>
                   <input
                     v-validate="'required|email'"
                     type="text"
@@ -69,7 +69,7 @@
                     v-for="errorText in formErrors.email"
                     :key="'email_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -80,7 +80,7 @@
                   id="firstName"
                   class="firstName"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('user.fields.first_name') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.first_name') }}</label>
                   <input
                     v-validate="'required'"
                     name="firstName"
@@ -93,7 +93,7 @@
                     v-for="errorText in formErrors.firstName"
                     :key="'firstName_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -107,7 +107,7 @@
                   id="lastName"
                   class="lastName"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('user.fields.last_name') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.last_name') }}</label>
                   <input
                     type="text"
                     class="form-control"
@@ -118,7 +118,7 @@
                     v-for="errorText in formErrors.lastName"
                     :key="'lastName_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -129,7 +129,7 @@
                   id="login"
                   class="login"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('user.fields.login') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.login') }}</label>
                   <input
                     v-validate="'required_login'"
                     type="text"
@@ -142,7 +142,7 @@
                     v-for="errorText in formErrors.login"
                     :key="'login_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -152,7 +152,7 @@
             <div class="col-6 offset-3">
               <button
                 type="button"
-                class="btn button_skb fontUbuntu"
+                class="btn button_skb fontUbuntuItalic"
                 @click="$validateForm()"
               >{{ this.$t('commons.edit') }}</button>
             </div>

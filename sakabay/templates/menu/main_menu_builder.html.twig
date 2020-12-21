@@ -23,7 +23,7 @@
 </div>
 <div class="wrapper">
     <!-- Sidebar -->
-  <nav id="sidebar" class="fontUbuntu">
+  <nav id="sidebar" class="fontUbuntuItalic">
       <div id="dismiss">
           <i class="fas fa-arrow-left"></i>
       </div>
@@ -45,6 +45,9 @@
           <div class="col-12">
             <a href="/utilisateur/edit/{{ app.user.id }}" class="edit_account">{{ 'edit_account'|trans }}</a>
           </div>
+          <div class="col-12">
+            <a href="" class="edit_account">{{ 'settings'|trans }}</a>
+          </div>
         </div>
         <div class="row">
           <div class="col-12">
@@ -53,6 +56,31 @@
         </div>
         {% endif %}
       </div>
+      {# Action utilisateur #}
+        <div class="p-1 pl-3 menu-category fontSize18">
+            {{ 'menu_user_actions'|trans }}
+        </div>
+        <ul class="list-unstyled menu-sub-category m-0">
+          <li class="active">
+            <div class="container-fluid menu-link">
+              <div class="row">
+                <div class="col-12 pb-1">
+                  <a class="fontSize16" href="/dashboard">
+                    {{ 'dashboard'|trans }}
+                  </a>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 pb-1">
+                  <a class="fontSize16" href="#">
+                    {{ 'dashboard'|trans }}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      {# Action admin SKB #}
       {% for breadcrumb_category in knp_menu_get('main') %}
         <div class="p-1 pl-3 menu-category fontSize18">
           {{ breadcrumb_category.label|trans }}
@@ -106,19 +134,19 @@
   <div class="container">
     <div class="row">
       <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href="/entreprises/list">
-        <span class="fontPatua fontSize16">{{ 'local_business'|trans }}</span>
+        <span class="fontAlice fontW600 fontSize16">{{ 'local_business'|trans }}</span>
       </a>
       <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href="/entreprise">
-        <span class="fontPatua fontSize16">{{ 'company_director'|trans }}</span>
+        <span class="fontAlice fontW600 fontSize16">{{ 'company_director'|trans }}</span>
       </a>
       <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href="#">
-        <span class="fontPatua fontSize16">{{ 'who_is'|trans }}</span>
+        <span class="fontAlice fontW600 fontSize16">{{ 'who_is'|trans }}</span>
       </a>
       <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href="#">
-        <span class="fontPatua fontSize16">{{ 'contact_us'|trans }}</span>
+        <span class="fontAlice fontW600 fontSize16">{{ 'contact_us'|trans }}</span>
       </a>
       <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href="#">
-        <span class="fontPatua fontSize16">{{ 'recruit'|trans }}</span>
+        <span class="fontAlice fontW600 fontSize16">{{ 'recruit'|trans }}</span>
       </a>
     </div>
   </div>

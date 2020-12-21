@@ -16,7 +16,7 @@ class MainMenuBuilder
             "menu_role_actions" => [
                 "menu_all_role" => [
                     "route" => "role_index",
-                    "roles" => ["ROLE_ADMIN"]
+                    "roles" => ["ROLE_RROLE"]
                 ],
                 "menu_all_group" => [
                     "route" => "group_index",
@@ -24,7 +24,7 @@ class MainMenuBuilder
                 ],
                 "menu_all_user" => [
                     "route" => "user_index",
-                    "roles" => ["ROLE_ADMIN"]
+                    "roles" => ["ROLE_RUTILISATEUR"]
                 ],
                 "menu_all_function" => [
                     "route" => "fonction_index",
@@ -32,25 +32,25 @@ class MainMenuBuilder
                 ],
                 "menu_all_categories" => [
                     "route" => "category_index",
-                    "roles" => ["ROLE_ADMIN"]
+                    "roles" => ["ROLE_RCATEGORY"]
                 ],
                 "menu_all_cities" => [
                     "route" => "city_index",
-                    "roles" => ["ROLE_ADMIN"]
+                    "roles" => ["ROLE_RCITY"]
                 ],
                 "menu_all_companustatus" => [
                     "route" => "company_statut_index",
-                    "roles" => ["ROLE_ADMIN"]
+                    "roles" => ["ROLE_RCOMPANYSTATUT"]
                 ]
             ],
             "menu_management_company" => [
                 "menu_subscribed_company" => [
                     "route" => "company_subscribed_index",
-                    "roles" => ["ROLE_ADMIN"]
+                    "roles" => ["ROLE_RCOMPANY"]
                 ],
                 "menu_registered_company" => [
                     "route" => "company_registered_index",
-                    "roles" => ["ROLE_ADMIN"]
+                    "roles" => ["ROLE_RCOMPANY"]
                 ]
             ]
         ],

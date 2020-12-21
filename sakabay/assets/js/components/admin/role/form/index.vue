@@ -26,7 +26,7 @@
                   id="name"
                   class="name"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('role.fields.name') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('role.fields.name') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
@@ -39,7 +39,7 @@
                     v-for="errorText in formErrors.name"
                     :key="'name_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -50,7 +50,7 @@
                   id="code"
                   class="code"
                 >
-                  <label class="fontUbuntu fontSize16">{{ this.$t('role.fields.code') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('role.fields.code') }}</label>
                   <input
                     v-validate="'required'"
                     name="code"
@@ -63,7 +63,7 @@
                     v-for="errorText in formErrors.code"
                     :key="'code_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -75,7 +75,7 @@
               id="fonctions"
               class="col-12 fonctions"
             >
-              <label class="fontUbuntu fontSize16">{{ $t('role.fields.fonctions') }}</label>
+              <label class="fontUbuntuItalic fontSize16">{{ $t('role.fields.fonctions') }}</label>
               <dual-list
                 v-if="fonctionsAtCreation !== null"
                 :items="fonctions"
@@ -94,7 +94,7 @@
                 :key="'fonctions_' + errorText"
                 class="line-height-1"
               >
-                <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
               </div>
             </fieldset>
           </div>
@@ -104,7 +104,7 @@
               id="groups"
               class="col-12 groups"
             >
-              <label class="fontUbuntu fontSize16">{{ $t('role.fields.groups') }}</label>
+              <label class="fontUbuntuItalic fontSize16">{{ $t('role.fields.groups') }}</label>
               <dual-list
                 v-if="groupsAtCreation !== null"
                 :items="groups"
@@ -122,7 +122,7 @@
                 :key="'groups_' + errorText"
                 class="line-height-1"
               >
-                <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
               </div>
             </fieldset>
           </div>
@@ -130,7 +130,7 @@
             <div class="col-6 offset-3">
               <button
                 type="button"
-                class="btn button_skb fontUbuntu"
+                class="btn button_skb fontUbuntuItalic"
                 @click="$validateForm()"
               >{{ this.roleId ? this.$t('commons.edit') :  this.$t('commons.create')}}</button>
             </div>

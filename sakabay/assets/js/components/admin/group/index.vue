@@ -8,7 +8,7 @@
     </div>
     <div class="row my-4">
       <div class="col-4">
-        <h1 class="fontUbuntu orange-skb">{{ this.$t('group.title') }}</h1>
+        <h1 class="fontUbuntuItalic orange-skb">{{ this.$t('group.title') }}</h1>
       </div>
       <div class="col-1">
       </div>

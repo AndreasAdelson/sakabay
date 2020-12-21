@@ -26,4 +26,8 @@ CCITY; Création d'une ville
 RCITY; Consultation d'une ville
 UCITY; Modification d'une ville
 DCITY; Suppression d'une ville
+CCOMPANYSTATUT; Création d'une catégorie
+RCOMPANYSTATUT; Consultation d'une catégorie
+UCOMPANYSTATUT; Modification d'une catégorie
+DCOMPANYSTATUT; Suppression d'une catégorie
 ADMIN; Administrateur du site

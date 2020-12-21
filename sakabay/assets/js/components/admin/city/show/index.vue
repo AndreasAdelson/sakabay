@@ -12,7 +12,7 @@
         class="row mt-3 "
       >
         <div class="col-6">
-          <h1 class="fontUbuntu orange-skb">{{ this.$t('commons.detail') }}</h1>
+          <h1 class="fontUbuntuItalic orange-skb">{{ this.$t('commons.detail') }}</h1>
         </div>
         <div class="col-6 justify-content-end">
           <a

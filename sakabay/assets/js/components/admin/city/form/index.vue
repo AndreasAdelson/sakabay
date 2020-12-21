@@ -26,7 +26,7 @@
                   id="name"
                   class="name"
                 >
-                  <label class="fontUbuntu fontSize14">{{ this.$t('city.fields.name') }}</label>
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('city.fields.name') }}</label>
                   <input
                     v-validate="'required'"
                     type="text"
@@ -39,7 +39,7 @@
                     v-for="errorText in formErrors.name"
                     :key="'name_' + errorText"
                   >
-                    <span class="fontUbuntu fontSize13 red-skb">{{ errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -49,7 +49,7 @@
             <div class="col-6 offset-3">
               <button
                 type="button"
-                class="btn button_skb fontUbuntu"
+                class="btn button_skb fontUbuntuItalic"
                 @click="$validateForm()"
               >{{ this.cityId ? this.$t('commons.edit') :  this.$t('commons.create')}}</button>
             </div>

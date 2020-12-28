@@ -138,7 +138,7 @@ export default {
           name: company.name,
           numSiret: company.num_siret,
           urlName: company.url_name,
-          utilisateur: company.utilisateur.login,
+          utilisateur: company.utilisateur.username,
           category: company.category.name,
           statut: company.companystatut.name,
           actions: company.id,

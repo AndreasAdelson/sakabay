@@ -10,6 +10,7 @@
     "jms/serializer-bundle": "^3.7",
     "knplabs/knp-menu-bundle": "^3.0",
     "laminas/laminas-code": "^3.4",
+    "mgilet/notification-bundle": "^3.2",
     "nelmio/api-doc-bundle": "^3.6",
     "pagerfanta/pagerfanta": "^2.4",
     "sensio/framework-extra-bundle": "^5.5",

@@ -75,11 +75,11 @@ const CnsRenderUtils = {
           }
           label += user.first_name
         }
-        if (user.login) {
+        if (user.username) {
           if (user.last_name || user.first_name) {
             label += ' [';
           }
-          label += user.login + ']'
+          label += user.username + ']'
         }
       }
       return label.trim();

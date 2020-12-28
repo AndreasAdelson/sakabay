@@ -77,7 +77,7 @@
                 :key="'utilisateur_'+ index"
                 class="fontHelveticaOblique fontSize18"
               >
-                {{ utilisateur.last_name.toUpperCase() + ' ' + utilisateur.first_name + ' ' + ' [' + utilisateur.login + ']' }}
+                {{ utilisateur.last_name.toUpperCase() + ' ' + utilisateur.first_name + ' ' + ' [' + utilisateur.username + ']' }}
               </li>
             </ul>
           </div>

@@ -46,7 +46,7 @@
     "title": "Liste des utilisateurs",
     "fields": {
       "email": "Email",
-      "login": "Pseudo",
+      "username": "Pseudo",
       "first_name": "Prénom",
       "last_name": "Nom"
     },
@@ -187,7 +187,7 @@
     }
   },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",
-  "error_message_required_login": "La taille de votre login ne doit pas être inférieure à 5 caractères ni supérieur à 10 caractères",
+  "error_message_required_username": "La taille de votre pseudonyme ne doit pas être inférieure à 5 caractères ni supérieur à 10 caractères",
   "error_message_email": "Veuillez entrer un email valide",
   "error_message_regex": "Ce champ ne respecte pas le format attendu",
   "user_does_not_exist": "Cet utilisateur n'existe pas"

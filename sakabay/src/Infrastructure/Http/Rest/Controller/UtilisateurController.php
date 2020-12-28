@@ -39,7 +39,7 @@ final class UtilisateurController extends AbstractFOSRestController
      * @Rest\Get("/admin/utilisateurs")
      *
      * @QueryParam(name="filterFields",
-     *             default="email,login,firstName,lastName",
+     *             default="email,username,firstName,lastName",
      *             description="Liste des champs sur lesquels le filtre s'appuie"
      * )
      * @QueryParam(name="filter",

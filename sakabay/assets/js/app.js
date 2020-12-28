@@ -62,6 +62,7 @@ import FormCity from './components/admin/city/form';
 import ShowCity from './components/admin/city/show';
 import ListCity from './components/admin/city';
 import Dashboard from './components/utilisateur/dashboard';
+import moment from 'moment';
 import 'utils/logger';
 
 Vue.use(BootstrapVue);
@@ -84,10 +85,10 @@ Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png').default,
 });
 
-Vue.component('multiselect', MultiSelect);
-Vue.component('v-map', LMap);
-Vue.component('v-tile-layer', LTileLayer);
-Vue.component('v-marker', LMarker);
+Vue.component('Multiselect', MultiSelect);
+Vue.component('VMap', LMap);
+Vue.component('VTileLayer', LTileLayer);
+Vue.component('VMarker', LMarker);
 
 new Vue({
   el: '#root',
@@ -130,5 +131,5 @@ new Vue({
   }
 });
 
-
+moment.locale('fr');
 global.$ = global.jQuery = $;

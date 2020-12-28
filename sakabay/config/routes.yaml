@@ -203,3 +203,8 @@ city_show:
     path: admin/city/show/{id}
     controller: App\Infrastructure\Http\Web\Controller\CityController::show
     methods: [GET, POST]
+
+# Notifications
+mgilet_notification:
+    resource: "@MgiletNotificationBundle/Controller/"
+    prefix: /notifications

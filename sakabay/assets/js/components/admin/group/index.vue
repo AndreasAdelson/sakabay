@@ -185,7 +185,7 @@ export default {
             + (group.roles.length > this.NB_MAX_DISPLAYED ? '<br />' + this.$tc('commons.et_plus', group.roles.length - this.NB_MAX_DISPLAYED) : ''),
           utilisateurs: _.take(
             _.sortBy(
-              _.map(group.utilisateurs, 'login'), (login) => login), this.NB_MAX_DISPLAYED)
+              _.map(group.utilisateurs, 'username'), (username) => username), this.NB_MAX_DISPLAYED)
             .join('<br />')
             + (group.utilisateurs.length > this.NB_MAX_DISPLAYED ? '<br />' + this.$tc('commons.et_plus', group.utilisateurs.length - this.NB_MAX_DISPLAYED) : ''),
           actions: group.id,

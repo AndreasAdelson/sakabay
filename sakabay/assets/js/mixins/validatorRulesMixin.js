@@ -8,8 +8,8 @@ import {
  */
 export default {
   created() {
-    Validator.extend('required_login', {
-      getMessage: this.$t('error_message_required_login'),
+    Validator.extend('required_username', {
+      getMessage: this.$t('error_message_required_username'),
       validate: value => value.trim().length >= 5 && value.trim().length <= 10
     });
   }

@@ -12,18 +12,22 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
+use Mgilet\NotificationBundle\Annotation\Notifiable;
+use Mgilet\NotificationBundle\NotifiableInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UtilisateurRepository")
- * @UniqueEntity(fields={"login"})
+ * @UniqueEntity(fields={"username"})
  * @UniqueEntity(
  *     fields={"email"},
  *     message="Un compte utilise déjà cet email"
  * )
  * @ExclusionPolicy("all")
+ * @Notifiable(name="Utilisateur")
  */
-class Utilisateur implements UserInterface
+class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterface
 {
 
     const PREFIX_ROLE = 'ROLE_';
@@ -90,7 +94,7 @@ class Utilisateur implements UserInterface
      * "api_admin_companies"
      * })
      */
-    private $login;
+    private $username;
 
     /**
      * @Expose
@@ -199,9 +203,16 @@ class Utilisateur implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
-        return (string) $this->email;
+        return $this->username;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->username = mb_strtoupper($username);
+
+        return $this;
     }
 
     /**
@@ -234,26 +245,6 @@ class Utilisateur implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    /**
-     * Get the value of login
-     */
-    public function getLogin()
-    {
-        return $this->login;
-    }
-
-    /**
-     * Set the value of login
-     *
-     * @return  self
-     */
-    public function setLogin($login)
-    {
-        $this->login = $login;
-
-        return $this;
     }
 
     /**
@@ -442,5 +433,14 @@ class Utilisateur implements UserInterface
     public function refreshUpdated()
     {
         $this->setUpdated(new \DateTime());
+    }
+
+    public function isEqualTo(UserInterface $user)
+    {
+        if ($this->username !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
     }
 }

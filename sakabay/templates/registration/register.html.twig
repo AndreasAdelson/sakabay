@@ -18,10 +18,10 @@
     </div>
     <form method="POST">
         <div class="form-group">
-          {{ form_widget(registrationForm.login, {'attr': {'class': 'form-control', 'placeholder': 'login_placeholder'|trans }}) }}
-          {% if form_errors(registrationForm.login) %}
+          {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control', 'placeholder': 'username_placeholder'|trans }}) }}
+          {% if form_errors(registrationForm.username) %}
             <div class="fontUbuntuItalic error-message">
-              {{ form_errors(registrationForm.login) }}
+              {{ form_errors(registrationForm.username) }}
             </div>
           {% endif %}
         </div>
@@ -33,9 +33,9 @@
         </div>
         <div class="form-group">
           {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'email_placeholder'|trans, 'required': 'required' }}) }}
-          {% if form_errors(registrationForm.login) %}
+          {% if form_errors(registrationForm.username) %}
             <div class="fontUbuntuItalic error-message">
-              {{ form_errors(registrationForm.login) }}
+              {{ form_errors(registrationForm.username) }}
             </div>
           {% endif %}
         </div>

@@ -22,7 +22,7 @@ services:
     App\:
         autowire: true
         resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Domain/Model,Infrastructure/Doctrine/Migrations,Tests,Kernel.php}'
+        exclude: '../src/{Domain/Model,Infrastructure/Doctrine/Migrations,Tests,Kernel.php}'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
@@ -50,3 +50,10 @@ services:
         arguments: ["@security.password_encoder"]
         tags:
             - { name: doctrine.event_listener, event: prePersist, connection: default }
+
+    notification.factory:
+        class: App\Infrastructure\Factory\NotificationFactory
+        arguments: ['@mgilet.notification', '@translator']
+
+    App\Infrastructure\Factory\NotificationFactory: '@notification.factory'
+

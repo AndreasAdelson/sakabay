@@ -12,6 +12,7 @@ use App\Application\Service\CompanyStatutService;
 use App\Application\Service\CompanyService;
 use App\Application\Service\FileUploader;
 use App\Domain\Model\Company;
+use App\Infrastructure\Factory\NotificationFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -25,6 +26,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mime\Message;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class CompanyController extends AbstractFOSRestController
@@ -34,16 +36,24 @@ final class CompanyController extends AbstractFOSRestController
     private $companyStatutService;
     private $translator;
     private $encoder;
+    private $notificationFactory;
 
     /**
      * CompanyRestController constructor.
      */
-    public function __construct(EntityManagerInterface $entityManager, CompanyService $companyService, CompanyStatutService $companyStatutService, TranslatorInterface $translator, UserPasswordEncoderInterface $encoder, MailerInterface $mailer)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        CompanyService $companyService,
+        CompanyStatutService $companyStatutService,
+        TranslatorInterface $translator,
+        UserPasswordEncoderInterface $encoder,
+        NotificationFactory $notificationFactory
+    ) {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
         $this->companyService = $companyService;
         $this->companyStatutService = $companyStatutService;
+        $this->notificationFactory = $notificationFactory;
         $this->encoder = $encoder;
     }
 
@@ -82,8 +92,8 @@ final class CompanyController extends AbstractFOSRestController
         $plainPassword = 'test';
         $encoded = $this->encoder->encodePassword($company->getUtilisateur(), $plainPassword);
 
-        $login = str_replace('-', '', $urlName);
-        $company->getUtilisateur()->setLogin(strtoupper($login));
+        $username = str_replace('-', '', $urlName);
+        $company->getUtilisateur()->setUsername(strtoupper($username));
         $company->getUtilisateur()->setPassword($encoded);
         $companyStatut = $this->companyStatutService->getENCCompanyStatut()[0];
         $company->setCompanystatut($companyStatut);
@@ -338,7 +348,9 @@ final class CompanyController extends AbstractFOSRestController
         $subject = $this->translator->trans('email_register_validation_subject');
         $bodyMessage = sprintf($this->translator->trans('email_register_validation_body'), $company->getName(), $this->generateUrl('home'));
 
-        $this->sendMail($email, $subject, $bodyMessage);
+        // $this->sendMail($email, $subject, $bodyMessage);
+        $ressourceLocation = $this->generateUrl('company_subscribed_show', ['id' => $companyId], UrlGenerator::RELATIVE_PATH);
+        $this->notificationFactory->testNotification(array($this->getUser()), $ressourceLocation);
         $ressourceLocation = $this->generateUrl('company_registered_index');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }

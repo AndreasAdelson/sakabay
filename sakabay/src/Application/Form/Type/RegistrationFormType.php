@@ -19,7 +19,7 @@ class RegistrationFormType extends AbstractType
     {
         $translator = $options['translator'];
         $builder
-            ->add('login', TextType::class, [
+            ->add('username', TextType::class, [
                 'constraints' => [
                     new Assert\NotNull([
                         'message' => $translator->trans('error_message_field_not_empty')

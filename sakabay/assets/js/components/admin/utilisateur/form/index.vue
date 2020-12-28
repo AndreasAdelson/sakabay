@@ -97,21 +97,21 @@
               <div class="col-6">
                 <div class="form-group">
                   <fieldset
-                    id="login"
-                    class="login"
+                    id="username"
+                    class="username"
                   >
-                    <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.login') }}</label>
+                    <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.username') }}</label>
                     <input
-                      v-validate="'required_login'"
+                      v-validate="'required_username'"
                       type="text"
-                      name="login"
+                      name="username"
                       class="form-control"
-                      placeholder="Enter login"
-                      v-model="formFields.login"
+                      placeholder="Enter username"
+                      v-model="formFields.username"
                     >
                     <div
-                      v-for="errorText in formErrors.login"
-                      :key="'login_' + errorText"
+                      v-for="errorText in formErrors.username"
+                      :key="'username_' + errorText"
                     >
                       <span class="fontUbuntuItalic fontSize13 red-skb">{{errorText }}</span>
                     </div>
@@ -149,13 +149,13 @@ export default {
         email: null,
         firstName: null,
         lastName: null,
-        login: null,
+        username: null,
       },
       formErrors: {
         email: [],
         firstName: [],
         lastName: [],
-        login: []
+        username: []
       }
     };
   },

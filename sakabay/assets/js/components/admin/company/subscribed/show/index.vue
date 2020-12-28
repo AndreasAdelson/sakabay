@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <!-- User login and category -->
+        <!-- User username and category -->
         <div class="row">
           <div class="col-6">
             <span class="fontPatua fontSize20">{{ $t('company.table.fields.utilisateur') }}</span>
@@ -60,7 +60,7 @@
         <div class="row mb-2">
           <div class="col-6">
             <a :href="'/admin/utilisateur/show/' + company.utilisateur.id">
-              <span class="fontHelveticaOblique fontSize18 inscription">{{ company.utilisateur.login }}</span>
+              <span class="fontHelveticaOblique fontSize18 inscription">{{ company.utilisateur.username }}</span>
             </a>
           </div>
           <div class="col-6">

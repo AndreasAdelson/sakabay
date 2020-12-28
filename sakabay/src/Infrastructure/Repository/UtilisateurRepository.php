@@ -47,7 +47,7 @@ class UtilisateurRepository extends AbstractRepository implements UtilisateurRep
     /**
      * Return a list of User matching given criterias.
      *
-     * @param string $filter[autocomplete] Name or first name or login of a user
+     * @param string $filter[autocomplete] Name or first name or username of a user
      */
     public function findUsersForAutocomplete(array $filter): array
     {
@@ -55,7 +55,7 @@ class UtilisateurRepository extends AbstractRepository implements UtilisateurRep
         $name = mb_strtolower("%$name%");
         $queryFilter = "LOWER(CONCAT(user.firstName, ' ', user.lastName)) LIKE :name
                         OR LOWER(CONCAT(user.lastName, ' ', user.firstName)) LIKE :name
-                        OR LOWER(user.login) LIKE :name";
+                        OR LOWER(user.username) LIKE :name";
         $query = $this->createQueryBuilder('user');
 
         return $query->andWhere($queryFilter)

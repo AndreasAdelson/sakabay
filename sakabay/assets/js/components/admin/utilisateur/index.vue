@@ -141,7 +141,7 @@ export default {
       table: {
         field: [
           { key: 'email', label: this.$t('user.fields.email'), sortable: true, thClass: "tableitem" },
-          { key: 'login', label: this.$t('user.fields.login'), sortable: true, thClass: "tableitem" },
+          { key: 'username', label: this.$t('user.fields.username'), sortable: true, thClass: "tableitem" },
           { key: 'lastName', label: this.$t('user.fields.last_name'), sortable: true, thClass: "tableitem" },
           { key: 'firstName', label: this.$t('user.fields.first_name'), sortable: true, thClass: "tableitem" },
           (!this.canRead && !this.canEdit && !this.canDelete) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-9', thClass: "tableitem" },
@@ -156,7 +156,7 @@ export default {
       this.loading = true;
       return axios.get("/api/admin/utilisateurs", {
         params: {
-          filterFields: 'firstName,lastName,email,login',
+          filterFields: 'firstName,lastName,email,username',
           filter: this.currentFilter,
           sortBy: this.table.sortBy,
           sortDesc: this.table.sortDesc,
@@ -166,7 +166,7 @@ export default {
       }).then(response => {
         let items = _.map(response.data, utilisateur => _.assign(utilisateur, {
           email: utilisateur.email,
-          login: utilisateur.login,
+          username: utilisateur.username,
           actions: utilisateur.id,
           lastName: utilisateur.last_name,
           firstName: utilisateur.first_name

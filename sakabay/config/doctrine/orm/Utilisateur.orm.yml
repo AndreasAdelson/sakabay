@@ -12,10 +12,10 @@ App\Domain\Model\Utilisateur:
             options:
                 comment: Identifiant technique d'un user
     fields:
-        login:
+        username:
             type: string
             length: 191
-            column: login
+            column: username
             nullable: false
         email:
             type: string
@@ -50,7 +50,7 @@ App\Domain\Model\Utilisateur:
 
     uniqueConstraints:
         uniqueGroupCode:
-            columns: [login, email]
+            columns: [username, email]
     manyToMany:
         groups:
             targetEntity: Group

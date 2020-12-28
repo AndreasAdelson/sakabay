@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Http\Web\Controller;
 
+use Mgilet\NotificationBundle\Manager\NotificationManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -84,10 +85,11 @@ class UtilisateurController extends AbstractController
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         } else {
+
+            return $this->render('utilisateur/dashboard.html.twig', [
+                'utilisateurId' => $this->getUser()->getId(),
+            ]);
         }
-        return $this->render('utilisateur/dashboard.html.twig', [
-            'utilisateurId' => $this->getUser()->getId(),
-        ]);
     }
 
     private function urlPrecedente()

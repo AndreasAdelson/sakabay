@@ -31,7 +31,7 @@ jest.mock('axios', () => ({
     return Promise.resolve({
       data: {
         last_name: "toto",
-        login: "test"
+        username: "test"
       }
     });
   })

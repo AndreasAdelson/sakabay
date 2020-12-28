@@ -31,13 +31,13 @@ class UtilisateurService
     // }
 
     ///Editer un utilisateur
-    public function editUtilisateur(string $email, string $firstName, string $lastName, string $login, int $utilisateurId)
+    public function editUtilisateur(string $email, string $firstName, string $lastName, string $username, int $utilisateurId)
     {
         $utilisateur = $this->utilisateurRepository->findById($utilisateurId);
         $utilisateur->setEmail($email);
         $utilisateur->setFirstName($firstName);
         $utilisateur->setLastName($lastName);
-        $utilisateur->setLogin($login);
+        $utilisateur->setUsername($username);
 
         return $utilisateur;
     }
@@ -85,7 +85,7 @@ class UtilisateurService
     /**
      * Return a list of User matching given criterias.
      *
-     * @param string $filter[autocomplete] Name or first name or login of a user
+     * @param string $filter[autocomplete] Name or first name or username of a user
      */
     public function findUsersForAutocomplete(array $filter): array
     {

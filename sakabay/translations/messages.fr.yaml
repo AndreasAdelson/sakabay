@@ -33,7 +33,7 @@ dashboard: "Tableau de bord"
 settings: "Paramètres"
 
 #form-user
-login_placeholder: "Pseudonyme"
+username_placeholder: "Pseudonyme"
 first_name_placeholder: "Prénom"
 last_name_placeholder: "Nom"
 email_placeholder: "Email"
@@ -52,7 +52,7 @@ sign_in: "Se connecter"
 remember_me: "Se souvenir de moi"
 forgot_password: "Mot de passe oublié?"
 create_account: "Créer un compte?"
-error_message_unique_login: "Ce pseudonyme est déjà utilisé. Choisissez-en un autre."
+error_message_unique_username: "Ce pseudonyme est déjà utilisé. Choisissez-en un autre."
 logout: "Se déconnecter"
 edit_account: "Modifier son compte"
 

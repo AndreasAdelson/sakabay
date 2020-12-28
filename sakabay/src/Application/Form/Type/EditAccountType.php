@@ -26,7 +26,7 @@ class EditAccountType extends AbstractType
                 'required' => true,
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('login', TextType::class, [
+            ->add('username', TextType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => $translator->trans('error_message_field_not_empty'),

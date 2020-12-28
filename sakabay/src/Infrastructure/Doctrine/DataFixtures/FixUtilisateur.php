@@ -30,7 +30,7 @@ class FixUtilisateur extends Fixture implements OrderedFixtureInterface, Contain
             list(
                 $firstName,
                 $lastName,
-                $login,
+                $username,
                 $password,
                 $email,
             ) = explode(';', trim($data));
@@ -38,12 +38,12 @@ class FixUtilisateur extends Fixture implements OrderedFixtureInterface, Contain
             $utilisateur = new Utilisateur();
             $utilisateur->setLastName($lastName);
             $utilisateur->setFirstName($firstName);
-            $utilisateur->setLogin($login);
+            $utilisateur->setUsername($username);
             $utilisateur->setEmail($email);
             $utilisateur->setPassword(password_hash($password, PASSWORD_BCRYPT));
 
             $manager->persist($utilisateur);
-            $this->addReference('utilisateur_' . $login, $utilisateur);
+            $this->addReference('utilisateur_' . $username, $utilisateur);
         }
 
         $manager->flush();

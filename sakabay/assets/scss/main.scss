@@ -450,6 +450,10 @@ a[data-toggle="collapse"] {
   background-color: $yellow_login_color;
 }
 
+.grey-bg-skb {
+  background-color: $grey_icon
+}
+
 .yellow-gradiant {
   background: linear-gradient($yellow_light_color, $yellow_login_color, $yellow_light_color);
 }
@@ -509,6 +513,10 @@ a[data-toggle="collapse"] {
   color: $grey_icon;
 }
 
+.white-skb {
+  color: $white_color;
+}
+
 /*---------------------------------
     Bouttons de l'apli
 -----------------------------------*/
@@ -551,7 +559,7 @@ a[data-toggle="collapse"] {
   margin: 0.4rem;
   height: 50px;
   z-index: 1;
-  background-color: $yellow_login_color;
+  background-color: transparent;
 }
 
 .btn-close:hover {
@@ -1209,7 +1217,6 @@ a[data-toggle="collapse"] {
 .notification-title {
   display: inline-block;
   width: fit-content;
-  padding-right: 0.5rem;
 }
 
 .notifications-card {

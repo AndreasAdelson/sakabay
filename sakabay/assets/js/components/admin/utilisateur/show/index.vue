@@ -71,7 +71,7 @@
             <span class="fontPatua fontSize20">{{ $t('user.fields.email') }}</span>
           </div>
           <div class="col-6">
-            <span class="fontPatua fontSize20">{{ $t('user.fields.login') }}</span>
+            <span class="fontPatua fontSize20">{{ $t('user.fields.username') }}</span>
           </div>
         </div>
         <div class="row mb-2">
@@ -79,7 +79,7 @@
             <span class="fontHelveticaOblique fontSize18">{{ this.utilisateur.email }}</span>
           </div>
           <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.utilisateur.login.toUpperCase() }}</span>
+            <span class="fontHelveticaOblique fontSize18">{{ this.utilisateur.username.toUpperCase() }}</span>
           </div>
         </div>
       </div>

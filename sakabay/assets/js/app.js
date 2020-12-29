@@ -63,8 +63,8 @@ import ShowCity from './components/admin/city/show';
 import ListCity from './components/admin/city';
 import Dashboard from './components/utilisateur/dashboard';
 import moment from 'moment';
+import DashboardTwo from './components/dashboard';
 import 'utils/logger';
-
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(cnsRenderUtils);
@@ -94,6 +94,7 @@ new Vue({
   el: '#root',
   i18n,
   components: {
+    Dashboard,
     ShowCategory,
     ListCategory,
     ListCompanyStatut,
@@ -127,7 +128,7 @@ new Vue({
     ShowCity,
     ListCity,
     FormCity,
-    Dashboard
+    DashboardTwo
   }
 });
 

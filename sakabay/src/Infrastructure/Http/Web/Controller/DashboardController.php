@@ -24,6 +24,7 @@ class DashboardController extends AbstractController
             'canEdit' => $authorizationChecker->isGranted('ROLE_ADMIN'),
             'canDelete' => $authorizationChecker->isGranted('ROLE_ADMIN'),
             'controller_name' => 'UtilisateurController',
+            'utilisateurId' => $this->getUser()->getId(),
         ]);
     }
 }

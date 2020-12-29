@@ -24,14 +24,14 @@ user_edit_index:
     methods: [POST, GET]
 
 ##Andreas dashboard##
-dasboard:
-    path: /dashboard
+dasboard_two:
+    path: /dashboard2
     controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::dashboard
     methods: [GET]
 
 ##Salman dashbaord ##
 dashboard:
-    path: /dashboard2
+    path: /dashboard
     controller: App\Infrastructure\Http\Web\Controller\DashboardController::index
     methods: [GET, POST]
 # Routes for Fonction object

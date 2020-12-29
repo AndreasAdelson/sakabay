@@ -2,8 +2,7 @@
   <div class="skb-body container">
     <div v-if="loading">
       <div class="loader-container-full">
-        <div class="loader">
-        </div>
+        <div class="loader" />
       </div>
     </div>
     <div v-else-if="company">
@@ -12,18 +11,19 @@
           <img
             src="/build/logo.png"
             class="logo-main-info bordered"
-          />
+          >
           <div class="header-main-info">
             <div class="company-name">
-              <h1 class="fontSize32 fontPoppins m-0"> {{ company.name }} </h1>
+              <h1 class="fontSize32 fontPoppins m-0">
+                {{ company.name }}
+              </h1>
             </div>
             <div class="activity-domain">
               <span class="fontSize18 fontAlice">{{ company.category.name }}</span>
             </div>
           </div>
         </div>
-        <div class="col-2">
-        </div>
+        <div class="col-2" />
       </div>
 
       <div class="row navigation-menu card-skb">
@@ -33,19 +33,19 @@
             class="fontPoppins"
             :class="presentationActive ? 'navigation-link-active': 'navigation-link'"
             @click="activePresentation()"
-          >{{$t("company.nav_title.presentation")}}</a>
+          >{{ $t("company.nav_title.presentation") }}</a>
           <a
             href="#jobOffers"
             class="fontPoppins"
             :class="jobOfferActive ? 'navigation-link-active': 'navigation-link'"
             @click="activeJobOffer()"
-          >{{$t("company.nav_title.job_offers")}}</a>
+          >{{ $t("company.nav_title.job_offers") }}</a>
           <a
             href="#comments"
             class="fontPoppins"
             :class="commentActive ? 'navigation-link-active': 'navigation-link'"
             @click="activeComment()"
-          >{{$t("company.nav_title.comments")}}</a>
+          >{{ $t("company.nav_title.comments") }}</a>
         </div>
       </div>
       <div v-if="presentationActive">
@@ -63,56 +63,56 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import presentationPage from './presentation';
+  import axios from 'axios';
+  import presentationPage from './presentation';
 
-export default {
-  components: {
-    presentationPage
-  },
-  props: {
-    companyUrlName: {
-      type: String,
-      default: ''
+  export default {
+    components: {
+      presentationPage
+    },
+    props: {
+      companyUrlName: {
+        type: String,
+        default: ''
+      },
+
     },
 
-  },
-  async created () {
-    return axios.get('/api/entreprise/' + this.companyUrlName)
-      .then(response => {
-        this.company = response.data;
-        this.loading = false;
-      }).catch(e => {
-        this.loading = false;
-        this.$handleError(e);
-      });
-  },
-
-  data () {
-    return {
-      loading: true,
-      company: new Object(),
-      presentationActive: true,
-      jobOfferActive: false,
-      commentActive: false,
-    }
-  },
-  methods: {
-    activePresentation () {
-      this.presentationActive = true;
-      this.jobOfferActive = false;
-      this.commentActive = false;
+    data() {
+      return {
+        loading: true,
+        company: new Object(),
+        presentationActive: true,
+        jobOfferActive: false,
+        commentActive: false,
+      };
     },
-    activeJobOffer () {
-      this.presentationActive = false;
-      this.jobOfferActive = true;
-      this.commentActive = false;
+    async created() {
+      return axios.get('/api/entreprise/' + this.companyUrlName)
+        .then(response => {
+          this.company = response.data;
+          this.loading = false;
+        }).catch(e => {
+          this.loading = false;
+          this.$handleError(e);
+        });
     },
-    activeComment () {
-      this.presentationActive = false;
-      this.jobOfferActive = false;
-      this.commentActive = true;
+    methods: {
+      activePresentation() {
+        this.presentationActive = true;
+        this.jobOfferActive = false;
+        this.commentActive = false;
+      },
+      activeJobOffer() {
+        this.presentationActive = false;
+        this.jobOfferActive = true;
+        this.commentActive = false;
+      },
+      activeComment() {
+        this.presentationActive = false;
+        this.jobOfferActive = false;
+        this.commentActive = true;
+      },
     },
-  },
-}
+  };
 </script>

@@ -65,6 +65,7 @@ import Dashboard from './components/utilisateur/dashboard';
 import moment from 'moment';
 import DashboardTwo from './components/dashboard';
 import 'utils/logger';
+
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(cnsRenderUtils);

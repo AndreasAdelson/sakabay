@@ -7,7 +7,7 @@
     <div class="col-12">
       <div class="row">
         <div class="col-12 icon-button">
-          <i :class="iconLabel + ' fa-4x'"></i>
+          <i :class="iconLabel + ' fa-4x'" />
         </div>
       </div>
       <div class="row">
@@ -19,28 +19,28 @@
   </a>
 </template>
 <script>
-export default {
-  props: {
-    url: {
-      type: String,
-      default: '#'
+  export default {
+    props: {
+      url: {
+        type: String,
+        default: '#'
+      },
+      iconLabel: {
+        type: String,
+        default: null
+      },
+      buttonText: {
+        type: String,
+        default: null
+      },
+      classColor: {
+        type: String,
+        default: null
+      }
     },
-    iconLabel: {
-      type: String,
-      default: null
+    data() {
+      return {
+      };
     },
-    buttonText: {
-      type: String,
-      default: null
-    },
-    classColor: {
-      type: String,
-      default: null
-    }
-  },
-  data () {
-    return {
-    }
-  },
-}
+  };
 </script>

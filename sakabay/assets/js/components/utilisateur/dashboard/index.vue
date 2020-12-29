@@ -115,7 +115,6 @@
   import axios from 'axios';
   import LinkItem from './link-item.vue';
   import NotificationItem from './notification-item.vue';
-  import _ from 'lodash';
 
   export default {
     components: {

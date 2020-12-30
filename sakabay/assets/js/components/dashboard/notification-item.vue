@@ -19,14 +19,37 @@
         </div>
       </div>
     </div>
-    <a
-      v-if="!notif.seen"
-      class="col-1 text-center badge badge-complete"
-      href="#"
-      @click.prevent="markAsSeen()"
-    >
-      <i class="fas fa-check" />
-    </a>
+    <div class="col-1 text-center">
+      <a
+        v-if="!notif.seen"
+        data-toggle="tooltip"
+        :title="$t('dashboard.notification.tooltip.mark_as_seen')"
+        class="text-center badge badge-complete"
+        href="#"
+        @click.prevent="markAsSeen()"
+      >
+        <i class="fas fa-check" />
+      </a>
+      <a
+        v-else
+        data-toggle="tooltip"
+        :title="$t('dashboard.notification.tooltip.mark_as_unseen')"
+        class="text-center badge grey-bg-skb"
+        href="#"
+        @click.prevent="markAsUnSeen()"
+      >
+        <i class="fas fa-check" />
+      </a>
+      <a
+        class="text-center badge orange-gradiant"
+        data-toggle="tooltip"
+        :title="$t('dashboard.notification.tooltip.delete')"
+        href="#"
+        @click.prevent="deleteNotification()"
+      >
+        <i class="fas fa-times" />
+      </a>
+    </div>
   </li>
 </template>
 <script>
@@ -70,12 +93,31 @@
       markAsSeen() {
         return axios.post('/notification/' + this.notif.notifiable.id + '/mark_as_seen/' + this.notif.notification.id)
           .then(r => {
-            this.$emit('notification-marked', this.notif.notification.id);
+            this.$emit('notification-seen');
           })
           .catch(e => {
             this.$handleError(e);
           });
       },
+
+      markAsUnSeen() {
+        return axios.post('/notification/' + this.notif.notifiable.id + '/mark_as_unseen/' + this.notif.notification.id)
+          .then(r => {
+            this.$emit('notification-unseen');
+          })
+          .catch(e => {
+            this.$handleError(e);
+          });
+      },
+
+      deleteNotification() {
+        return axios.post('/notification/' + this.notif.notifiable.id + '/delete/' + this.notif.notification.id)
+          .then(r => {
+            this.$emit('notification-deleted');
+          }).catch(e => {
+            this.$handleError(e);
+          });
+      }
     },
   };
 </script>

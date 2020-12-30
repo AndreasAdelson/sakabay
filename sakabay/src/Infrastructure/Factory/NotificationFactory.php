@@ -18,9 +18,52 @@ class NotificationFactory
         $this->translator = $translator;
     }
 
-    public function testNotification(array $destinataires, string $link)
+    public function validationCompanyNotificationAdmin(array $destinataires, string $link, $company)
     {
-        $this->addNotification($destinataires, 'Blablabla', 'Validation d\'une entreprise', $link);
+        $subject = $this->translator->trans('validatecompany_subject_admin');
+        $message = sprintf(
+            $this->translator->trans('validatecompany_message_admin'),
+            $company->getName()
+        );
+
+        $this->addNotification($destinataires, $subject, $message, $link);
+    }
+
+    public function validationCompanyNotificationUser(array $destinataires, string $link, $company)
+    {
+        $subject = $this->translator->trans('validatecompany_subject');
+        $message = sprintf(
+            $this->translator->trans('validatecompany_message'),
+            $company->getName()
+        );
+
+        $this->addNotification($destinataires, $subject, $message, $link);
+    }
+
+    public function createCompanyNotificationAdmin(array $destinataires, string $link, $company)
+    {
+        $subject = $this->translator->trans('createcompany_subject_admin');
+        $creatorName =  $company->getUtilisateur()->getFirstName() . ' ' . $company->getUtilisateur()->getLastName();
+        $message = sprintf(
+            $this->translator->trans('createcompany_message_admin'),
+            $creatorName,
+            $company->getName()
+        );
+
+        $this->addNotification($destinataires, $subject, $message, $link);
+    }
+
+    public function createCompanyNotificationUser(array $destinataires, string $link, $company)
+    {
+        $subject = $this->translator->trans('createcompany_subject');
+        $creatorName =  $company->getUtilisateur()->getFirstName() . ' ' . $company->getUtilisateur()->getLastName();
+        $message = sprintf(
+            $this->translator->trans('createcompany_message'),
+            $creatorName,
+            $company->getName()
+        );
+
+        $this->addNotification($destinataires, $subject, $message, $link);
     }
 
 

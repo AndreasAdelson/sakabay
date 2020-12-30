@@ -135,3 +135,8 @@ new Vue({
 
 moment.locale('fr');
 global.$ = global.jQuery = $;
+
+$(document).ready(() => {
+  // Bootstrap tooltips
+  $('[data-toggle="tooltip"]').tooltip();
+});

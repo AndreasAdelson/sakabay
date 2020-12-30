@@ -184,6 +184,13 @@
       "opportunity": "Opportunity",
       "nomination": "Nominations",
       "papers": "CV & Cover letter"
+    },
+    "notification": {
+      "tooltip": {
+        "mark_as_seen": "Mark as seen",
+        "mark_as_unseen": "Mark as unseen",
+        "delete": "Delete"
+      }
     }
   },
   "error_message_required": "This field is mandatory. Thank you for filling it in.",

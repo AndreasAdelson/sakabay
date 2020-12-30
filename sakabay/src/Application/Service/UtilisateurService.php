@@ -101,4 +101,9 @@ class UtilisateurService
         }
         $this->utilisateurRepository->delete($utilisateur);
     }
+
+    public function findUsersByRight(array $filter, bool $includeAll = true): array
+    {
+        return $this->utilisateurRepository->findUsersByRight($filter, $includeAll);;
+    }
 }

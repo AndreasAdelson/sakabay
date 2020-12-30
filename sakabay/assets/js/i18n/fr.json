@@ -184,7 +184,15 @@
       "opportunity": "Opportunités",
       "nomination": "Candidatures",
       "papers": "CV & Lettre de motivation"
+    },
+    "notification": {
+      "tooltip": {
+        "mark_as_seen": "Marquer comme lu",
+        "mark_as_unseen": "Marquer comme non-lu",
+        "delete": "Supprimer"
+      }
     }
+
   },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",
   "error_message_required_username": "La taille de votre pseudonyme ne doit pas être inférieure à 5 caractères ni supérieur à 10 caractères",

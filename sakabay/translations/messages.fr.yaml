@@ -119,3 +119,15 @@ email_register_confirmation_subject: "Confirmation de votre inscription"
 email_register_confirmation_body: "Bonjour, \n\nVotre candidature pour que l'entreprise « %s », soit référencée sur Sakabay est en cours de traitement.\nNotre enseigne s'assure que votre entreprise respecte bien nos conditions d'utilisations.\nVous pouvez dès à présent vous connectez et suivre l'évolution de votre candidature sur l'application à l'aide de vos identifiants.\nVos identifiants de connection sont les suivants:\nEmail:  %s \nMot de passe:  %s \nNous vous recommandons de modifier votre mot de passe lors de votre première connection.\n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."
 email_register_validation_subject: "Validation de votre candidature"
 email_register_validation_body: "Bonjour, \n\nC'est avec plaisir que vous nous annoncons que l'inscription de l'entreprise « %s » à été validée par nos équipes.\nNous vous souhaitons donc la bienvenue au sein de notre groupe avec 2 mois d'abonnement offert. Vous pouvez dès maintenant personnaliser votre page de présentation depuis ce lien  %s , accessible depuis le menu glissant de l'application.\nL'Equipe Sakabay vous souhaite une bonne journée.\n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."
+
+###### Notifications ######
+
+createcompany_subject_admin: "Inscription d'une entreprise"
+createcompany_message_admin: "L'utilisateur « %s » à réalisé une demande d'inscription pour l'entreprise « %s ». Veuillez vérifier si l'entreprise correspond aux conditions d'utilisations de SAKABAY et validez en conséquence."
+validatecompany_subject_admin: "Une entreprise a été validée"
+validatecompany_message_admin: "L'entreprise « %s » à été acceptée sur notre plateforme. Nous lui avons souhaitée la bienvenue avec 2 mois d'abonnements offert. Vérifiez rapidement que tout est en place. Merci."
+
+createcompany_subject: "Confirmation inscription"
+createcompany_message: "Votre inscription qui concerne l'entreprise « %s »  est en cours de traitement. Une réponse vous sera délivrée sous 48h."
+validatecompany_subject: "Acceptation de votre candidature"
+validatecompany_message: "Félicitations ! Vous faîtes désormais partis de Sakabay Entrepeneur. Afin de vous souhaiter la bienvenue nous vous offrons 2 mois d'abonnements premium. Bienvenue chez Sakabay :)."

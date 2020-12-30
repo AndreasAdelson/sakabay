@@ -66,7 +66,9 @@
                           v-for="(notif, index) in notifications"
                           :key="notif.id"
                           :notif="notif"
-                          @notification-marked="onNotificationMarked(index)"
+                          @notification-seen="onNotificationSeen(index)"
+                          @notification-unseen="onNotificationUnSeen(index)"
+                          @notification-deleted="onNotificationDeleted(index)"
                         />
                       </ul>
                     </div>
@@ -182,6 +184,8 @@
   import Poubelle from './poubelle.vue';
   import NotificationItem from './notification-item.vue';
   import axios from 'axios';
+  import _ from 'lodash';
+
   export default {
     components: {
       LinkItem,
@@ -225,8 +229,17 @@
             this.$handleError(e);
           });
       },
-      onNotificationMarked(index) {
-        return this.notifications[index].seen = true;
+
+      onNotificationSeen(index) {
+        this.notifications[index].seen = true;
+      },
+
+      onNotificationUnSeen(index) {
+        this.notifications[index].seen = false;
+      },
+
+      onNotificationDeleted(index) {
+        this.notifications.splice(index, 1);
       },
 
       sortNotifications() {

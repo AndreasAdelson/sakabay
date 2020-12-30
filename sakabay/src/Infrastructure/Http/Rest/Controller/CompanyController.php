@@ -11,6 +11,7 @@ use App\Application\Form\Type\CompanyAdminEditType;
 use App\Application\Service\CompanyStatutService;
 use App\Application\Service\CompanyService;
 use App\Application\Service\FileUploader;
+use App\Application\Service\UtilisateurService;
 use App\Domain\Model\Company;
 use App\Infrastructure\Factory\NotificationFactory;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,6 +38,7 @@ final class CompanyController extends AbstractFOSRestController
     private $translator;
     private $encoder;
     private $notificationFactory;
+    private $utilisateurService;
 
     /**
      * CompanyRestController constructor.
@@ -47,13 +49,15 @@ final class CompanyController extends AbstractFOSRestController
         CompanyStatutService $companyStatutService,
         TranslatorInterface $translator,
         UserPasswordEncoderInterface $encoder,
-        NotificationFactory $notificationFactory
+        NotificationFactory $notificationFactory,
+        UtilisateurService $utilisateurService
     ) {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
         $this->companyService = $companyService;
         $this->companyStatutService = $companyStatutService;
         $this->notificationFactory = $notificationFactory;
+        $this->utilisateurService = $utilisateurService;
         $this->encoder = $encoder;
     }
 
@@ -338,19 +342,33 @@ final class CompanyController extends AbstractFOSRestController
         }
         $companyStatut = $this->companyStatutService->getVALCompanyStatut()[0];
 
-        $company->setCompanyStatut($companyStatut);
+        // $company->setCompanyStatut($companyStatut);
 
-        $this->entityManager->persist($company);
-        $this->entityManager->flush($company);
+        // $this->entityManager->persist($company);
+        // $this->entityManager->flush($company);
 
+        // WARNING carreful about the email address for production
+
+        //Send email
         // $email = $company->getUtilisateur()->getEmail();
         $email = "andreasadelson@gmail.com";
         $subject = $this->translator->trans('email_register_validation_subject');
         $bodyMessage = sprintf($this->translator->trans('email_register_validation_body'), $company->getName(), $this->generateUrl('home'));
-
         // $this->sendMail($email, $subject, $bodyMessage);
+
         $ressourceLocation = $this->generateUrl('company_subscribed_show', ['id' => $companyId], UrlGenerator::RELATIVE_PATH);
-        $this->notificationFactory->testNotification(array($this->getUser()), $ressourceLocation);
+
+        //WARNING be sure about who get this notification for production
+        $rights = [
+            'groups' => ['SUADMIN'],
+        ];
+        //Admins notification
+        $users = $this->utilisateurService->findUsersByRight($rights);
+        $this->notificationFactory->validationCompanyNotificationAdmin($users, $ressourceLocation, $company);
+        //User->company notification
+        $ressourceLocation = $this->generateUrl('company_show', ['slug' => $company->getUrlName()]);
+        $this->notificationFactory->validationCompanyNotificationUser([$company->getUtilisateur()], $ressourceLocation, $company);
+
         $ressourceLocation = $this->generateUrl('company_registered_index');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
@@ -405,11 +423,11 @@ final class CompanyController extends AbstractFOSRestController
      */
     public function declineCompany(int $companyId): View
     {
-        try {
-            $this->companyService->deleteCompany($companyId);
-        } catch (EntityNotFoundException $e) {
-            throw new NotFoundHttpException($e->getMessage());
-        }
+        // try {
+        //     $this->companyService->deleteCompany($companyId);
+        // } catch (EntityNotFoundException $e) {
+        //     throw new NotFoundHttpException($e->getMessage());
+        // }
         $ressourceLocation = $this->generateUrl('company_registered_index');
 
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);

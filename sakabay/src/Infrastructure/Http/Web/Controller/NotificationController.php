@@ -5,6 +5,7 @@ namespace App\Infrastructure\Http\Web\Controller;
 use App\Domain\Model\Utilisateur;
 use App\Domain\Notification\Model\Notification;
 use Mgilet\NotificationBundle\Controller\NotificationController as NotificationControllerModel;
+use Mgilet\NotificationBundle\Entity\NotificationInterface;
 use Mgilet\NotificationBundle\NotifiableInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -137,6 +138,33 @@ class NotificationController extends NotificationControllerModel
 
         return new JsonResponse(true);
     }
+
+    /**
+     * Delete notification.
+     *
+     * @Route("/{notifiable}/delete/{notification}")
+     * @Method("POST")
+     *
+     * @param $notifiable
+     *
+     * @return JsonResponse
+     *
+     * @throws \RuntimeException
+     * @throws \InvalidArgumentException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function deleteNotification($notifiable, $notification)
+    {
+        $manager = $this->get('mgilet.notification');
+        $manager->removeNotification(
+            [$manager->getNotifiableInterface($manager->getNotifiableEntityById($notifiable))],
+            $manager->getNotification($notification),
+            true
+        );
+
+        return new JsonResponse(true);
+    }
+
 
     /**
      * Checks API access permission.

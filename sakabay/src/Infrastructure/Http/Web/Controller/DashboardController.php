@@ -18,13 +18,13 @@ class DashboardController extends AbstractController
      */
     public function index(AuthorizationCheckerInterface $authorizationChecker)
     {
-        return $this->render('dashboard/index.html.twig', [
-            'canCreate' => $authorizationChecker->isGranted('ROLE_ADMIN'),
-            'canRead' => $authorizationChecker->isGranted('ROLE_ADMIN'),
-            'canEdit' => $authorizationChecker->isGranted('ROLE_ADMIN'),
-            'canDelete' => $authorizationChecker->isGranted('ROLE_ADMIN'),
-            'controller_name' => 'UtilisateurController',
-            'utilisateurId' => $this->getUser()->getId(),
-        ]);
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        } else {
+            return $this->render('dashboard/index.html.twig', [
+                'controller_name' => 'UtilisateurController',
+                'utilisateurId' => $this->getUser()->getId()
+            ]);
+        }
     }
 }

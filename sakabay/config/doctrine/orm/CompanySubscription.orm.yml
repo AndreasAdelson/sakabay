@@ -1,0 +1,45 @@
+App\Domain\Model\CompanySubscription:
+    type: entity
+    table: company_subscription
+    options:
+        comment: Entité pour définir la validité de l'abonnement.
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+            options:
+                comment: Identifiant technique de la company_subscription
+    fields:
+        dt_debut:
+            type: datetime
+            length: 50
+            nullable: true
+            column: dt_debut
+        dt_fin:
+            type: datetime
+            length: 50
+            nullable: true
+            column: dt_fin
+
+    manyToOne:
+        subscription:
+            targetEntity: Subscription
+            cascade: [persist, merge]
+            inversedBy: companysubscriptions
+            joinColumn:
+                name: id_subscription
+                referencedColumnName: id
+                nullable: false
+
+        company:
+            targetEntity: Company
+            cascade: [persist, merge]
+            inversedBy: companysubscriptions
+            joinColumn:
+                name: id_company
+                referencedColumnName: id
+                nullable: false
+
+

@@ -64,6 +64,9 @@ import ListCity from './components/admin/city';
 import Dashboard from './components/utilisateur/dashboard';
 import moment from 'moment';
 import DashboardTwo from './components/dashboard';
+import abonnement from './components/company/abonnement';
+import subscription from './components/subscription';
+import Premium from './components/subscription/premium';
 import 'utils/logger';
 
 Vue.use(BootstrapVue);
@@ -95,6 +98,9 @@ new Vue({
   el: '#root',
   i18n,
   components: {
+    Premium,
+    subscription,
+    abonnement,
     Dashboard,
     ShowCategory,
     ListCategory,

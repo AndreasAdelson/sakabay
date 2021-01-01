@@ -216,3 +216,13 @@ city_show:
 mgilet_notification:
     resource: "@MgiletNotificationBundle/Controller/"
     prefix: /notifications
+
+### Subscription
+subscription_index:
+    path: /subscription
+    controller: App\Infrastructure\Http\Web\Controller\SubscriptionController::index
+    methods: [GET]
+subscription_details_subscriptions:
+    path: /subscription/{slug}
+    controller: App\Infrastructure\Http\Web\Controller\SubscriptionController::detailsSubscriptions
+    methods: [GET]

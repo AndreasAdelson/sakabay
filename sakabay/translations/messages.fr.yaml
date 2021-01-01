@@ -131,3 +131,13 @@ createcompany_subject: "Confirmation inscription"
 createcompany_message: "Votre inscription qui concerne l'entreprise « %s »  est en cours de traitement. Une réponse vous sera délivrée sous 48h."
 validatecompany_subject: "Acceptation de votre candidature"
 validatecompany_message: "Félicitations ! Vous faîtes désormais partis de Sakabay Entrepeneur. Afin de vous souhaiter la bienvenue nous vous offrons 2 mois d'abonnements premium. Bienvenue chez Sakabay :)."
+
+
+####Footer:
+company_footer_name: "SAKABAY"
+company_footer_description: "Lumiere vers vous , vous prioritaire , vous satisfaire"
+company_footer_lien: "Lien Rapide"
+company_footer_join: "Rejoignez nous !"
+company_footer_contact: "Contactez nous !"
+company_footer_description_inscription: "Accédez à votre page et développer votre marketing."
+footer_signature: "Copyright SAKABAY © 2020. Tous droits réservés. By : Andreas ADELSON and Salman KARI"

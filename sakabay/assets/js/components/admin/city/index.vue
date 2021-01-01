@@ -2,16 +2,16 @@
   <div class="container-fluid skb-body">
     <div v-show="loading">
       <div class="loader-container-full">
-        <div class="loader">
-        </div>
+        <div class="loader" />
       </div>
     </div>
     <div class="row my-4">
       <div class="col-4">
-        <h1 class="fontUbuntuItalic orange-skb">{{ this.$t('city.title') }}</h1>
+        <h1 class="fontUbuntuItalic orange-skb">
+          {{ this.$t('city.title') }}
+        </h1>
       </div>
-      <div class="col-1">
-      </div>
+      <div class="col-1" />
       <div class="col-5">
         <b-form-group
           horizontal
@@ -27,14 +27,16 @@
               <b-btn
                 :disabled="!currentFilter"
                 @click="applyFilter()"
-              ><i class="fas fa-search"></i></b-btn>
+              >
+                <i class="fas fa-search" />
+              </b-btn>
             </b-input-group-append>
           </b-input-group>
         </b-form-group>
       </div>
       <div
-        class="col-1"
         v-if="canCreate"
+        class="col-1"
       >
         <a href="/admin/city/new">
           <b-button class="button_skb">{{ this.$t('commons.create') }}</b-button>
@@ -45,8 +47,8 @@
     <b-row>
       <b-col cols="12">
         <b-table
-          class="tablestyle"
           ref="table"
+          class="tablestyle"
           :items="refreshData"
           :fields="table.field"
           :current-page="pager.currentPage"
@@ -60,25 +62,25 @@
           responsive
           fixed
         >
-          <template v-slot:cell(actions)="data">
+          <template #cell(actions)="data">
             <b-button-group>
               <a
-                :href="'/admin/city/show/' + data.value "
                 v-if="canRead"
+                :href="'/admin/city/show/' + data.value "
               >
-                <b-button><i class="fas fa-eye"></i></b-button>
+                <b-button><i class="fas fa-eye" /></b-button>
               </a>
               <a
                 v-if="canEdit"
                 :href="'/admin/city/edit/' + data.value "
                 class="mx-1"
               >
-                <b-button><i class="fas fa-edit"></i></b-button>
+                <b-button><i class="fas fa-edit" /></b-button>
               </a>
             </b-button-group>
           </template>
-          <template v-slot:cell(fonctions)="data">
-            <div v-html="data.value"></div>
+          <template #cell(fonctions)="data">
+            <div v-html="data.value" />
           </template>
         </b-table>
       </b-col>
@@ -90,7 +92,7 @@
           :total-rows="pager.totalRows"
           :per-page="pager.perPage"
           align="center"
-        ></b-pagination>
+        />
       </b-col>
     </b-row>
     <confirm-modal
@@ -136,8 +138,8 @@ export default {
       currentFilter: '',
       table: {
         field: [
-          { key: 'name', label: this.$t('city.fields.name'), sortable: true, thClass: "tableitem" },
-          (!this.canEdit & !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-6', thClass: "tableitem" },
+          { key: 'name', label: this.$t('city.fields.name'), sortable: true, thClass: 'tableitem' },
+          (!this.canEdit & !this.canRead) ? null : { key: 'actions', label: this.$t('commons.actions'), class: 'col-size-6', thClass: 'tableitem' },
         ],
         sortBy: 'name'
       },
@@ -148,7 +150,7 @@ export default {
   methods: {
     refreshData () {
       this.loading = true;
-      return axios.get("/api/admin/cities", {
+      return axios.get('/api/admin/cities', {
         params: {
           filterFields: 'name',
           filter: this.currentFilter,
@@ -173,5 +175,5 @@ export default {
       });
     },
   },
-}
+};
 </script>

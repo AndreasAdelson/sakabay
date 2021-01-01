@@ -41,7 +41,6 @@ export default {
      */
     submitForm() {
       let fieldsDataFunction = this.getFormFieldsData || this.$getFormFieldsData;
-      console.log(fieldsDataFunction.bind(this)(this.formFields),'submiting');
       return axios
         .post(this.API_URL, fieldsDataFunction.bind(this)(this.formFields))
         .then(response => {

@@ -1,0 +1,34 @@
+App\Domain\Model\Subscription:
+    type: entity
+    table: subscription
+    options:
+        comment: Entité représentant un Subscription.
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+            options:
+                comment: Identifiant technique d'un subscription
+    fields:
+        name:
+            type: string
+            length: 191
+            column: name
+            nullable: false
+        code:
+            type: string
+            length: 100
+            column: code
+            nullable: false
+        price:
+            type: integer
+            length: 50
+            column: price
+    oneToMany:
+        companysubscriptions:
+            targetEntity: CompanySubscription
+            orphanRemoval: true
+            cascade: [persist, remove]
+            mappedBy: subscription

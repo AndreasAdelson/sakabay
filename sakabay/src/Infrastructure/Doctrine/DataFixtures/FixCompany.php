@@ -37,7 +37,7 @@ class FixCompany extends Fixture implements
                 $utilisateur,
                 $companyStatut,
                 $address,
-                $city
+                $city,
             ) = explode(';', trim($data));
 
             $company = new Company();
@@ -49,6 +49,7 @@ class FixCompany extends Fixture implements
             $company->setCompanystatut($this->getReference('companyStatut_' . $companyStatut));
             $company->setAddress($this->getReference('address_' . $address));
             $company->setCity($this->getReference('city_' . $city));
+
             $manager->persist($company);
             $this->addReference('company_' . $name, $company);
         }

@@ -131,3 +131,12 @@ createcompany_message: "The user « %s » has completed a registration request f
 validatecompany_subject: "A company has been validated"
 validatecompany_message: "The company « %s » has been accepted on our platform. We welcomed it with 2 months of free subscriptions. Check quickly that everything is in place. Thank you for your time."
 
+
+####Footer:
+company_footer_name: "SAKABAY"
+company_footer_description: "Light towards you, you priority, satisfy you"
+company_footer_lien: "Quick links"
+company_footer_join: "Joign us !"
+company_footer_contact: "Contact us !"
+company_footer_description_inscription: "Go to your page and develop your marketing."
+footer_signature: "Copyright SAKABAY © 2020. All rights reserved. \n By : Andreas ADELSON and Salman KARI"

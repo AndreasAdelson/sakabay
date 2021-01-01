@@ -3,6 +3,8 @@
 namespace App\Domain\Model;
 
 use App\Domain\Model\Utilisateur;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -118,8 +120,19 @@ class Company
      */
     private $city;
 
+    /**
+     * @var CompanySubscription[]
+     * @Expose
+     * @Groups({
+     * "api_companies",
+     * "api_admin_companies"
+     * })
+     */
+    private $companysubscriptions;
+
     public function __construct()
     {
+        $this->companysubscriptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -273,6 +286,33 @@ class Company
     public function setCity(City $city)
     {
         $this->city = $city;
+        return $this;
+    }
+
+    /**
+     * @return Collection|CompanySubscription[]
+     */
+    public function getCompanySubscriptions(): Collection
+    {
+        return $this->companysubscriptions;
+    }
+
+    public function addCompanySubscription(CompanySubscription $companysubscription): self
+    {
+        if (!$this->companysubscriptions->contains($companysubscription)) {
+            $this->companysubscriptions[] = $companysubscription;
+            $companysubscription->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompanySubscription(CompanySubscription $companysubscription): self
+    {
+        if ($this->companysubscriptions->contains($companysubscription)) {
+            $this->companysubscriptions->removeElement($companysubscription);
+        }
+
         return $this;
     }
 }

@@ -1,5 +1,10 @@
 <template>
   <div class="skb-body container-fluid p-4">
+    <div v-show="!utilisateur">
+      <div class="loader-container-full">
+        <div class="loader" />
+      </div>
+    </div>
     <!-- Content -->
     <div class="row py-3">
       <div class="col-3">
@@ -9,11 +14,14 @@
         <i class="fas fa-home grey-skb fontSize20" />
       </div>
     </div>
-    <div class="row">
+    <div
+      v-if="utilisateur && utilisateur.company"
+      class="row"
+    >
       <div class="col-3">
         <link-item
           icon-label="fas fa-edit"
-          button-text="Publiez votre CV"
+          button-text="Publiez une offre"
           class-color="flat-color-1"
           :small-text="false"
         />
@@ -21,15 +29,16 @@
       <div class="col-3">
         <link-item
           icon-label="fas fa-wrench"
-          button-text="Modifier mes informations personnelles"
+          button-text="Voir les abonnements"
           class-color="flat-color-2"
           :small-text="true"
+          :href="'/subscription'"
         />
       </div>
       <div class="col-3">
         <link-item
           icon-label="far fa-eye"
-          button-text="Consultez votre CV"
+          button-text="Consultez vos messages"
           class-color="flat-color-3"
           :small-text="true"
         />
@@ -184,7 +193,6 @@
   import Poubelle from './poubelle.vue';
   import NotificationItem from './notification-item.vue';
   import axios from 'axios';
-  import _ from 'lodash';
 
   export default {
     components: {
@@ -202,7 +210,8 @@
     data() {
       return {
         notifications: [
-        ]
+        ],
+        utilisateur: null
       };
     },
     computed: {
@@ -214,10 +223,11 @@
           }
         });
         return unseen;
-      }
+      },
     },
     created() {
       this.getNotifications();
+      this.getUser();
     },
     methods: {
       getNotifications() {
@@ -246,6 +256,20 @@
         this.notifications.sort(function(a, b) {
           return a.notification.date - b.notification.date;
         });
+      },
+
+      getUser() {
+        return axios.get('api/admin/utilisateurs/' + this.utilisateurId)
+          .then(response => {
+            console.log(response);
+            this.utilisateur = response.data;
+          }).catch(e => {
+            this.$handleError(e);
+          });
+      },
+
+      onNotificationMarked(index) {
+        return this.notifications[index].seen = true;
       }
     },
   };

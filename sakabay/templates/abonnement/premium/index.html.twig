@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'user_title_edit_page'|trans }}{% endblock %}
+
+{% block body %}
+ <premium
+ :company-id="{{ companyId }}"
+ :subscription-name="{{ subscriptionName|json_encode }}"
+ :utilisateur-id="{{ utilisateurId }}"
+ ></premium>
+{% endblock %}

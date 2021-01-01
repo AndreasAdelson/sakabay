@@ -3,6 +3,7 @@
 namespace App\Infrastructure\Repository;
 
 use App\Domain\Model\Company;
+use App\Domain\Model\Utilisateur;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
@@ -81,5 +82,14 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
         }
 
         return $this->paginate($qb, $perPage, $currentPage);
+    }
+    public function getCompanyByUserId($utilisateur = '')
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->leftJoin('u.utilisateur', 'utilisateur')
+            ->andWhere('utilisateur.id = :utilisateurId')
+            ->setParameter('utilisateurId', $utilisateur);
+
+        return $qb->getQuery()->getResult();
     }
 }

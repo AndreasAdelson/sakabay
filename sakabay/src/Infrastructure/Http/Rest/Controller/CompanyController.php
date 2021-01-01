@@ -433,6 +433,18 @@ final class CompanyController extends AbstractFOSRestController
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 
+    /**
+     * @Rest\View(serializerGroups={"api_companies"})
+     * @Rest\Get("/companies/utilisateur/{utilisateurId}")
+     *
+     * @return View
+     */
+    public function getCompanyByUserId(string $utilisateurId): View
+    {
+        $company = $this->companyService->getCompanyByUserId($utilisateurId);
+        return View::create($company, Response::HTTP_OK);
+    }
+
     private function recastName(string $urlName): string
     {
         $urlName = str_replace(' ', '-', $urlName);

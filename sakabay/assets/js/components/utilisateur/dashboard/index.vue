@@ -152,7 +152,6 @@
       getNotifications() {
         return axios.get('/notification/all/' + this.utilisateurId)
           .then(response => {
-            console.log(response);
             this.notifications = response.data;
           }).catch(e => {
             this.$handleError(e);

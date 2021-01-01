@@ -78,4 +78,9 @@ class CompanyService
         return $this->companyRepository
             ->getPaginatedList($sortBy, $descending, $filterFields, $filterText, $currentPage, $perPage, $codeStatut, $category, $city);
     }
+
+    public function getCompanyByUserId($utilisateur = '')
+    {
+        return $this->companyRepository->getCompanyByUserId($utilisateur);
+    }
 }

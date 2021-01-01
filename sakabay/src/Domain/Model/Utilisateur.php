@@ -133,6 +133,7 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @var Company
      * @Expose
      * @Groups({
+     * "api_utilisateurs",
      * })
      */
     private $company;

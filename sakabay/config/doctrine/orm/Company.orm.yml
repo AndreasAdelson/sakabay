@@ -52,6 +52,7 @@ App\Domain\Model\Company:
                 name: id_city
                 referencedColumnName: id
                 nullable: false
+
     oneToOne:
         utilisateur:
             targetEntity: Utilisateur
@@ -72,6 +73,15 @@ App\Domain\Model\Company:
                 onDelete: CASCADE
                 nullable: false
             cascade: [persist,remove]
+
+    oneToMany:
+        companysubscriptions:
+            targetEntity: CompanySubscription
+            orphanRemoval: true
+            cascade: [persist, remove]
+            mappedBy: company
+
+
 
 
 

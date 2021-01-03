@@ -49,7 +49,7 @@ services:
     App\Infrastructure\EventListener\CompanyListener:
         arguments: ["@security.password_encoder"]
         tags:
-            - { name: doctrine.event_listener, event: prePersist, connection: default }
+            - { name: kernel.event_listener, event: prePersist, connection: default }
 
     notification.factory:
         class: App\Infrastructure\Factory\NotificationFactory

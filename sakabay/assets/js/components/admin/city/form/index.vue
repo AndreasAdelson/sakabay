@@ -2,8 +2,7 @@
   <div class="container skb-body">
     <div v-show="loading">
       <div class="loader-container-full">
-        <div class="loader">
-        </div>
+        <div class="loader" />
       </div>
     </div>
     <a href="/admin/city">
@@ -12,7 +11,7 @@
         type="button"
         class="w-40px p-0 rounded-circle btn-close btn"
       >
-        <i class="fas fa-times "></i>
+        <i class="fas fa-times " />
       </button>
     </a>
     <form>
@@ -28,12 +27,12 @@
                 >
                   <label class="fontUbuntuItalic fontSize14">{{ this.$t('city.fields.name') }}</label>
                   <input
+                    v-model="formFields.name"
                     v-validate="'required'"
                     type="text"
                     name="name"
                     class="form-control"
                     :placeholder="$t('city.placeholder.name')"
-                    v-model="formFields.name"
                   >
                   <div
                     v-for="errorText in formErrors.name"
@@ -51,7 +50,9 @@
                 type="button"
                 class="btn button_skb fontUbuntuItalic"
                 @click="$validateForm()"
-              >{{ this.cityId ? this.$t('commons.edit') :  this.$t('commons.create')}}</button>
+              >
+                {{ this.cityId ? this.$t('commons.edit') : this.$t('commons.create') }}
+              </button>
             </div>
           </div>
         </div>
@@ -60,57 +61,57 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import validatorRulesMixin from 'mixins/validatorRulesMixin';
-import adminFormMixin from 'mixins/adminFormMixin';
-import DualList from 'components/commons/dual-list';
+  import axios from 'axios';
+  import validatorRulesMixin from 'mixins/validatorRulesMixin';
+  import adminFormMixin from 'mixins/adminFormMixin';
+  import DualList from 'components/commons/dual-list';
 
-export default {
-  components: {
-    DualList
-  },
-  mixins: [
-    validatorRulesMixin,
-    adminFormMixin
-  ],
-  data () {
-    return {
-      loading: true,
-      API_URL: '/api/admin/cities' + (this.cityId ? `/${this.cityId}` : ''),
-      fonctionsAtCreation: null,
-      formFields: {
-        name: null,
-      },
-      formErrors: {
-        name: [],
-      }
-    };
-  },
-  props: {
-    cityId: {
-      type: Number,
-      default: null,
+  export default {
+    components: {
+      DualList
     },
-  },
-  created () {
-    let promises = [];
-    if (this.cityId) {
-      promises.push(axios.get(this.API_URL));
-    }
-    return Promise.all(promises).then(res => {
+    mixins: [
+      validatorRulesMixin,
+      adminFormMixin
+    ],
+    props: {
+      cityId: {
+        type: Number,
+        default: null,
+      },
+    },
+    data() {
+      return {
+        loading: true,
+        API_URL: '/api/admin/cities' + (this.cityId ? `/${this.cityId}` : ''),
+        fonctionsAtCreation: null,
+        formFields: {
+          name: null,
+        },
+        formErrors: {
+          name: [],
+        }
+      };
+    },
+    created() {
+      let promises = [];
       if (this.cityId) {
-        let city = res[0].data;
-        this.$removeFieldsNotInForm(city, Object.keys(this.formFields));
-        this.$setEditForm(city);
+        promises.push(axios.get(this.API_URL));
       }
-      this.loading = false;
-    }).catch(e => {
-      this.$handleError(e);
-      this.loading = false;
-    });
-  },
-  methods: {
+      return Promise.all(promises).then(res => {
+        if (this.cityId) {
+          let city = res[0].data;
+          this.$removeFieldsNotInForm(city, Object.keys(this.formFields));
+          this.$setEditForm(city);
+        }
+        this.loading = false;
+      }).catch(e => {
+        this.$handleError(e);
+        this.loading = false;
+      });
+    },
+    methods: {
 
-  },
-}
+    },
+  };
 </script>

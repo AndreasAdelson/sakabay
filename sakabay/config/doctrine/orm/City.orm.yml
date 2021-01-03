@@ -22,7 +22,7 @@ App\Domain\Model\City:
         uniqueGroupCode:
             columns: [name]
     oneToMany:
-        company:
+        companys:
             targetEntity: Company
             orphanRemoval: false
             cascade: [persist]

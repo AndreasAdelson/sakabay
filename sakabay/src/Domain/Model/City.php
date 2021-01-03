@@ -51,13 +51,13 @@ class City
      * @Groups({
      * })
      */
-    private $company;
+    private $companys;
 
 
     public function __construct()
 
     {
-        $this->company = new ArrayCollection();
+        $this->companys = new ArrayCollection();
     }
 
     /**
@@ -69,17 +69,7 @@ class City
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     * @param  int  $id
-     * @return  self
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
 
-        return $this;
-    }
 
     /**
      * Get the value of name
@@ -102,52 +92,19 @@ class City
         return $this;
     }
 
-    /**
-     * @return Collection|City[]
-     */
-    public function getCity(): Collection
-    {
-        return $this->fonctions;
-    }
-
-    /**
-     * Get the value of categorys
-     * @return  City[]
-     */
-    public function addCity(City $fonction): self
-    {
-        if (!$this->fonctions->contains($fonction)) {
-            $this->fonctions[] = $fonction;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the value of fonctions
-     * @param  City[]  $fonctions
-     * @return  self
-     */
-    public function removeCity(City $fonction): self
-    {
-        if ($this->fonctions->contains($fonction)) {
-            $this->fonctions->removeElement($fonction);
-        }
-        return $this;
-    }
 
     /**
      * @return Company[]
      */
-    public function getCompany(): Collection
+    public function getCompanys(): Collection
     {
-        return $this->company;
+        return $this->companys;
     }
 
     public function addCompany(Company $company): self
     {
-        if (!$this->company->contains($company)) {
-            $this->company[] = $company;
+        if (!$this->companys->contains($company)) {
+            $this->companys[] = $company;
             $company->setCity($this);
         }
 

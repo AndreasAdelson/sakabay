@@ -56,13 +56,13 @@ class Category
      * @Groups({
      * })
      */
-    private $company;
+    private $companys;
 
 
     public function __construct()
 
     {
-        $this->company = new ArrayCollection();
+        $this->companys = new ArrayCollection();
     }
 
     /**
@@ -74,17 +74,7 @@ class Category
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     * @param  int  $id
-     * @return  self
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
 
-        return $this;
-    }
 
     /**
      * Get the value of name
@@ -129,52 +119,17 @@ class Category
     }
 
     /**
-     * @return Collection|Category[]
-     */
-    public function getCategory(): Collection
-    {
-        return $this->fonctions;
-    }
-
-    /**
-     * Get the value of categorys
-     * @return  Categorys[]
-     */
-    public function addCategory(Category $fonction): self
-    {
-        if (!$this->fonctions->contains($fonction)) {
-            $this->fonctions[] = $fonction;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Set the value of fonctions
-     * @param  Categorys[]  $fonctions
-     * @return  self
-     */
-    public function removeCategory(Category $fonction): self
-    {
-        if ($this->fonctions->contains($fonction)) {
-            $this->fonctions->removeElement($fonction);
-        }
-        return $this;
-    }
-
-
-    /**
      * @return Collection|Company[]
      */
-    public function getCompany(): Collection
+    public function getCompanys(): Collection
     {
-        return $this->company;
+        return $this->companys;
     }
 
     public function addCompany(Company $company): self
     {
-        if (!$this->company->contains($company)) {
-            $this->company[] = $company;
+        if (!$this->companys->contains($company)) {
+            $this->companys[] = $company;
             $company->setCategory($this);
         }
 

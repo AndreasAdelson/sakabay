@@ -14,7 +14,6 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use Mgilet\NotificationBundle\Annotation\Notifiable;
 use Mgilet\NotificationBundle\NotifiableInterface;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 
 /**
@@ -406,7 +405,7 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
     /**
      * Get the value of updated
      *
-     * @return  datetime
+     * @return  DateTime
      */
     public function getUpdated()
     {
@@ -416,7 +415,7 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
     /**
      * Set the value of updated
      *
-     * @param  datetime  $updated
+     * @param  DateTime  $updated
      *
      * @return  self
      */

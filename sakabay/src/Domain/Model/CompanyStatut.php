@@ -57,12 +57,12 @@ class CompanyStatut
      * @Groups({
      * })
      */
-    private $company;
+    private $companys;
 
     public function __construct()
 
     {
-        $this->company = new ArrayCollection();
+        $this->companys = new ArrayCollection();
         $this->fonctions = new ArrayCollection();
         $this->groups = new ArrayCollection();
     }
@@ -70,18 +70,6 @@ class CompanyStatut
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set the value of id
-     * @param  int  $id
-     * @return  self
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**
@@ -129,15 +117,15 @@ class CompanyStatut
     /**
      * @return Company[]
      */
-    public function getCompany(): Collection
+    public function getCompanys(): Collection
     {
-        return $this->company;
+        return $this->companys;
     }
 
     public function addCompany(Company $company): self
     {
-        if (!$this->company->contains($company)) {
-            $this->company[] = $company;
+        if (!$this->companys->contains($company)) {
+            $this->companys[] = $company;
             $company->setCompanystatut($this);
         }
 

@@ -5,12 +5,14 @@ namespace App\Infrastructure\Doctrine\DataFixtures;
 use App\Application\Utils\StringUtils;
 use App\Domain\Model\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FixCategory extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
+class FixCategory extends Fixture implements
+    OrderedFixtureInterface,
+    ContainerAwareInterface
 {
     private $container;
 

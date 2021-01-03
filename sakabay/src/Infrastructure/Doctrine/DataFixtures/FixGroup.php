@@ -6,11 +6,13 @@ use App\Application\Utils\StringUtils;
 use App\Domain\Model\Group;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class FixGroup extends Fixture implements OrderedFixtureInterface, ContainerAwareInterface
+class FixGroup extends Fixture implements
+    OrderedFixtureInterface,
+    ContainerAwareInterface
 {
     private $container;
 

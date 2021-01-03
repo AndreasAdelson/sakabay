@@ -79,17 +79,7 @@ class Role
         return $this->id;
     }
 
-    /**
-     * Set the value of id
-     * @param  int  $id
-     * @return  self
-     */
-    public function setId(int $id)
-    {
-        $this->id = $id;
 
-        return $this;
-    }
 
     /**
      * Get the value of name
@@ -186,7 +176,7 @@ class Role
 
     public function removeGroup(Group $group): self
     {
-        if (!$this->groups->contains($group)) {
+        if ($this->groups->contains($group)) {
             $this->groups->removeElement($group);
             $group->removeRole($this);
         }

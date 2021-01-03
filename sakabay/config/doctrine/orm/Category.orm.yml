@@ -24,7 +24,7 @@ App\Domain\Model\Category:
             column: code
             nullable: false
     oneToMany:
-        company:
+        companys:
             targetEntity: Company
             orphanRemoval: true
             cascade: [persist, remove]

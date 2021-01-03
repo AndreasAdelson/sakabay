@@ -31,7 +31,7 @@ App\Domain\Model\Company:
         category:
             targetEntity: Category
             cascade: [persist]
-            inversedBy: company
+            inversedBy: companys
             joinColumn:
                 name: id_category
                 referencedColumnName: id
@@ -39,7 +39,7 @@ App\Domain\Model\Company:
         companystatut:
             targetEntity: CompanyStatut
             cascade: [persist]
-            inversedBy: company
+            inversedBy: companys
             joinColumn:
                 name: id_companystatut
                 referencedColumnName: id
@@ -47,7 +47,7 @@ App\Domain\Model\Company:
         city:
             targetEntity: City
             cascade: [persist]
-            inversedBy: company
+            inversedBy: companys
             joinColumn:
                 name: id_city
                 referencedColumnName: id

@@ -21,17 +21,6 @@ class UtilisateurRepository extends AbstractRepository implements UtilisateurRep
         parent::__construct($entityManager, new ClassMetadata(Utilisateur::class));
     }
 
-    public function loadUserByUsername($usernameOrEmail)
-    {
-        return $this->createQuery(
-            'SELECT u
-                FROM App\Domain\Model\Utilisateur u
-                WHERE u.email = :query'
-        )
-            ->setParameter('query', $usernameOrEmail)
-            ->getQuery()
-            ->getOneOrNullResult();
-    }
 
     public function save(Utilisateur $utilisateur): void
     {
@@ -119,7 +108,9 @@ class UtilisateurRepository extends AbstractRepository implements UtilisateurRep
                     $qb->orWhere($orStatements);
                 }
             }
-        } else {
+        }
+        else
+        {
             if (!empty($filter['groups'])) {
                 $qb->leftJoin('u.groups', 'groups');
                 if (is_array($filter['groups'])) {

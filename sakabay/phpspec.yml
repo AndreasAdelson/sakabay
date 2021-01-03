@@ -1,0 +1,21 @@
+suites:
+  entity:
+    namespace: App
+    psr4_prefix: App
+
+extensions:
+  FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
+    format:
+      - html
+      - clover
+    blacklist:
+      - src/Infrastructure/Http
+      - src/Infrastructure/Doctrine
+      - src/Infrastructure/EventListener
+      - src/Application/Form/Type
+    blacklist_files:
+      - src/Kernel.php
+      - src/Infrastructure/Repository/AbstractRepository.php
+    output:
+      html: tests/coverage
+      clover: tests/coverage.xml

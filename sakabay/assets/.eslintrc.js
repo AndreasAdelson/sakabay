@@ -33,20 +33,20 @@ module.exports = {
     }]
   },
   'overrides': [{
-      'files': ['js/**/*.test.js'],
-      'rules': {
-        'camelcase': 0,
-        'no-underscore-dangle': 0,
-      }
-    },
-    {
-      'files': ['*.vue', 'js/**/*.js'],
-      'rules': {
-        'indent': 'off'
-      }
+    'files': ['js/**/*.test.js'],
+    'rules': {
+      'camelcase': 0,
+      'no-underscore-dangle': 0,
     }
+  },
+  {
+    'files': ['*.vue', 'js/**/*.js'],
+    'rules': {
+      'indent': 'off'
+    }
+  }
   ],
   globals: {
     '$': 'readonly',
   }
-}
+};

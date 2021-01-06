@@ -1,6 +1,15 @@
 <template>
-  <div class="container">
-    <div class="row">
+  <div class="container skb-body">
+    <div v-if="loading">
+      <div class="loader-container-full">
+        <div class="loader" />
+      </div>
+    </div>
+
+    <div
+      v-else
+      class="row"
+    >
       <b-card-group deck>
         <b-card
           v-for="(subscription , index) in subscriptions "
@@ -10,20 +19,21 @@
           img-alt="Image"
           img-top
         >
-          <b-card-text>
-            This is a wider card with supporting text below as a natural lead-in to additional content.
-            This content is a little bit longer.
+          <b-card-text v-if="subscription.name.toLowerCase() == 'premium'">
+            {{ $t('subscription.detailsPremium') }}
           </b-card-text>
-          <template #footer>
-            <b-button
-              variant="primary"
-              data-toggle="modal"
-              :data-target="'#' + CONFIRM_SUBSCRIPTION"
-              @click="currentName = subscription.name"
-            >
-              Follow
-            </b-button>
-          </template>
+          <b-card-text v-if="subscription.name.toLowerCase() == 'pro'">
+            {{ $t('subscription.detailsPro') }}
+          </b-card-text>
+          <b-card-text v-if="subscription.name.toLowerCase() == 'free'">
+            {{ $t('subscription.detailsFree') }}
+          </b-card-text>
+          <b-button
+            variant="primary"
+            :href="'subscription/'+subscription.name.toLowerCase()"
+          >
+            Follow
+          </b-button>
         </b-card>
 
         <!-- <b-card
@@ -66,27 +76,14 @@
         </b-card> -->
       </b-card-group>
     </div>
-    <confirm-modal
-      :id="CONFIRM_SUBSCRIPTION"
-      :title-text="$t('commons.confirm_modal.delete.title')"
-      :body-text="$t('commons.confirm_modal.delete.text')"
-      :button-yes-text="$t('commons.yes')"
-      :button-no-text="$t('commons.no')"
-      :are-buttons-on-same-line="true"
-      @confirm-modal-yes="confirmSubscription('/subscription/')"
-    />
   </div>
 </template>
 
 <script>
 
 import axios from 'axios';
-import ConfirmModal from 'components/commons/confirm-modal';
 
 export default {
-  components: {
-    ConfirmModal
-  },
   props: {
 
     subscriptionId: {
@@ -97,7 +94,6 @@ export default {
   data () {
 
     return {
-      CONFIRM_SUBSCRIPTION: 'confirm_subscription_modal',
       loading: true,
       subscriptions: [],
       currentName: null,
@@ -120,9 +116,6 @@ export default {
           this.loading = false;
         });
 
-    },
-    confirmSubscription (url) {
-      window.location.assign(url + this.currentName.toLowerCase());
     },
   },
 };

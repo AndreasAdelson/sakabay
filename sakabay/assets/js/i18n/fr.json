@@ -29,11 +29,24 @@
           "title": "Valider l'inscription",
           "text": "Vous êtes sur le point de valider la candidature d'une entreprise. Êtes-vous sur de bien vouloir la valider ?"
         }
+
+      },
+      "subscription_validate": {
+        "validate":{
+        "title": "Valider l'abonnement",
+        "text": "Vous êtes sur le point de valider l'abonnement pour votre entreprise. Êtes-vous sur de bien vouloir la valider ?"
+        }
       },
       "decline": {
         "company": {
           "title": "Refuser l'inscription",
           "text": "Vous êtes sur le point de refuser la candidature d'une entreprise. Êtes-vous sur de bien vouloir la refuser ? Si oui les données concernant l'entreprise seront directement supprimées."
+        }
+      },
+      "subscription_decline": {
+        "decline": {
+          "title": "Refuser l'abonnement",
+          "text": "Vous êtes sur le point de valider l'abonnement à l'offre. Êtes-vous sur de bien vouloir la refuser ?"
         }
       },
       "delete": {
@@ -206,6 +219,11 @@
         "expired": "Expiré"
       }
     }
+  },
+  "subscription": {
+    "detailsPremium": "detailsPremium",
+    "detailsPro": "detailsPro",
+    "detailsFree": "detailsFree"
   },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",
   "error_message_required_username": "La taille de votre pseudonyme ne doit pas être inférieure à 5 caractères ni supérieur à 10 caractères",

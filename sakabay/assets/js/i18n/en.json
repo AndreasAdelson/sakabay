@@ -30,6 +30,18 @@
           "text": "You are about to validate a company's application. Are you sure you want to validate it?"
         }
       },
+      "subscription_validate": {
+        "validate":{
+          "title": "Validate the subscription",
+          "text": "You are about to validate a subscription's application. Are you sure you want to validate it?"
+        }
+      },
+      "subscription_decline": {
+        "decline": {
+          "title": "Refuse subscription",
+          "text": "You are about to reject a subscri^ption's offer. Are you sure you want to refuse it?"
+        }
+      },
       "decline": {
         "company": {
           "title": "Refuse registration",
@@ -206,6 +218,11 @@
         "expired": "Expired"
       }
     }
+  },
+  "subscription": {
+    "detailsPremium": "detailsPremium",
+    "detailsPro": "detailsPro",
+    "detailsFree": "detailsFree"
   },
   "error_message_required": "This field is mandatory. Thank you for filling it in.",
   "error_message_required_username": "The size of your username must not be less than 5 characters and not more than 10 characters.",

@@ -81,4 +81,36 @@ final class CompanySubscriptionController extends AbstractFOSRestController
 
         return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
     }
+
+    /**
+     * @Rest\View()
+     * @Rest\Post("/subscribes/{slug}")
+     * @param Request $request
+     *
+     * @return View
+     */
+    public function createCompanySubscriptionByname(string $slug, Request $request): View
+    {
+
+        $companySubscription = new CompanySubscription();
+
+        $setcompanySubscription = $this->companySubscriptionService->createCompanySubscriptionByname($slug);
+
+
+        $companySubscription = $setcompanySubscription;
+        $formOptions = ['translator' => $this->translator];
+        $form = $this->createForm(CompanySubscriptionType::class, $companySubscription, $formOptions);
+        $form->submit($request->request->all());
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $this->entityManager->persist($companySubscription);
+        $this->entityManager->flush();
+
+        $ressourceLocation = $this->generateUrl('dashboard');
+
+        return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
+        // return View::create($subscription, Response::HTTP_OK);
+    }
 }

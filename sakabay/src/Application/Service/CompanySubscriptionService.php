@@ -33,6 +33,11 @@ class CompanySubscriptionService
         return $this->companySubscriptionRepository->findAll();
     }
 
+    public function createCompanySubscriptionByname(string $name): array
+    {
+        return $this->subscriptionRepository->createCompanySubscriptionByname($name);
+    }
+
     // ///Editer un Category
     // public function editCompanySubscription(string $dtFin, string $dtDebut, int $companySubscriptionId)
     // {

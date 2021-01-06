@@ -5,6 +5,10 @@ user_title_list_page: "Liste des utilisateurs"
 user_title_edit_page: "Modifier un utilisateur"
 user_title_show_page: "Détails de l'utilisateur"
 
+#####Subscription pages
+subscription_title_page: "Page d'abonnements"
+subscription_details_title_page: "Page de souscription à un abonnement "
+
 #Navbar
 local_business: "Business local"
 formules: "Nos formules"

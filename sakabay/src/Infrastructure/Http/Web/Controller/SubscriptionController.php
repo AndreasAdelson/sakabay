@@ -38,7 +38,7 @@ class SubscriptionController extends AbstractController
         } else if (!$this->getUser()->getCompany()) {
             throw new NotFoundHttpException('Error !');
         } else {
-            return $this->render('abonnement/premium/index.html.twig', [
+            return $this->render('abonnement/details/index.html.twig', [
                 'controller_name' => 'CompanyController',
                 'companyId' => $this->getUser()->getCompany()->getId(),
                 'utilisateurId' => $this->getUser()->getId(),
@@ -47,26 +47,5 @@ class SubscriptionController extends AbstractController
                 // 'companyUrlName' => $this->getUser()->getCompqny(),
             ]);
         }
-    }
-    /**
-     * @Route("subscription/pro", name="subscription_pro", methods="GET|POST")
-     * @Security("is_granted('ROLE_ADMIN')")
-     */
-    public function pro(int $id)
-    {
-        return $this->render('abonnement/pro/index.html.twig', [
-            'subscriptionId' => $id,
-        ]);
-    }
-
-    /**
-     * @Security("is_granted('ROLE_ADMIN')")
-     * @Route("subscription/free", name="subscription_free", methods="GET|POST")
-     */
-    public function free(int $id)
-    {
-        return $this->render('abonnement/free/index.html.twig', [
-            'subscriptionId' => $id
-        ]);
     }
 }

@@ -56,133 +56,132 @@
 </template>
 
 <script>
+import axios from 'axios';
+import moment from 'moment';
+import ConfirmModal from 'components/commons/confirm-modal';
 
-  import axios from 'axios';
-  import moment from 'moment';
-  import ConfirmModal from 'components/commons/confirm-modal';
-
-  export default {
-    components: {
-      ConfirmModal
+export default {
+  components: {
+    ConfirmModal
+  },
+  props: {
+    utilisateurId: {
+      type: Number,
+      default: null
     },
-    props: {
-      utilisateurId: {
-        type: Number,
-        default: null
-      },
-      companyId: {
-        type: Number,
-        default: null
-      },
-      subscriptionName: {
-        type: String,
-        default: null
-      },
+    companyId: {
+      type: Number,
+      default: null
     },
-
-    data() {
-
-      return {
-        CONFIRM_SUBSCRIPTION: 'confirm_subscription_modal',
-        loading: true,
-        API_URL: '/api/subscribes',
-        formFields: {
-          dtDebut: moment().format('YYYY/MM/DD H:m:s'),
-          dtFin: moment().format('YYYY/MM/DD H:m:s'),
-          company: new Object(),
-          subscription: new Object()
-        },
-        formErrors: {
-          dtDebut: [],
-          dtFin: [],
-          company: [],
-          subscription: [],
-        },
-
-      };
+    subscriptionName: {
+      type: String,
+      default: null
     },
-    computed: {
-      verifySubscription() {
-        let etat = true;
-        let companySubscriptions = this.formFields.company.companysubscriptions;
-        if (!this.loading) {
-          if (this.formFields.company && companySubscriptions) {
-            // console.log(companySubscriptions);
-            companySubscriptions.forEach((item) => {
-              console.log('1', item.dt_fin);
-              console.log('2', moment().isAfter(item.dt_fin));
-              if (moment().isAfter(item.dt_fin)) {
-                console.log(item.dt_fin);
-                etat = false;
-              } else {
-                etat = true;
-              }
+  },
 
-            });
-          } else {
-            etat = true;
-          }
+  data () {
 
-        }
-        if (etat) {
-          return true;
+    return {
+      CONFIRM_SUBSCRIPTION: 'confirm_subscription_modal',
+      loading: true,
+      API_URL: '/api/subscribes',
+      formFields: {
+        dtDebut: moment().format('YYYY/MM/DD H:m:s'),
+        dtFin: moment().format('YYYY/MM/DD H:m:s'),
+        company: new Object(),
+        subscription: new Object()
+      },
+      formErrors: {
+        dtDebut: [],
+        dtFin: [],
+        company: [],
+        subscription: [],
+      },
+
+    };
+  },
+  computed: {
+    verifySubscription () {
+      let etat = true;
+      let companySubscriptions = this.formFields.company.companysubscriptions;
+      if (!this.loading) {
+        if (this.formFields.company && companySubscriptions) {
+          // console.log(companySubscriptions);
+          companySubscriptions.forEach((item) => {
+            console.log('1', item.dt_fin);
+            console.log('2', moment().isAfter(item.dt_fin));
+            if (moment().isAfter(item.dt_fin)) {
+              console.log(item.dt_fin);
+              etat = false;
+            } else {
+              etat = true;
+            }
+
+          });
         } else {
-          return false;
+          etat = true;
         }
-        console.log('etat', etat);
 
-      },
-    },
-    created() {
-      this.getSubcriptionName();
-      this.getUtilisateurCompany();
-    },
-    methods: {
-      getSubcriptionName() {
-        if (this.subscriptionName) {
-          this.loading = true;
-          return axios.get('/api/subscribes/' + this.subscriptionName)
-            .then(response => {
-              this.formFields.subscription = response.data;
-              this.loading = false;
-            }).catch(error => {
-              this.$handleError(error);
-            });
-        }
-      },
-      getUtilisateurCompany() {
-        if (this.utilisateurId) {
-          this.loading = true;
-          return axios.get('/api/companies/utilisateur/' + this.utilisateurId)
-            .then(response => {
-              this.formFields.company = response.data[0];
-              console.log(response.data);
-              this.loading = false;
-            }).catch(error => {
-              this.$handleError(error);
-              this.loading = false;
-            });
-        }
-      },
-      subscribe() {
-        let currentDate = moment(this.formFields.dtDebut);
-        let futureMonth = moment(currentDate).add(1, 'M');
-        if (moment(currentDate) != moment(futureMonth) && moment(currentDate) < moment(futureMonth)) {
-          futureMonth = futureMonth.add(1, 'd');
-        }
-        this.formFields.dtFin = futureMonth.format('YYYY/MM/DD H:m:s');
+      }
+      if (etat) {
+        return true;
+      } else {
+        return false;
+      }
+      console.log('etat', etat);
 
-        let formData = this.$getFormFieldsData(this.formFields);
+    },
+  },
+  created () {
+    this.getSubcriptionName();
+    this.getUtilisateurCompany();
+  },
+  methods: {
+    getSubcriptionName () {
+      if (this.subscriptionName) {
         this.loading = true;
-        return axios.post(this.API_URL, formData)
+        return axios.get('/api/subscribes/' + this.subscriptionName)
           .then(response => {
-            this.loading = true;
-            window.location.assign(response.headers.location);
+            this.formFields.subscription = response.data;
+            this.loading = false;
+          }).catch(error => {
+            this.$handleError(error);
+          });
+      }
+    },
+    getUtilisateurCompany () {
+      if (this.utilisateurId) {
+        this.loading = true;
+        return axios.get('/api/companies/utilisateur/' + this.utilisateurId)
+          .then(response => {
+            this.formFields.company = response.data[0];
+            console.log(response.data);
+            this.loading = false;
           }).catch(error => {
             this.$handleError(error);
             this.loading = false;
           });
-      },
-    }
-  };
+      }
+    },
+    subscribe () {
+      let currentDate = moment(this.formFields.dtDebut);
+      let futureMonth = moment(currentDate).add(1, 'M');
+      if (moment(currentDate) != moment(futureMonth) && moment(currentDate) < moment(futureMonth)) {
+        futureMonth = futureMonth.add(1, 'd');
+      }
+      this.formFields.dtFin = futureMonth.format('YYYY/MM/DD H:m:s');
+
+      let formData = this.$getFormFieldsData(this.formFields);
+      this.loading = true;
+      return axios.post(this.API_URL, formData)
+        .then(response => {
+          this.loading = true;
+          window.location.assign(response.headers.location);
+        }).catch(error => {
+          this.$handleError(error);
+          this.loading = false;
+        });
+    },
+  }
+};
 </script>

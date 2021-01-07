@@ -8,6 +8,7 @@ use App\Application\Service\UtilisateurService;
 use App\Application\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use FOS\RestBundle\Context\Context;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -98,19 +99,36 @@ final class UtilisateurController extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\View(serializerGroups={"api_utilisateurs"})
      * @Rest\Get("/admin/utilisateurs/{utilisateurId}")
+     * @QueryParam(name="serial_group",
+     *             nullable=false,
+     *             default="api_utilisateurs",
+     *             description="Un groupe de sérialisation parmis les groupes autorisés"
+     * )
      *
      * @return View
      */
-    public function getUtilisateur(int $utilisateurId): View
+    public function getUtilisateur(int $utilisateurId, ParamFetcher $paramFetcher): View
     {
         $utilisateur = $this->utilisateurService->getUtilisateur($utilisateurId);
         if (!$utilisateur) {
             throw $this->createNotFoundException('Utilisateur with id ' . $utilisateurId . ' does not exist!');
         }
 
-        return View::create($utilisateur, Response::HTTP_OK);
+        $authorizedSerialGroups = [
+            'api_utilisateurs',
+            'api_dashboard_utilisateur'
+        ];
+        $querySerial = $paramFetcher->get('serial_group');
+        if (in_array($querySerial, $authorizedSerialGroups)) {
+            $serializerGroups = [$querySerial];
+        } else {
+            $serializerGroups = ['api_utilisateurs'];
+        }
+        $context = new Context();
+        $context->setGroups($serializerGroups);
+
+        return View::create($utilisateur, Response::HTTP_OK)->setContext($context);
     }
 
     /**

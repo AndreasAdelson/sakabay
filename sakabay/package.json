@@ -36,6 +36,7 @@
     "vue2-leaflet": "^2.6.0",
     "vue2-transitions": "^0.3.0",
     "vuejs-logger": "^1.5.4",
+    "vuescroll": "^4.17.3",
     "vuetify": "^2.3.9",
     "vuex": "^3.5.1"
   },

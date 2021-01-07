@@ -17,6 +17,7 @@
     "error_code_message": "Erreur {0}: {1}",
     "error_occured": "Une erreur est servenue.",
     "search_button": "Rechercher",
+    "no_results_found": "Aucune entreprise ne semble correspondre à votre recherche, nous vous invitons à modifier vos critères de filtre.",
     "placeholder": {
       "search": "Que recherchez-vous ?",
       "category": "Filtrer par categorie",
@@ -140,7 +141,8 @@
       "comments": "Avis"
     } ,
     "presentation": {
-      "title": "Informations"
+      "informations": "Informations",
+      "description": "Description"
     }
   },
   "companyStatut": {
@@ -177,6 +179,7 @@
   "dashboard": {
     "title": "Tableau de bord",
     "recent_activity": "Activité récente",
+    "susbcription_history": "Historique des abonnements",
     "link": {
       "n_company": "Votre entreprise | Votre entreprise | Vos entreprises",
       "subscription": "Abonnements",
@@ -191,8 +194,18 @@
         "mark_as_unseen": "Marquer comme non-lu",
         "delete": "Supprimer"
       }
+    },
+    "history": {
+      "table": {
+        "name": "Nom",
+        "price": "Prix",
+        "dt_debut": "Date de souscription",
+        "dt_fin": "Date de fin",
+        "statut": "Statut",
+        "in_progress": "En cours",
+        "expired": "Expiré"
+      }
     }
-
   },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",
   "error_message_required_username": "La taille de votre pseudonyme ne doit pas être inférieure à 5 caractères ni supérieur à 10 caractères",

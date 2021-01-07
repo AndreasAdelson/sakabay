@@ -17,6 +17,7 @@
     "error_code_message": "Erreur {0}: {1}",
     "error_occured": "An error occured.",
     "search_button": "Search",
+    "no_results_found": "No company seems to match your search, we invite you to modify your filter criteria.",
     "placeholder": {
       "search": "Whata re you looking for ?",
       "category": "Select category",
@@ -139,7 +140,8 @@
       "comments": "Comments"
     } ,
     "presentation": {
-      "title": "Informations"
+      "informations": "Informations",
+      "description": "Description"
     }
   },
   "companyStatut": {
@@ -176,6 +178,7 @@
   "dashboard": {
     "title": "Dashboard",
     "recent_activity": "Recent activity",
+    "susbcription_history": "Subscription history",
     "link": {
       "n_company": "Your company | Your company | Your companies",
       "company": "Company(ies)",
@@ -190,6 +193,17 @@
         "mark_as_seen": "Mark as seen",
         "mark_as_unseen": "Mark as unseen",
         "delete": "Delete"
+      }
+    },
+    "history": {
+      "table": {
+        "name": "Name",
+        "price": "Price",
+        "dt_debut": "Date of subscription",
+        "dt_fin": "End Date",
+        "statut": "Status",
+        "in_progress": "In progress",
+        "expired": "Expired"
       }
     }
   },

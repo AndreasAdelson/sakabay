@@ -23,13 +23,8 @@ user_edit_index:
     controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::editUser
     methods: [POST, GET]
 
-##Andreas dashboard##
-dasboard_two:
-    path: /dashboard2
-    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::dashboard
-    methods: [GET]
 
-##Salman dashbaord ##
+## dashbaord ##
 dashboard:
     path: /dashboard
     controller: App\Infrastructure\Http\Web\Controller\DashboardController::index

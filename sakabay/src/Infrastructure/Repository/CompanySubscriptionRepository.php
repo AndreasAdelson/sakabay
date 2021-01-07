@@ -2,30 +2,30 @@
 
 namespace App\Infrastructure\Repository;
 
-use App\Domain\Model\SubscriptionCompany;
+use App\Domain\Model\CompanySubscription;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
-class SubscriptionCompanyRepository extends AbstractRepository implements SubscriptionCompanyRepositoryInterface
+class CompanySubscriptionRepository extends AbstractRepository implements CompanySubscriptionRepositoryInterface
 {
 
     /**
-     * SubscriptionCompanyRepository constructor.
+     * CompanySubscriptionRepository constructor.
      */
     public function __construct(EntityManagerInterface $entityManager)
     {
-        parent::__construct($entityManager, new ClassMetadata(SubscriptionCompany::class));
+        parent::__construct($entityManager, new ClassMetadata(CompanySubscription::class));
     }
 
-    public function save(SubscriptionCompany $subscriptionCompany): void
+    public function save(CompanySubscription $companySubscription): void
     {
-        $this->_em->persist($subscriptionCompany);
-        $this->_em->flush($subscriptionCompany);
+        $this->_em->persist($companySubscription);
+        $this->_em->flush($companySubscription);
     }
 
-    public function delete(SubscriptionCompany $subscriptionCompany): void
+    public function delete(CompanySubscription $companySubscription): void
     {
-        $this->_em->remove($subscriptionCompany);
-        $this->_em->flush($subscriptionCompany);
+        $this->_em->remove($companySubscription);
+        $this->_em->flush($companySubscription);
     }
 }

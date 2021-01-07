@@ -65,7 +65,7 @@
 <script>
   import axios from 'axios';
   import presentationPage from './presentation';
-
+  import _ from 'lodash';
   export default {
     components: {
       presentationPage
@@ -90,7 +90,7 @@
     async created() {
       return axios.get('/api/entreprise/' + this.companyUrlName)
         .then(response => {
-          this.company = response.data;
+          this.company = _.cloneDeep(response.data);
           this.loading = false;
         }).catch(e => {
           this.loading = false;

@@ -38,7 +38,8 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @Groups({
      * "api_utilisateurs",
      * "api_groups",
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $id;
@@ -49,6 +50,7 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @Groups({
      * "api_utilisateurs",
      * "api_groups",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $firstName;
@@ -67,7 +69,8 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @Expose
      * @Groups({
      * "api_utilisateurs",
-     * "api_groups"
+     * "api_groups",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $lastName;
@@ -78,7 +81,8 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @Expose
      * @Groups({
      * "api_utilisateurs",
-     * "api_groups"
+     * "api_groups",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $email;
@@ -90,7 +94,8 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @Groups({
      * "api_utilisateurs",
      * "api_groups",
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $username;
@@ -124,7 +129,8 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @Groups({
      * "api_utilisateurs",
      * "api_groups",
-     * "api_companies"
+     * "api_companies",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $imageProfil;
@@ -134,6 +140,7 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @Expose
      * @Groups({
      * "api_utilisateurs",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $company;

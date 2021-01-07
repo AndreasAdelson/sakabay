@@ -32,7 +32,9 @@ class Company
      * @Expose
      * @Groups({
      * "api_companies",
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_utilisateurs",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $id;
@@ -42,7 +44,9 @@ class Company
      * @Expose
      * @Groups({
      * "api_companies",
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_utilisateurs",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $name;
@@ -61,7 +65,8 @@ class Company
      * @Expose
      * @Groups({
      * "api_companies",
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $urlName;
@@ -125,7 +130,8 @@ class Company
      * @Expose
      * @Groups({
      * "api_companies",
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $companysubscriptions;

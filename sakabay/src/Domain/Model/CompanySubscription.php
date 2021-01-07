@@ -27,6 +27,7 @@ class CompanySubscription
      * @var DateTime
      * @Expose
      * @Groups({
+     * "api_dashboard_utilisateur"
      * })
      */
     private $dt_debut;
@@ -35,6 +36,7 @@ class CompanySubscription
      * @var DateTime
      * @Expose
      * @Groups({
+     * "api_dashboard_utilisateur"
      * })
      */
     private $dt_fin;
@@ -43,6 +45,7 @@ class CompanySubscription
      * @var Subscription
      * @Expose
      * @Groups({
+     * "api_dashboard_utilisateur"
      * })
      */
     private $subscription;
@@ -51,6 +54,7 @@ class CompanySubscription
      * @var Company
      * @Expose
      * @Groups({
+     * "api_dashboard_utilisateur"
      * })
      */
     private $company;

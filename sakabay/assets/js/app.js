@@ -20,6 +20,7 @@ import VueLoaders from 'vue-loaders';
 import MultiSelect from 'vue-multiselect';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { Icon } from 'leaflet';
+import vuescroll from 'vuescroll';
 
 import {
   BootstrapVue,
@@ -61,11 +62,10 @@ import CompanyShow from './components/company/show';
 import FormCity from './components/admin/city/form';
 import ShowCity from './components/admin/city/show';
 import ListCity from './components/admin/city';
-import Dashboard from './components/utilisateur/dashboard';
 import moment from 'moment';
-import DashboardTwo from './components/dashboard';
-import abonnement from './components/company/abonnement';
-import subscription from './components/subscription';
+import Dashboard from './components/dashboard';
+import Abonnement from './components/company/abonnement';
+import Subscription from './components/subscription';
 import Premium from './components/subscription/premium';
 import 'utils/logger';
 
@@ -81,6 +81,33 @@ Vue.use(VeeValidate, {
   fieldsBagName: 'veeFields',
   errorBagName: 'errors'
 });
+Vue.use(vuescroll, {
+  ops: {
+    mode: 'native',
+    sizeStrategy: 'percent',
+    detectResize: true,
+    /** Enable locking to the main axis if user moves only slightly on one of them at start */
+    locking: true,
+  },
+});
+
+Vue.prototype.$vuescrollConfig = {
+  bar: {
+    background: ' #f39c12',
+    size: '6px',
+    minSize: 0.3,
+    keepShow: true
+  },
+  rail: {
+    background: '#c5c9cc',
+    opacity: 0.6,
+    size: '6px',
+    specifyBorderRadius: false,
+    gutterOfEnds: '1px',
+    gutterOfSide: '2px',
+    keepShow: false
+  },
+};
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -99,9 +126,8 @@ new Vue({
   i18n,
   components: {
     Premium,
-    subscription,
-    abonnement,
-    Dashboard,
+    Subscription,
+    Abonnement,
     ShowCategory,
     ListCategory,
     ListCompanyStatut,
@@ -135,7 +161,7 @@ new Vue({
     ShowCity,
     ListCity,
     FormCity,
-    DashboardTwo
+    Dashboard
   }
 });
 

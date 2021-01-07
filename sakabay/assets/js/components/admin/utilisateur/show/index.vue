@@ -2,8 +2,7 @@
   <div class="skb-body container ">
     <div v-if="loading">
       <div class="loader-container-full">
-        <div class="loader">
-        </div>
+        <div class="loader" />
       </div>
     </div>
     <div v-else>
@@ -12,7 +11,9 @@
         class="row mt-3 "
       >
         <div class="col-6">
-          <h1 class="fontUbuntuItalic orange-skb">{{ this.$t('commons.detail') }}</h1>
+          <h1 class="fontUbuntuItalic orange-skb">
+            {{ this.$t('commons.detail') }}
+          </h1>
         </div>
         <div class="col-6 justify-content-end">
           <a
@@ -22,19 +23,17 @@
             <b-button class="pull-right  button_skb">{{ this.$t('commons.edit') }}</b-button>
           </a>
         </div>
-
       </div>
       <a href="/admin/utilisateur">
         <button
-          :title="$t('go_back')"
+          :title="$t('commons.go_back')"
           type="button"
           class="w-40px mt-4 p-0 rounded-circle btn-close btn"
         >
-          <i class="fas fa-times "></i>
+          <i class="fas fa-times " />
         </button>
       </a>
       <div class="register-card mt-3 w-100 h-100">
-
         <div class="row my-2">
           <div class="col-6">
             <b-img
@@ -47,7 +46,7 @@
               class="p-0"
               :username="this.utilisateur && this.utilisateur.first_name + ' ' + this.utilisateur.last_name"
               :size="75"
-            ></avatar>
+            />
           </div>
         </div>
         <div class="row">
@@ -87,43 +86,43 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import Avatar from 'vue-avatar';
+  import axios from 'axios';
+  import Avatar from 'vue-avatar';
 
-export default {
-  components: {
-    Avatar
-  },
-  props: {
-    utilisateurId: {
-      type: Number,
-      default: null
+  export default {
+    components: {
+      Avatar
     },
-    canEdit: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data () {
-    return {
-      utilisateur: new Object(),
-      loading: true
-    }
-  },
-  async created () {
-    this.loading = true;
-    return axios.get('/api/admin/utilisateurs/' + this.utilisateurId)
-      .then(response => {
-        this.utilisateur = response.data;
-        this.loading = false;
-      }).catch(error => {
-        this.$handleError(error);
-        this.loading = false
-      });
+    props: {
+      utilisateurId: {
+        type: Number,
+        default: null
+      },
+      canEdit: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        utilisateur: new Object(),
+        loading: true
+      };
+    },
+    async created() {
+      this.loading = true;
+      return axios.get('/api/admin/utilisateurs/' + this.utilisateurId)
+        .then(response => {
+          this.utilisateur = response.data;
+          this.loading = false;
+        }).catch(error => {
+          this.$handleError(error);
+          this.loading = false;
+        });
 
-  },
-  methods: {
+    },
+    methods: {
 
-  },
-}
+    },
+  };
 </script>>

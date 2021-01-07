@@ -16,7 +16,7 @@ class CompanySubscriptionController extends AbstractController
 
 
     /**
-     * @Route("subscribe/premium", name="company_subscription_premium", methods="GET|POST")
+     * @Route("subscribe/", name="company_subscription_premium", methods="GET|POST")
      */
     public function premium()
     {

@@ -40,6 +40,7 @@ class Subscription
      * @Expose
      * @Groups({
      * "api_subscriptions",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $name;
@@ -49,6 +50,7 @@ class Subscription
      * @Expose
      * @Groups({
      * "api_subscriptions",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $price;

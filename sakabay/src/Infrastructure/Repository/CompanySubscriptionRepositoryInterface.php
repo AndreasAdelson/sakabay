@@ -9,7 +9,7 @@ use App\Domain\Model\CompanySubscription;
  */
 interface CompanySubscriptionRepositoryInterface
 {
-    public function save(CompanySubscription $subscriptionCompany): void;
+    public function save(CompanySubscription $companySubscription): void;
 
-    public function delete(CompanySubscription $subscriptionCompany): void;
+    public function delete(CompanySubscription $companySubscription): void;
 }

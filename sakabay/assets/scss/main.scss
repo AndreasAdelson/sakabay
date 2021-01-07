@@ -35,12 +35,12 @@ $white_color: #fff;
 $black_color: #000;
 
 body {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Alice', sans-serif;
   background-color: $grey_body;
 }
 
 p {
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'Alice', sans-serif;
   font-size: 1.1em;
   font-weight: 300;
   line-height: 1.7em;
@@ -537,6 +537,12 @@ a[data-toggle="collapse"] {
 
 .white-skb {
   color: $white_color;
+}
+
+.blue-skb {
+  //   $blue_light_color:#2798a0;
+  // $blue_logo_color: #60a3bc;
+  color: $blue_logo_color;
 }
 
 /*---------------------------------
@@ -1200,6 +1206,19 @@ ul.social-footer2 li a {
   min-width: 250px;
 }
 
+.w-90 {
+  width: 90%;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+
 /*---------------------------------
     Pagination overwrite
 -----------------------------------*/
@@ -1330,7 +1349,7 @@ ul.social-footer2 li a {
   color: $grey_light_2_color;
 }
 
-.navigation-link:hover {
+.navigation-menu .navigation-link:hover {
   background-color: $grey_body;
   color: $black_color;
   border-bottom: 4px solid $yellow_login_color;
@@ -1357,10 +1376,9 @@ ul.social-footer2 li a {
 }
 
 .title-card-skb {
-  font-style: italic;
-  text-decoration: underline;
-  padding: 1rem 0px 0px 1rem;
+  padding: 0.5rem;
 }
+
 
 /*---------------------------------
     Loader style
@@ -1435,6 +1453,11 @@ ul.social-footer2 li a {
 /*---------------------------------
    Dashboard style
 -----------------------------------*/
+
+.dashboard {
+  font-family: 'Poppins';
+}
+
 .dashboard-title {
   display: inline-block;
   width: fit-content;
@@ -1461,11 +1484,8 @@ ul.social-footer2 li a {
   border-top: solid 1px #dee2e5 !important;
 }
 
-.notification-scroll {
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  height: 250px;
-  margin-right: 0.1rem;
+.scroll-h300 {
+  height: 300px;
 }
 
 .dashboard-link {
@@ -1481,4 +1501,25 @@ ul.social-footer2 li a {
   text-align: center;
   // margin: 1rem 0 0 0;
   color: $white_color;
+}
+
+.navigation-menu .navigation-dashboard-link {
+  padding: 0.7rem 1.14rem;
+  font-weight: 600;
+  display: inline-block;
+  border-bottom: 4px solid $grey_light_2_color;
+  color: $grey_light_2_color;
+}
+
+.navigation-menu .navigation-dashboard-link:hover {
+  background-color: $grey_body;
+  color: $black_color;
+  border-bottom: 4px solid $yellow_login_color;
+}
+
+.navigation-menu .navigation-dashboard-link-active {
+  padding: 0.7rem 1.14rem;
+  font-weight: 600;
+  display: inline-block;
+  border-bottom: 4px solid $yellow_login_color;
 }

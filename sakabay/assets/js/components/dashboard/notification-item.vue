@@ -14,7 +14,7 @@
             @click.prevent="goToNotificationSubject()"
           >{{ notif.notification.message }}</a>
         </div>
-        <div class="col-2">
+        <div class="col-2 text-center">
           <span class="fontPoppins fontSize14">{{ notificationDate }}</span>
         </div>
       </div>

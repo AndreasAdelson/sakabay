@@ -21,6 +21,7 @@
             <button
               type="button"
               class="btn btn-lg btn-block btn-primary"
+              @click="subscribe()"
             >
               S'abonner
             </button>
@@ -32,63 +33,104 @@
 </template>
 
 <script>
+  import axios from 'axios';
+  import moment from 'moment';
 
-import axios from 'axios';
+  export default {
+    props: {
+      utilisateurId: {
+        type: Number,
+        default: null
+      },
+      companyId: {
+        type: Number,
+        default: null
+      },
+      subscriptionName: {
+        type: String,
+        default: null
+      },
+    },
 
-export default {
-  props: {
-    utilisateurId: {
-      type: Number,
-      default: null
-    },
-    companyId: {
-      type: Number,
-      default: null
-    },
-    subscriptionName: {
-      type: String,
-      default: null
-    },
-  },
+    data() {
 
-  data () {
+      return {
+        API_URL: '/api/subscribes',
+        formFields: {
+          dtDebut: null,
+          dtFin: null,
+          company: new Object(),
+          subscription: new Object()
+        },
+        formErrors: {
+          dtDebut: [],
+          dtFin: [],
+          company: [],
+          subscription: [],
+        },
 
-    return {
-      subscription: new Object(),
-      company: new Array(),
-    };
-  },
-  created () {
-    this.getSubcriptionName();
-    this.getUtilisateurCompany();
-  },
-  methods: {
-    getSubcriptionName () {
-      if (this.subscriptionName) {
-        this.loading = true;
-        return axios.get('/api/subscribes/' + this.subscriptionName)
-          .then(response => {
-            this.subscription = response.data;
-          }).catch(error => {
-            this.$handleError(error);
+      };
+    },
+    created() {
+      this.getSubcriptionName();
+      this.getUtilisateurCompany();
 
-          });
-      }
     },
-    getUtilisateurCompany () {
-      this.loading = true;
-      return axios.get('/api/companies/utilisateur/' + this.utilisateurId)
-        .then(response => {
-          this.company = response.data;
-          this.loading = false;
-        }).catch(error => {
-          this.$handleError(error);
-          this.loading = false;
-        });
-    },
-  },
-};
+    methods: {
+      getSubcriptionName() {
+        if (this.subscriptionName) {
+          this.loading = true;
+          return axios.get('/api/subscribes/' + this.subscriptionName)
+            .then(response => {
+              this.formFields.subscription = response.data;
+            }).catch(error => {
+              this.$handleError(error);
+
+            });
+        }
+      },
+      getUtilisateurCompany() {
+        if (this.utilisateurId) {
+          this.loading = true;
+          return axios.get('/api/companies/utilisateur/' + this.utilisateurId)
+            .then(response => {
+              this.formFields.company = response.data[0];
+              console.log(response.data);
+              this.loading = false;
+            }).catch(error => {
+              this.$handleError(error);
+              this.loading = false;
+            });
+        }
+      },
+      subscribe() {
+        let currentDate = moment().format('YYYY/MM/DD HH:mm:ss');
+        let futureMonth = moment(currentDate).add(1, 'M');
+        // if (moment(currentDate) != moment(futureMonth) && moment(currentDate) < moment(futureMonth)) {
+        //   futureMonth = futureMonth.add(1, 'd');
+        // }
+        this.formFields.dtDebut = currentDate;
+        this.formFields.dtFin = futureMonth.format('YYYY/MM/DD HH:mm:ss');
+
+        return {
+
+          API_URL: '/api/subscribes',
+          formFields: {
+            dtDebut: moment().format('YYYY/MM/DD H:m:s'),
+            dtFin: moment().format('YYYY/MM/DD H:m:s'),
+            company: new Object(),
+            subscription: new Object()
+          },
+          formErrors: {
+            dtDebut: [],
+            dtFin: [],
+            company: [],
+            subscription: [],
+          },
+
+        };
+      },
+    }
+  };
 </script>
 
-<style>
-</style>

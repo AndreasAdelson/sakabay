@@ -1,5 +1,5 @@
 <template>
-  <div class="skb-body container-fluid p-4">
+  <div class="skb-body container-fluid p-4 dashboard">
     <div v-show="!utilisateur">
       <div class="loader-container-full">
         <div class="loader" />
@@ -55,32 +55,79 @@
     <!-- Notifications center -->
     <div class="orders">
       <div class="row">
-        <div class="offset-2 col-8">
+        <div class="mx-auto col-10">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body navigation-menu">
               <div class="row">
-                <div class="col-12">
-                  <div class="row mb-3">
-                    <div class="col-3 pt-3 pl-4">
-                      <h4 class="box-title notification-title">
-                        {{ $t('dashboard.recent_activity') }}
-                      </h4>
-                      <span class="fontPoppins fontSize12 py-1 px-2 orange-gradiant white-skb rounded">{{ numberUnseen }}</span>
-                    </div>
+                <!-- Gestion affichage information de la carte -->
+                <div class="col-2">
+                  <ul class="list-unstyled text-center scroll-h300">
+                    <!-- Recent Notification bouton -->
+                    <vuescroll :ops="opsButton">
+                      <a
+                        :class="notificationActive ? 'navigation-dashboard-link-active': 'navigation-dashboard-link'"
+                        href="#"
+                        class="w-90"
+                        @click="activeNotification()"
+                      >
+                        <li>
+                          <span class="box-title notification-title">
+                            {{ $t('dashboard.recent_activity') }}
+                          </span>
+                          <span
+                            v-if="numberUnseen != 0"
+                            class="fontPoppins fontSize12 py-1 px-2 orange-gradiant white-skb rounded"
+                          >{{ numberUnseen }}</span>
+                        </li>
+                      </a>
+                      <!-- Subscription History bouton -->
+                      <a
+                        v-if="utilisateur && utilisateur.company"
+                        :class="historyActive ? 'navigation-dashboard-link-active': 'navigation-dashboard-link'"
+                        href="#"
+                        class="w-90"
+                        @click="activeHistory()"
+                      >
+                        <li>
+                          <span class="box-title notification-title">
+                            {{ $t('dashboard.susbcription_history') }}
+                          </span>
+                        </li>
+                      </a>
+                    </vuescroll>
+                  </ul>
+                </div>
+                <div class="col-10">
+                  <!-- Notifications List -->
+                  <div
+                    v-if="notificationActive"
+                    class="row scroll-h300"
+                  >
+                    <vuescroll>
+                      <div class="col-12">
+                        <ul class="notification-item mb-0">
+                          <notification-item
+                            v-for="(notif, index) in notifications"
+                            :key="notif.id"
+                            :notif="notif"
+                            @notification-seen="onNotificationSeen(index)"
+                            @notification-unseen="onNotificationUnSeen(index)"
+                            @notification-deleted="onNotificationDeleted(index)"
+                          />
+                        </ul>
+                      </div>
+                    </vuescroll>
                   </div>
-                  <div class="row notification-scroll">
-                    <div class="col-12">
-                      <ul class="notification-item ">
-                        <notification-item
-                          v-for="(notif, index) in notifications"
-                          :key="notif.id"
-                          :notif="notif"
-                          @notification-seen="onNotificationSeen(index)"
-                          @notification-unseen="onNotificationUnSeen(index)"
-                          @notification-deleted="onNotificationDeleted(index)"
-                        />
-                      </ul>
-                    </div>
+                  <!-- History SUbscription List -->
+                  <div
+                    v-else-if="historyActive && utilisateur && utilisateur.company"
+                    class="row scroll-h300"
+                  >
+                    <vuescroll>
+                      <div class="col-12">
+                        <history-item :company-subscriptions="companySubscriptions" />
+                      </div>
+                    </vuescroll>
                   </div>
                 </div>
               </div>
@@ -89,116 +136,67 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-12 mb-4">
-      <div class="card-group">
-        <div class="card col-md-6 no-padding ">
-          <div class="card-body">
-            <div class="h1 text-muted text-right mb-4">
-              <i class="fa fa-users" />
-            </div>
-
-            <div class="h4 mb-0">
-              <span class="count">87500</span>
-            </div>
-
-            <small class="text-muted text-uppercase font-weight-bold">Visitors</small>
-            <div
-              class="progress progress-xs mt-3 mb-0 bg-flat-color-1"
-              style="width: 40%; height: 5px;"
-            />
-          </div>
-        </div>
-        <div class="card col-md-6 no-padding ">
-          <div class="card-body">
-            <div class="h1 text-muted text-right mb-4">
-              <i class="fa fa-user-plus" />
-            </div>
-            <div class="h4 mb-0">
-              <span class="count">385</span>
-            </div>
-            <small class="text-muted text-uppercase font-weight-bold">New Clients</small>
-            <div
-              class="progress progress-xs mt-3 mb-0 bg-flat-color-2"
-              style="width: 40%; height: 5px;"
-            />
-          </div>
-        </div>
-        <div class="card col-md-6 no-padding ">
-          <div class="card-body">
-            <div class="h1 text-muted text-right mb-4">
-              <i class="fa fa-cart-plus" />
-            </div>
-            <div class="h4 mb-0">
-              <span class="count">1238</span>
-            </div>
-            <small class="text-muted text-uppercase font-weight-bold">Products sold</small>
-            <div
-              class="progress progress-xs mt-3 mb-0 bg-flat-color-3"
-              style="width: 40%; height: 5px;"
-            />
-          </div>
-        </div>
-        <div class="card col-md-6 no-padding ">
-          <div class="card-body">
-            <div class="h1 text-muted text-right mb-4">
-              <i class="fa fa-pie-chart" />
-            </div>
-            <div class="h4 mb-0">
-              <span class="count">28</span>%
-            </div>
-            <small class="text-muted text-uppercase font-weight-bold">Returning Visitors</small>
-            <div
-              class="progress progress-xs mt-3 mb-0 bg-flat-color-4"
-              style="width: 40%; height: 5px;"
-            />
-          </div>
-        </div>
-        <div class="card col-md-6 no-padding ">
-          <div class="card-body">
-            <div class="h1 text-muted text-right mb-4">
-              <i class="fa fa-clock-o" />
-            </div>
-            <div class="h4 mb-0">
-              5:34:11
-            </div>
-            <small class="text-muted text-uppercase font-weight-bold">Avg. Time</small>
-            <div
-              class="progress progress-xs mt-3 mb-0 bg-flat-color-5"
-              style="width: 40%; height: 5px;"
-            />
-          </div>
-        </div>
-        <div class="card col-md-6 no-padding ">
-          <div class="card-body">
-            <div class="h1 text-muted text-right mb-4">
-              <i class="fa fa-comments-o" />
-            </div>
-            <div class="h4 mb-0">
-              <span class="count">972</span>
-            </div>
-            <small class="text-muted text-uppercase font-weight-bold">COMMENTS</small>
-            <div
-              class="progress progress-xs mt-3 mb-0 bg-flat-color-1"
-              style="width: 40%; height: 5px;"
-            />
-          </div>
+    <!-- Info line -->
+    <div class="row">
+      <div class="col-sm-12 mb-4">
+        <div class="card-group">
+          <info-item
+            title="87500"
+            sub-title="Visitors"
+            icon-class="fa fa-users"
+            color-class="bg-flat-color-1"
+          />
+          <info-item
+            title="385"
+            sub-title="New Clients"
+            icon-class="fa fa-user-plus"
+            color-class="bg-flat-color-2"
+          />
+          <info-item
+            title="1238"
+            sub-title="Products sold"
+            icon-class="fa fa-cart-plus"
+            color-class="bg-flat-color-3"
+          />
+          <info-item
+            title="28%"
+            sub-title="Returning Visitors"
+            icon-class="fas fa-undo-alt"
+            color-class="bg-flat-color-4"
+          />
+          <info-item
+            title="5:34:11"
+            sub-title="Avg. Time"
+            icon-class="fa fa-clock"
+            color-class="bg-flat-color-5"
+          />
+          <info-item
+            title="973"
+            sub-title="COMMENTS"
+            icon-class="fa fa-users"
+            color-class="bg-flat-color-1"
+          />
         </div>
       </div>
     </div>
-    <!-- <poubelle /> -->
   </div>
 </template>
 <script>
   import LinkItem from './link-item.vue';
-  import Poubelle from './poubelle.vue';
   import NotificationItem from './notification-item.vue';
+  import HistoryItem from './history-item.vue';
+  import InfoItem from './info-item.vue';
+  import vuescroll from 'vuescroll';
   import axios from 'axios';
+  import _ from 'lodash';
 
   export default {
     components: {
       LinkItem,
-      Poubelle,
-      NotificationItem
+      NotificationItem,
+      HistoryItem,
+      InfoItem,
+      vuescroll
     },
     props:
       {
@@ -209,9 +207,26 @@
       },
     data() {
       return {
+        opsButton: {
+          bar: {
+            keepShow: false,
+            minSize: 0.3,
+          },
+          rail: {
+            background: '#c5c9cc',
+            opacity: 0.4,
+            size: '6px',
+            specifyBorderRadius: false,
+            gutterOfEnds: '1px',
+            gutterOfSide: '2px',
+            keepShow: false
+          },
+        },
         notifications: [
         ],
-        utilisateur: null
+        utilisateur: null,
+        notificationActive: true,
+        historyActive: false,
       };
     },
     computed: {
@@ -224,6 +239,12 @@
         });
         return unseen;
       },
+
+      companySubscriptions() {
+        let history = _.cloneDeep(this.utilisateur.company.companysubscriptions);
+
+        return  history;
+      }
     },
     created() {
       this.getNotifications();
@@ -259,7 +280,7 @@
       },
 
       getUser() {
-        return axios.get('api/admin/utilisateurs/' + this.utilisateurId)
+        return axios.get('api/admin/utilisateurs/' + this.utilisateurId, {params: { 'serial_group': 'api_dashboard_utilisateur' }})
           .then(response => {
             console.log(response);
             this.utilisateur = response.data;
@@ -270,7 +291,16 @@
 
       onNotificationMarked(index) {
         return this.notifications[index].seen = true;
-      }
+      },
+
+      activeNotification() {
+        this.notificationActive = true;
+        this.historyActive = false;
+      },
+      activeHistory() {
+        this.notificationActive = false;
+        this.historyActive = true;
+      },
     },
   };
 </script>

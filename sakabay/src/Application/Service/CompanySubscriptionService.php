@@ -33,13 +33,18 @@ class CompanySubscriptionService
         return $this->companySubscriptionRepository->findAll();
     }
 
-    ///Editer un Category
-    public function editCompanySubscription(string $dtFin, string $dtDebut, int $companySubscriptionId)
-    {
-        $companySubscription = $this->companySubscriptionRepository->findById($companySubscriptionId);
-        $companySubscription->setDtFin($dtFin);
-        $companySubscription->setDtDebut($dtDebut);
+    // ///Editer un Category
+    // public function editCompanySubscription(string $dtFin, string $dtDebut, int $companySubscriptionId)
+    // {
+    //     $companySubscription = $this->companySubscriptionRepository->findById($companySubscriptionId);
+    //     $companySubscription->setDtFin($dtFin);
+    //     $companySubscription->setDtDebut($dtDebut);
 
-        return $companySubscription;
-    }
+    //     return $companySubscription;
+    // }
+
+    // public function getCompanySubscriptionById(int $companySubscriptionId)
+    // {
+    //     return $this->subscriptionRepository->findById($companySubscriptionId);
+    // }
 }

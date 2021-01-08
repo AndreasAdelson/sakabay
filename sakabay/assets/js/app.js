@@ -12,7 +12,7 @@ require('vue2-autocomplete-js/dist/style/vue2-autocomplete.css');
 import 'es6-promise/auto';
 import 'bootstrap';
 
-
+import quickMenu from 'vue-quick-menu';
 import $ from 'jquery';
 import Vue from 'vue';
 import * as VeeValidate from 'vee-validate';
@@ -67,8 +67,10 @@ import Dashboard from './components/dashboard';
 import Abonnement from './components/company/abonnement';
 import Subscription from './components/subscription';
 import Premium from './components/subscription/premium';
+import demoNav from './components/quickMenu/demo.vue';
 import 'utils/logger';
 
+Vue.use(quickMenu);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(cnsRenderUtils);
@@ -125,6 +127,7 @@ new Vue({
   el: '#root',
   i18n,
   components: {
+    demoNav,
     Premium,
     Subscription,
     Abonnement,

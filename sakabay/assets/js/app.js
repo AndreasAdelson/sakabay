@@ -11,7 +11,7 @@ require('@fortawesome/fontawesome-free/js/all.js');
 require('vue2-autocomplete-js/dist/style/vue2-autocomplete.css');
 import 'es6-promise/auto';
 import 'bootstrap';
-
+import VueRouter from 'vue-router';
 import quickMenu from 'vue-quick-menu';
 import $ from 'jquery';
 import Vue from 'vue';
@@ -67,9 +67,10 @@ import Dashboard from './components/dashboard';
 import Abonnement from './components/company/abonnement';
 import Subscription from './components/subscription';
 import Premium from './components/subscription/premium';
-import demoNav from './components/quickMenu/demo.vue';
+import demo from './components/quickMenu/demo.vue';
 import 'utils/logger';
 
+Vue.use(VueRouter);
 Vue.use(quickMenu);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -127,7 +128,7 @@ new Vue({
   el: '#root',
   i18n,
   components: {
-    demoNav,
+    demo,
     Premium,
     Subscription,
     Abonnement,

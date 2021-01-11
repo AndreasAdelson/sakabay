@@ -9,7 +9,8 @@
       <img src="{{ asset('build/logo.png') }}"/>
     </a>
   {% else %}
-<demo-nav style="top: 0px;"></demo-nav>
+<demo style="z-index: 0;width: 50%;"></demo>
+
     {# <a href="/" class="logo-home">
         <img src="{{ asset('build/logo.png') }}"/>
     </a>
@@ -35,6 +36,7 @@
       </div>
       <div class="sidebar-header">
       {% if app.user %}
+      <demo style="z-index: 0;width: 50%;"></demo>
         <div class="row user-info mb-1 pb-2">
           <div class="col-3 my-auto">
           {% if app.user.imageProfil %}

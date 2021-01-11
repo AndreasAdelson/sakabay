@@ -35,7 +35,7 @@ $white_color: #fff;
 $black_color: #000;
 
 body {
-  font-family: 'Alice', sans-serif;
+  // font-family: 'Alice', sans-serif;
   background-color: $grey_body;
 }
 
@@ -439,7 +439,7 @@ a[data-toggle="collapse"] {
   top: 50px;
   left: 0;
   right: 0;
-  z-index: 998;
+  z-index: -1;
 }
 
 .sous-nav-bar-item {

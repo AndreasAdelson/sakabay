@@ -34,11 +34,12 @@ Encore
   .addStyleEntry('css/bootstrap-vue', './node_modules/bootstrap-vue/dist/bootstrap-vue.min.css')
   .addStyleEntry('css/vue-multiselect', './node_modules/vue-multiselect/dist/vue-multiselect.min.css')
   // .addStyleEntry('css/leaflet', './node_modules/leaflet/dist/leaflet.css')
+  .addStyleEntry('css/demo', './assets/css/demo.css')
   .addStyleEntry('css/main', './assets/scss/main.scss')
   .addStyleEntry('css/app', './assets/css/app.css')
   .enableSassLoader()
   //.addStyleEntry('css/main', './assets/scss/main.scss')
-
+  .enableLessLoader()
   ////images
   .copyFiles({
     from: './assets/pictures',

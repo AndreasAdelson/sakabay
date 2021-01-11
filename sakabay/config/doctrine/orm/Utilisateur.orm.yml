@@ -68,4 +68,9 @@ App\Domain\Model\Utilisateur:
             targetEntity: Company
             mappedBy: utilisateur
             nullable: true
+    oneToMany:
+        reset_password:
+            targetEntity: ResetPasswordRequest
+            cascade: [persist]
+            mappedBy: user
 

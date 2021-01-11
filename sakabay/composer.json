@@ -32,6 +32,7 @@
     "symfony/orm-pack": "^2.0",
     "symfony/polyfill-ctype": "~1.8",
     "symfony/security-bundle": "4.4.*",
+    "symfony/security-csrf": "4.4.*",
     "symfony/templating": "4.4.*",
     "symfony/translation": "4.4.*",
     "symfony/twig-bridge": "4.4.*",
@@ -39,6 +40,7 @@
     "symfony/validator": "4.4.*",
     "symfony/webpack-encore-bundle": "^1.7",
     "symfony/yaml": "4.4.*",
+    "symfonycasts/reset-password-bundle": "^1.2",
     "twig/extra-bundle": "^2.12|^3.0",
     "twig/twig": "~2.0",
     "voku/stop-words": "^2.0"

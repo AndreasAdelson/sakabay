@@ -3,6 +3,11 @@ home:
    controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::index
    methods: [GET, POST]
 
+app_forgot_password_request:
+    path: /reset-password
+    controller: App\Infrastructure\Http\Web\Controller\ResetPasswordController::request
+    methods: [GET,POST]
+
 user_index:
     path: /admin/utilisateur
     controller: App\Infrastructure\Http\Web\Controller\UtilisateurController::usersList

@@ -354,7 +354,7 @@ final class CompanyController extends AbstractFOSRestController
         $email = "andreasadelson@gmail.com";
         $subject = $this->translator->trans('email_register_validation_subject');
         $bodyMessage = sprintf($this->translator->trans('email_register_validation_body'), $company->getName(), $this->generateUrl('home'));
-        // $this->sendMail($email, $subject, $bodyMessage);
+        $this->sendMail($email, $subject, $bodyMessage);
 
         $ressourceLocation = $this->generateUrl('company_subscribed_show', ['id' => $companyId], UrlGenerator::RELATIVE_PATH);
 
@@ -384,7 +384,7 @@ final class CompanyController extends AbstractFOSRestController
             ->from('no-reply@sakabay.com')
             ->to($receiver)
             // ->addTo('andreasadelson@gmail.com')
-            // ->cc('karii.salman@gmail.com')
+            ->cc('karii.salman@gmail.com')
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
             ->priority(Email::PRIORITY_HIGH)

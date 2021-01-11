@@ -4,11 +4,16 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-<div class="card-register-pt">
-  {{ form_start(registrationForm) }}
-  <div class="register-card">
-    <div class="row user-header-card">
-      <div class ="col">
+<div class="container h-100 skb-body">
+  <div class="row pt-4">
+    <div class="col">
+      <h1 class="text-center">{{ 'register'|trans }}</h1>
+    </div>
+  </div>
+  {{ form_start(registrationForm, {'attr': {'class': 'pt-5rem'}}) }}
+  <div class="row register-card pt-5">
+    <div class="user-header-card">
+      <div class ="col user-header-card">
         <div class="d-flex justify-content-center">
           <div class="brand_logo_container_register">
             <img src="{{ asset('build/logo.png') }}" class="brand_logo" alt="Logo">
@@ -20,7 +25,7 @@
         <div class="form-group">
           {{ form_widget(registrationForm.username, {'attr': {'class': 'form-control', 'placeholder': 'username_placeholder'|trans }}) }}
           {% if form_errors(registrationForm.username) %}
-            <div class="fontUbuntuItalic error-message">
+            <div class="fontUbuntuItalic error-message fontSize13 red-skb">
               {{ form_errors(registrationForm.username) }}
             </div>
           {% endif %}
@@ -34,7 +39,7 @@
         <div class="form-group">
           {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'email_placeholder'|trans, 'required': 'required' }}) }}
           {% if form_errors(registrationForm.username) %}
-            <div class="fontUbuntuItalic error-message">
+            <div class="fontUbuntuItalic error-message fontSize13 red-skb">
               {{ form_errors(registrationForm.username) }}
             </div>
           {% endif %}
@@ -45,7 +50,7 @@
         <div class="form-group">
           {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'password_confirmation_placeholder'|trans, 'required': 'required' }}) }}
           {% if form_errors(registrationForm.plainPassword.first) or form_errors(registrationForm.plainPassword.second) %}
-            <div class="fontUbuntuItalic error-message">
+            <div class="fontUbuntuItalic error-message fontSize13 red-skb">
               {{ form_errors(registrationForm.plainPassword.first) }}
             </div>
           {% endif %}
@@ -54,13 +59,13 @@
         <div class="form-group">
           <label class="form-check-label fontUbuntuItalic">
             {{ form_widget(registrationForm.agreeTerms, {'attr': {'required': 'required' }}) }}
-            {{'accept_terms_begin_message'|trans}} <a href="#" class="inscription">{{'accept_terms_end_message'|trans}}</a>
+            {{'accept_terms_begin_message'|trans}} <a href="#" class="link">{{'accept_terms_end_message'|trans}}</a>
           </label>
         </div>
         <div class="form-group">
-          <button type="submit" class="btn button_skb btn-lg fontUbuntuItalic inscription">{{ 'register_now'|trans }}</button>
+          <button type="submit" class="btn button_skb btn-lg fontUbuntuItalic link">{{ 'register_now'|trans }}</button>
         </div>
-      <div class="text-center fontUbuntuItalic">{{ 'already_have_an_account'|trans }} <a href="#" class="inscription">{{ 'sign_in'|trans }}</a></div>
+      <div class="text-center fontUbuntuItalic">{{ 'already_have_an_account'|trans }} <a href="#" class="link">{{ 'sign_in'|trans }}</a></div>
     </form>
   </div>
 </div>

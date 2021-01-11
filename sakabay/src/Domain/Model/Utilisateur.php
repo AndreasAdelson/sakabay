@@ -150,6 +150,22 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      */
     private $file;
 
+    /**
+     * Unmapped property to handle file uploads
+     */
+    private $selector;
+
+
+    /**
+     * @var ResetPasswordRequest
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs",
+     * "api_dashboard_utilisateur"
+     * })
+     */
+    private $reset_password;
+
 
     /**
      * @var DateTime

@@ -53,6 +53,7 @@ register_now: "S'inscrire"
 register: "Inscription"
 already_have_an_account: "Vous avez déjà un compte?"
 sign_in: "Se connecter"
+sign: "Connection"
 remember_me: "Se souvenir de moi"
 forgot_password: "Mot de passe oublié?"
 create_account: "Créer un compte?"
@@ -125,7 +126,6 @@ email_register_validation_subject: "Validation de votre candidature"
 email_register_validation_body: "Bonjour, \n\nC'est avec plaisir que vous nous annoncons que l'inscription de l'entreprise « %s » à été validée par nos équipes.\nNous vous souhaitons donc la bienvenue au sein de notre groupe avec 2 mois d'abonnement offert. Vous pouvez dès maintenant personnaliser votre page de présentation depuis ce lien  %s , accessible depuis le menu glissant de l'application.\nL'Equipe Sakabay vous souhaite une bonne journée.\n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."
 
 ###### Notifications ######
-
 createcompany_subject_admin: "Inscription d'une entreprise"
 createcompany_message_admin: "L'utilisateur « %s » à réalisé une demande d'inscription pour l'entreprise « %s ». Veuillez vérifier si l'entreprise correspond aux conditions d'utilisations de SAKABAY et validez en conséquence."
 validatecompany_subject_admin: "Une entreprise a été validée"
@@ -136,7 +136,6 @@ createcompany_message: "Votre inscription qui concerne l'entreprise « %s »  es
 validatecompany_subject: "Acceptation de votre candidature"
 validatecompany_message: "Félicitations ! Vous faîtes désormais partis de Sakabay Entrepeneur. Afin de vous souhaiter la bienvenue nous vous offrons 2 mois d'abonnements premium. Bienvenue chez Sakabay :)."
 
-
 ####Footer:
 company_footer_name: "SAKABAY"
 company_footer_description: "Lumiere vers vous , vous prioritaire , vous satisfaire"
@@ -145,3 +144,13 @@ company_footer_join: "Rejoignez nous !"
 company_footer_contact: "Contactez nous !"
 company_footer_description_inscription: "Accédez à votre page et développer votre marketing."
 footer_signature: "Copyright SAKABAY © 2020. Tous droits réservés. By : Andreas ADELSON and Salman KARI"
+
+#Reset password
+reset_password: "Réinitialiser son mot de passe"
+send_email: "Envoyer l'email"
+reset_password_message: "Saisissez votre email et nous vous enverrons un lien pour réinitialiser votre mot de passe."
+reset_password_title: "Réinitialiser son mot de passe"
+check_email_message_fisrt: "Un courriel a été envoyé, contenant un lien sur lequel vous pouvez cliquer pour réinitialiser votre mot de passe. Ce lien expirera dans %s heure."
+check_email_message_second: "Si vous ne recevez pas de courriel, veuillez vérifier votre dossier de courrier indésirable ou "
+check_email_message_third: "réessayer."
+new_password_placeholder: "Nouveau mot de passe"

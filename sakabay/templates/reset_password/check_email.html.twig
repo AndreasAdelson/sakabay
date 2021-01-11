@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Password Reset Email Sent{% endblock %}
+
+{% block body %}
+    <div class="skb-body">
+      <div class="container-fluid">
+        <div class="row pt-5">
+          <div class="col">
+            <p class="text-center">{{ 'check_email_message_fisrt'|trans({'%s': tokenLifetime/3600}) }} </p>
+            <p class="text-center">{{ 'check_email_message_second'|trans }}  <a class="link" href="{{ path('app_forgot_password_request') }}">{{ 'check_email_message_third'|trans }} </a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

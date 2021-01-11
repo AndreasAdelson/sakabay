@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reset your password{% endblock %}
+
+{% block body %}
+
+    <div class="container h-100 skb-body">
+      <div class="row pt-4">
+        <div class="col">
+        <h1 class="text-center">{{ 'reset_password_title'|trans }}</h1>
+        </div>
+      </div>
+      <div class="row pt-4">
+        <div class="col">
+          <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+              <div class="row user-header-card">
+                <div class ="col">
+                  <div class="d-flex justify-content-center">
+                    <div class="brand_logo_container">
+                      <img src="{{ asset('build/logo.png') }}" class="brand_logo" alt="Logo">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center form_container">
+                {{ form_start(resetForm) }}
+
+                {# {{ form_start(resetForm, {'attr': {'class': 'w-90'}}) }} #}
+                <form method="POST">
+                  <div class="form-group">
+                    {{ form_widget(resetForm.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'new_password_placeholder'|trans }}) }}
+                    {% if form_errors(resetForm.plainPassword.first) %}
+                      <div class="fontUbuntuItalic error-message fontSize13 red-skb">
+                        {{ form_errors(resetForm.plainPassword.first) }}
+                      </div>
+                    {% endif %}
+
+                  </div>
+                  <div class="form-group">
+                    {{ form_widget(resetForm.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'password_confirmation_placeholder'|trans }}) }}
+                    {% if form_errors(resetForm.plainPassword.second) %}
+                      <div class="fontUbuntuItalic fontSize13 red-skb fontSize13 red-skb">
+                        {{ form_errors(resetForm.plainPassword.second) }}
+                      </div>
+                    {% endif %}
+
+                  </div>
+                  <div class="form-group">
+                    <button class="btn fontSize16 button_skb btn-lg fontUbuntuItalic link">{{ 'reset_password'|trans }}</button>
+                  </div>
+                  {{ form_row(resetForm._token) }}
+
+                </form>
+                {{ form_end(resetForm) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {# {{ form_start(resetForm) }}
+        {{ form_row(resetForm.plainPassword) }}
+        <button class="btn btn-primary">Reset password</button>
+    {{ form_end(resetForm) }} #}
+{% endblock %}

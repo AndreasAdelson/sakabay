@@ -3,7 +3,7 @@
     <div class="col-6 card-skb">
       <div class="title-card-skb">
         <i class="fas fa-file-alt fa-lg yellow-login-skb" />
-        <span class="fontPoppins underline">{{ $t('company.presentation.description') }}</span>
+        <span class="fontPoppins underline ml-1">{{ $t('company.presentation.description') }}</span>
       </div>
       <div class="details-card">
         <p class="fontAlice fontSize18">

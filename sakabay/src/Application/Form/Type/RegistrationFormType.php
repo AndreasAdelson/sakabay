@@ -72,7 +72,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new Assert\IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => $translator->trans('error_message_agree_terms'),
                     ]),
                 ],
             ]);

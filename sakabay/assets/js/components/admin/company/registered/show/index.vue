@@ -60,7 +60,7 @@
         <div class="row mb-2">
           <div class="col-6">
             <a :href="'/admin/utilisateur/show/' + company.utilisateur.id">
-              <span class="fontHelveticaOblique fontSize18 inscription">{{ company.utilisateur.username }}</span>
+              <span class="fontHelveticaOblique fontSize18 link">{{ company.utilisateur.username }}</span>
             </a>
           </div>
           <div class="col-6">

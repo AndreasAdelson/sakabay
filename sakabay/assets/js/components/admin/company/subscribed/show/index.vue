@@ -2,8 +2,7 @@
   <div class="skb-body container ">
     <div v-if="loading">
       <div class="loader-container-full">
-        <div class="loader">
-        </div>
+        <div class="loader" />
       </div>
     </div>
     <div v-else>
@@ -26,7 +25,7 @@
           type="button"
           class="w-40px mt-4 p-0 rounded-circle btn-close btn"
         >
-          <i class="fas fa-times "></i>
+          <i class="fas fa-times " />
         </button>
       </a>
       <div class="register-card mt-3 w-100 h-100">
@@ -60,7 +59,7 @@
         <div class="row mb-2">
           <div class="col-6">
             <a :href="'/admin/utilisateur/show/' + company.utilisateur.id">
-              <span class="fontHelveticaOblique fontSize18 inscription">{{ company.utilisateur.username }}</span>
+              <span class="fontHelveticaOblique fontSize18 link">{{ company.utilisateur.username }}</span>
             </a>
           </div>
           <div class="col-6">
@@ -119,12 +118,12 @@
         <div class="row">
           <div class="col-12">
             <v-map
-              :zoom=16
+              :zoom="16"
               :center="[company.address.latitude, company.address.longitude]"
               style="height:300px"
             >
-              <v-marker :lat-lng="[company.address.latitude, company.address.longitude]"></v-marker>
-              <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tile-layer>
+              <v-marker :lat-lng="[company.address.latitude, company.address.longitude]" />
+              <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
             </v-map>
           </div>
         </div>
@@ -133,40 +132,40 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
+  import axios from 'axios';
 
-export default {
-  props: {
-    companyId: {
-      type: Number,
-      default: null
+  export default {
+    props: {
+      companyId: {
+        type: Number,
+        default: null
+      },
+      canEdit: {
+        type: Boolean,
+        default: false
+      }
     },
-    canEdit: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data () {
-    return {
-      company: null,
-      loading: false
-    }
-  },
-  async created () {
-    if (this.companyId) {
-      this.loading = true;
-      return axios.get('/api/admin/companies/' + this.companyId)
-        .then(response => {
-          this.company = response.data;
-          this.loading = false;
-        }).catch(error => {
-          this.$handleError(error);
-          this.loading = false;
-        });
-    }
-  },
-  methods: {
+    data() {
+      return {
+        company: null,
+        loading: false
+      };
+    },
+    async created() {
+      if (this.companyId) {
+        this.loading = true;
+        return axios.get('/api/admin/companies/' + this.companyId)
+          .then(response => {
+            this.company = response.data;
+            this.loading = false;
+          }).catch(error => {
+            this.$handleError(error);
+            this.loading = false;
+          });
+      }
+    },
+    methods: {
 
-  },
-}
+    },
+  };
 </script>>

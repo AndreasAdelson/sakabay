@@ -99,7 +99,8 @@ class CompanyController extends AbstractController
     {
         return $this->render('admin/company/subscribed/subscribed_form.html.twig', [
             'companyId' => $id,
-            'isValidated' => true
+            'isValidated' => true,
+            'urlPrecedente' => $this->urlPrecedente()
         ]);
     }
 
@@ -110,7 +111,8 @@ class CompanyController extends AbstractController
     {
         return $this->render('admin/company/subscribed/subscribed_show.html.twig', [
             'companyId' => $id,
-            'canEdit' => $authorizationChecker->isGranted('ROLE_UCOMPANY')
+            'canEdit' => $authorizationChecker->isGranted('ROLE_UCOMPANY'),
+            'urlPrecedente' => $this->urlPrecedente()
         ]);
     }
 
@@ -121,7 +123,8 @@ class CompanyController extends AbstractController
     {
         return $this->render('admin/company/registered/registered_form.html.twig', [
             'companyId' => $id,
-            'isValidated' => false
+            'isValidated' => false,
+            'urlPrecedente' => $this->urlPrecedente()
         ]);
     }
 
@@ -133,7 +136,17 @@ class CompanyController extends AbstractController
     {
         return $this->render('admin/company/registered/registered_show.html.twig', [
             'companyId' => $id,
-            'canEdit' => $authorizationChecker->isGranted('ROLE_UCOMPANY')
+            'canEdit' => $authorizationChecker->isGranted('ROLE_UCOMPANY'),
+            'urlPrecedente' => $this->urlPrecedente()
         ]);
+    }
+
+    private function urlPrecedente()
+    {
+        $urlPrecedente = "/";
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $urlPrecedente = $_SERVER['HTTP_REFERER'];
+        }
+        return $urlPrecedente;
     }
 }

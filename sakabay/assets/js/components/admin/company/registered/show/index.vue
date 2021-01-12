@@ -2,8 +2,7 @@
   <div class="skb-body container ">
     <div v-if="loading">
       <div class="loader-container-full">
-        <div class="loader">
-        </div>
+        <div class="loader" />
       </div>
     </div>
     <div v-else>
@@ -20,13 +19,13 @@
           </a>
         </div>
       </div>
-      <a href="/admin/registered/entreprise">
+      <a @click="goBack()">
         <button
           :title="$t('commons.go_back')"
           type="button"
           class="w-40px mt-4 p-0 rounded-circle btn-close btn"
         >
-          <i class="fas fa-times "></i>
+          <i class="fas fa-times " />
         </button>
       </a>
       <div class="register-card mt-3 w-100 h-100">
@@ -135,16 +134,15 @@
         <div class="row">
           <div class="col-12">
             <v-map
-              :zoom=16
+              :zoom="16"
               :center="[company.address.latitude, company.address.longitude]"
               style="height:300px"
             >
-              <v-marker :lat-lng="[company.address.latitude, company.address.longitude]"></v-marker>
-              <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tile-layer>
+              <v-marker :lat-lng="[company.address.latitude, company.address.longitude]" />
+              <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
             </v-map>
           </div>
         </div>
-
       </div>
       <div class="row justify-content-center my-3">
         <div class="col-2">
@@ -152,7 +150,9 @@
             data-toggle="modal"
             :data-target="'#' + DECLINE_CONFIRM_MODAL_ID"
             class="btn button_skb"
-          >{{ $t('commons.decline') }}</b-button>
+          >
+            {{ $t('commons.decline') }}
+          </b-button>
         </div>
         <div class="col-2">
           <b-button
@@ -160,7 +160,9 @@
             data-toggle="modal"
             :data-target="'#' + VALIDATE_CONFIRM_MODAL_ID"
             class="btn btn-success w-100"
-          >{{ $t('commons.validate') }}</b-button>
+          >
+            {{ $t('commons.validate') }}
+          </b-button>
         </div>
       </div>
     </div>
@@ -186,66 +188,73 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import ConfirmModal from 'components/commons/confirm-modal';
+  import axios from 'axios';
+  import ConfirmModal from 'components/commons/confirm-modal';
 
-export default {
-  components: {
-    ConfirmModal
-  },
-  props: {
-    companyId: {
-      type: Number,
-      default: null
+  export default {
+    components: {
+      ConfirmModal
     },
-    canEdit: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data () {
-    return {
-      DECLINE_CONFIRM_MODAL_ID: 'decline_confirmModal',
-      VALIDATE_CONFIRM_MODAL_ID: 'validate_confirmModal',
-      company: null,
-      loading: true
-    }
-  },
-  created () {
-    if (this.companyId) {
-      return axios.get('/api/admin/companies/' + this.companyId)
-        .then(response => {
-          this.company = response.data;
-          this.loading = false;
-        }).catch(error => {
-          this.$handleError(error);
-          this.loading = false;
-        });
-    }
-  },
-  methods: {
-    validateCompany () {
-      this.loading = true;
-      return axios.post('/api/admin/companies/' + this.companyId + '/validation')
-        .then(response => {
-          this.loading = false;
-          window.location.assign(response.headers.location);
-        }).catch(e => {
-          this.$handleError(e);
-          this.loading = false;
-        });
+    props: {
+      companyId: {
+        type: Number,
+        default: null
+      },
+      canEdit: {
+        type: Boolean,
+        default: false
+      },
+      urlPrecedente: {
+        type: String,
+        default: null
+      }
     },
-    declineCompany () {
-      this.loading = true;
-      return axios.delete('/api/admin/companies/' + this.companyId + '/decline')
-        .then(response => {
-          this.loading = false;
-          window.location.assign(response.headers.location);
-        }).catch(e => {
-          this.$handleError(e);
-          this.loading = false;
-        });
-    }
-  },
-}
+    data() {
+      return {
+        DECLINE_CONFIRM_MODAL_ID: 'decline_confirmModal',
+        VALIDATE_CONFIRM_MODAL_ID: 'validate_confirmModal',
+        company: null,
+        loading: true
+      };
+    },
+    created() {
+      if (this.companyId) {
+        return axios.get('/api/admin/companies/' + this.companyId)
+          .then(response => {
+            this.company = response.data;
+            this.loading = false;
+          }).catch(error => {
+            this.$handleError(error);
+            this.loading = false;
+          });
+      }
+    },
+    methods: {
+      validateCompany() {
+        this.loading = true;
+        return axios.post('/api/admin/companies/' + this.companyId + '/validation')
+          .then(response => {
+            this.loading = false;
+            window.location.assign(response.headers.location);
+          }).catch(e => {
+            this.$handleError(e);
+            this.loading = false;
+          });
+      },
+      declineCompany() {
+        this.loading = true;
+        return axios.delete('/api/admin/companies/' + this.companyId + '/decline')
+          .then(response => {
+            this.loading = false;
+            window.location.assign(response.headers.location);
+          }).catch(e => {
+            this.$handleError(e);
+            this.loading = false;
+          });
+      },
+      goBack() {
+        this.$goTo(this.urlPrecedente);
+      },
+    },
+  };
 </script>>

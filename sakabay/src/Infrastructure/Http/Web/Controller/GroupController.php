@@ -56,7 +56,17 @@ class GroupController extends AbstractController
     {
         return $this->render('admin/group/show.html.twig', [
             'canEdit' => $authorizationChecker->isGranted('ROLE_UGROUP'),
-            'groupId' => $id
+            'groupId' => $id,
+            'urlPrecedente' => $this->urlPrecedente()
         ]);
+    }
+
+    private function urlPrecedente()
+    {
+        $urlPrecedente = "/";
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $urlPrecedente = $_SERVER['HTTP_REFERER'];
+        }
+        return $urlPrecedente;
     }
 }

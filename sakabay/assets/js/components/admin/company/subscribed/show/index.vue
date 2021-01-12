@@ -19,7 +19,7 @@
           </a>
         </div>
       </div>
-      <a href="/admin/entreprise">
+      <a @click="goBack()">
         <button
           :title="$t('commons.go_back')"
           type="button"
@@ -143,6 +143,10 @@
       canEdit: {
         type: Boolean,
         default: false
+      },
+      urlPrecedente: {
+        type: String,
+        default: null
       }
     },
     data() {
@@ -165,7 +169,9 @@
       }
     },
     methods: {
-
+      goBack() {
+        this.$goTo(this.urlPrecedente);
+      },
     },
   };
 </script>>

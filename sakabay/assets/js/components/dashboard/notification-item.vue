@@ -87,7 +87,7 @@
        */
       goToNotificationSubject() {
         window.location.assign(this.notif.notification.link);
-      // this.markAsSeen();
+        this.markAsSeen();
       },
 
       markAsSeen() {

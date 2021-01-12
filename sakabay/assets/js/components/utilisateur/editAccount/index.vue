@@ -6,7 +6,7 @@
       class="w-40px p-0 rounded-circle btn-close btn"
       @click.prevent="goBack()"
     >
-      <i class="fas fa-times "></i>
+      <i class="fas fa-times " />
     </button>
     <form>
       <div class="">
@@ -24,7 +24,7 @@
                 class="p-0"
                 :username="utilisateur.last_name + ' ' + utilisateur.first_name"
                 :size="75"
-              ></avatar>
+              />
             </div>
             <div class="col-5 my-auto">
               <div class="form-group mb-0">
@@ -33,16 +33,16 @@
                   class="imageProfil"
                 >
                   <input
+                    ref="imageProfil"
                     name="imageProfil"
                     type="file"
                     @change="onFileSelected"
-                    ref="imageProfil"
                   >
                   <div
                     v-for="errorText in formErrors.imageProfil"
                     :key="'imageProfil_' + errorText"
                   >
-                    <span class="fontUbuntuItalic fontSize13 red-skb">{{errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -58,12 +58,12 @@
                 >
                   <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.email') }}</label>
                   <input
+                    v-model="formFields.email"
                     v-validate="'required|email'"
                     type="text"
                     name="email"
                     class="form-control"
                     :placeholder="$t('user.placeholder.email')"
-                    v-model="formFields.email"
                   >
                   <div
                     v-for="errorText in formErrors.email"
@@ -82,18 +82,18 @@
                 >
                   <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.first_name') }}</label>
                   <input
+                    v-model="formFields.firstName"
                     v-validate="'required'"
                     name="firstName"
                     type="text"
                     class="form-control"
                     :placeholder="$t('user.placeholder.first_name')"
-                    v-model="formFields.firstName"
                   >
                   <div
                     v-for="errorText in formErrors.firstName"
                     :key="'firstName_' + errorText"
                   >
-                    <span class="fontUbuntuItalic fontSize13 red-skb">{{errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -109,10 +109,10 @@
                 >
                   <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.last_name') }}</label>
                   <input
+                    v-model="formFields.lastName"
                     type="text"
                     class="form-control"
                     :placeholder="$t('user.placeholder.last_name')"
-                    v-model="formFields.lastName"
                   >
                   <div
                     v-for="errorText in formErrors.lastName"
@@ -131,18 +131,18 @@
                 >
                   <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.username') }}</label>
                   <input
+                    v-model="formFields.username"
                     v-validate="'required_username'"
                     type="text"
                     name="username"
                     class="form-control"
                     :placeholder="$t('user.placeholder.username')"
-                    v-model="formFields.username"
                   >
                   <div
                     v-for="errorText in formErrors.username"
                     :key="'username_' + errorText"
                   >
-                    <span class="fontUbuntuItalic fontSize13 red-skb">{{errorText }}</span>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
@@ -154,7 +154,9 @@
                 type="button"
                 class="btn button_skb fontUbuntuItalic"
                 @click="$validateForm()"
-              >{{ this.$t('commons.edit') }}</button>
+              >
+                {{ this.$t('commons.edit') }}
+              </button>
             </div>
           </div>
         </div>
@@ -163,87 +165,87 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import validatorRulesMixin from 'mixins/validatorRulesMixin';
-import Avatar from 'vue-avatar';
+  import axios from 'axios';
+  import validatorRulesMixin from 'mixins/validatorRulesMixin';
+  import Avatar from 'vue-avatar';
 
-export default {
-  mixins: [
-    validatorRulesMixin
-  ],
-  components: {
-    Avatar
-  },
-  data () {
-    return {
-      formFields: {
-        email: null,
-        firstName: null,
-        lastName: null,
-        username: null,
-      },
-      formErrors: {
-        email: [],
-        firstName: [],
-        lastName: [],
-        username: [],
-      },
-      urlImageProfil: null,
-      imageProfilSelected: null,
-      utilisateur: null,
-      imageName: ''
-    };
-  },
-  props: {
-    utilisateurId: {
-      type: Number,
-      default: null,
+  export default {
+    components: {
+      Avatar
     },
-    urlPrecedente: {
-      type: String,
-      default: null
-    }
-  },
-  created () {
-    if (this.utilisateurId) {
-      return axios.get("/api/admin/utilisateurs/" + this.utilisateurId)
-        .then(response => {
-          this.$setEditForm(response.data);
-          this.utilisateur = response.data;
-          if (this.utilisateur.image_profil) {
-            this.urlImageProfil = "/build/images/uploads/" + this.utilisateur.image_profil;
-          }
-        }).catch(e => {
-          console.log(e);
-        });
-    }
-  },
-
-  methods: {
-    onFileSelected () {
-      this.imageProfilSelected = this.$refs.imageProfil.files[0];
-      this.imageName = this.$refs.imageProfil.files[0].name;
-      this.urlImageProfil = URL.createObjectURL(this.imageProfilSelected);
-    },
-
-    submitForm () {
-      let formData = this.$getFormFieldsData(this.formFields);
-      if (this.imageProfilSelected) {
-        formData.append('file', this.imageProfilSelected);
+    mixins: [
+      validatorRulesMixin
+    ],
+    props: {
+      utilisateurId: {
+        type: Number,
+        default: null,
+      },
+      urlPrecedente: {
+        type: String,
+        default: null
       }
-      return axios.post("/api/utilisateur/edit/" + this.utilisateurId, formData)
-        .then(response => {
-          window.location.assign(response.headers.location);
-        }).catch(e => {
-          if (e.response && e.response.status && e.response.status == 400) {
-            this.$handleFormError(e.response.data);
-          }
-        });
+    },
+    data() {
+      return {
+        formFields: {
+          email: null,
+          firstName: null,
+          lastName: null,
+          username: null,
+        },
+        formErrors: {
+          email: [],
+          firstName: [],
+          lastName: [],
+          username: [],
+        },
+        urlImageProfil: null,
+        imageProfilSelected: null,
+        utilisateur: null,
+        imageName: ''
+      };
+    },
+    created() {
+      if (this.utilisateurId) {
+        return axios.get('/api/admin/utilisateurs/' + this.utilisateurId)
+          .then(response => {
+            this.$setEditForm(response.data);
+            this.utilisateur = response.data;
+            if (this.utilisateur.image_profil) {
+              this.urlImageProfil = '/build/images/uploads/' + this.utilisateur.image_profil;
+            }
+          }).catch(e => {
+            console.log(e);
+          });
+      }
     },
 
-    goBack () {
-      this.$goTo(this.urlPrecedente);
+    methods: {
+      onFileSelected() {
+        this.imageProfilSelected = this.$refs.imageProfil.files[0];
+        this.imageName = this.$refs.imageProfil.files[0].name;
+        this.urlImageProfil = URL.createObjectURL(this.imageProfilSelected);
+      },
+
+      submitForm() {
+        let formData = this.$getFormFieldsData(this.formFields);
+        if (this.imageProfilSelected) {
+          formData.append('file', this.imageProfilSelected);
+        }
+        return axios.post('/api/utilisateur/edit/' + this.utilisateurId, formData)
+          .then(response => {
+            window.location.assign(response.headers.location);
+          }).catch(e => {
+            if (e.response && e.response.status && e.response.status == 400) {
+              this.$handleFormError(e.response.data);
+            }
+          });
+      },
+
+      goBack() {
+        this.$goTo(this.urlPrecedente);
+      },
     },
-  },
-}
+  };
 </script>

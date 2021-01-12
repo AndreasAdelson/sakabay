@@ -56,7 +56,17 @@ class RoleController extends AbstractController
     {
         return $this->render('admin/role/show.html.twig', [
             'canEdit' => $authorizationChecker->isGranted('ROLE_UROLE'),
-            'roleId' => $id
+            'roleId' => $id,
+            'urlPrecedente' => $this->urlPrecedente()
         ]);
+    }
+
+    private function urlPrecedente()
+    {
+        $urlPrecedente = "/";
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $urlPrecedente = $_SERVER['HTTP_REFERER'];
+        }
+        return $urlPrecedente;
     }
 }

@@ -56,7 +56,17 @@ class CompanyStatutController extends AbstractController
     {
         return $this->render('admin/companystatut/show.html.twig', [
             'canEdit' => $authorizationChecker->isGranted('ROLE_ADMIN'),
-            'companyStatutId' => $id
+            'companyStatutId' => $id,
+            'urlPrecedente' => $this->urlPrecedente()
         ]);
+    }
+
+    private function urlPrecedente()
+    {
+        $urlPrecedente = "/";
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            $urlPrecedente = $_SERVER['HTTP_REFERER'];
+        }
+        return $urlPrecedente;
     }
 }

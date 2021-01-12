@@ -57,6 +57,7 @@ class UtilisateurController extends AbstractController
         return $this->render('admin/utilisateur/show.html.twig', [
             'utilisateurId' => $id,
             'canEdit' => $authorizationChecker->isGranted('ROLE_UUTILISATEUR'),
+            'urlPrecedente' => $this->urlPrecedente(),
         ]);
     }
 
@@ -75,7 +76,7 @@ class UtilisateurController extends AbstractController
         ]);
     }
 
-    
+
     private function urlPrecedente()
     {
         $urlPrecedente = "/";

@@ -11,7 +11,7 @@
             v-model="formFields.nom"
             type="text"
             name="nom"
-            maxlength="100"
+            :maxlength="100"
           >
           <div
             v-for="errorText in formErrors.nom"
@@ -32,7 +32,7 @@
             v-model="formFields.consigne"
             type="text"
             name="consigne"
-            maxlength="100"
+            :maxlength="100"
             rows="5"
             :placeholder="'300 caractères max'"
           />
@@ -51,49 +51,53 @@
           class="btn btn-primary mx-3"
           data-cy="form-valider"
           @click="submitForm()"
-        >Valider</button>
+        >
+          Valider
+        </button>
 
         <button
           type="button"
           class="btn btn-primary mx-3"
           data-cy="form-valider"
           @click="getAllExamples()"
-        >Get all </button>
+        >
+          Get all
+        </button>
       </div>
     </form>
   </div>
 </template>
 <script>
-import axios from 'axios';
-import _ from 'lodash';
-export default {
-  data () {
-    return {
-      examples: null,
-      formFields: {
-        nom: '',
-        consigne: ''
-      },
-      formErrors: {
-        nom: [],
-        consigne: []
-      }
-    }
-  },
-
-  methods: {
-    getAllExamples () {
-      return axios.get("/api/examples")
-        .then(response => {
-          this.examples = response.data;
-        });
+  import axios from 'axios';
+  import _ from 'lodash';
+  export default {
+    data() {
+      return {
+        examples: null,
+        formFields: {
+          nom: '',
+          consigne: ''
+        },
+        formErrors: {
+          nom: [],
+          consigne: []
+        }
+      };
     },
 
-    submitForm () {
-      return axios.post("/api/examples", this.formFields)
-        .then(response => {
-        });
-    }
-  },
-}
+    methods: {
+      getAllExamples() {
+        return axios.get('/api/examples')
+          .then(response => {
+            this.examples = response.data;
+          });
+      },
+
+      submitForm() {
+        return axios.post('/api/examples', this.formFields)
+          .then(response => {
+          });
+      }
+    },
+  };
 </script>

@@ -18,6 +18,7 @@
     "error_occured": "An error occured.",
     "search_button": "Search",
     "no_results_found": "No company seems to match your search, we invite you to modify your filter criteria.",
+    "close": "Close",
     "placeholder": {
       "search": "Whata re you looking for ?",
       "category": "Select category",
@@ -36,16 +37,16 @@
           "text": "You are about to validate a subscription's application. Are you sure you want to validate it?"
         }
       },
-      "subscription_decline": {
-        "decline": {
-          "title": "Refuse subscription",
-          "text": "You are about to reject a subscri^ption's offer. Are you sure you want to refuse it?"
-        }
-      },
       "decline": {
         "company": {
           "title": "Refuse registration",
           "text": "You are about to reject a company's candidacy. Are you sure you want to refuse it? If so, the company's data will be directly deleted."
+        }
+      },
+      "subscription_decline": {
+        "decline": {
+          "title": "Refuse subscription",
+          "text": "You are about to reject a subscri^ption's offer. Are you sure you want to refuse it?"
         }
       },
       "delete": {
@@ -60,7 +61,11 @@
       "email": "Email",
       "username": "Login",
       "first_name": "First Name",
-      "last_name": "Last Name"
+      "last_name": "Last Name",
+      "password": "Mot de passe",
+      "current_password": "",
+      "plain_password_first": "",
+      "plain_password_second": ""
     },
     "placeholder": {
       "email": "Enter email",
@@ -144,7 +149,7 @@
       "postal_code": "Postal code",
       "latitude": "Latitude",
       "longitude": "Longitude",
-      "city": "City"
+      "city": "Enter the first two letters and select a proposed city"
     },
     "nav_title": {
       "presentation": "Presentation",
@@ -193,7 +198,6 @@
     "susbcription_history": "Subscription history",
     "link": {
       "n_company": "Your company | Your company | Your companies",
-      "company": "Company(ies)",
       "subscription": "Subscriptions",
       "recruit": "Recruit (HR)",
       "opportunity": "Opportunity",

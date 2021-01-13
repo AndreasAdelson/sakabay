@@ -9,10 +9,15 @@
       >
         <div class="col-9">
           <a
+            v-if="notif.notification.link !== null"
             href="#"
             class="fontPoppins fontSize14"
             @click.prevent="goToNotificationSubject()"
           >{{ notif.notification.message }}</a>
+          <span
+            v-else
+            class="fontPoppins fontSize14"
+          >{{ notif.notification.message }}</span>
         </div>
         <div class="col-2 text-center">
           <span class="fontPoppins fontSize14">{{ notificationDate }}</span>
@@ -86,8 +91,10 @@
        * Immediately followed by a redirection to the subject of the notification. No further handling required.
        */
       goToNotificationSubject() {
-        window.location.assign(this.notif.notification.link);
-        this.markAsSeen();
+        if (this.notif.notification.link) {
+          window.location.assign(this.notif.notification.link);
+          this.markAsSeen();
+        }
       },
 
       markAsSeen() {

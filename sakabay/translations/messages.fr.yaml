@@ -60,6 +60,7 @@ create_account: "Créer un compte?"
 error_message_unique_username: "Ce pseudonyme est déjà utilisé. Choisissez-en un autre."
 logout: "Se déconnecter"
 edit_account: "Modifier son compte"
+error_message_field_not_empty_city: "Ce champ est obligatoire. Assurez-vous que la ville existe sur l'application en tapant les deux premières lettres. Si le champ ne vous propose pas la ville que vous recherchez veuillez nous contacter."
 
 # Page d'erreur 404
 
@@ -67,7 +68,7 @@ error_notfound_menu: "Page non trouvée !"
 error_notfound_message: "La page recherchée n'est pas accessible. Vérifiez que l'URL que vous avez saisie est correcte ou "
 error_notfound_message_link: "revenez à la page d'accueil"
 
-# Page d'erreur générique
+# Page d'erreur liés au droits.
 
 error_generic_title: "Erreur"
 error_generic_message: "Une erreur est survenue."
@@ -99,13 +100,16 @@ group_title_show_page: "Détails d'un groupe"
 company_subscribed_title_list_page: "Liste des entreprises"
 company_subscribed_title_form_page: "Modifier une entreprise"
 company_subscribed_title_show_page: "Détails d'une entreprise"
-
 company_registered_title_list_page: "Liste demande d'inscription entreprise"
 company_registered_title_form_page: "Modifier une inscription"
 company_registered_title_show_page: "Détail d'une inscription"
-
 company_register_title_page: "Référencez-vous"
 company_list_title_page: "Rechercher une entreprise"
+company_register_index_title: "Référencer votre entreprise"
+company_register_index_message_first: "Vous devez être connecté pour visualiser le contenu de cette page. Vous pouvez vous connecter "
+company_register_index_message_second: ". Vous n'avez pas de compte ? "
+company_register_index_message_here: "ici"
+company_register_index_message_subscribe: "Inscrivez-vous"
 
 #Category's pages
 category_title_list_page: "Liste des categories"
@@ -124,17 +128,20 @@ email_register_confirmation_subject: "Confirmation de votre inscription"
 email_register_confirmation_body: "Bonjour, \n\nVotre candidature pour que l'entreprise « %s », soit référencée sur Sakabay est en cours de traitement.\nNotre enseigne s'assure que votre entreprise respecte bien nos conditions d'utilisations.\nVous pouvez dès à présent vous connectez et suivre l'évolution de votre candidature sur l'application à l'aide de vos identifiants.\nVos identifiants de connection sont les suivants:\nEmail:  %s \nMot de passe:  %s \nNous vous recommandons de modifier votre mot de passe lors de votre première connection.\n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."
 email_register_validation_subject: "Validation de votre candidature"
 email_register_validation_body: "Bonjour, \n\nC'est avec plaisir que vous nous annoncons que l'inscription de l'entreprise « %s » à été validée par nos équipes.\nNous vous souhaitons donc la bienvenue au sein de notre groupe avec 2 mois d'abonnement offert. Vous pouvez dès maintenant personnaliser votre page de présentation depuis ce lien  %s , accessible depuis le menu glissant de l'application.\nL'Equipe Sakabay vous souhaite une bonne journée.\n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."
+email_update_password_subject: "Votre mot de passe a été modifié."
+email_update_password_body: "Bonjour, \n\n Nous vous confirmons la modification de votre mot de passe. \n\nBonne journée sur Sakabay."
 
 ###### Notifications ######
 createcompany_subject_admin: "Inscription d'une entreprise"
 createcompany_message_admin: "L'utilisateur « %s » à réalisé une demande d'inscription pour l'entreprise « %s ». Veuillez vérifier si l'entreprise correspond aux conditions d'utilisations de SAKABAY et validez en conséquence."
 validatecompany_subject_admin: "Une entreprise a été validée"
 validatecompany_message_admin: "L'entreprise « %s » à été acceptée sur notre plateforme. Nous lui avons souhaitée la bienvenue avec 2 mois d'abonnements offert. Vérifiez rapidement que tout est en place. Merci."
-
 createcompany_subject: "Confirmation inscription"
 createcompany_message: "Votre inscription qui concerne l'entreprise « %s »  est en cours de traitement. Une réponse vous sera délivrée sous 48h."
 validatecompany_subject: "Acceptation de votre candidature"
 validatecompany_message: "Félicitations ! Vous faîtes désormais partis de Sakabay Entrepeneur. Afin de vous souhaiter la bienvenue nous vous offrons 2 mois d'abonnements premium. Bienvenue chez Sakabay :)."
+updatepassword_subject: "Confirmation changement de mot de passe"
+updatepassword_message: "Votre mot de passe a bien été modifié. Un email de confirmation vous a également été envoyé."
 
 ####Footer:
 company_footer_name: "SAKABAY"

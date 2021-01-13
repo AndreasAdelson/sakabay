@@ -48,7 +48,6 @@ final class CompanyController extends AbstractFOSRestController
         CompanyService $companyService,
         CompanyStatutService $companyStatutService,
         TranslatorInterface $translator,
-        UserPasswordEncoderInterface $encoder,
         NotificationFactory $notificationFactory,
         UtilisateurService $utilisateurService
     ) {
@@ -58,7 +57,6 @@ final class CompanyController extends AbstractFOSRestController
         $this->companyStatutService = $companyStatutService;
         $this->notificationFactory = $notificationFactory;
         $this->utilisateurService = $utilisateurService;
-        $this->encoder = $encoder;
     }
 
     /**
@@ -71,17 +69,7 @@ final class CompanyController extends AbstractFOSRestController
     public function createCompany(Request $request, FileUploader $uploader, string $uploadDir)
     {
         $company = new Company();
-        $file = $request->files->get('file');
 
-        if (!empty($file)) {
-            $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFileName);
-            $newFileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
-            $uploader->upload($uploadDir, $file, $newFileName);
-            $requestUtilisateur = $request->request->get('utilisateur');
-            $requestUtilisateur['imageProfil'] = $newFileName;
-            $request->request->set('utilisateur', $requestUtilisateur);
-        }
         $formOptions = ['translator' => $this->translator];
         $form = $this->createForm(CompanyType::class, $company, $formOptions);
         $form->submit($request->request->all());
@@ -92,13 +80,6 @@ final class CompanyController extends AbstractFOSRestController
         $urlName  = $this->recastName($company->getName());
         $company->setUrlName($urlName);
 
-        //TODO Faire une fonction qui génère un mdp aléatoire lorsqu'on se penche sur l'envoie d'un email pour vérifier le mdp créé.
-        $plainPassword = 'test';
-        $encoded = $this->encoder->encodePassword($company->getUtilisateur(), $plainPassword);
-
-        $username = str_replace('-', '', $urlName);
-        $company->getUtilisateur()->setUsername(strtoupper($username));
-        $company->getUtilisateur()->setPassword($encoded);
         $companyStatut = $this->companyStatutService->getENCCompanyStatut()[0];
         $company->setCompanystatut($companyStatut);
 
@@ -110,9 +91,12 @@ final class CompanyController extends AbstractFOSRestController
         // $email = $company->getUtilisateur()->getEmail();
         $email = "andreasadelson@gmail.com";
         $subject = $this->translator->trans('email_register_confirmation_subject');
-        $bodyMessage = sprintf($this->translator->trans('email_register_confirmation_body'), $company->getName(), $email, $plainPassword);
-
+        $bodyMessage = sprintf($this->translator->trans('email_register_confirmation_body'), $company->getName(), $email);
         $this->sendMail($email, $subject, $bodyMessage);
+
+        //Notification
+        
+
         return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
     }
 

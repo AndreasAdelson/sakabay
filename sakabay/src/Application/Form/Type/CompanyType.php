@@ -42,9 +42,13 @@ class CompanyType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('utilisateur', CreateUtilisateurByCompanyType::class, [
-                'constraints' => [new Valid()],
-                'translator' => $translator,
+            ->add('utilisateur', EntityType::class, [
+                'class' => 'App:Utilisateur',
+                'constraints' => [
+                    new NotNull([
+                        'message' => $translator->trans('error_message_field_not_empty'),
+                    ]),
+                ],
                 'required' => true,
             ])
             ->add('address', AddressType::class, [
@@ -54,12 +58,12 @@ class CompanyType extends AbstractType
                 'by_reference' => true
             ])
             ->add('city', EntityType::class, [
-                'by_reference' => false,
                 'class' => 'App:City',
                 'constraints' => [
                     new NotNull([
-                        'message' => $translator->trans('error_message_field_not_empty'),
+                        'message' => $translator->trans('error_message_field_not_empty_city'),
                     ]),
+                    
                 ],
                 'required' => true,
                 'multiple' => false

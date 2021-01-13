@@ -2,8 +2,7 @@
   <div class="skb-body container">
     <div v-show="loading">
       <div class="loader-container-full">
-        <div class="loader">
-        </div>
+        <div class="loader" />
       </div>
     </div>
     <div>
@@ -13,7 +12,7 @@
           type="button"
           class="w-40px p-0 rounded-circle btn-close btn"
         >
-          <i class="fas fa-times "></i>
+          <i class="fas fa-times " />
         </button>
       </a>
       <form>
@@ -29,12 +28,12 @@
                   >
                     <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.name') }}</label>
                     <input
+                      v-model="formFields.name"
                       v-validate="'required'"
                       type="text"
                       name="name"
                       class="form-control"
                       :placeholder="$t('company.placeholder.name')"
-                      v-model="formFields.name"
                     >
                     <div
                       v-for="errorText in formErrors.name"
@@ -53,13 +52,13 @@
                   >
                     <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.fields.num_siret') }}</label>
                     <input
+                      v-model="formFields.numSiret"
                       v-validate="'required'"
                       name="numSiret"
                       type="text"
                       class="form-control"
                       :placeholder="$t('company.placeholder.num_siret')"
                       onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
-                      v-model="formFields.numSiret"
                     >
                     <div
                       v-for="errorText in formErrors.numSiret"
@@ -81,12 +80,12 @@
                   >
                     <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.url_name') }}</label>
                     <input
+                      v-model="formFields.url_name"
                       v-validate="'required'"
                       type="text"
                       name="url_name"
                       class="form-control"
                       :placeholder="$t('company.placeholder.url_name')"
-                      v-model="formFields.url_name"
                     >
                     <div
                       v-for="errorText in formErrors.url_name"
@@ -105,8 +104,8 @@
                   <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.category') }}</label>
 
                   <multiselect
-                    v-validate="'required'"
                     v-model="formFields.category"
+                    v-validate="'required'"
                     :options="category"
                     name="category"
                     placeholder="Selectionner categorie"
@@ -115,8 +114,7 @@
                     :show-labels="false"
                     label="name"
                     track-by="name"
-                  >
-                  </multiselect>
+                  />
                   <div
                     v-for="errorText in formErrors.category"
                     :key="'category_' + errorText"
@@ -136,13 +134,13 @@
                   >
                     <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_address') }}</label>
                     <input
+                      v-model="formFields.address.postal_address"
                       v-validate="'required'"
                       name="postalAddress"
                       type="text"
-                      maxlength="255"
+                      :maxlength="255"
                       class="form-control"
                       :placeholder="$t('company.placeholder.postal_address')"
-                      v-model="formFields.address.postal_address"
                     >
                     <div
                       v-for="errorText in formErrors.postal_address"
@@ -155,20 +153,19 @@
               </div>
               <div class="col-6">
                 <div class="form-group">
-
                   <fieldset
                     id="postalCode"
                     class="postalCode"
                   >
                     <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_code') }}</label>
                     <input
+                      v-model="formFields.address.postal_code"
                       v-validate="'required'"
                       type="text"
                       name="postalCode"
                       class="form-control"
                       :placeholder="$t('company.placeholder.postal_code')"
                       onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
-                      v-model="formFields.address.postal_code"
                     >
                     <div
                       v-for="errorText in formErrors.postal_code"
@@ -222,15 +219,15 @@
                   >
                     <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.latitude') }}</label>
                     <input
+                      v-model="formFields.address.latitude"
                       v-validate="'required'"
                       name="latitude"
                       type="text"
                       pattern="^-?\d{0,3}(\.\d{0,6})?$"
-                      maxlength="9"
+                      :maxlength="9"
                       class="form-control"
                       :placeholder="$t('company.placeholder.latitude')"
                       onkeypress="return event.charCode === 0 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)"
-                      v-model="formFields.address.latitude"
                     >
                     <div
                       v-for="errorText in formErrors.latitude"
@@ -243,22 +240,21 @@
               </div>
               <div class="col-6">
                 <div class="form-group">
-
                   <fieldset
                     id="longitude"
                     class="longitude"
                   >
                     <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.longitude') }}</label>
                     <input
+                      v-model="formFields.address.longitude"
                       v-validate="'required'"
                       type="text"
                       pattern="^-?\d{0,3}(\.\d{0,6})?$"
-                      maxlength="9"
+                      :maxlength="9"
                       name="longitude"
                       class="form-control"
                       :placeholder="$t('company.placeholder.longitude')"
                       onkeypress="return event.charCode === 0 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)"
-                      v-model="formFields.address.longitude"
                     >
                     <div
                       v-for="errorText in formErrors.longitude"
@@ -271,17 +267,17 @@
               </div>
             </div>
             <div
-              class="row"
               v-if="formFields.address.latitude && formFields.address.latitude"
+              class="row"
             >
               <div class="col-12">
                 <v-map
-                  :zoom=16
+                  :zoom="16"
                   :center="[formFields.address.latitude, formFields.address.longitude]"
                   style="height:300px"
                 >
-                  <v-marker :lat-lng="[formFields.address.latitude, formFields.address.longitude]"></v-marker>
-                  <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tile-layer>
+                  <v-marker :lat-lng="[formFields.address.latitude, formFields.address.longitude]" />
+                  <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
                 </v-map>
               </div>
             </div>
@@ -291,7 +287,9 @@
                   type="button"
                   class="btn button_skb fontUbuntuItalic"
                   @click="$validateForm()"
-                >{{ this.$t('commons.edit') }}</button>
+                >
+                  {{ this.$t('commons.edit') }}
+                </button>
               </div>
             </div>
           </div>
@@ -301,79 +299,79 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import _ from 'lodash';
-import validatorRulesMixin from 'mixins/validatorRulesMixin';
-import Autocomplete from 'vue2-autocomplete-js';
-import adminFormMixin from 'mixins/adminFormMixin';
-export default {
-  components: {
-    Autocomplete
-  },
-  mixins: [
-    validatorRulesMixin,
-    adminFormMixin
-  ],
-  props: {
-    companyId: {
-      type: Number,
-      default: null,
+  import axios from 'axios';
+  import _ from 'lodash';
+  import validatorRulesMixin from 'mixins/validatorRulesMixin';
+  import Autocomplete from 'vue2-autocomplete-js';
+  import adminFormMixin from 'mixins/adminFormMixin';
+  export default {
+    components: {
+      Autocomplete
     },
-    isValidated: {
-      type: Boolean,
-      default: false
-    }
-  },
-  data () {
-    return {
-      API_URL: '/api/admin/companies/' + this.companyId,
-      formFields: {
-        name: null,
-        numSiret: null,
-        category: null,
-        url_name: null,
-        address: {},
-        city: {},
-        validated: this.isValidated
+    mixins: [
+      validatorRulesMixin,
+      adminFormMixin
+    ],
+    props: {
+      companyId: {
+        type: Number,
+        default: null,
       },
-      formErrors: {
-        name: [],
-        numSiret: [],
+      isValidated: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        API_URL: '/api/admin/companies/' + this.companyId,
+        formFields: {
+          name: null,
+          numSiret: null,
+          category: null,
+          url_name: null,
+          address: {},
+          city: {},
+          validated: this.isValidated
+        },
+        formErrors: {
+          name: [],
+          numSiret: [],
+          category: [],
+          url_name: [],
+          postalCode: [],
+          postalAddress: [],
+          latitude: [],
+          longitude: [],
+          city: []
+        },
         category: [],
-        url_name: [],
-        postalCode: [],
-        postalAddress: [],
-        latitude: [],
-        longitude: [],
-        city: []
-      },
-      category: [],
-      loading: true,
-    };
-  },
-  created () {
-    let promises = [];
-    promises.push(axios.get("/api/admin/categories"));
-    promises.push(axios.get(this.API_URL));
-    return Promise.all(promises).then(res => {
-      this.category = res[0].data;
-      let company = res[1].data;
-      this.$removeFieldsNotInForm(company, Object.keys(this.formFields));
-      this.$setEditForm(company);
-      this.$refs.autocomplete.setValue(company.city.name);
-      this.loading = false;
-    }).catch(e => {
-      this.$handleError(e);
-    }).then(() => this.loading = false);
-  },
-  methods: {
-    setCity (city) {
-      this.formFields.city = city;
-      this.$refs.autocomplete.setValue(city.name);
+        loading: true,
+      };
     },
-  },
-  computed: {
+    computed: {
 
-  },
-}
+    },
+    created() {
+      let promises = [];
+      promises.push(axios.get('/api/admin/categories'));
+      promises.push(axios.get(this.API_URL));
+      return Promise.all(promises).then(res => {
+        this.category = res[0].data;
+        let company = res[1].data;
+        this.$removeFieldsNotInForm(company, Object.keys(this.formFields));
+        this.$setEditForm(company);
+        this.$refs.autocomplete.setValue(company.city.name);
+        this.loading = false;
+      }).catch(e => {
+        this.$handleError(e);
+      }).then(() => this.loading = false);
+    },
+    methods: {
+      setCity(city) {
+        this.formFields.city = city;
+        this.$refs.autocomplete.setValue(city.name);
+      },
+    },
+  };
 </script>

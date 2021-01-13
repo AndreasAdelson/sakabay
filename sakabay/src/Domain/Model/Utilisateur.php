@@ -160,8 +160,6 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @var ResetPasswordRequest
      * @Expose
      * @Groups({
-     * "api_utilisateurs",
-     * "api_dashboard_utilisateur"
      * })
      */
     private $reset_password;

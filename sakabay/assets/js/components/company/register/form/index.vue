@@ -6,7 +6,7 @@
         type="button"
         class="w-40px p-0 rounded-circle btn-close btn"
       >
-        <i class="fas fa-times "></i>
+        <i class="fas fa-times " />
       </button>
     </a>
     <form>
@@ -22,12 +22,12 @@
                 >
                   <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.fields.name') }}</label>
                   <input
+                    v-model="formFields.name"
                     v-validate="'required'"
                     type="text"
                     name="name"
                     class="form-control"
                     :placeholder="$t('company.placeholder.name')"
-                    v-model="formFields.name"
                   >
                   <div
                     v-for="errorText in formErrors.name"
@@ -46,13 +46,13 @@
                 >
                   <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.fields.num_siret') }}</label>
                   <input
+                    v-model="formFields.numSiret"
                     v-validate="'required'"
                     name="numSiret"
                     type="text"
                     class="form-control"
                     :placeholder="$t('company.placeholder.num_siret')"
                     onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
-                    v-model="formFields.numSiret"
                   >
                   <div
                     v-for="errorText in formErrors.numSiret"
@@ -74,18 +74,18 @@
                 >
                   <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_address') }}</label>
                   <input
+                    v-model="formFields.address.postalAddress"
                     v-validate="'required'"
                     name="postalAddress"
                     type="text"
-                    maxlength="255"
+                    :maxlength="255"
                     class="form-control"
-                    v-on:blur="() => {
+                    :placeholder="$t('company.placeholder.postal_address')"
+                    @blur="() => {
                       if (formFields.address.postalCode && formFields.address.postalAddress && formFields.city) {
                         getLongLat();
                       }
                     }"
-                    :placeholder="$t('company.placeholder.postal_address')"
-                    v-model="formFields.address.postalAddress"
                   >
                   <div
                     v-for="errorText in formErrors.postalAddress"
@@ -98,25 +98,24 @@
             </div>
             <div class="col-6">
               <div class="form-group">
-
                 <fieldset
                   id="postalCode"
                   class="postalCode"
                 >
                   <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_code') }}</label>
                   <input
+                    v-model="formFields.address.postalCode"
                     v-validate="'required'"
                     type="text"
                     name="postalCode"
                     class="form-control"
                     :placeholder="$t('company.placeholder.postal_code')"
-                    v-on:blur="() => {
+                    onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
+                    @blur="() => {
                       if (formFields.address.postalCode && formFields.address.postalAddress && formFields.city) {
                         getLongLat();
                       }
                     }"
-                    onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
-                    v-model="formFields.address.postalCode"
                   >
                   <div
                     v-for="errorText in formErrors.postalCode"
@@ -130,30 +129,30 @@
           </div>
           <!-- Map row -->
           <div v-if="loading">
-            <div class="loader3"></div>
+            <div class="loader3" />
           </div>
           <div
-            class="row mb-3"
             v-else-if="formFields.address.latitude && formFields.address.longitude"
+            class="row mb-3"
           >
             <div
               class="col-12"
               style="height:300px"
             >
               <v-map
-                :zoom=16
+                :zoom="16"
                 :center="[formFields.address.latitude, formFields.address.longitude]"
                 style="height:300px"
               >
                 <v-marker
                   :draggable="true"
                   :lat-lng.sync="position"
-                ></v-marker>
-                <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"></v-tile-layer>
+                />
+                <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
               </v-map>
             </div>
             <div class="col-12 warning-message">
-              <span class="fontUbuntuItalic fontSize16 red-skb">{{$t('company.table.fields.address.warning_message')}}</span>
+              <span class="fontUbuntuItalic fontSize16 red-skb">{{ $t('company.table.fields.address.warning_message') }}</span>
             </div>
           </div>
           <!-- third row -->
@@ -166,6 +165,9 @@
                 <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.city') }}</label>
                 <autocomplete
                   ref="autocomplete"
+                  v-model="formFields.city"
+                  :required="true"
+                  name="city"
                   :min="2"
                   :debounce="500"
                   :on-should-render-child="$getCityLabel"
@@ -174,7 +176,6 @@
                   param="autocomplete"
                   url="/api/admin/cities"
                   anchor="label"
-                  v-model="formFields.city"
                   :classes="{input: 'form-control'}"
                 />
                 <div
@@ -193,8 +194,8 @@
                 <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.category') }}</label>
 
                 <multiselect
-                  v-validate="'required'"
                   v-model="formFields.category"
+                  v-validate="'required'"
                   :options="category"
                   name="category"
                   placeholder="Selectionner categorie"
@@ -204,8 +205,7 @@
                   label="name"
                   track-by="name"
                   open-direction="below"
-                >
-                </multiselect>
+                />
                 <div
                   v-for="errorText in formErrors.category"
                   :key="'category_' + errorText"
@@ -215,130 +215,6 @@
               </fieldset>
             </div>
           </div>
-          <!-- fourth row -->
-
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <fieldset
-                  id="lastName"
-                  class="lastName"
-                >
-                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('user.fields.last_name') }}</label>
-                  <input
-                    v-validate="{ required: true, regex:/^\D*$/ }"
-                    name="lastName"
-                    type="text"
-                    maxlength="100"
-                    class="form-control"
-                    :placeholder="$t('user.placeholder.last_name')"
-                    v-model="formFields.utilisateur.lastName"
-                    onkeypress="return event.charCode === 0  ||
-                                      (event.charCode >= 65 && event.charCode <= 90) ||
-                                      (event.charCode >= 97 && event.charCode <= 122) ||
-                                      (event.charCode >= 224 && event.charCode <= 246) ||
-                                      (event.charCode >= 249 && event.charCode <= 255)"
-                  >
-                  <div
-                    v-for="errorText in formErrors.lastName"
-                    :key="'code_' + errorText"
-                  >
-                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="form-group">
-
-                <fieldset
-                  id="firstName"
-                  class="firstName"
-                >
-                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('user.fields.first_name') }}</label>
-                  <input
-                    v-validate="'required'"
-                    type="text"
-                    name="firstName"
-                    class="form-control"
-                    :placeholder="$t('user.placeholder.first_name')"
-                    onkeypress="return event.charCode === 0  ||
-                                      (event.charCode >= 65 && event.charCode <= 90) ||
-                                      (event.charCode >= 97 && event.charCode <= 122) ||
-                                      (event.charCode >= 224 && event.charCode <= 246) ||
-                                      (event.charCode >= 249 && event.charCode <= 255)"
-                    v-model="formFields.utilisateur.firstName"
-                  >
-                  <div
-                    v-for="errorText in formErrors.firstName"
-                    :key="'name_' + errorText"
-                  >
-                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-          </div>
-          <!-- fifth row -->
-          <div class="row">
-            <div class="col-6">
-              <div class="form-group">
-                <fieldset
-                  id="email"
-                  class="email"
-                >
-                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('user.fields.email') }}</label>
-                  <input
-                    v-validate="'required|email'"
-                    type="text"
-                    name="email"
-                    class="form-control"
-                    :placeholder="$t('user.placeholder.email')"
-                    v-model="formFields.utilisateur.email"
-                  >
-                  <div
-                    v-for="errorText in formErrors.email"
-                    :key="'email_' + errorText"
-                  >
-                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                  </div>
-                </fieldset>
-              </div>
-            </div>
-            <div class="col-6 my-auto">
-              <div class="row">
-                <div class="col-8 my-auto">
-                  <div class="form-group mb-0">
-                    <fieldset
-                      id="imageProfil"
-                      class="imageProfil"
-                    >
-                      <label class="fontUbuntuItalic fontSize14"> {{ $t('user.placeholder.image_profil') }}</label>
-                      <input
-                        name="imageProfil"
-                        type="file"
-                        @change="onFileSelected"
-                        ref="imageProfil"
-                      >
-                      <div
-                        v-for="errorText in formErrors.imageProfil"
-                        :key="'imageProfil_' + errorText"
-                      >
-                        <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                      </div>
-                    </fieldset>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <b-img
-                    v-if="urlImageProfil"
-                    class="rounded-circle logo-size-75"
-                    :src="urlImageProfil"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div class="row my-3">
             <div class="col-6 offset-3">
@@ -346,7 +222,9 @@
                 type="button"
                 class="btn button_skb fontUbuntuItalic"
                 @click="$validateForm()"
-              >{{ this.$t('commons.create') }}</button>
+              >
+                {{ this.$t('commons.create') }}
+              </button>
             </div>
             <!-- <div class="col-3">
               <button
@@ -362,126 +240,135 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import Autocomplete from 'vue2-autocomplete-js';
-import validatorRulesMixin from 'mixins/validatorRulesMixin';
-import _ from 'lodash';
-import adminFormMixin from 'mixins/adminFormMixin';
-export default {
-  components: {
-    Autocomplete
-  },
-  mixins: [
-    validatorRulesMixin,
-    adminFormMixin
-  ],
-  props: {
-  },
-  data () {
-    return {
-      loading: false,
-      API_URL: '/api/companies',
-      formFields: {
-        name: null,
-        numSiret: null,
-        utilisateur: new Object(),
-        address: new Object(),
-        category: null,
-        city: new Object()
-      },
-      position: {
-        lng: null,
-        lat: null
-      },
-      formErrors: {
-        name: [],
-        numSiret: [],
-        firstName: [],
-        lastName: [],
-        email: [],
-        imageProfil: [],
-        category: [],
-        city: [],
-        postalAddress: [],
-        postalCode: []
-      },
-      urlImageProfil: null,
-      imageProfilSelected: null,
-      imageName: '',
-      category: []
-    };
-  },
-  created () {
-    return axios.get("/api/admin/categories")
-      .then(response => {
-        this.category = response.data;
-      }).catch(e => {
-        console.log(e);
-      });
-  },
-  methods: {
-
-    onFileSelected () {
-      this.imageProfilSelected = this.$refs.imageProfil.files[0];
-      this.imageName = this.$refs.imageProfil.files[0].name;
-      this.urlImageProfil = URL.createObjectURL(this.imageProfilSelected);
+  import axios from 'axios';
+  import Autocomplete from 'vue2-autocomplete-js';
+  import validatorRulesMixin from 'mixins/validatorRulesMixin';
+  import _ from 'lodash';
+  import adminFormMixin from 'mixins/adminFormMixin';
+  export default {
+    components: {
+      Autocomplete
     },
-
-    getLongLat () {
-      let query = this.formFields.address.postalAddress + ' ' + this.formFields.city;
-      let postalCode = this.formFields.address.postalCode;
-      this.loading = true;
-      return axios.get('https://api-adresse.data.gouv.fr/search/', {
-        params: {
-          q: query,
-          postcode: postalCode,
-          limit: 10
-        }
-      }).then(response => {
-        if (response.data.features) {
-          this.$set(this.formFields.address, 'longitude', response.data.features[0].geometry.coordinates[0]);
-          this.$set(this.formFields.address, 'latitude', response.data.features[0].geometry.coordinates[1]);
-          this.position.lat = response.data.features[0].geometry.coordinates[1];
-          this.position.lng = response.data.features[0].geometry.coordinates[0];
-
-        } else {
-          this.$set(this.formFields.address, 'longitude', 0);
-          this.$set(this.formFields.address, 'latitude', 0);
+    mixins: [
+      validatorRulesMixin,
+      adminFormMixin
+    ],
+    props: {
+      utilisateurId: {
+        type: Number,
+        default: null
+      },
+    },
+    data() {
+      return {
+        loading: false,
+        API_URL: '/api/companies',
+        formFields: {
+          name: null,
+          numSiret: null,
+          utilisateur: new Object(),
+          address: new Object(),
+          category: null,
+          city: new Object()
+        },
+        position: {
+          lng: null,
+          lat: null
+        },
+        formErrors: {
+          name: [],
+          numSiret: [],
+          firstName: [],
+          lastName: [],
+          email: [],
+          imageProfil: [],
+          category: [],
+          city: [],
+          postalAddress: [],
+          postalCode: []
+        },
+        category: [],
+        utilisateur: null
+      };
+    },
+    created() {
+      let promises = [];
+      promises.push(axios.get('/api/admin/categories'));
+      if(this.utilisateurId) {
+        promises.push(axios.get('/api/admin/utilisateurs/' + this.utilisateurId));
+      }
+      return Promise.all(promises).then(res => {
+        this.category = res[0].data;
+        if (this.utilisateurId) {
+          this.utilisateur = res[1].data;
         }
         this.loading = false;
       }).catch(e => {
         this.$handleError(e);
         this.loading = false;
-
       });
     },
+    methods: {
 
-    setCity (city) {
-      if (this.formFields.address.postalAddress && this.formFields.address.postalCode) {
-        this.getLongLat();
-      }
-      this.formFields.city = city;
-      this.$refs.autocomplete.setValue(city.name);
-    },
-
-    submitForm () {
-      if (this.position.lat !== this.formFields.address.latitude && this.position.ngt !== this.formFields.address.longitude) {
-        this.formFields.address.longitude = this.position.lng.toFixed(6);
-        this.formFields.address.latitude = this.position.lat.toFixed(6);
-      }
-      let formData = this.$getFormFieldsData(this.formFields);
-      if (this.imageProfilSelected) {
-        formData.append('file', this.imageProfilSelected);
-      }
-      return axios.post(this.API_URL, formData)
-        .then(response => {
-          window.location.assign(response.headers.location);
-        }).catch(e => {
-          if (e.response && e.response.status && e.response.status == 400) {
-            this.$handleFormError(e.response.data);
+      getLongLat() {
+        let query = this.formFields.address.postalAddress + ' ' + this.formFields.city;
+        let postalCode = this.formFields.address.postalCode;
+        this.loading = true;
+        return axios.get('https://api-adresse.data.gouv.fr/search/', {
+          params: {
+            q: query,
+            postcode: postalCode,
+            limit: 10
           }
+        }).then(response => {
+          if (response.data.features) {
+            this.$set(this.formFields.address, 'longitude', response.data.features[0].geometry.coordinates[0]);
+            this.$set(this.formFields.address, 'latitude', response.data.features[0].geometry.coordinates[1]);
+            this.position.lat = response.data.features[0].geometry.coordinates[1];
+            this.position.lng = response.data.features[0].geometry.coordinates[0];
+
+          } else {
+            this.$set(this.formFields.address, 'longitude', 0);
+            this.$set(this.formFields.address, 'latitude', 0);
+          }
+          this.loading = false;
+        }).catch(e => {
+          this.$handleError(e);
+          this.loading = false;
+
         });
+      },
+
+      setCity(city) {
+        if (this.formFields.address.postalAddress && this.formFields.address.postalCode) {
+          this.getLongLat();
+        }
+        this.formFields.city = city;
+        this.$refs.autocomplete.setValue(city.name);
+      },
+
+      submitForm() {
+        if (this.position.lat !== this.formFields.address.latitude && this.position.ngt !== this.formFields.address.longitude) {
+          this.formFields.address.longitude = this.position.lng.toFixed(6);
+          this.formFields.address.latitude = this.position.lat.toFixed(6);
+        }
+        //Gestion lorsque le navigateur propose de compléter automatiquement. Ici on s'assure que la ville existe en base avant de la set.
+        if(this.$refs.autocomplete.json.length > 0) {
+          this.formFields.city = this.$refs.autocomplete.json[0];
+        }
+        this.formFields.utilisateur = _.cloneDeep(this.utilisateur);
+        let formData = this.$getFormFieldsData(this.formFields);
+        //On renvoie un message d'erreur si l'autocompletion du formulaire propose une ville qui n'existe pas dans l'application.
+        
+        return axios.post(this.API_URL, formData)
+          .then(response => {
+            window.location.assign(response.headers.location);
+          }).catch(e => {
+            if (e.response && e.response.status && e.response.status == 400) {
+              this.$handleFormError(e.response.data);
+            }
+          });
+      },
     },
-  },
-}
+  };
 </script>

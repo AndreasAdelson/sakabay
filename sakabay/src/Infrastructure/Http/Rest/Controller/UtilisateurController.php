@@ -6,6 +6,7 @@ use App\Application\Form\Type\EditUtilisateurType;
 use App\Application\Form\Type\EditAccountType;
 use App\Application\Service\UtilisateurService;
 use App\Application\Service\FileUploader;
+use App\Infrastructure\Factory\NotificationFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Context\Context;
@@ -17,22 +18,32 @@ use FOS\RestBundle\View\View;
 use FOS\RestBundle\Request\ParamFetcher;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport;
+use Symfony\Component\Mime\Email;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class UtilisateurController extends AbstractFOSRestController
 {
     private $entityManager;
     private $utilisateurService;
+    private $notificationFactory;
     private $translator;
 
     /**
      * UtilisateurRestController constructor.
      */
-    public function __construct(EntityManagerInterface $entityManager, UtilisateurService $utilisateurService, TranslatorInterface $translator)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        UtilisateurService $utilisateurService,
+        TranslatorInterface $translator,
+        NotificationFactory $notificationFactory
+    ) {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
         $this->utilisateurService = $utilisateurService;
+        $this->notificationFactory = $notificationFactory;
     }
 
     /**
@@ -166,7 +177,7 @@ final class UtilisateurController extends AbstractFOSRestController
      *
      * @return View
      */
-    public function editAccount(int $utilisateurId, Request $request, string $uploadDir, FileUploader $uploader)
+    public function editAccount(int $utilisateurId, Request $request, string $uploadDir, FileUploader $uploader, UserPasswordEncoderInterface $passwordEncoder)
     {
         $utilisateur = $this->utilisateurService->getUtilisateur($utilisateurId);
 
@@ -197,10 +208,47 @@ final class UtilisateurController extends AbstractFOSRestController
         if (!$form->isValid()) {
             return $form;
         }
+        if ($form->isSubmitted() && !empty($form->get('plainPassword')->getData())) {
+            $utilisateur->setPassword(
+                $passwordEncoder->encodePassword(
+                    $utilisateur,
+                    $form->get('plainPassword')->getData()
+                )
+            );
+            $this->notificationFactory->updatePassword([$utilisateur]);
+            $email = $utilisateur->getEmail();
+            $subject = $this->translator->trans('email_update_password_subject');
+            $bodyMessage = $this->translator->trans('email_update_password_body');
+            $this->sendMail($email, $subject, $bodyMessage);
+        }
         $this->entityManager->persist($utilisateur);
         $this->entityManager->flush();
-        $ressourceLocation = $this->generateUrl('home');
+
+        $ressourceLocation = $this->generateUrl('dashboard');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
+    }
+
+    //Méthode denvoie de mail
+    public function sendMail($receiver, $subject, $bodyMessage)
+    {
+        $dsn = $this->getParameter('url');
+        $transport = Transport::fromDsn($dsn);
+        $mailer = new Mailer($transport);
+
+        $email = (new Email())
+            ->from('no-reply@sakabay.com')
+            ->to($receiver)
+            // ->addTo('andreasadelson@gmail.com')
+            // ->cc('karii.salman@gmail.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            ->priority(Email::PRIORITY_HIGH)
+            ->subject($subject)
+            ->text($bodyMessage)
+            // ->html('<p>See Twig integration for better HTML integration!</p>')
+        ;
+
+        $mailer->send($email);
     }
 
     /**

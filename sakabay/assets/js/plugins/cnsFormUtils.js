@@ -9,7 +9,7 @@ const CnsFormUtils = {
      * @param {object} entity
      * @param {array} keptFields
      */
-    Vue.prototype.$removeFieldsNotInForm = function (entity, keptFields) {
+    Vue.prototype.$removeFieldsNotInForm = function(entity, keptFields) {
       let finalKeptFields = [];
       keptFields.forEach(keptField => {
         finalKeptFields.push(this.$camelCaseToUnderscoreCase(keptField));
@@ -25,7 +25,7 @@ const CnsFormUtils = {
      * Complete form error when Symfony Validator throw error on forms
      * @param {object} errorsData
      */
-    Vue.prototype.$handleFormError = function (errorsData) {
+    Vue.prototype.$handleFormError = function(errorsData) {
       let receivedFormError = errorsData.errors.children;
       Object.keys(receivedFormError).forEach(field => {
         const fieldErrors = receivedFormError[field].errors;
@@ -46,7 +46,7 @@ const CnsFormUtils = {
       });
     };
 
-    Vue.prototype.$addErrorInFormError = function (field, error) {
+    Vue.prototype.$addErrorInFormError = function(field, error) {
       if (error) {
         this.formErrors[field] = error;
       }
@@ -60,7 +60,7 @@ const CnsFormUtils = {
       }
     };
 
-    Vue.prototype.$validateForm = function (newLocationHash) {
+    Vue.prototype.$validateForm = function(newLocationHash) {
       this.$removeFormErrors();
       return this.$validator.validate().then(result => {
         if (result) {
@@ -68,6 +68,7 @@ const CnsFormUtils = {
         } else {
           this.$validator.errors.items.forEach(error => {
             let fieldErrors = _.get(this.formErrors, error.field);
+
             if (fieldErrors === undefined) {
               fieldErrors = [];
             }
@@ -93,16 +94,16 @@ const CnsFormUtils = {
             window.location.hash = newLocationHash;
           }
         }
-      })
+      });
     };
 
-    Vue.prototype.$removeFormErrors = function () {
+    Vue.prototype.$removeFormErrors = function() {
       Object.keys(this.formErrors).forEach(field => {
         this.$removeFieldErrors(field);
       });
     };
 
-    Vue.prototype.$removeFieldErrors = function (field) {
+    Vue.prototype.$removeFieldErrors = function(field) {
       _.set(this.formErrors, field, []);
       let fieldsetElement = document.getElementsByClassName(field)[0];
       if (fieldsetElement) {
@@ -115,7 +116,7 @@ const CnsFormUtils = {
       }
     };
 
-    Vue.prototype.$setEditForm = function (data) {
+    Vue.prototype.$setEditForm = function(data) {
       let transformedData = _.cloneDeep(data);
       Object.keys(this.formFields).forEach(field => {
         let underscoreField = this.$camelCaseToUnderscoreCase(field);
@@ -125,19 +126,19 @@ const CnsFormUtils = {
       });
     };
 
-    Vue.prototype.$camelCaseToUnderscoreCase = function (field) {
-      return field.replace(/([A-Z])/g, "_$1").toLowerCase();
+    Vue.prototype.$camelCaseToUnderscoreCase = function(field) {
+      return field.replace(/([A-Z])/g, '_$1').toLowerCase();
     };
 
     /**
      * Redirect to given URL
      * @param {String} url
      */
-    Vue.prototype.$goTo = function (url) {
+    Vue.prototype.$goTo = function(url) {
       window.location.assign(url);
     };
 
-    Vue.prototype.$getTransformedValue = function (value) {
+    Vue.prototype.$getTransformedValue = function(value) {
       let transformedValue = undefined;
       if (value instanceof Date) {
         transformedValue = {
@@ -186,7 +187,7 @@ const CnsFormUtils = {
      * @param {Object} formFields
      * @param {FormData} formData
      */
-    Vue.prototype.$getFormFieldsData = function (formFields = this.formFields, formData = new FormData()) {
+    Vue.prototype.$getFormFieldsData = function(formFields = this.formFields, formData = new FormData()) {
       let transformedFormFields = this.$getTransformedValue(formFields);
       _.forEach(_.keys(transformedFormFields), field => {
         if (transformedFormFields[field] instanceof Array) {
@@ -211,7 +212,7 @@ const CnsFormUtils = {
      * @param {Array} eventArguments[0] Selected items.
      * @param {String} fieldName
      */
-    Vue.prototype.$onSelectedItemsChange = function (eventArguments, fieldName) {
+    Vue.prototype.$onSelectedItemsChange = function(eventArguments, fieldName) {
       this.formFields[fieldName] = _.cloneDeep(eventArguments[0]);
     };
 
@@ -223,7 +224,7 @@ const CnsFormUtils = {
      * @param {String} fieldName The name of the entity
      * @param {Object} formFields The object containing fieldName entities  The name of the entity
      */
-    Vue.prototype.$onAfterCreateEntity = function (eventArguments, fieldName, formFields) {
+    Vue.prototype.$onAfterCreateEntity = function(eventArguments, fieldName, formFields) {
       const nextKey = Math.max(-1, ...Object.keys(formFields[fieldName])) + 1;
       Vue.set(formFields[fieldName], nextKey, eventArguments[0]);
     };
@@ -235,7 +236,7 @@ const CnsFormUtils = {
      * @param {string} fieldName The name of the entity
      * @param {object} formFields
      */
-    Vue.prototype.$onDeleteEntity = function (indexOfDeletedItem, fieldName, formFields) {
+    Vue.prototype.$onDeleteEntity = function(indexOfDeletedItem, fieldName, formFields) {
       let refEntity = _.cloneDeep(formFields[fieldName][indexOfDeletedItem].refEntity);
       if (refEntity) {
         refEntity.hasDeletedRevision = true;
@@ -250,7 +251,7 @@ const CnsFormUtils = {
      * Hide/show the modal of confirmModal.
      * @param {string} id  The identifiant of the confirmModal
      */
-    Vue.prototype.$toggleModal = function (id, testId) {
+    Vue.prototype.$toggleModal = function(id, testId) {
       $('#' + id).modal('toggle');
     };
 
@@ -258,7 +259,7 @@ const CnsFormUtils = {
      *  Delete an entity on confirm Modal. Need currentId to be defined in component datas
      * @param {string} url the delete url api to request
      */
-    Vue.prototype.$deleteEntity = function (url) {
+    Vue.prototype.$deleteEntity = function(url) {
       return axios.delete(url + this.currentId)
         .then(response => {
           window.location.assign(response.headers.location);
@@ -280,6 +281,6 @@ const CnsFormUtils = {
       return Promise.all(promises);
     };
   }
-}
+};
 
 export default CnsFormUtils;

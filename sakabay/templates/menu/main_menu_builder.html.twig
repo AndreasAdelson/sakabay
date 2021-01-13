@@ -6,15 +6,15 @@
     <a href="/" class="logo-home-user">
       <img src="{{ asset('build/logo.png') }}"/>
     </a>
-    
+
   {% else %}
     <a href="/" class="logo-home">
         <img src="{{ asset('build/logo.png') }}"/>
     </a>
-    <a href="/login" class="w-50px btn-user btn">
+    <a href="{{ path('app_login') }}" class="w-50px btn-user btn">
         <i class="icon-login far fa-user"></i>
     </a>
-    <a href="/register" class="w-50px btn-connect btn">
+    <a href="{{ path('app_register') }}" class="w-50px btn-connect btn">
       <i class="icon-user fas fa-user-plus"></i>
     </a>
   {% endif %}
@@ -127,10 +127,10 @@
 <nav class="fixed-sous-nav w-100" id="sousNav">
   <div class="container">
     <div class="row nav-skb">
-      <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href="/entreprises/list">
+      <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href="{{ path('company_list') }}">
         <span class="fontAlice fontW600 fontSize16">{{ 'local_business'|trans }}</span>
       </a>
-      <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href="/entreprise">
+      <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href=" {{ path('company_register_index') }}">
         <span class="fontAlice fontW600 fontSize16">{{ 'company_director'|trans }}</span>
       </a>
       <a class="col sous-nav-bar-item align-items-center d-flex justify-content-center" href="#">

@@ -66,6 +66,14 @@ class NotificationFactory
         $this->addNotification($destinataires, $subject, $message, $link);
     }
 
+    public function updatePassword(array $destinataires)
+    {
+        $subject = $this->translator->trans('updatepassword_subject');
+
+        $message = $this->translator->trans('updatepassword_message');
+
+        $this->addNotification($destinataires, $subject, $message, $link = null);
+    }
 
 
     private function addNotification(
@@ -77,7 +85,9 @@ class NotificationFactory
         $notification = new Notification();
         $notification->setSubject($subject);
         $notification->setMessage($message);
-        $notification->setLink(parse_url($link, PHP_URL_PATH));
+        if ($link) {
+            $notification->setLink(parse_url($link, PHP_URL_PATH));
+        }
 
         $this->manager->addNotification($users, $notification, true);
     }

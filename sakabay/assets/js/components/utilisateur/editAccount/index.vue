@@ -148,11 +148,114 @@
               </div>
             </div>
           </div>
+          <!-- Fourth row -->
           <div class="row">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-12">
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.password') }}</label>
+                </div>
+              </div>
+              <div class="row justify-content-between align-items-center">
+                <div class="col-4">
+                  <span class="w-50">*********</span>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn fontUbuntu italic button_skb"
+                    @click="changePassword()"
+                  >
+                    {{ passwordActive ? this.$t('commons.close') : this.$t('commons.edit') }}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              v-if="passwordActive"
+              class="col-6"
+            >
+              <div class="form-group">
+                <!-- <fieldset
+                  id="currentPassword"
+                  class="currentPassword"
+                >
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.current_password') }}</label>
+                  <input
+                    v-model="formFields.currentPassword"
+                    v-validate="'required_currentPassword'"
+                    type="text"
+                    name="currentPassword"
+                    class="form-control"
+                  >
+                  <div
+                    v-for="errorText in formErrors.currentPassword"
+                    :key="'currentPassword_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset> -->
+              </div>
+            </div>
+          </div>
+          <!-- Fifth row -->
+          <div
+            v-if="passwordActive"
+            class="row"
+          >
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="first"
+                  class="first"
+                >
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.plain_password_first') }}</label>
+                  <input
+                    v-model="formFields.plainPassword.first"
+                    v-validate="'required'"
+                    type="text"
+                    name="plainPassword"
+                    class="form-control"
+                  >
+                  <div
+                    v-for="errorText in formErrors.first"
+                    :key="'plainPasswordFirst_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="second"
+                  class="second"
+                >
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.plain_password_second') }}</label>
+                  <input
+                    v-model="formFields.plainPassword.second"
+                    v-validate="'required'"
+                    type="text"
+                    name="plainPassword"
+                    class="form-control"
+                    :class="formErrors.first.length > 0 ? 'border-danger-skb' : '' "
+                  >
+                  <div
+                    v-for="errorText in formErrors.first"
+                    :key="'plainPasswordSecond_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-5">
             <div class="col-6 offset-3">
               <button
                 type="button"
-                class="btn button_skb fontUbuntuItalic"
+                class="btn button_skb fontUbuntu italic"
                 @click="$validateForm()"
               >
                 {{ this.$t('commons.edit') }}
@@ -193,17 +296,23 @@
           firstName: null,
           lastName: null,
           username: null,
+          currentPassword: null,
+          plainPassword: new Object()
         },
         formErrors: {
           email: [],
           firstName: [],
           lastName: [],
           username: [],
+          currentPassword: [],
+          first: [],
+          second: []
         },
         urlImageProfil: null,
         imageProfilSelected: null,
         utilisateur: null,
-        imageName: ''
+        imageName: '',
+        passwordActive: false
       };
     },
     created() {
@@ -246,6 +355,11 @@
       goBack() {
         this.$goTo(this.urlPrecedente);
       },
+
+      changePassword() {
+        this.passwordActive = !this.passwordActive;
+
+      }
     },
   };
 </script>

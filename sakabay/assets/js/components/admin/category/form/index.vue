@@ -2,8 +2,7 @@
   <div class="container skb-body">
     <div v-show="loading">
       <div class="loader-container-full">
-        <div class="loader">
-        </div>
+        <div class="loader" />
       </div>
     </div>
     <a href="/admin/category">
@@ -12,7 +11,7 @@
         type="button"
         class="w-40px p-0 rounded-circle btn-close btn"
       >
-        <i class="fas fa-times "></i>
+        <i class="fas fa-times " />
       </button>
     </a>
     <form>
@@ -28,12 +27,12 @@
                 >
                   <label class="fontUbuntuItalic fontSize14">{{ this.$t('category.fields.name') }}</label>
                   <input
+                    v-model="formFields.name"
                     v-validate="'required'"
                     type="text"
                     name="name"
                     class="form-control"
                     :placeholder="$t('category.placeholder.name')"
-                    v-model="formFields.name"
                   >
                   <div
                     v-for="errorText in formErrors.name"
@@ -52,12 +51,12 @@
                 >
                   <label class="fontUbuntuItalic fontSize14">{{ this.$t('category.fields.code') }}</label>
                   <input
+                    v-model="formFields.code"
                     v-validate="'required'"
                     name="code"
                     type="text"
                     class="form-control"
                     :placeholder="$t('category.placeholder.code')"
-                    v-model="formFields.code"
                   >
                   <div
                     v-for="errorText in formErrors.code"
@@ -75,7 +74,9 @@
                 type="button"
                 class="btn button_skb fontUbuntuItalic"
                 @click="$validateForm()"
-              >{{ this.categoryId ? this.$t('commons.edit') :  this.$t('commons.create')}}</button>
+              >
+                {{ this.categoryId ? this.$t('commons.edit') : this.$t('commons.create') }}
+              </button>
             </div>
           </div>
         </div>
@@ -84,60 +85,60 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import validatorRulesMixin from 'mixins/validatorRulesMixin';
-import adminFormMixin from 'mixins/adminFormMixin';
-import DualList from 'components/commons/dual-list';
+  import axios from 'axios';
+  import validatorRulesMixin from 'mixins/validatorRulesMixin';
+  import adminFormMixin from 'mixins/adminFormMixin';
+  import DualList from 'components/commons/dual-list';
 
-export default {
-  components: {
-    DualList
-  },
-  mixins: [
-    validatorRulesMixin,
-    adminFormMixin
-  ],
-  data () {
-    return {
-      loading: true,
-      API_URL: '/api/admin/categories' + (this.categoryId ? `/${this.categoryId}` : ''),
-      fonctionsAtCreation: null,
-      fonctions: [],
-      formFields: {
-        name: null,
-        code: null,
-      },
-      formErrors: {
-        name: [],
-        code: [],
-      }
-    };
-  },
-  props: {
-    categoryId: {
-      type: Number,
-      default: null,
+  export default {
+    components: {
+      DualList
     },
-  },
-  created () {
-    let promises = [];
-    if (this.categoryId) {
-      promises.push(axios.get(this.API_URL));
-    }
-    return Promise.all(promises).then(res => {
+    mixins: [
+      validatorRulesMixin,
+      adminFormMixin
+    ],
+    props: {
+      categoryId: {
+        type: Number,
+        default: null,
+      },
+    },
+    data() {
+      return {
+        loading: true,
+        API_URL: '/api/admin/categories' + (this.categoryId ? `/${this.categoryId}` : ''),
+        fonctionsAtCreation: null,
+        fonctions: [],
+        formFields: {
+          name: null,
+          code: null,
+        },
+        formErrors: {
+          name: [],
+          code: [],
+        }
+      };
+    },
+    created() {
+      let promises = [];
       if (this.categoryId) {
-        let category = res[0].data;
-        this.$removeFieldsNotInForm(category, Object.keys(this.formFields));
-        this.$setEditForm(category);
+        promises.push(axios.get(this.API_URL));
       }
-      this.loading = false;
-    }).catch(e => {
-      this.$handleError(e);
-      this.loading = false;
-    });
-  },
-  methods: {
+      return Promise.all(promises).then(res => {
+        if (this.categoryId) {
+          let category = res[0].data;
+          this.$removeFieldsNotInForm(category, Object.keys(this.formFields));
+          this.$setEditForm(category);
+        }
+        this.loading = false;
+      }).catch(e => {
+        this.$handleError(e);
+        this.loading = false;
+      });
+    },
+    methods: {
 
-  },
-}
+    },
+  };
 </script>

@@ -18,6 +18,7 @@
     "error_occured": "Une erreur est servenue.",
     "search_button": "Rechercher",
     "no_results_found": "Aucune entreprise ne semble correspondre à votre recherche, nous vous invitons à modifier vos critères de filtre.",
+    "close": "Fermer",
     "placeholder": {
       "search": "Que recherchez-vous ?",
       "category": "Filtrer par categorie",
@@ -29,7 +30,6 @@
           "title": "Valider l'inscription",
           "text": "Vous êtes sur le point de valider la candidature d'une entreprise. Êtes-vous sur de bien vouloir la valider ?"
         }
-
       },
       "subscription_validate": {
         "validate":{
@@ -55,14 +55,17 @@
       }
     }
   },
-
   "user": {
     "title": "Liste des utilisateurs",
     "fields": {
       "email": "Email",
       "username": "Pseudo",
       "first_name": "Prénom",
-      "last_name": "Nom"
+      "last_name": "Nom",
+      "password": "Mot de passe",
+      "current_password": "Mot de passe actuel",
+      "plain_password_first": "Nouveau mot de passe",
+      "plain_password_second": "Confirmation mot de passe"
     },
     "placeholder": {
       "email": "Renseignez votre email",
@@ -146,7 +149,10 @@
       "postal_code": "Code postal",
       "latitude": "Latitude",
       "longitude": "Longitude",
-      "city": "Ville"
+      "city": "Tapez les deux première lettres de la ville puis sélectionner"
+    },
+    "error_message": {
+      "city": "La ville selectionnée n'existe pas sur le site. Veuillez taper les deux première lettres et sélectionner une ville proposée. Si vous ne trouvez pas notre ville veuillez nous contacter."
     },
     "nav_title": {
       "presentation": "Présentation",

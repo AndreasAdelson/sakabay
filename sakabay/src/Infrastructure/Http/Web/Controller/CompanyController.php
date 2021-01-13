@@ -34,10 +34,7 @@ class CompanyController extends AbstractController
      */
     public function registerIndex(AuthorizationCheckerInterface $authorizationChecker)
     {
-        return $this->render('company/index.html.twig', [
-            'canEdit' => $authorizationChecker->isGranted('ROLE_UCOMPANY'),
-            'canDelete' => $authorizationChecker->isGranted('ROLE_DCOMPANY'),
-        ]);
+        return $this->render('company/index.html.twig', []);
     }
 
     /**
@@ -89,7 +86,12 @@ class CompanyController extends AbstractController
      */
     public function new()
     {
-        return $this->render('company/form.html.twig', []);
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        return $this->render('company/form.html.twig', [
+            'utilisateurId' => $this->getUser()->getId()
+        ]);
     }
 
     /**

@@ -6,9 +6,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use App\Domain\Model\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class EditAccountType extends AbstractType
 {
@@ -54,6 +57,22 @@ class EditAccountType extends AbstractType
                 'attr' => ['class' => 'form-control'],
             ])->add('imageProfil', TextType::class, [
                 'required' => false
+            ])
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => $translator->trans('error_message_password_must_match'),
+                'required' => false,
+                // instead of being set onto the object directly,
+                // this is read and encoded in the controller
+                'mapped' => false,
+                'constraints' => [
+                    new Assert\Length([
+                        'min' => 6,
+                        'minMessage' => $translator->trans('error_message_password_length'),
+                        // max length allowed by Symfony for security reasons
+                        'max' => 4096,
+                    ]),
+                ],
             ]);
     }
 

@@ -60,6 +60,9 @@ security:
         - { path: ^/admin/registered/entreprise, roles: ROLE_RCOMPANY }
         - { path: ^/admin/registered/entreprise/show, roles: ROLE_RCOMPANY }
         - { path: ^/admin/registered/entreprise/edit, roles: ROLE_UCOMPANY }
+        - { path: ^/admin/refused/entreprise, roles: ROLE_RCOMPANY }
+        - { path: ^/admin/refused/entreprise/show, roles: ROLE_RCOMPANY }
+        - { path: ^/admin/refused/entreprise/edit, roles: ROLE_UCOMPANY }
 
         - { path: ^/admin/companystatut, roles: ROLE_RCOMPANYSTATUT }
         - { path: ^/admin/companystatut/show, roles: ROLE_RCOMPANYSTATUT }

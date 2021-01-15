@@ -27,6 +27,23 @@ App\Domain\Model\Company:
             length: 100
             column: url_name
             nullable: false
+        dtCreated:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+            options:
+                default: CURRENT_TIMESTAMP
+        description:
+            type: string
+            length: 2000
+            column: description
+            nullable: true
+        imageProfil:
+            type: string
+            length: 100
+            column: image_profil
+            nullable: true
     manyToOne:
         category:
             targetEntity: Category
@@ -52,11 +69,9 @@ App\Domain\Model\Company:
                 name: id_city
                 referencedColumnName: id
                 nullable: false
-
-    oneToOne:
         utilisateur:
             targetEntity: Utilisateur
-            inversedBy: company
+            inversedBy: companys
             joinColumn:
                 name: utilisateur_id
                 referencedColumnName: id
@@ -64,6 +79,7 @@ App\Domain\Model\Company:
                 nullable: false
             cascade: [persist,remove]
 
+    oneToOne:
         address:
             targetEntity: Address
             inversedBy: company

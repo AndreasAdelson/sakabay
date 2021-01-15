@@ -32,6 +32,7 @@ menu_company_page: My presentation page
 menu_management_company: Company Management
 menu_subscribed_company: Companies
 menu_registered_company: Register
+menu_refused_company: Refused
 menu_all_companustatus: Company Status page
 dashboard: "Dashboard"
 settings: "Settings"
@@ -47,6 +48,7 @@ error_message_password_must_match: "The password fields must match."
 error_message_password_length: "Your password should be at least {{ limit }} characters"
 error_message_field_not_empty: "This field cannot be empty"
 error_message_agree_terms: "You should agree to our terms."
+error_message_n_length: "This value is too long. It should have {{ limit }} characters or less."
 accept_terms_begin_message: "I accept the"
 accept_terms_end_message: "Terms of use "
 register_now: "Register now"
@@ -61,6 +63,7 @@ error_message_unique_username: "This username is already in use. Choose another 
 logout: "Log out"
 edit_account: "Edit my account"
 error_message_field_not_empty_city: "Ce champ est obligatoire. Assurez-vous que la ville existe sur l'application en tapant les deux premières lettres. Si le champ ne vous propose pas la ville que vous recherchez veuillez nous contacter."
+edit_company_profil: "Edit my company"
 
 #Page d'erreur 404
 
@@ -103,13 +106,18 @@ company_subscribed_title_show_page: "Detail of a company"
 company_registered_title_list_page: "Company registration request list"
 company_registered_title_form_page: "Edit registration"
 company_registered_title_show_page: "Detail of the registration"
+company_refused_title_show_page: "Detail of a refusal"
+company_refused_title_list_page: "Liste of refused companies"
+company_refused_title_form_page: "Edit a refused company"
 company_register_title_page: "Reference yourself"
-company_list_title_page: "Search a company"
+company_search_title_page: "Search a company"
 company_register_index_title: "Reference your company"
 company_register_index_message_first: "You must be logged in to view the content of this page. You can log in "
 company_register_index_message_second: ". Don't have an account? "
 company_register_index_message_here: "here"
 company_register_index_message_subscribe: "Register"
+company_list_title_page: "Manage your company"
+company_edit_title_page: "Edit your company"
 
 #Category's pages
 category_title_list_page: "List of categories"
@@ -125,7 +133,7 @@ city_title_show_page: "Detail of city"
 
 #Emails
 email_register_confirmation_subject: "Confirmation of your registration"
-email_register_confirmation_body: "Hello, \n\nYour application for the company « %s », to be referenced on Sakabay is currently being processed.\n Our brand ensures that your company complies with our terms of use.\nYou can now log in and follow the progress of your application on the application using your username and password.\nYour username and password are:\nEmail:%s\nPassword:%s\nWe recommend that you change your password the first time you log in.\n\nThank you for your interest in Sakabay.\n\nThis email is automatic, so please do not reply to it."
+email_register_confirmation_body: "Hello, \n\nYour application for the company « %s », to be referenced on Sakabay is currently being processed.\n Our brand ensures that your company complies with our terms of use.\nYou can now log in and follow the progress of your candidacy on the application using your username and password.\n\nThank you for your interest in Sakabay.\n\nThis email is automatic, so please do not reply to it."
 email_register_validation_subject: "Validation of your application"
 email_register_validation_body: "Hello, \n\n It is with pleasure that you announce that the registration of the company « %s » has been validated by our teams.\nWe therefore welcome you within our group with 2 months subscription free. You can now customize your presentation page from this link %s, accessible from the sliding menu of the application.\nThe Sakabay Team wishes you a good day.\n\nThank you for your interest in Sakabay.\n\nThis email is automatic, so please do not reply to it.\n\nThe Sakabay Team."
 email_update_password_subject: "Your password has been changed."

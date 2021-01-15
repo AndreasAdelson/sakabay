@@ -538,6 +538,10 @@ a[data-toggle="collapse"] {
   color: $white_color;
 }
 
+.black-skb {
+  color: $black_color;
+}
+
 .blue-skb {
   //   $blue_light_color:#2798a0;
   // $blue_logo_color: #60a3bc;
@@ -673,6 +677,21 @@ a[data-toggle="collapse"] {
   background-color: transparent;
 }
 
+.btn-back {
+  position: absolute;
+  width: 100px;
+  margin: 0.4rem;
+  height: 40px;
+  z-index: 1;
+  background-color: $white_color;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 0px solid transparent;
+}
+
+.btn-back:hover {
+  color: $yellow_login_color;
+}
+
 /********************************
 * STYLE LOGIN
 ********************************/
@@ -711,7 +730,7 @@ a[data-toggle="collapse"] {
   width: 150px;
 }
 
-
+// Red one
 .button_skb {
   width: 100%;
   background: $orange_login_color !important;
@@ -726,6 +745,40 @@ a[data-toggle="collapse"] {
 
 .button_skb:hover {
   background: red !important;
+}
+
+// Blue one
+.button_skb_blue {
+  width: 100%;
+  background: $blue_light_color !important;
+  color: white !important;
+  border-color: $blue_light_color !important;
+}
+
+.button_skb_blue:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+
+.button_skb_blue:hover {
+  background: $blue_logo_color !important;
+}
+
+// yellow one
+.button_skb_yellow {
+  width: 100%;
+  background: $yellow_login_color !important;
+  color: white !important;
+  border-color: $yellow_login_color !important;
+}
+
+.button_skb_yellow:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+
+.button_skb_yellow:hover {
+  background: $yellow_color !important;
 }
 
 .login_container {
@@ -788,6 +841,11 @@ a[data-toggle="collapse"] {
 
 .form-control:focus {
   border-color: #5cb85c;
+}
+
+.form-control:disabled {
+  background-color: #ededed !important;
+  opacity: 0.6 !important;
 }
 
 .form-control,
@@ -1198,6 +1256,10 @@ ul.social-footer2 li a {
   font-style: italic;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .underline {
   text-decoration: underline;
 }
@@ -1226,7 +1288,6 @@ ul.social-footer2 li a {
 .dual-list .list-group {
   height: 350px;
   max-height: 350px;
-  overflow-y: auto;
   border: 2px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   display: block;
@@ -1234,6 +1295,7 @@ ul.social-footer2 li a {
 
 .list-group-item.active {
   background-color: $orange_login_color;
+  z-index: 1 !important;
 }
 
 .list-group-item,
@@ -1300,7 +1362,20 @@ ul.social-footer2 li a {
 }
 
 .card-main-info {
-  margin-left: 9.3rem;
+  padding-left: 9.3rem;
+}
+
+.company-image-2 {
+  width: 150px;
+  height: 150px;
+  border: solid 3px rgba(0, 0, 0, .125);
+  float: left;
+  margin-right: 1rem;
+  margin-top: 1.5rem;
+}
+
+.card-main-info-2 {
+  padding-left: 11.5rem;
 }
 
 /*---------------------------------
@@ -1506,4 +1581,51 @@ ul.social-footer2 li a {
   font-weight: 600;
   display: inline-block;
   border-bottom: 4px solid $yellow_login_color;
+}
+
+.isDisabled {
+  color: currentColor;
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+// Multiselect rework
+
+.multiselect__option--highlight {
+  background: $yellow_login_color;
+  color: #fff;
+  outline: none;
+}
+
+.multiselect__option--highlight:after {
+  content: attr(data-select);
+  background: $yellow_login_color;
+  color: #fff
+}
+
+.multiselect__option--selected {
+  background: #f3f3f3;
+  color: #35495e;
+  font-weight: 700
+}
+
+.multiselect__option--selected:after {
+  content: attr(data-selected);
+  color: silver
+}
+
+.multiselect__option--selected.multiselect__option--highlight {
+  background: $orange_login_color;
+  color: #fff
+}
+
+.multiselect__option--selected.multiselect__option--highlight:after {
+  background: $orange_login_color;
+  content: attr(data-deselect);
+  color: #fff
 }

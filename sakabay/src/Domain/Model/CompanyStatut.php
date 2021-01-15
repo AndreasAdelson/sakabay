@@ -46,7 +46,8 @@ class CompanyStatut
      * @Groups({
      * "api_companystatut",
      * "api_admin_companies",
-     * "api_companies"
+     * "api_companies",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $code;

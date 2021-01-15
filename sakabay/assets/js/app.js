@@ -57,7 +57,7 @@ import CompanySubscribedShow from './components/admin/company/subscribed/show';
 import ListCompanyRegistered from './components/admin/company/registered';
 import CompanyRegisteredShow from './components/admin/company/registered/show';
 import CompanyAdminForm from './components/admin/company/form';
-import CompanyListing from './components/company/list';
+import CompanySearch from './components/company/search';
 import CompanyShow from './components/company/show';
 import FormCity from './components/admin/city/form';
 import ShowCity from './components/admin/city/show';
@@ -66,7 +66,11 @@ import moment from 'moment';
 import Dashboard from './components/dashboard';
 import Abonnement from './components/company/abonnement';
 import Subscription from './components/subscription';
-import Premium from './components/subscription/premium';
+import AbonnementDetails from './components/subscription/details';
+import CompanyRefusedShow from './components/admin/company/refused/show';
+import ListCompanyRefused from './components/admin/company/refused';
+import CompanyList from './components/company/list';
+import CompanyEdit from './components/company/list/form';
 import 'utils/logger';
 
 Vue.use(BootstrapVue);
@@ -116,6 +120,16 @@ Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png').default,
 });
 
+var filter = function(text, length, clamp){
+  clamp = clamp || '...';
+  var node = document.createElement('div');
+  node.innerHTML = text;
+  var content = node.textContent;
+  return content.length > length ? content.slice(0, length) + clamp : content;
+};
+
+Vue.filter('truncate', filter);
+
 Vue.component('Multiselect', MultiSelect);
 Vue.component('VMap', LMap);
 Vue.component('VTileLayer', LTileLayer);
@@ -125,7 +139,7 @@ new Vue({
   el: '#root',
   i18n,
   components: {
-    Premium,
+    AbonnementDetails,
     Subscription,
     Abonnement,
     ShowCategory,
@@ -156,12 +170,16 @@ new Vue({
     CompanySubscribedShow,
     CompanyAdminForm,
     CompanyRegisteredShow,
-    CompanyListing,
+    CompanySearch,
     CompanyShow,
     ShowCity,
     ListCity,
     FormCity,
-    Dashboard
+    Dashboard,
+    CompanyRefusedShow,
+    ListCompanyRefused,
+    CompanyList,
+    CompanyEdit
   }
 });
 

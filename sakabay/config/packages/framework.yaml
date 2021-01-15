@@ -17,9 +17,9 @@ framework:
         cookie_secure: auto
         cookie_samesite: lax
 
-    # templating:
+    templating:
     #     enabled: true
-    #     engines: twig
+        engines: twig
 
     #esi: true
     #fragments: true

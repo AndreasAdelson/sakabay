@@ -19,6 +19,10 @@
     "search_button": "Search",
     "no_results_found": "No company seems to match your search, we invite you to modify your filter criteria.",
     "close": "Close",
+    "presentation": "Presentation page",
+    "more_details": "More details",
+    "maximum_n_characters": "Maximum {n} character | Maximum {n} character | Maximum {n} characters",
+    "n_charaters_left": "{n} character left | {n} character left | {n} characters left",
     "placeholder": {
       "search": "Whata re you looking for ?",
       "category": "Select category",
@@ -119,6 +123,8 @@
   "company": {
     "title_subscribed": "Companies list",
     "title_registered": "Company registration request list",
+    "title_refused": "Liste des refus",
+    "title_list_user": "Gestion de votre entreprise | Gestion de votre entreprise | Gestions de vos entreprises",
     "table": {
       "fields": {
         "name": "Name",
@@ -158,8 +164,24 @@
     } ,
     "presentation": {
       "informations": "Informations",
-      "description": "Description"
-    }
+      "description": "Description",
+      "no_subscriptions": "Not a subscriber"
+    },
+    "card": {
+      "label": {
+        "category": "Catégorie",
+        "address": "Adresse",
+        "statut": "Statut",
+        "dt_created": "Date de création",
+        "code": "Code",
+        "dt_fin": "Date fin abonnement",
+        "siret": "Siret",
+        "city": "Ville",
+        "url_name": "Url page de détails"
+      }
+    },
+    "already_validate": "This nomination has already been accepted by our teams.",
+    "already_refused": "This nomination has already been rejected by our teams."
   },
   "companyStatut": {
     "title": "List of company status",
@@ -170,6 +192,11 @@
     "placeholder": {
       "name": "Enter a name",
       "code": "Enter code number"
+    },
+    "state": {
+      "validate": "Validated",
+      "pending": "In process",
+      "refused": "Rejected"
     }
   },
   "category": {
@@ -197,12 +224,13 @@
     "recent_activity": "Recent activity",
     "susbcription_history": "Subscription history",
     "link": {
+      "request_service": "Request a service",
       "n_company": "Your company | Your company | Your companies",
-      "subscription": "Subscriptions",
-      "recruit": "Recruit (HR)",
+      "subscription": "See subscriptions",
+      "recruit": "Job offer",
       "opportunity": "Opportunity",
-      "nomination": "Nominations",
-      "papers": "CV & Cover letter"
+      "nomination": "My nominations",
+      "documents": "My documents"
     },
     "notification": {
       "tooltip": {
@@ -219,7 +247,8 @@
         "dt_fin": "End Date",
         "statut": "Status",
         "in_progress": "In progress",
-        "expired": "Expired"
+        "expired": "Expired",
+        "company": "Company"
       }
     }
   },

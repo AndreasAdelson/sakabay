@@ -143,7 +143,7 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * "api_dashboard_utilisateur"
      * })
      */
-    private $company;
+    private $companys;
 
     /**
      * Unmapped property to handle file uploads
@@ -175,6 +175,7 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
     public function __construct()
     {
         $this->groups = new ArrayCollection();
+        $this->companys = new ArrayCollection();
     }
 
 
@@ -413,14 +414,30 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
         return $this;
     }
 
-    public function getCompany(): ?Company
+    /**
+     * @return Collection|Company[]
+     */
+    public function getCompanys(): Collection
     {
-        return $this->company;
+        return $this->companys;
     }
 
-    public function setCompany(?Company $company)
+    public function addCompany(Company $company): self
     {
-        $this->company = $company;
+        if (!$this->companys->contains($company)) {
+            $this->companys[] = $company;
+            $company->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompany(Company $company): self
+    {
+        if ($this->companys->contains($company)) {
+            $this->companys->removeElement($company);
+        }
+
         return $this;
     }
 

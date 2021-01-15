@@ -60,16 +60,13 @@ class CompanyStatutService
         $this->companyStatutRepository->delete($companyStatut);
     }
 
-    public function getENCCompanyStatut(): array
+    public function getCompanyStatutByCode(string $code)
     {
-        return $this->companyStatutRepository->getENCCompanyStatut();
+        return $this->companyStatutRepository->findOneBy(['code' => $code]);
     }
 
 
-    public function getVALCompanyStatut(): array
-    {
-        return $this->companyStatutRepository->getVALCompanyStatut();
-    }
+
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *

@@ -43,6 +43,7 @@ class FixUtilisateur extends Fixture implements
             $utilisateur->setUsername($username);
             $utilisateur->setEmail($email);
             $utilisateur->setPassword(password_hash($password, PASSWORD_BCRYPT));
+            $utilisateur->setUpdated(new \DateTime());
 
             $manager->persist($utilisateur);
             $this->addReference('utilisateur_' . $username, $utilisateur);

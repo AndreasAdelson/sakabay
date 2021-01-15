@@ -55,7 +55,8 @@ class Company
      * @var integer
      * @Expose
      * @Groups({
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_companies"
      * })
      */
     private $numSiret;
@@ -98,7 +99,8 @@ class Company
      * @Groups({
      * "api_companystatut",
      * "api_admin_companies",
-     * "api_companies"
+     * "api_companies",
+     * "api_dashboard_utilisateur"
      * })
      * @var CompanyStatut
      *
@@ -135,6 +137,42 @@ class Company
      * })
      */
     private $companysubscriptions;
+
+    /**
+     * @var DateTime
+     * @Expose
+     * @Groups({
+     * "api_companies",
+     * "api_admin_companies",
+     * "api_dashboard_utilisateur"
+     * })
+     */
+    private $dtCreated;
+
+    /**
+     * @var String
+     * @Expose
+     * @Groups({
+     * "api_companies",
+     * })
+     */
+    private $description;
+
+    /**
+     * @var string
+     * @Expose
+     * @Groups({
+     * "api_companies",
+     * })
+     */
+    private $imageProfil;
+
+    /**
+     * Unmapped property to handle file uploads
+     */
+    private $file;
+
+
 
     public function __construct()
     {
@@ -319,6 +357,56 @@ class Company
             $this->companysubscriptions->removeElement($companysubscription);
         }
 
+        return $this;
+    }
+
+    public function getDtCreated(): ?\DateTimeInterface
+    {
+        return $this->dtCreated;
+    }
+
+    public function setDtCreated(\DateTimeInterface $dtCreated): self
+    {
+        $this->dtCreated = $dtCreated;
+
+        return $this;
+    }
+
+    /**
+     *
+     * @return  string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param  string  $description
+     * @return  self
+     */
+    public function setDescription(string $description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return  string
+     */
+    public function getImageProfil()
+    {
+        return $this->imageProfil;
+    }
+
+    /**
+     * @param  string  $imageProfil
+     *
+     * @return  self
+     */
+    public function setImageProfil(?string $imageProfil)
+    {
+        $this->imageProfil = $imageProfil;
         return $this;
     }
 }

@@ -19,6 +19,10 @@
     "search_button": "Rechercher",
     "no_results_found": "Aucune entreprise ne semble correspondre à votre recherche, nous vous invitons à modifier vos critères de filtre.",
     "close": "Fermer",
+    "presentation": "Page de présentation",
+    "more_details": "Plus de détails",
+    "maximum_n_characters": "Maximum {n} caractère | Maximum {n} caractère | Maximum {n} caractères",
+    "n_charaters_left": "{n} caractère restant | {n} caractère restant | {n} caractères restants",
     "placeholder": {
       "search": "Que recherchez-vous ?",
       "category": "Filtrer par categorie",
@@ -119,14 +123,17 @@
   "company": {
     "title_subscribed": "Liste des entreprises",
     "title_registered": "Liste demande d'inscription",
+    "title_refused": "Liste des refus",
+    "title_list_user": "Gestion de votre entreprise | Gestion de votre entreprise | Gestions de vos entreprises",
     "table": {
       "fields": {
         "name": "Nom",
         "url_name": "Nom url",
         "utilisateur": "Pseudo utilisateur",
-        "category": "Categorie",
+        "category": "Catégorie",
         "statut": "Statut",
         "city": "Ville",
+        "description": "Description",
         "address": {
           "postal_address": "Adresse postale",
           "postal_code":"Code postal",
@@ -151,9 +158,6 @@
       "longitude": "Longitude",
       "city": "Tapez les deux première lettres de la ville puis sélectionner"
     },
-    "error_message": {
-      "city": "La ville selectionnée n'existe pas sur le site. Veuillez taper les deux première lettres et sélectionner une ville proposée. Si vous ne trouvez pas notre ville veuillez nous contacter."
-    },
     "nav_title": {
       "presentation": "Présentation",
       "job_offers": "Offres d'emplois",
@@ -161,8 +165,24 @@
     } ,
     "presentation": {
       "informations": "Informations",
-      "description": "Description"
-    }
+      "description": "Description",
+      "no_subscriptions": "Non abonné"
+    },
+    "card": {
+      "label": {
+        "category": "Catégorie",
+        "address": "Adresse",
+        "statut": "Statut",
+        "dt_created": "Date de création",
+        "code": "Code",
+        "dt_fin": "Date fin abonnement",
+        "siret": "Siret",
+        "city": "Ville",
+        "url_name": "Url page de détails"
+      }
+    },
+    "already_validate": "Cette candidature à déjà été acceptée par nos équipes.",
+    "already_refused": "Cette candidature à déjà été refusée par nos équipes."
   },
   "companyStatut": {
     "title": "Liste des statuts des entreprises",
@@ -173,6 +193,11 @@
     "placeholder": {
       "name": "Renseignez un statut",
       "code": "Renseignez un Code du statut"
+    },
+    "state": {
+      "validate": "Validé",
+      "pending": "En cours de traitement",
+      "refused": "Refusé"
     }
   },
   "category": {
@@ -200,12 +225,13 @@
     "recent_activity": "Activité récente",
     "susbcription_history": "Historique des abonnements",
     "link": {
+      "request_service": "Demander un service",
       "n_company": "Votre entreprise | Votre entreprise | Vos entreprises",
-      "subscription": "Abonnements",
-      "recruit": "Recrutement",
+      "subscription": "Voir les abonnements",
+      "recruit": "Offres d'emplois",
       "opportunity": "Opportunités",
-      "nomination": "Candidatures",
-      "papers": "CV & Lettre de motivation"
+      "nomination": "Mes candidatures",
+      "documents": "Mes documents"
     },
     "notification": {
       "tooltip": {
@@ -222,7 +248,8 @@
         "dt_fin": "Date de fin",
         "statut": "Statut",
         "in_progress": "En cours",
-        "expired": "Expiré"
+        "expired": "Expiré",
+        "company": "Entreprise"
       }
     }
   },
@@ -236,5 +263,4 @@
   "error_message_email": "Veuillez entrer un email valide",
   "error_message_regex": "Ce champ ne respecte pas le format attendu",
   "user_does_not_exist": "Cet utilisateur n'existe pas"
-
 }

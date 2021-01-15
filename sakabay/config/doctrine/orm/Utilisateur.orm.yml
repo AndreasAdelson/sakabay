@@ -44,7 +44,9 @@ App\Domain\Model\Utilisateur:
             nullable: true
         updated:
             type: datetime
-            nullable: true
+            gedmo:
+                timestampable:
+                    on: update
             options:
                 default: CURRENT_TIMESTAMP
 
@@ -63,14 +65,14 @@ App\Domain\Model\Utilisateur:
                 inverseJoinColumns:
                     id_group:
                         referencedColumnName: id
-    oneToOne:
-        company:
-            targetEntity: Company
-            mappedBy: utilisateur
-            nullable: true
+
     oneToMany:
         reset_password:
             targetEntity: ResetPasswordRequest
             cascade: [persist]
             mappedBy: user
+        companys:
+            targetEntity: Company
+            mappedBy: utilisateur
+            nullable: true
 

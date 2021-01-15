@@ -8,12 +8,14 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use App\Application\Form\Type\CompanyType;
 use App\Application\Form\Type\CompanyAdminEditType;
+use App\Application\Form\Type\CompanyUserEditType;
 use App\Application\Service\CompanyStatutService;
 use App\Application\Service\CompanyService;
 use App\Application\Service\FileUploader;
 use App\Application\Service\UtilisateurService;
 use App\Domain\Model\Company;
 use App\Infrastructure\Factory\NotificationFactory;
+use App\Infrastructure\Repository\CompanyStatutRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -80,23 +82,33 @@ final class CompanyController extends AbstractFOSRestController
         $urlName  = $this->recastName($company->getName());
         $company->setUrlName($urlName);
 
-        $companyStatut = $this->companyStatutService->getENCCompanyStatut()[0];
+        $companyStatut = $this->companyStatutService->getCompanyStatutByCode(CompanyStatutRepository::EN_COURS_CODE);
         $company->setCompanystatut($companyStatut);
 
         $this->entityManager->persist($company);
         $this->entityManager->flush();
-        //TODO Envoie de l'email
+        //WARNING be sure about who get this notification for production
 
-        $ressourceLocation = $this->generateUrl('home');
         // $email = $company->getUtilisateur()->getEmail();
         $email = "andreasadelson@gmail.com";
         $subject = $this->translator->trans('email_register_confirmation_subject');
-        $bodyMessage = sprintf($this->translator->trans('email_register_confirmation_body'), $company->getName(), $email);
+        $bodyMessage = sprintf($this->translator->trans('email_register_confirmation_body'), $company->getName());
         $this->sendMail($email, $subject, $bodyMessage);
 
-        //Notification
-        
+        //WARNING be sure about who get this notification for production
+        $rights = [
+            'groups' => ['SUADMIN'],
+        ];
+        //Admins notification
+        $users = $this->utilisateurService->findUsersByRight($rights);
+        $ressourceLocation = $this->generateUrl('company_registered_show', ['id' => $company->getId()]);
+        $this->notificationFactory->createCompanyNotificationAdmin($users, $ressourceLocation, $company);
 
+        //User->company notification
+        $ressourceLocation = $this->generateUrl('company_list');
+        $this->notificationFactory->createCompanyNotificationUser([$company->getUtilisateur()], $ressourceLocation, $company);
+
+        $ressourceLocation = $this->generateUrl('dashboard');
         return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
     }
 
@@ -109,7 +121,7 @@ final class CompanyController extends AbstractFOSRestController
      * Retrieves sorted list of all companies
      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      * @QueryParam(name="filterFields",
-     *             default="name",
+     *             default="name,description",
      *             description="Liste des champs sur lesquels le filtre s'appuie"
      * )
      * @QueryParam(name="filter",
@@ -312,6 +324,57 @@ final class CompanyController extends AbstractFOSRestController
 
     /**
      * @Rest\View()
+     * @Rest\Post("companies/edit/{companyUrlName}")
+     *
+     * @return View
+     */
+    public function editUserCompany(string $companyUrlName, Request $request, string $uploadDir, FileUploader $uploader)
+    {
+        $company = $this->companyService->getCompanyByUrlName($companyUrlName);
+        if (!$company) {
+            throw new EntityNotFoundException('Company with url name ' . $companyUrlName . ' does not exist!');
+        }
+        $utilisateurId = $request->request->get('utilisateur');
+        $ownerId = $company->getUtilisateur()->getId();
+        if ($ownerId != $utilisateurId || $company->getCompanystatut()->getCode() != 'VAL') {
+            throw $this->createAccessDeniedException();
+        }
+        $file = $request->files->get('file');
+
+        if (!empty($file)) {
+            $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFileName);
+            $newFileName = $safeFilename . '-' . uniqid() . '.' . $file->guessExtension();
+            $uploadDir = $uploadDir . '/' . $companyUrlName;
+            $uploader->upload($uploadDir, $file, $newFileName);
+            $request->request->set('imageProfil', $newFileName);
+            $oldImage = $company->getImageProfil();
+            if (!empty($oldImage)) {
+                if (file_exists($oldImage)) {
+                    $uploader->deleteOldFile($uploadDir, $oldImage);
+                }
+            }
+        }
+        $request->request->remove('utilisateur');
+        $formOptions = [
+            'translator' => $this->translator,
+        ];
+        $ressourceLocation = $this->generateUrl('company_list');
+
+
+        $form = $this->createForm(CompanyUserEditType::class, $company, $formOptions);
+        $form->submit($request->request->all());
+        if (!$form->isValid()) {
+            return $form;
+        }
+        $this->entityManager->persist($company);
+        $this->entityManager->flush($company);
+
+        return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
+    }
+
+    /**
+     * @Rest\View()
      * @Rest\Post("admin/companies/{companyId}/validation")
      * @Security("is_granted('ROLE_UCOMPANY')")
      *
@@ -324,12 +387,11 @@ final class CompanyController extends AbstractFOSRestController
         if (!$company) {
             throw new EntityNotFoundException('Company with id ' . $companyId . ' does not exist!');
         }
-        $companyStatut = $this->companyStatutService->getVALCompanyStatut()[0];
+        $companyStatut = $this->companyStatutService->getCompanyStatutByCode(CompanyStatutRepository::VALIDE_CODE);
+        $company->setCompanyStatut($companyStatut);
 
-        // $company->setCompanyStatut($companyStatut);
-
-        // $this->entityManager->persist($company);
-        // $this->entityManager->flush($company);
+        $this->entityManager->persist($company);
+        $this->entityManager->flush($company);
 
         // WARNING carreful about the email address for production
 
@@ -357,28 +419,6 @@ final class CompanyController extends AbstractFOSRestController
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 
-    //Méthode denvoie de mail
-    public function sendMail($receiver, $subject, $bodyMessage)
-    {
-        $dsn = $this->getParameter('url');
-        $transport = Transport::fromDsn($dsn);
-        $mailer = new Mailer($transport);
-
-        $email = (new Email())
-            ->from('no-reply@sakabay.com')
-            ->to($receiver)
-            // ->addTo('andreasadelson@gmail.com')
-            ->cc('karii.salman@gmail.com')
-            //->bcc('bcc@example.com')
-            //->replyTo('fabien@example.com')
-            ->priority(Email::PRIORITY_HIGH)
-            ->subject($subject)
-            ->text($bodyMessage)
-            // ->html('<p>See Twig integration for better HTML integration!</p>')
-        ;
-
-        $mailer->send($email);
-    }
     /**
      * @Rest\View()
      * @Rest\Delete("admin/companies/{companyId}")
@@ -400,18 +440,47 @@ final class CompanyController extends AbstractFOSRestController
 
     /**
      * @Rest\View()
-     * @Rest\Delete("admin/companies/{companyId}/decline")
-     * @Security("is_granted('ROLE_DCOMPANY')")
+     * @Rest\Post("admin/companies/{companyId}/decline")
+     * @Security("is_granted('ROLE_UCOMPANY')")
      *
      * @return View
      */
     public function declineCompany(int $companyId): View
     {
-        // try {
-        //     $this->companyService->deleteCompany($companyId);
-        // } catch (EntityNotFoundException $e) {
-        //     throw new NotFoundHttpException($e->getMessage());
-        // }
+        $company = $this->companyService->getCompany($companyId);
+
+        if (!$company) {
+            throw new EntityNotFoundException('Company with id ' . $companyId . ' does not exist!');
+        }
+        $companyStatut = $this->companyStatutService->getCompanyStatutByCode(CompanyStatutRepository::REFUSED_CODE);
+        $company->setCompanyStatut($companyStatut);
+
+        $this->entityManager->persist($company);
+        $this->entityManager->flush($company);
+
+        // WARNING carreful about the email address for production
+
+        //Send email
+        // $email = $company->getUtilisateur()->getEmail();
+        // $email = "andreasadelson@gmail.com";
+        // $subject = $this->translator->trans('email_register_decline_subject');
+        // $bodyMessage = sprintf($this->translator->trans('email_register_decline_body'), $company->getName(), $this->generateUrl('home'));
+        // $this->sendMail($email, $subject, $bodyMessage);
+
+
+        //WARNING be sure about who get this notification for production
+        // $rights = [
+        //     'groups' => ['SUADMIN'],
+        // ];
+        // //Admins notification
+        // $users = $this->utilisateurService->findUsersByRight($rights);
+        // $ressourceLocation = $this->generateUrl('company_subscribed_show', ['id' => $companyId], UrlGenerator::RELATIVE_PATH);
+        // $this->notificationFactory->validationCompanyNotificationAdmin($users, $ressourceLocation, $company);
+
+        // //User->company notification
+        // $ressourceLocation = $this->generateUrl('company_show', ['slug' => $company->getUrlName()]);
+        // $this->notificationFactory->validationCompanyNotificationUser([$company->getUtilisateur()], $ressourceLocation, $company);
+
         $ressourceLocation = $this->generateUrl('company_registered_index');
 
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
@@ -427,6 +496,30 @@ final class CompanyController extends AbstractFOSRestController
     {
         $company = $this->companyService->getCompanyByUserId($utilisateurId);
         return View::create($company, Response::HTTP_OK);
+    }
+
+
+    //Méthode denvoie de mail
+    private function sendMail($receiver, $subject, $bodyMessage)
+    {
+        $dsn = $this->getParameter('url');
+        $transport = Transport::fromDsn($dsn);
+        $mailer = new Mailer($transport);
+
+        $email = (new Email())
+            ->from('no-reply@sakabay.com')
+            ->to($receiver)
+            // ->addTo('andreasadelson@gmail.com')
+            // ->cc('karii.salman@gmail.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            ->priority(Email::PRIORITY_HIGH)
+            ->subject($subject)
+            ->text($bodyMessage)
+            // ->html('<p>See Twig integration for better HTML integration!</p>')
+        ;
+
+        $mailer->send($email);
     }
 
     private function recastName(string $urlName): string

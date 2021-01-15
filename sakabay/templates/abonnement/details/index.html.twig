@@ -3,9 +3,8 @@
 {% block title %}{{ 'subscription_title_page'|trans }}{% endblock %}
 
 {% block body %}
- <premium
- :company-id="{{ companyId }}"
+ <abonnement-details
  :subscription-name="{{ subscriptionName|json_encode }}"
  :utilisateur-id="{{ utilisateurId }}"
- ></premium>
+ ></abonnement-details>
 {% endblock %}

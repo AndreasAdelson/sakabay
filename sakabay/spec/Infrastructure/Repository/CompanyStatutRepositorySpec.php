@@ -48,19 +48,4 @@ class CompanyStatutRepositorySpec extends ObjectBehavior
         $em->remove($companyStatut)->shouldBeCalled();
         $em->flush($companyStatut)->shouldBeCalled();
     }
-
-    public function it_should_get_enc_and_val_company_statut($em, QueryBuilder $queryBuilder, AbstractQuery $query)
-    {
-        $em->createQueryBuilder(Argument::any())->willReturn($queryBuilder);
-        $queryBuilder->select(Argument::any())->willReturn($queryBuilder);
-        $queryBuilder->distinct(Argument::any())->willReturn($queryBuilder);
-        $queryBuilder->from(Argument::any(), Argument::any(), Argument::any())->willReturn($queryBuilder);
-        $queryBuilder->where(Argument::any())->willReturn($queryBuilder);
-        $queryBuilder->setParameter(Argument::any(), Argument::any())->willReturn($queryBuilder);
-        $queryBuilder->getQuery()->willReturn($query);
-        $query->getResult()->willReturn([]);
-
-        $this->getENCCompanyStatut()->shouldReturn([]);
-        $this->getVALCompanyStatut()->shouldReturn([]);
-    }
 }

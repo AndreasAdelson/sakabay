@@ -51,6 +51,10 @@ class MainMenuBuilder
                 "menu_registered_company" => [
                     "route" => "company_registered_index",
                     "roles" => ["ROLE_RCOMPANY"]
+                ],
+                "menu_refused_company" => [
+                    "route" => "company_refused_index",
+                    "roles" => ["ROLE_RCOMPANY"]
                 ]
             ]
         ],

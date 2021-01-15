@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+
 
 class SubscriptionController extends AbstractController
 {
@@ -31,20 +31,16 @@ class SubscriptionController extends AbstractController
      */
     public function detailsSubscriptions(string $slug)
     {
-        // $subscription = $this.SubscriptionService->
         #Check si l'user est connecté sinon redirige vers l'authentification
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
-        } else if (!$this->getUser()->getCompany()) {
+        } else if (empty($this->getUser()->getCompanys())) {
             throw new NotFoundHttpException('Error !');
         } else {
             return $this->render('abonnement/details/index.html.twig', [
                 'controller_name' => 'CompanyController',
-                'companyId' => $this->getUser()->getCompany()->getId(),
                 'utilisateurId' => $this->getUser()->getId(),
-                'subscriptionName' => $slug,
-                // 'companyId' => $this->getUser()->getId(),
-                // 'companyUrlName' => $this->getUser()->getCompqny(),
+                'subscriptionName' => $slug
             ]);
         }
     }

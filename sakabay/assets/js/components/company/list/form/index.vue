@@ -1,23 +1,55 @@
 <template>
-  <div class="skb-body container">
+  <div class="container skb-body">
     <div v-show="loading">
       <div class="loader-container-full">
         <div class="loader" />
       </div>
     </div>
-    <a href="/">
-      <button
-        title="Annulez "
-        type="button"
-        class="w-40px p-0 rounded-circle btn-close btn"
-      >
-        <i class="fas fa-times " />
-      </button>
-    </a>
+    <button
+      :title="$t('commons.go_back')"
+      type="button"
+      class="w-40px p-0 rounded-circle btn-close btn"
+      @click.prevent="goBack()"
+    >
+      <i class="fas fa-times " />
+    </button>
     <form>
       <div class="">
         <div class="register-card w-100 h-100">
           <!-- First row  -->
+          <div class="row mb-3">
+            <div
+              v-if="urlImageProfil"
+              class="col-2"
+            >
+              <b-img
+                :src="urlImageProfil"
+                class="company-image-2"
+              />
+            </div>
+            <div class="col-4 my-auto">
+              <div class="form-group mb-0">
+                <fieldset
+                  id="imageProfil"
+                  class="imageProfil"
+                >
+                  <input
+                    ref="imageProfil"
+                    name="imageProfil"
+                    type="file"
+                    @change="onFileSelected"
+                  >
+                  <div
+                    v-for="errorText in formErrors.imageProfil"
+                    :key="'imageProfil_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <!-- Second row  -->
           <div class="row">
             <div class="col-6">
               <div class="form-group">
@@ -25,10 +57,11 @@
                   id="name"
                   class="name"
                 >
-                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.fields.name') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.fields.name') }}</label>
                   <input
                     v-model="formFields.name"
                     v-validate="'required'"
+                    disabled
                     type="text"
                     name="name"
                     class="form-control"
@@ -49,19 +82,19 @@
                   id="numSiret"
                   class="numSiret"
                 >
-                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.fields.num_siret') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.fields.num_siret') }}</label>
                   <input
                     v-model="formFields.numSiret"
                     v-validate="'required'"
+                    disabled
                     name="numSiret"
                     type="text"
                     class="form-control"
                     :placeholder="$t('company.placeholder.num_siret')"
-                    onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
                   >
                   <div
                     v-for="errorText in formErrors.numSiret"
-                    :key="'code_' + errorText"
+                    :key="'numSiret_' + errorText"
                   >
                     <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
@@ -69,7 +102,66 @@
               </div>
             </div>
           </div>
-          <!-- second row -->
+          <!-- Third row  -->
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="category"
+                  class="category"
+                >
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.table.fields.category') }}</label>
+
+                  <multiselect
+                    v-model="formFields.category"
+                    v-validate="'required'"
+                    disabled
+                    :options="category"
+                    name="category"
+                    placeholder="Selectionner categorie"
+                    :searchable="false"
+                    :close-on-select="false"
+                    :show-labels="false"
+                    label="name"
+                    track-by="name"
+                    open-direction="below"
+                  />
+                  <div
+                    v-for="errorText in formErrors.category"
+                    :key="'category_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="urlName"
+                  class="urlName"
+                >
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.table.fields.url_name') }}</label>
+                  <input
+                    v-model="formFields.urlName"
+                    v-validate="'required_urlName'"
+                    disabled
+                    type="text"
+                    name="urlName"
+                    class="form-control"
+                    :placeholder="$t('company.placeholder.url_name')"
+                  >
+                  <div
+                    v-for="errorText in formErrors.urlName"
+                    :key="'urlName_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <!-- Fourth row -->
           <div class="row">
             <div class="col-6">
               <div class="form-group">
@@ -77,7 +169,7 @@
                   id="postalAddress"
                   class="postalAddress"
                 >
-                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_address') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.table.fields.address.postal_address') }}</label>
                   <input
                     v-model="formFields.address.postalAddress"
                     v-validate="'required'"
@@ -94,7 +186,7 @@
                   >
                   <div
                     v-for="errorText in formErrors.postalAddress"
-                    :key="'code_' + errorText"
+                    :key="'postalCode_' + errorText"
                   >
                     <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
@@ -107,7 +199,7 @@
                   id="postalCode"
                   class="postalCode"
                 >
-                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_code') }}</label>
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.table.fields.address.postal_code') }}</label>
                   <input
                     v-model="formFields.address.postalCode"
                     v-validate="'required'"
@@ -124,7 +216,7 @@
                   >
                   <div
                     v-for="errorText in formErrors.postalCode"
-                    :key="'name_' + errorText"
+                    :key="'postal_name_' + errorText"
                   >
                     <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
@@ -137,7 +229,7 @@
             <div class="loader3" />
           </div>
           <div
-            v-else-if="formFields.address.latitude && formFields.address.longitude"
+            v-if="formFields.address.latitude && formFields.address.longitude"
             class="row mb-3"
           >
             <div
@@ -160,14 +252,14 @@
               <span class="fontUbuntuItalic fontSize16 red-skb"><i class="fas fa-exclamation-triangle mx-1" />{{ $t('company.table.fields.address.warning_message') }}</span>
             </div>
           </div>
-          <!-- third row -->
+          <!-- Fifth row -->
           <div class="row mb-3">
             <div class="col-6">
               <fieldset
                 id="city"
                 class="city"
               >
-                <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.city') }}</label>
+                <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.table.fields.city') }}</label>
                 <autocomplete
                   ref="autocomplete"
                   v-model="formFields.city"
@@ -191,29 +283,33 @@
                 </div>
               </fieldset>
             </div>
-            <div class="col-6">
-              <fieldset
-                id="category"
-                class="category"
-              >
-                <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.category') }}</label>
+          </div>
 
-                <multiselect
-                  v-model="formFields.category"
-                  v-validate="'required'"
-                  :options="category"
-                  name="category"
-                  placeholder="Selectionner categorie"
-                  :searchable="false"
-                  :close-on-select="false"
-                  :show-labels="false"
-                  label="name"
-                  track-by="name"
-                  open-direction="below"
+          <!-- Sixth row -->
+          <div class="row mb-3">
+            <div class="col-12">
+              <fieldset
+                id="city"
+                class="city"
+              >
+                <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.table.fields.description') }}</label>
+                <textarea
+                  v-model="formFields.description"
+                  class="form-control"
+                  :placeholder="$tc('commons.maximum_n_characters', 2000)"
+                  type="text"
+                  :maxlength="2000"
+                  :rows="10"
                 />
                 <div
-                  v-for="errorText in formErrors.category"
-                  :key="'category_' + errorText"
+                  :class="!$getNbCharactersLeft(formFields.description, 2000) ? 'red-skb' : 'black-skb'"
+                  class="text-right pt-2 fontSize12"
+                >
+                  {{ $tc('commons.n_charaters_left', $getNbCharactersLeft(formFields.description, 5000)) }}
+                </div>
+                <div
+                  v-for="errorText in formErrors.description"
+                  :key="'description_' + errorText"
                 >
                   <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                 </div>
@@ -221,92 +317,107 @@
             </div>
           </div>
 
-          <div class="row my-3">
+          <div class="row mt-5">
             <div class="col-6 offset-3">
               <button
                 type="button"
-                class="btn button_skb fontUbuntuItalic"
+                class="btn button_skb fontUbuntu italic"
                 @click="$validateForm()"
               >
-                {{ this.$t('commons.create') }}
+                {{ this.$t('commons.edit') }}
               </button>
             </div>
-            <!-- <div class="col-3">
-              <button
-                type="button"
-                class="btn button_skb fontUbuntuItalic"
-                @click="test()"
-              >Test</button>
-            </div> -->
           </div>
         </div>
       </div>
     </form>
   </div>
+  </form>
+  </div>
 </template>
 <script>
   import axios from 'axios';
-  import Autocomplete from 'vue2-autocomplete-js';
-  import validatorRulesMixin from 'mixins/validatorRulesMixin';
   import _ from 'lodash';
-  import adminFormMixin from 'mixins/adminFormMixin';
+  import Autocomplete from 'vue2-autocomplete-js';
+
   export default {
     components: {
       Autocomplete
     },
-    mixins: [
-      validatorRulesMixin,
-      adminFormMixin
-    ],
     props: {
       utilisateurId: {
         type: Number,
         default: null
       },
+      urlPrecedente: {
+        type: String,
+        default: null
+      },
+      companyUrlName: {
+        type: String,
+        default: null
+      }
     },
     data() {
       return {
-        loading: false,
+        loading: true,
         loadingMap: false,
-        API_URL: '/api/companies',
-        formFields: {
-          name: null,
-          numSiret: null,
-          utilisateur: new Object(),
-          address: new Object(),
-          category: null,
-          city: new Object()
-        },
+        category: [],
         position: {
           lng: null,
           lat: null
         },
+        urlImageProfil: null,
+        imageProfilSelected: null,
+        imageName: null,
+        formFields: {
+          name: null,
+          category: null,
+          numSiret: null,
+          urlName: null,
+          address: {
+            postalAddress: null,
+            postalCode: null,
+            latitude: null,
+            longitude: null,
+          },
+          city: null,
+          description: null,
+          imageProfil: null
+        },
         formErrors: {
           name: [],
-          numSiret: [],
-          firstName: [],
-          lastName: [],
-          email: [],
-          imageProfil: [],
           category: [],
-          city: [],
+          numSiret: [],
+          urlName: [],
           postalAddress: [],
-          postalCode: []
-        },
-        category: [],
-        utilisateur: null
+          postalCode: [],
+          longitude: [],
+          latitude: [],
+          city: [],
+          description: [],
+          imageProfil: []
+        }
       };
     },
     created() {
       let promises = [];
       promises.push(axios.get('/api/admin/categories'));
-      if(this.utilisateurId) {
-        promises.push(axios.get('/api/admin/utilisateurs/' + this.utilisateurId));
+      if (this.companyUrlName) {
+        promises.push(axios.get('/api/entreprise/' + this.companyUrlName));
       }
       return Promise.all(promises).then(res => {
         this.category = res[0].data;
-        if (this.utilisateurId) {
-          this.utilisateur = res[1].data;
+        if (this.companyUrlName) {
+          let company = res[1].data;
+          if (company.image_profil) {
+            this.urlImageProfil = '/build/images/uploads/' + this.companyUrlName + '/' + company.image_profil;
+            this.formFields.imageProfil = company.image_profil;
+          }
+          this.$removeFieldsNotInForm(company, Object.keys(this.formFields));
+          this.$setEditForm(company);
+          this.setPosition(company.address);
+          this.setCity(company.city, false);
         }
         this.loading = false;
       }).catch(e => {
@@ -315,6 +426,13 @@
       });
     },
     methods: {
+      setCity(city, callApi=true) {
+        if (this.formFields.address.postalAddress && this.formFields.address.postalCode && callApi) {
+          this.getLongLat();
+        }
+        this.formFields.city = city;
+        this.$refs.autocomplete.setValue(city.name);
+      },
 
       getLongLat() {
         let query = this.formFields.address.postalAddress + ' ' + this.formFields.city;
@@ -340,12 +458,15 @@
         });
       },
 
-      setCity(city) {
-        if (this.formFields.address.postalAddress && this.formFields.address.postalCode) {
-          this.getLongLat();
-        }
-        this.formFields.city = city;
-        this.$refs.autocomplete.setValue(city.name);
+      setPosition(address) {
+        this.position.lat = address.latitude;
+        this.position.lng = address.longitude;
+      },
+
+      onFileSelected() {
+        this.imageProfilSelected = this.$refs.imageProfil.files[0];
+        this.imageName = this.$refs.imageProfil.files[0].name;
+        this.urlImageProfil = URL.createObjectURL(this.imageProfilSelected);
       },
 
       submitForm() {
@@ -358,9 +479,13 @@
         if(this.$refs.autocomplete.json.length > 0) {
           this.formFields.city = this.$refs.autocomplete.json[0];
         }
-        this.formFields.utilisateur = _.cloneDeep(this.utilisateur);
+
+        this.formFields.utilisateur = _.cloneDeep(this.utilisateurId);
         let formData = this.$getFormFieldsData(this.formFields);
-        return axios.post(this.API_URL, formData)
+        if (this.imageProfilSelected) {
+          formData.append('file', this.imageProfilSelected);
+        }
+        return axios.post('/api/companies/edit/' + this.companyUrlName, formData)
           .then(response => {
             this.loading = false;
             window.location.assign(response.headers.location);
@@ -372,6 +497,10 @@
 
           });
       },
+      goBack() {
+        this.$goTo(this.urlPrecedente);
+      },
     },
   };
 </script>
+

@@ -120,7 +120,15 @@ const CnsFormUtils = {
       let transformedData = _.cloneDeep(data);
       Object.keys(this.formFields).forEach(field => {
         let underscoreField = this.$camelCaseToUnderscoreCase(field);
-        if (transformedData[field] || transformedData[field] === 0 || transformedData[underscoreField]) {
+        if (this.formFields[field] instanceof Object) {
+          Object.keys(this.formFields[field]).forEach(key => {
+            let underscoreKey = this.$camelCaseToUnderscoreCase(key);
+            if (transformedData[field][key] || transformedData[field][key] === 0 || transformedData[underscoreField][underscoreKey]) {
+              this.formFields[field][key] = transformedData[underscoreField][underscoreKey];
+            }
+          });
+        }
+        else if (transformedData[field] || transformedData[field] === 0 || transformedData[underscoreField]) {
           this.formFields[field] = transformedData[underscoreField];
         }
       });

@@ -6,9 +6,9 @@
       </div>
     </div>
     <div>
-      <a :href="isValidated ? '/admin/entreprise' : '/admin/registered/entreprise'">
+      <a @click="goBack()">
         <button
-          title="Annulez "
+          :title="$t('commons.go_back')"
           type="button"
           class="w-40px p-0 rounded-circle btn-close btn"
         >
@@ -16,281 +16,279 @@
         </button>
       </a>
       <form>
-        <div class="">
-          <div class="register-card w-100 h-100">
-            <!-- First row  -->
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group">
-                  <fieldset
-                    id="name"
-                    class="name"
-                  >
-                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.name') }}</label>
-                    <input
-                      v-model="formFields.name"
-                      v-validate="'required'"
-                      type="text"
-                      name="name"
-                      class="form-control"
-                      :placeholder="$t('company.placeholder.name')"
-                    >
-                    <div
-                      v-for="errorText in formErrors.name"
-                      :key="'name_' + errorText"
-                    >
-                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                    </div>
-                  </fieldset>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group">
-                  <fieldset
-                    id="numSiret"
-                    class="numSiret"
-                  >
-                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.fields.num_siret') }}</label>
-                    <input
-                      v-model="formFields.numSiret"
-                      v-validate="'required'"
-                      name="numSiret"
-                      type="text"
-                      class="form-control"
-                      :placeholder="$t('company.placeholder.num_siret')"
-                      onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
-                    >
-                    <div
-                      v-for="errorText in formErrors.numSiret"
-                      :key="'code_' + errorText"
-                    >
-                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                    </div>
-                  </fieldset>
-                </div>
-              </div>
-            </div>
-            <!-- second row -->
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group">
-                  <fieldset
-                    id="url_name"
-                    class="url_name"
-                  >
-                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.url_name') }}</label>
-                    <input
-                      v-model="formFields.url_name"
-                      v-validate="'required'"
-                      type="text"
-                      name="url_name"
-                      class="form-control"
-                      :placeholder="$t('company.placeholder.url_name')"
-                    >
-                    <div
-                      v-for="errorText in formErrors.url_name"
-                      :key="'url_name_' + errorText"
-                    >
-                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                    </div>
-                  </fieldset>
-                </div>
-              </div>
-              <div class="col-6">
+        <div class="register-card w-100 h-100">
+          <!-- First row  -->
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
                 <fieldset
-                  id="category"
-                  class="category"
+                  id="name"
+                  class="name"
                 >
-                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.category') }}</label>
-
-                  <multiselect
-                    v-model="formFields.category"
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.name') }}</label>
+                  <input
+                    v-model="formFields.name"
                     v-validate="'required'"
-                    :options="category"
-                    name="category"
-                    placeholder="Selectionner categorie"
-                    :searchable="false"
-                    :close-on-select="false"
-                    :show-labels="false"
-                    label="name"
-                    track-by="name"
-                  />
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    :placeholder="$t('company.placeholder.name')"
+                  >
                   <div
-                    v-for="errorText in formErrors.category"
-                    :key="'category_' + errorText"
+                    v-for="errorText in formErrors.name"
+                    :key="'name_' + errorText"
                   >
                     <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                   </div>
                 </fieldset>
               </div>
             </div>
-            <!-- Postal Address and code -->
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group">
-                  <fieldset
-                    id="postalAddress"
-                    class="postalAddress"
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="numSiret"
+                  class="numSiret"
+                >
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.fields.num_siret') }}</label>
+                  <input
+                    v-model="formFields.numSiret"
+                    v-validate="'required'"
+                    name="numSiret"
+                    type="text"
+                    class="form-control"
+                    :placeholder="$t('company.placeholder.num_siret')"
+                    onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
                   >
-                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_address') }}</label>
-                    <input
-                      v-model="formFields.address.postal_address"
-                      v-validate="'required'"
-                      name="postalAddress"
-                      type="text"
-                      :maxlength="255"
-                      class="form-control"
-                      :placeholder="$t('company.placeholder.postal_address')"
-                    >
-                    <div
-                      v-for="errorText in formErrors.postal_address"
-                      :key="'code_' + errorText"
-                    >
-                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                    </div>
-                  </fieldset>
-                </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group">
-                  <fieldset
-                    id="postalCode"
-                    class="postalCode"
+                  <div
+                    v-for="errorText in formErrors.numSiret"
+                    :key="'code_' + errorText"
                   >
-                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_code') }}</label>
-                    <input
-                      v-model="formFields.address.postal_code"
-                      v-validate="'required'"
-                      type="text"
-                      name="postalCode"
-                      class="form-control"
-                      :placeholder="$t('company.placeholder.postal_code')"
-                      onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
-                    >
-                    <div
-                      v-for="errorText in formErrors.postal_code"
-                      :key="'name_' + errorText"
-                    >
-                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                    </div>
-                  </fieldset>
-                </div>
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
               </div>
             </div>
-            <!-- City -->
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group">
-                  <fieldset
-                    id="city"
-                    class="city"
+          </div>
+          <!-- second row -->
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="urlName"
+                  class="urlName"
+                >
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.url_name') }}</label>
+                  <input
+                    v-model="formFields.urlName"
+                    v-validate="'required'"
+                    type="text"
+                    name="urlName"
+                    class="form-control"
+                    :placeholder="$t('company.placeholder.url_name')"
                   >
-                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.city') }}</label>
-                    <autocomplete
-                      ref="autocomplete"
-                      :min="2"
-                      :debounce="500"
-                      :on-should-render-child="$getCityLabel"
-                      :on-select="setCity"
-                      :placeholder="$t('company.placeholder.city')"
-                      param="autocomplete"
-                      url="/api/admin/cities"
-                      anchor="label"
-                      :classes="{input: 'form-control'}"
-                    />
-                    <div
-                      v-for="errorText in formErrors.city"
-                      :key="'city_' + errorText"
-                    >
-                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                    </div>
-                  </fieldset>
-                </div>
+                  <div
+                    v-for="errorText in formErrors.urlName"
+                    :key="'urlName_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
               </div>
             </div>
+            <div class="col-6">
+              <fieldset
+                id="category"
+                class="category"
+              >
+                <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.category') }}</label>
 
-            <!-- Fourth row -->
-            <div class="row">
-              <div class="col-6">
-                <div class="form-group">
-                  <fieldset
-                    id="latitude"
-                    class="latitude"
-                  >
-                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.latitude') }}</label>
-                    <input
-                      v-model="formFields.address.latitude"
-                      v-validate="'required'"
-                      name="latitude"
-                      type="text"
-                      pattern="^-?\d{0,3}(\.\d{0,6})?$"
-                      :maxlength="9"
-                      class="form-control"
-                      :placeholder="$t('company.placeholder.latitude')"
-                      onkeypress="return event.charCode === 0 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)"
-                    >
-                    <div
-                      v-for="errorText in formErrors.latitude"
-                      :key="'code_' + errorText"
-                    >
-                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                    </div>
-                  </fieldset>
+                <multiselect
+                  v-model="formFields.category"
+                  v-validate="'required'"
+                  :options="category"
+                  name="category"
+                  placeholder="Selectionner categorie"
+                  :searchable="false"
+                  :close-on-select="false"
+                  :show-labels="false"
+                  label="name"
+                  track-by="name"
+                />
+                <div
+                  v-for="errorText in formErrors.category"
+                  :key="'category_' + errorText"
+                >
+                  <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                 </div>
-              </div>
-              <div class="col-6">
-                <div class="form-group">
-                  <fieldset
-                    id="longitude"
-                    class="longitude"
+              </fieldset>
+            </div>
+          </div>
+          <!-- Postal Address and code -->
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="postalAddress"
+                  class="postalAddress"
+                >
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_address') }}</label>
+                  <input
+                    v-model="formFields.address.postalAddress"
+                    v-validate="'required'"
+                    name="postalAddress"
+                    type="text"
+                    :maxlength="255"
+                    class="form-control"
+                    :placeholder="$t('company.placeholder.postal_address')"
                   >
-                    <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.longitude') }}</label>
-                    <input
-                      v-model="formFields.address.longitude"
-                      v-validate="'required'"
-                      type="text"
-                      pattern="^-?\d{0,3}(\.\d{0,6})?$"
-                      :maxlength="9"
-                      name="longitude"
-                      class="form-control"
-                      :placeholder="$t('company.placeholder.longitude')"
-                      onkeypress="return event.charCode === 0 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)"
-                    >
-                    <div
-                      v-for="errorText in formErrors.longitude"
-                      :key="'name_' + errorText"
-                    >
-                      <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                    </div>
-                  </fieldset>
-                </div>
+                  <div
+                    v-for="errorText in formErrors.postalAddress"
+                    :key="'postal_code_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
               </div>
             </div>
-            <div
-              v-if="formFields.address.latitude && formFields.address.latitude"
-              class="row"
-            >
-              <div class="col-12">
-                <v-map
-                  :zoom="16"
-                  :center="[formFields.address.latitude, formFields.address.longitude]"
-                  style="height:300px"
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="postalCode"
+                  class="postalCode"
                 >
-                  <v-marker :lat-lng="[formFields.address.latitude, formFields.address.longitude]" />
-                  <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
-                </v-map>
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.postal_code') }}</label>
+                  <input
+                    v-model="formFields.address.postalCode"
+                    v-validate="'required'"
+                    type="text"
+                    name="postalCode"
+                    class="form-control"
+                    :placeholder="$t('company.placeholder.postal_code')"
+                    onkeypress="return event.charCode === 0 || event.charCode === 47 || (event.charCode >= 48 && event.charCode <= 57)"
+                  >
+                  <div
+                    v-for="errorText in formErrors.postalCode"
+                    :key="'postal_address_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
               </div>
             </div>
-            <div class="row my-3">
-              <div class="col-6 offset-3">
-                <button
-                  type="button"
-                  class="btn button_skb fontUbuntuItalic"
-                  @click="$validateForm()"
+          </div>
+          <!-- City -->
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="city"
+                  class="city"
                 >
-                  {{ this.$t('commons.edit') }}
-                </button>
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.city') }}</label>
+                  <autocomplete
+                    ref="autocomplete"
+                    :min="2"
+                    :debounce="500"
+                    :on-should-render-child="$getCityLabel"
+                    :on-select="setCity"
+                    :placeholder="$t('company.placeholder.city')"
+                    param="autocomplete"
+                    url="/api/admin/cities"
+                    anchor="label"
+                    :classes="{input: 'form-control'}"
+                  />
+                  <div
+                    v-for="errorText in formErrors.city"
+                    :key="'city_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
               </div>
+            </div>
+          </div>
+
+          <!-- Fourth row -->
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="latitude"
+                  class="latitude"
+                >
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.latitude') }}</label>
+                  <input
+                    v-model="formFields.address.latitude"
+                    v-validate="'required'"
+                    name="latitude"
+                    type="text"
+                    pattern="^-?\d{0,3}(\.\d{0,6})?$"
+                    :maxlength="9"
+                    class="form-control"
+                    :placeholder="$t('company.placeholder.latitude')"
+                    onkeypress="return event.charCode === 0 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)"
+                  >
+                  <div
+                    v-for="errorText in formErrors.latitude"
+                    :key="'code_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <fieldset
+                  id="longitude"
+                  class="longitude"
+                >
+                  <label class="fontUbuntuItalic fontSize14">{{ this.$t('company.table.fields.address.longitude') }}</label>
+                  <input
+                    v-model="formFields.address.longitude"
+                    v-validate="'required'"
+                    type="text"
+                    pattern="^-?\d{0,3}(\.\d{0,6})?$"
+                    :maxlength="9"
+                    name="longitude"
+                    class="form-control"
+                    :placeholder="$t('company.placeholder.longitude')"
+                    onkeypress="return event.charCode === 0 || event.charCode === 45 || event.charCode === 46 || (event.charCode >= 48 && event.charCode <= 57)"
+                  >
+                  <div
+                    v-for="errorText in formErrors.longitude"
+                    :key="'name_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="formFields.address.latitude && formFields.address.latitude"
+            class="row"
+          >
+            <div class="col-12">
+              <v-map
+                :zoom="16"
+                :center="[formFields.address.latitude, formFields.address.longitude]"
+                style="height:300px"
+              >
+                <v-marker :lat-lng="[formFields.address.latitude, formFields.address.longitude]" />
+                <v-tile-layer url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+              </v-map>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-6 offset-3">
+              <button
+                type="button"
+                class="btn button_skb fontUbuntuItalic"
+                @click="$validateForm()"
+              >
+                {{ this.$t('commons.edit') }}
+              </button>
             </div>
           </div>
         </div>
@@ -317,9 +315,9 @@
         type: Number,
         default: null,
       },
-      isValidated: {
-        type: Boolean,
-        default: false
+      urlPrecedente: {
+        type: String,
+        default: null
       }
     },
     data() {
@@ -329,16 +327,21 @@
           name: null,
           numSiret: null,
           category: null,
-          url_name: null,
-          address: {},
-          city: {},
+          urlName: null,
+          address: {
+            postalAddress: null,
+            postalCode: null,
+            latitude: null,
+            longitude: null
+          },
+          city: null,
           validated: this.isValidated
         },
         formErrors: {
           name: [],
           numSiret: [],
           category: [],
-          url_name: [],
+          urlName: [],
           postalCode: [],
           postalAddress: [],
           latitude: [],
@@ -371,6 +374,9 @@
       setCity(city) {
         this.formFields.city = city;
         this.$refs.autocomplete.setValue(city.name);
+      },
+      goBack() {
+        this.$goTo(this.urlPrecedente);
       },
     },
   };

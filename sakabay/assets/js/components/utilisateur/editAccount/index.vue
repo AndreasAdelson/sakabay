@@ -171,32 +171,6 @@
                 </div>
               </div>
             </div>
-            <div
-              v-if="passwordActive"
-              class="col-6"
-            >
-              <div class="form-group">
-                <!-- <fieldset
-                  id="currentPassword"
-                  class="currentPassword"
-                >
-                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('user.fields.current_password') }}</label>
-                  <input
-                    v-model="formFields.currentPassword"
-                    v-validate="'required_currentPassword'"
-                    type="text"
-                    name="currentPassword"
-                    class="form-control"
-                  >
-                  <div
-                    v-for="errorText in formErrors.currentPassword"
-                    :key="'currentPassword_' + errorText"
-                  >
-                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
-                  </div>
-                </fieldset> -->
-              </div>
-            </div>
           </div>
           <!-- Fifth row -->
           <div

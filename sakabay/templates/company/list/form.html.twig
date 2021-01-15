@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'company_edit_title_page'|trans }}{% endblock %}
+
+{% block body %}
+<h1 class="fontUbuntuItalic orange-skb text-center p-1">{{ 'edit_company_profil'|trans }}</h1>
+<company-edit
+:utilisateur-id="{{ utilisateurId }}"
+url-precedente="{{ urlPrecedente }}"
+:company-url-name="{{ companyUrlName|json_encode }}"
+></company-edit>
+{% endblock %}

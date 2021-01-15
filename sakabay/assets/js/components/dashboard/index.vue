@@ -15,39 +15,70 @@
       </div>
     </div>
     <div
-      v-if="utilisateur && utilisateur.company"
+      v-if="utilisateur && companies.length > 0"
       class="row"
     >
       <div class="col-3">
         <link-item
+          icon-label="fas fa-city"
+          :button-text="$tc('dashboard.link.n_company', companies.length)"
+          class-color="flat-color-5"
+          :small-text="false"
+          :disabled="false"
+          url="/entreprises/list"
+        />
+      </div>
+      <div class="col-3">
+        <link-item
+          icon-label="fas fa-gem"
+          :button-text="$t('dashboard.link.subscription')"
+          class-color="yellow-login-skb"
+          :small-text="true"
+          url="/subscription"
+          :disabled="!hasOneValidated"
+        />
+      </div>
+      <div class="col-3">
+        <link-item
+          icon-label="far fa-copy"
+          :button-text="$t('dashboard.link.opportunity')"
+          class-color="flat-color-6"
+          :small-text="true"
+          :disabled="!hasOneSusbcribed"
+        />
+      </div>
+      <div class="col-3">
+        <link-item
+          icon-label="fas fa-paste"
+          :button-text="$t('dashboard.link.recruit')"
+          class-color="blue-skb"
+          :small-text="true"
+          :disabled="!hasOneSusbcribed"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <link-item
           icon-label="fas fa-edit"
-          button-text="Publiez une offre"
+          :button-text="$t('dashboard.link.request_service')"
           class-color="flat-color-1"
           :small-text="false"
         />
       </div>
       <div class="col-3">
         <link-item
-          icon-label="fas fa-wrench"
-          button-text="Voir les abonnements"
-          class-color="flat-color-2"
-          :small-text="true"
-          :href="'/subscription'"
-        />
-      </div>
-      <div class="col-3">
-        <link-item
-          icon-label="far fa-eye"
-          button-text="Consultez vos messages"
-          class-color="flat-color-3"
-          :small-text="true"
-        />
-      </div>
-      <div class="col-3">
-        <link-item
-          icon-label="fas fa-paste"
-          button-text="Récapitulatif"
+          icon-label="fas fa-book-open"
+          :button-text="$t('dashboard.link.documents')"
           class-color="flat-color-4"
+          :small-text="true"
+        />
+      </div>
+      <div class="col-3">
+        <link-item
+          icon-label="far fa-address-card"
+          :button-text="$t('dashboard.link.nomination')"
+          class-color="flat-color-2"
           :small-text="true"
         />
       </div>
@@ -82,7 +113,7 @@
                       </a>
                       <!-- Subscription History bouton -->
                       <a
-                        v-if="utilisateur && utilisateur.company"
+                        v-if="utilisateur && utilisateur.companys.length > 0"
                         :class="historyActive ? 'navigation-dashboard-link-active': 'navigation-dashboard-link'"
                         href="#"
                         class="w-90"
@@ -120,7 +151,7 @@
                   </div>
                   <!-- History SUbscription List -->
                   <div
-                    v-else-if="historyActive && utilisateur && utilisateur.company"
+                    v-else-if="historyActive && utilisateur && companies"
                     class="row scroll-h300"
                   >
                     <vuescroll>
@@ -189,6 +220,7 @@
   import vuescroll from 'vuescroll';
   import axios from 'axios';
   import _ from 'lodash';
+  import moment from 'moment';
 
   export default {
     components: {
@@ -224,9 +256,11 @@
         },
         notifications: [
         ],
+        companies: [],
         utilisateur: null,
         notificationActive: true,
         historyActive: false,
+        hasOneSusbcribed: false
       };
     },
     computed: {
@@ -241,9 +275,26 @@
       },
 
       companySubscriptions() {
-        let history = _.cloneDeep(this.utilisateur.company.companysubscriptions);
-
+        let history = [];
+        this.companies.forEach(company => {
+          company.companysubscriptions.forEach(subscription => {
+            subscription.company_name = company.name;
+          });
+          history = _.concat(history, _.cloneDeep(company.companysubscriptions));
+        });
         return  history;
+      },
+
+      hasOneValidated() {
+        let validated;
+        validated = _.filter(this.companies, company => {
+          return company.companystatut.code === 'VAL';
+        });
+        if (validated.length > 0) {
+          this.getSubscribedCompany();
+          return true;
+        }
+        return false;
       }
     },
     created() {
@@ -283,7 +334,8 @@
         return axios.get('api/admin/utilisateurs/' + this.utilisateurId, {params: { 'serial_group': 'api_dashboard_utilisateur' }})
           .then(response => {
             console.log(response);
-            this.utilisateur = response.data;
+            this.utilisateur = _.cloneDeep(response.data);
+            this.companies = _.cloneDeep(this.utilisateur.companys);
           }).catch(e => {
             this.$handleError(e);
           });
@@ -301,6 +353,20 @@
         this.notificationActive = false;
         this.historyActive = true;
       },
+
+      getSubscribedCompany() {
+        if (this.companySubscriptions.length > 0) {
+          let subscription = this.companySubscriptions.find((item) => {
+            return moment(item.dt_fin, 'DD/MM/YYYY HH:mm:ss').isAfter();
+          });
+          if(subscription) {
+            this.hasOneSusbcribed = true;
+          }
+          else {
+            this.hasOneSusbcribed = false;
+          }
+        }
+      }
     },
   };
 </script>

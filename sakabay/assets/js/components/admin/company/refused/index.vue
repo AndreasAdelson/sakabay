@@ -9,7 +9,7 @@
       <div class="row my-4">
         <div class="col-4">
           <h1 class="fontUbuntuItalic orange-skb">
-            {{ this.$t('company.title_registered') }}
+            {{ this.$t('company.title_refused') }}
           </h1>
         </div>
         <div class="col-1" />
@@ -59,13 +59,13 @@
               <b-button-group>
                 <a
                   v-if="canRead"
-                  :href="'/admin/registered/entreprise/show/' + data.value "
+                  :href="'/admin/refused/entreprise/show/' + data.value "
                 >
                   <b-button><i class="fas fa-eye" /></b-button>
                 </a>
                 <a
                   v-if="canEdit"
-                  :href="'/admin/registered/entreprise/edit/' + data.value "
+                  :href="'/admin/refused/entreprise/edit/' + data.value "
                   class="mx-1"
                 >
                   <b-button><i class="fas fa-edit" /></b-button>
@@ -93,7 +93,6 @@
   import axios from 'axios';
   import paginationMixin from 'mixins/paginationMixin';
   import _ from 'lodash';
-
 
   export default {
     mixins: [paginationMixin],
@@ -136,7 +135,7 @@
             sortDesc: this.table.sortDesc,
             currentPage: this.pager.currentPage,
             perPage: this.pager.perPage,
-            codeStatut: 'ENC'
+            codeStatut: 'REF'
           }
         }).then(response => {
           let items = _.map(response.data, company => _.assign(company, {

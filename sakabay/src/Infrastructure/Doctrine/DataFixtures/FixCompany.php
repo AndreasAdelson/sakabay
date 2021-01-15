@@ -49,6 +49,7 @@ class FixCompany extends Fixture implements
             $company->setCompanystatut($this->getReference('companyStatut_' . $companyStatut));
             $company->setAddress($this->getReference('address_' . $address));
             $company->setCity($this->getReference('city_' . $city));
+            $company->setDtCreated(new \DateTime());
 
             $manager->persist($company);
             $this->addReference('company_' . $name, $company);

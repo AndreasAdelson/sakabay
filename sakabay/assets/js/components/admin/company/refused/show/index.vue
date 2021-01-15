@@ -14,7 +14,7 @@
         </div>
       </div>
     </div>
-    <div v-else-if="!loading && company.companystatut.code === 'REF'">
+    <div v-else-if="!loading && company.companystatut.code === 'ENC'">
       <div class="row pt-5">
         <div class="col">
           <p class="text-center">
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div v-else-if="!loading && company.companystatut.code === 'ENC'">
+    <div v-else-if="!loading && company.companystatut.code === 'REF'">
       <div
         v-if="canEdit"
         class="row mt-3 "
@@ -33,7 +33,7 @@
         >
           <a
             class="float-right"
-            :href="'/admin/registered/entreprise/edit/' + companyId"
+            :href="'/admin/refused/entreprise/edit/' + companyId"
           >
             <b-button class="button_skb">{{ $t('commons.edit') }}</b-button>
           </a>
@@ -164,61 +164,14 @@
           </div>
         </div>
       </div>
-      <div
-        v-if="company.companystatut.code === 'ENC'"
-        class="row justify-content-center my-3"
-      >
-        <div class="col-2">
-          <b-button
-            data-toggle="modal"
-            :data-target="'#' + DECLINE_CONFIRM_MODAL_ID"
-            class="btn button_skb"
-          >
-            {{ $t('commons.decline') }}
-          </b-button>
-        </div>
-        <div
-          class="col-2"
-        >
-          <b-button
-            :disabled="company.address.latitude === 0 && company.address.longitude === 0"
-            data-toggle="modal"
-            :data-target="'#' + VALIDATE_CONFIRM_MODAL_ID"
-            class="btn btn-success w-100"
-          >
-            {{ $t('commons.validate') }}
-          </b-button>
-        </div>
-      </div>
     </div>
-    <confirm-modal
-      :id="DECLINE_CONFIRM_MODAL_ID"
-      :title-text="$t('commons.confirm_modal.decline.company.title')"
-      :body-text="$t('commons.confirm_modal.decline.company.text')"
-      :button-yes-text="$t('commons.yes')"
-      :button-no-text="$t('commons.no')"
-      :are-buttons-on-same-line="true"
-      @confirm-modal-yes="declineCompany()"
-    />
-
-    <confirm-modal
-      :id="VALIDATE_CONFIRM_MODAL_ID"
-      :title-text="$t('commons.confirm_modal.validate.company.title')"
-      :body-text="$t('commons.confirm_modal.validate.company.text')"
-      :button-yes-text="$t('commons.yes')"
-      :button-no-text="$t('commons.no')"
-      :are-buttons-on-same-line="true"
-      @confirm-modal-yes="validateCompany()"
-    />
   </div>
 </template>
 <script>
   import axios from 'axios';
-  import ConfirmModal from 'components/commons/confirm-modal';
 
   export default {
     components: {
-      ConfirmModal
     },
     props: {
       companyId: {
@@ -236,8 +189,6 @@
     },
     data() {
       return {
-        DECLINE_CONFIRM_MODAL_ID: 'decline_confirmModal',
-        VALIDATE_CONFIRM_MODAL_ID: 'validate_confirmModal',
         company: null,
         loading: true
       };
@@ -255,28 +206,6 @@
       }
     },
     methods: {
-      validateCompany() {
-        this.loading = true;
-        return axios.post('/api/admin/companies/' + this.companyId + '/validation')
-          .then(response => {
-            this.loading = false;
-            window.location.assign(response.headers.location);
-          }).catch(e => {
-            this.$handleError(e);
-            this.loading = false;
-          });
-      },
-      declineCompany() {
-        this.loading = true;
-        return axios.post('/api/admin/companies/' + this.companyId + '/decline')
-          .then(response => {
-            this.loading = false;
-            window.location.assign(response.headers.location);
-          }).catch(e => {
-            this.$handleError(e);
-            this.loading = false;
-          });
-      },
       goBack() {
         this.$goTo(this.urlPrecedente);
       },

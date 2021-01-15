@@ -28,6 +28,7 @@ class City
      * @Expose
      * @Groups({
      * "api_cities",
+     * "api_companies",
      * "api_admin_companies"
      * })
      */

@@ -19,7 +19,7 @@ class AddressEditType extends AbstractType
         $translator = $options['translator'];
 
         $builder
-            ->add('postal_address', TextType::class, [
+            ->add('postalAddress', TextType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => $translator->trans('error_message_field_not_empty')
@@ -28,7 +28,7 @@ class AddressEditType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('postal_code', NumberType::class, [
+            ->add('postalCode', NumberType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => $translator->trans('error_message_field_not_empty'),

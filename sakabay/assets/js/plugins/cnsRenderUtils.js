@@ -3,13 +3,13 @@ import _ from 'lodash';
 
 const CnsRenderUtils = {
   install(Vue, options) {
-    Vue.prototype.$setAreaHeight = function () {
+    Vue.prototype.$setAreaHeight = function() {
       // let windowHeight = document.documentElement.clientHeight;
       let headerMainHeight = document.getElementById('headerMain').clientHeight;
       let sousNavHeight = document.getElementById('sousNav').clientHeight;
       let totalHeaderHeight = headerMainHeight + sousNavHeight;
 
-      $(document).ready(function () {
+      $(document).ready(function() {
         $('body').css('padding-top', totalHeaderHeight);
       });
     };
@@ -20,7 +20,7 @@ const CnsRenderUtils = {
      * @param {String} string
      * @returns {String}
      */
-    Vue.prototype.$camelToSnakeCase = function (string) {
+    Vue.prototype.$camelToSnakeCase = function(string) {
       let snake = '';
       for (let i = 0; i < string.length; i++) {
         const letter = string[i];
@@ -40,7 +40,7 @@ const CnsRenderUtils = {
      * @param {String} string
      * @returns {String}
      */
-    Vue.prototype.$getStringWithSpaces = function (string) {
+    Vue.prototype.$getStringWithSpaces = function(string) {
       string = string.replace(/[^\d.]/g, '');
       let split;
       let chunk = [];
@@ -56,14 +56,14 @@ const CnsRenderUtils = {
       return chunk.join(' ');
     };
 
-    Vue.prototype.$refreshScrollbar = function () {
+    Vue.prototype.$refreshScrollbar = function() {
       setTimeout(() => {
         this.$vuebar.refreshScrollbar(document.getElementById('scrollbar'));
       }, 50);
     };
 
 
-    Vue.prototype.$getUserLabel = function (user) {
+    Vue.prototype.$getUserLabel = function(user) {
       let label = '';
       if (user) {
         if (user.last_name) {
@@ -73,19 +73,19 @@ const CnsRenderUtils = {
           if (user.last_name) {
             label += ' ';
           }
-          label += user.first_name
+          label += user.first_name;
         }
         if (user.username) {
           if (user.last_name || user.first_name) {
             label += ' [';
           }
-          label += user.username + ']'
+          label += user.username + ']';
         }
       }
       return label.trim();
-    }
+    };
 
-    Vue.prototype.$getCityLabel = function (city) {
+    Vue.prototype.$getCityLabel = function(city) {
       let label = '';
       if (city) {
         if (city.name) {
@@ -93,7 +93,7 @@ const CnsRenderUtils = {
         }
       }
       return label.trim();
-    }
+    };
 
     /**
      * Print the given error message in the console.
@@ -127,6 +127,9 @@ const CnsRenderUtils = {
       }
     };
 
+    Vue.prototype.$getNbCharactersLeft = function(text, nbMaxChars) {
+      return nbMaxChars - _.get(text, 'length', 0);
+    };
   },
 };
 

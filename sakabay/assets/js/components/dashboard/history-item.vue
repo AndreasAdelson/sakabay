@@ -3,6 +3,9 @@
     <thead>
       <tr class="fontAlice">
         <th scope="col">
+          {{ $t('dashboard.history.table.company') }}
+        </th>
+        <th scope="col">
           {{ $t('dashboard.history.table.name') }}
         </th>
         <th scope="col">
@@ -25,6 +28,7 @@
         :key="'history_'+ index"
         :class="history.isActive ? 'orange-skb' : ''"
       >
+        <td>{{ history.company_name }}</td>
         <td>{{ history.subscription.name }}</td>
         <td>{{ history.subscription.price }}</td>
         <td>{{ getDtDebutLabel(history.dt_debut) }}</td>
@@ -64,7 +68,7 @@
         this.printedHistory = _.orderBy(this.printedHistory, [
           function(history) {
             let dtFin = moment(history.dt_fin, 'DD/MM/YYYY HH:mm:ss').format('MM/DD/YYYY H:mm:ss');
-            if (moment(history.dt_fin).isAfter()) {
+            if (moment(history.dt_fin, 'DD/MM/YYYY HH:mm:ss').isAfter()) {
               history.isActive = true;
             } else {
               history.isActive = false;

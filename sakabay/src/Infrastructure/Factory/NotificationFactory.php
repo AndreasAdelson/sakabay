@@ -56,10 +56,8 @@ class NotificationFactory
     public function createCompanyNotificationUser(array $destinataires, string $link, $company)
     {
         $subject = $this->translator->trans('createcompany_subject');
-        $creatorName =  $company->getUtilisateur()->getFirstName() . ' ' . $company->getUtilisateur()->getLastName();
         $message = sprintf(
             $this->translator->trans('createcompany_message'),
-            $creatorName,
             $company->getName()
         );
 

@@ -18,6 +18,11 @@ class CompanyStatutRepository extends AbstractRepository implements CompanyStatu
      * Category code field for type "Beauté"
      */
     const VALIDE_CODE = 'VAL';
+
+    /**
+     * Category code field for type "Beauté"
+     */
+    const REFUSED_CODE = 'REF';
     /**
      * CompanyStatutRepository constructor.
      */
@@ -36,23 +41,5 @@ class CompanyStatutRepository extends AbstractRepository implements CompanyStatu
     {
         $this->_em->remove($companyStatut);
         $this->_em->flush($companyStatut);
-    }
-
-    public function getENCCompanyStatut()
-    {
-        $query = $this->createQueryBuilder('ca')->distinct(true);
-        $query->where('ca.code = (:codes)');
-        $query->setParameter('codes', CompanyStatutRepository::EN_COURS_CODE);
-
-        return $query->getQuery()->getResult();
-    }
-
-    public function getVALCompanyStatut()
-    {
-        $query = $this->createQueryBuilder('ca')->distinct(true);
-        $query->where('ca.code = (:codes)');
-        $query->setParameter('codes', CompanyStatutRepository::VALIDE_CODE);
-
-        return $query->getQuery()->getResult();
     }
 }

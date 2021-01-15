@@ -70,10 +70,6 @@
         type: Number,
         default: null
       },
-      companyId: {
-        type: Number,
-        default: null
-      },
       subscriptionName: {
         type: String,
         default: null
@@ -103,34 +99,21 @@
     },
     computed: {
       verifySubscription() {
-        let etat = true;
         let companySubscriptions = this.formFields.company.companysubscriptions;
         if (!this.loading) {
           if (this.formFields.company && companySubscriptions) {
-            // console.log(companySubscriptions);
-            companySubscriptions.forEach((item) => {
-              console.log('1', item.dt_fin);
-              console.log('2', moment().isAfter(item.dt_fin));
-              if (moment().isAfter(item.dt_fin)) {
-                console.log(item.dt_fin);
-                etat = false;
-              } else {
-                etat = true;
-              }
-
+            let subscription = companySubscriptions.find((item) => {
+              return moment(item.dt_fin, 'DD/MM/YYYY HH:mm:ss').isAfter();
             });
-          } else {
-            etat = true;
+            if(subscription) {
+              return true;
+            }
+            else {
+              return false;
+            }
           }
-
         }
-        if (etat) {
-          return true;
-        } else {
-          return false;
-        }
-        console.log('etat', etat);
-
+        return true;
       },
     },
     created() {

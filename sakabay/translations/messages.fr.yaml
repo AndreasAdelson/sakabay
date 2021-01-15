@@ -32,6 +32,7 @@ menu_company_page: Ma page de présentation
 menu_management_company: Gestion des entreprises
 menu_subscribed_company: Entreprises
 menu_registered_company: Inscriptions
+menu_refused_company: Refusées
 menu_all_companustatus: Liste statut des entreprises
 dashboard: "Tableau de bord"
 settings: "Paramètres"
@@ -47,6 +48,7 @@ error_message_password_must_match: "Les mots de passe doivent être identiques."
 error_message_password_length: "Votre mot de passe doit être composé au minimum de {{ limit }} caractères"
 error_message_field_not_empty: "Ce champ est obligatoire."
 error_message_agree_terms: "Vous devez accepter nos conditions générales d'utilisation."
+error_message_n_length: "This value is too long. It should have {{ limit }} characters or less."
 accept_terms_begin_message: "J'accepte les "
 accept_terms_end_message: "Conditions générales d'utilisation "
 register_now: "S'inscrire"
@@ -61,6 +63,7 @@ error_message_unique_username: "Ce pseudonyme est déjà utilisé. Choisissez-en
 logout: "Se déconnecter"
 edit_account: "Modifier son compte"
 error_message_field_not_empty_city: "Ce champ est obligatoire. Assurez-vous que la ville existe sur l'application en tapant les deux premières lettres. Si le champ ne vous propose pas la ville que vous recherchez veuillez nous contacter."
+edit_company_profil: "Modifier son entreprise"
 
 # Page d'erreur 404
 
@@ -103,13 +106,18 @@ company_subscribed_title_show_page: "Détails d'une entreprise"
 company_registered_title_list_page: "Liste demande d'inscription entreprise"
 company_registered_title_form_page: "Modifier une inscription"
 company_registered_title_show_page: "Détail d'une inscription"
+company_refused_title_show_page: "Détail d'un refus"
+company_refused_title_list_page: "Liste des entreprises refusées"
+company_refused_title_form_page: "Modifier une entreprise refusée"
 company_register_title_page: "Référencez-vous"
-company_list_title_page: "Rechercher une entreprise"
+company_search_title_page: "Rechercher une entreprise"
 company_register_index_title: "Référencer votre entreprise"
 company_register_index_message_first: "Vous devez être connecté pour visualiser le contenu de cette page. Vous pouvez vous connecter "
 company_register_index_message_second: ". Vous n'avez pas de compte ? "
 company_register_index_message_here: "ici"
 company_register_index_message_subscribe: "Inscrivez-vous"
+company_list_title_page: "Gestion de votre entreprise"
+company_edit_title_page: "Modifer son entreprise"
 
 #Category's pages
 category_title_list_page: "Liste des categories"
@@ -125,7 +133,7 @@ city_title_show_page: "Détails d'une ville"
 
 #Emails
 email_register_confirmation_subject: "Confirmation de votre inscription"
-email_register_confirmation_body: "Bonjour, \n\nVotre candidature pour que l'entreprise « %s », soit référencée sur Sakabay est en cours de traitement.\nNotre enseigne s'assure que votre entreprise respecte bien nos conditions d'utilisations.\nVous pouvez dès à présent vous connectez et suivre l'évolution de votre candidature sur l'application à l'aide de vos identifiants.\nVos identifiants de connection sont les suivants:\nEmail:  %s \nMot de passe:  %s \nNous vous recommandons de modifier votre mot de passe lors de votre première connection.\n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."
+email_register_confirmation_body: "Bonjour, \n\nVotre candidature pour que l'entreprise « %s », soit référencée sur Sakabay est en cours de traitement.\nNotre enseigne s'assure que votre entreprise respecte bien nos conditions d'utilisations.\nVous pouvez dès à présent vous connectez et suivre l'évolution de votre candidature sur l'application à l'aide de vos identifiants. \n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."
 email_register_validation_subject: "Validation de votre candidature"
 email_register_validation_body: "Bonjour, \n\nC'est avec plaisir que vous nous annoncons que l'inscription de l'entreprise « %s » à été validée par nos équipes.\nNous vous souhaitons donc la bienvenue au sein de notre groupe avec 2 mois d'abonnement offert. Vous pouvez dès maintenant personnaliser votre page de présentation depuis ce lien  %s , accessible depuis le menu glissant de l'application.\nL'Equipe Sakabay vous souhaite une bonne journée.\n\nMerci pour l'intérêt que vous portez à Sakabay\n\nCet email est automatique, merci de ne pas y répondre.\nL'Equipe Sakabay."
 email_update_password_subject: "Votre mot de passe a été modifié."

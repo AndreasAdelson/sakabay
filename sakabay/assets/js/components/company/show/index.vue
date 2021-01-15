@@ -8,10 +8,16 @@
     <div v-else-if="company">
       <div class="row mt-4 card-skb">
         <div class="col-7">
-          <img
-            src="/build/logo.png"
-            class="logo-main-info bordered"
-          >
+          <b-img
+            v-if="company.image_profil"
+            :src="'/build/images/uploads/' + company.url_name + '/' + company.image_profil"
+            class="company-image-2"
+          />
+          <b-img
+            v-else
+            src="/build/default_company.jpg"
+            class="company-image-2"
+          />
           <div class="header-main-info">
             <div class="company-name">
               <h1 class="fontSize32 fontPoppins m-0">
@@ -81,7 +87,7 @@
     data() {
       return {
         loading: true,
-        company: new Object(),
+        company: null,
         presentationActive: true,
         jobOfferActive: false,
         commentActive: false,

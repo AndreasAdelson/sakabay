@@ -122,10 +122,26 @@ company_registered_edit:
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::editRegistered
     methods: [GET]
 
+#Route for refused companies
+company_refused_index:
+    path: admin/refused/entreprise
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::refusedIndex
+    methods: [GET]
+
+company_refused_show:
+    path: admin/refused/entreprise/show/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::showRefused
+    methods: [GET]
+
+company_refused_edit:
+    path: admin/refused/entreprise/edit/{id}
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::editRefused
+    methods: [GET]
+
 #Route for the searchable page of companies
-company_list:
-    path: entreprises/list
-    controller: App\Infrastructure\Http\Web\Controller\CompanyController::listIndex
+company_search:
+    path: entreprises/search
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::searchIndex
     methods: [GET]
 
 #Route for the page before a user register a company
@@ -135,19 +151,28 @@ company_register_index:
     methods: [GET]
 
 #Route for user register his company
+# Création d'une entreprise
 company_new:
     path: entreprise/new
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::new
     methods: [GET, POST]
 
+# Edition d'une entreprise par son propre utilisateur.
 company_edit:
-    path: entreprise/edit/{id}
-    controller: App\Infrastructure\Http\Web\Controller\CompanyController::edit
+    path: entreprise/edit/{slug}
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::editOwnCompany
     methods: [GET, POST]
 
+# Page de détail d'une entreprise
 company_show:
     path: entreprise/{slug}
     controller: App\Infrastructure\Http\Web\Controller\CompanyController::show
+    methods: [GET, POST]
+
+# Page de gestion d'une entreprise
+company_list:
+    path: entreprises/list
+    controller: App\Infrastructure\Http\Web\Controller\CompanyController::manageCompanyList
     methods: [GET, POST]
 
 ######### routes for company status ###########

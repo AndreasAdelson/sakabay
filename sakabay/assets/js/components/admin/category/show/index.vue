@@ -44,10 +44,28 @@
         </div>
         <div class="row mb-2">
           <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.category.name.toUpperCase() }}</span>
+            <span class="fontHelveticaOblique fontSize18">{{ category.name.toUpperCase() }}</span>
           </div>
           <div class="col-6">
-            <span class="fontHelveticaOblique fontSize18">{{ this.category.code }}</span>
+            <span class="fontHelveticaOblique fontSize18">{{ category.code }}</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <span class="fontPatua fontSize20">{{ $t('category.fields.sous_category') }}</span>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-6">
+            <ul>
+              <li
+                v-for="(sousCategory, index) in category.sous_categorys"
+                :key="'sousCategory_' + index"
+                class="fontHelveticaOblique fontSize18"
+              >
+                {{ sousCategory.name }}
+              </li>
+            </ul>
           </div>
         </div>
       </div>

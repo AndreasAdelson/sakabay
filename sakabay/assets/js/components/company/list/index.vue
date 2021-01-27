@@ -55,7 +55,7 @@
                   <!-- Category & Address & Statut -->
                   <div class="row justify-content-between">
                     <div class="col-3 fontSize18 fontPoppins">
-                      <i class="fas fa-chart-pie mr-1" />
+                      <i class="fas fa-cube mr-1" />
                       <span class="bold">{{ $t('company.card.label.category') }}</span>
                     </div>
                     <div class="col-3 fontSize18 fontPoppins">
@@ -112,7 +112,7 @@
                       <span class="fontSize16">{{ company.address.postal_code }}</span>
                     </div>
                     <div class="col-3">
-                      <span class="fontSize16">{{ getSubscriptionDateLabel(company.companysubscriptions) }}</span>
+                      <span class="fontSize16">{{ getSubscriptionDateLabel(company.company_subscriptions) }}</span>
                     </div>
                   </div>
 
@@ -147,7 +147,27 @@
                   v-if="company.companystatut.code === 'VAL'"
                   class="col-3"
                 >
-                  this is a test
+                  <div
+                    v-if="company.sous_categorys.length != 0 "
+                    class="row mb-1"
+                  >
+                    <div class="col-12 fontSize18 fontPoppins">
+                      <i class="fas fa-cubes mr-1" />
+                      <span class="bold">{{ $t('company.card.label.sous_category') }}</span>
+                    </div>
+                  </div>
+                  <div
+                    v-if="company.sous_categorys.length != 0 "
+                    class="row mb-2"
+                  >
+                    <div class="col-12">
+                      <span
+                        v-for="(sousCategory, index2) in company.sous_categorys"
+                        :key="'sousCategory_' + index2"
+                        class="multiselect__tag_no_icon"
+                      >{{ sousCategory.name }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div
@@ -260,7 +280,7 @@
 
       sortSubscriptions() {
         this.companies.forEach(company => {
-          company.companysubscriptions = _.orderBy(company.companysubscriptions, [
+          company.company_subscriptions = _.orderBy(company.company_subscriptions, [
             function(subscription) {
               let dtFin = moment(subscription.dt_fin, 'DD/MM/YYYY HH:mm:ss').format('MM/DD/YYYY H:mm:ss');
               if (moment(subscription.dt_fin, 'DD/MM/YYYY HH:mm:ss').isAfter()) {

@@ -27,11 +27,26 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-3">
+                <div class="col-12">
                   <span class="fontPoppins fontSize14 italic">{{ company.category.name }} </span>
                 </div>
               </div>
-              <div class="row">
+              <div
+                v-if="isSubscriptionActive && company.sous_categorys.length != 0"
+                class="row"
+              >
+                <div class="col-12">
+                  <span
+                    v-for="(sousCategory, index) in company.sous_categorys"
+                    :key="'sousCategory_' + index"
+                    class="multiselect__tag_no_icon"
+                  >{{ sousCategory.name }}</span>
+                </div>
+              </div>
+              <div
+                v-if="company.description"
+                class="row"
+              >
                 <div class="col-12">
                   <p class="mb-0 fontAlice fontSize16">{{ company.description | truncate(150, '...') }}</p>
                 </div>
@@ -44,17 +59,44 @@
   </a>
 </template>
 <script>
+  import moment from 'moment';
+  import _ from 'lodash';
   export default {
     props: {
       company: {
         type: Object,
         default: () => new Object()
-      }
+      },
+
     },
     data() {
       return {
-
+        isSubscriptionActive: false
       };
+    },
+    created() {
+      this.sortSubscriptions();
+
+    },
+    methods: {
+      sortSubscriptions() {
+        if (this.company.company_subscriptions.length != 0) {
+          let subscriptions = _.cloneDeep(this.company.company_subscriptions);
+          subscriptions = _.orderBy(subscriptions, [
+            function(subscription) {
+              let dtFin = moment(subscription.dt_fin, 'DD/MM/YYYY HH:mm:ss').format('DD/MM/YYYY H:mm:ss');
+              return new Date(dtFin.toString());
+            }
+          ], ['desc']);
+          let lastDtFinSubscription = moment(subscriptions[0].dt_fin, 'DD/MM/YYYY HH:mm:ss').format('DD/MM/YYYY H:mm:ss');
+          if (moment(lastDtFinSubscription, 'DD/MM/YYYY HH:mm:ss').isAfter()) {
+            this.isSubscriptionActive = true;
+          } else {
+            this.isSubscriptionActive = false;
+          }
+        }
+
+      }
     },
   };
 </script>

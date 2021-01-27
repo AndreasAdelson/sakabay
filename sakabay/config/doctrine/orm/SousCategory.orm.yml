@@ -1,0 +1,41 @@
+App\Domain\Model\SousCategory:
+    type: entity
+    table: sous_category
+    repositoryClass: App\Infrastructure\Repository\SousCategoryRepository
+    options:
+        comment: Entité représentant un SousCategory.
+
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+            options:
+                comment: Identifiant technique d'une sous category
+    fields:
+        name:
+            type: string
+            length: 191
+            column: name
+            nullable: false
+        code:
+            type: string
+            length: 100
+            column: code
+            nullable: false
+    manyToOne:
+        category:
+            targetEntity: Category
+            cascade: [persist]
+            inversedBy: sousCategorys
+            joinColumn:
+                name: id_category
+                referencedColumnName: id
+                nullable: false
+    manyToMany:
+        companys:
+            targetEntity: Company
+            mappedBy: sousCategorys
+    uniqueConstraints:
+        uniqueGroupCode:
+            columns: [code]

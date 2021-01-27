@@ -68,6 +68,7 @@
               </div>
             </div>
           </div>
+
           <div class="row my-3">
             <div class="col-6 offset-3">
               <button
@@ -88,15 +89,13 @@
   import axios from 'axios';
   import validatorRulesMixin from 'mixins/validatorRulesMixin';
   import adminFormMixin from 'mixins/adminFormMixin';
-  import DualList from 'components/commons/dual-list';
 
   export default {
     components: {
-      DualList
     },
     mixins: [
       validatorRulesMixin,
-      adminFormMixin
+      adminFormMixin,
     ],
     props: {
       categoryId: {
@@ -108,11 +107,10 @@
       return {
         loading: true,
         API_URL: '/api/admin/categories' + (this.categoryId ? `/${this.categoryId}` : ''),
-        fonctionsAtCreation: null,
-        fonctions: [],
+        sousCategorys: [],
         formFields: {
           name: null,
-          code: null,
+          code: null
         },
         formErrors: {
           name: [],
@@ -122,6 +120,7 @@
     },
     created() {
       let promises = [];
+
       if (this.categoryId) {
         promises.push(axios.get(this.API_URL));
       }

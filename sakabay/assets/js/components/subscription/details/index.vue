@@ -99,7 +99,7 @@
     },
     computed: {
       verifySubscription() {
-        let companySubscriptions = this.formFields.company.companysubscriptions;
+        let companySubscriptions = this.formFields.company.company_subscriptions;
         if (!this.loading) {
           if (this.formFields.company && companySubscriptions) {
             let subscription = companySubscriptions.find((item) => {
@@ -150,9 +150,7 @@
       subscribe() {
         let currentDate = moment(this.formFields.dtDebut);
         let futureMonth = moment(currentDate).add(1, 'M');
-        if (moment(currentDate) != moment(futureMonth) && moment(currentDate) < moment(futureMonth)) {
-          futureMonth = futureMonth.add(1, 'd');
-        }
+        futureMonth = futureMonth.add(1, 'd');
         this.formFields.dtFin = futureMonth.format('YYYY/MM/DD H:m:s');
 
         let formData = this.$getFormFieldsData(this.formFields);

@@ -30,18 +30,24 @@ class MainMenuBuilder
                     "route" => "fonction_index",
                     "roles" => ["ROLE_RFONCTION"]
                 ],
+            ],
+            "menu_management_entities" => [
                 "menu_all_categories" => [
                     "route" => "category_index",
                     "roles" => ["ROLE_RCATEGORY"]
+                ],
+                "menu_all_sous_category" => [
+                    "route" => "sous_category_index",
+                    "roles" => ["ROLE_RSOUSCATEGORY"]
+                ],
+                "menu_all_companustatus" => [
+                    "route" => "company_statut_index",
+                    "roles" => ["ROLE_RCOMPANYSTATUT"]
                 ],
                 "menu_all_cities" => [
                     "route" => "city_index",
                     "roles" => ["ROLE_RCITY"]
                 ],
-                "menu_all_companustatus" => [
-                    "route" => "company_statut_index",
-                    "roles" => ["ROLE_RCOMPANYSTATUT"]
-                ]
             ],
             "menu_management_company" => [
                 "menu_subscribed_company" => [

@@ -64,11 +64,9 @@
   import axios from 'axios';
   import validatorRulesMixin from 'mixins/validatorRulesMixin';
   import adminFormMixin from 'mixins/adminFormMixin';
-  import DualList from 'components/commons/dual-list';
 
   export default {
     components: {
-      DualList
     },
     mixins: [
       validatorRulesMixin,

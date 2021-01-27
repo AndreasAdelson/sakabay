@@ -63,11 +63,11 @@ class Subscription
      * "api_subscriptions",
      * })
      */
-    private $companysubscriptions;
+    private $companySubscriptions;
 
     public function __construct()
     {
-        $this->companysubscriptions = new ArrayCollection();
+        $this->companySubscriptions = new ArrayCollection();
     }
 
     /**
@@ -157,23 +157,23 @@ class Subscription
      */
     public function getCompanySubscriptions(): Collection
     {
-        return $this->companysubscriptions;
+        return $this->companySubscriptions;
     }
 
-    public function addCompanySubscription(CompanySubscription $companysubscription): self
+    public function addCompanySubscription(CompanySubscription $companySubscription): self
     {
-        if (!$this->companysubscriptions->contains($companysubscription)) {
-            $this->companysubscriptions[] = $companysubscription;
-            $companysubscription->setCompany($this);
+        if (!$this->companySubscriptions->contains($companySubscription)) {
+            $this->companySubscriptions[] = $companySubscription;
+            $companySubscription->setCompany($this);
         }
 
         return $this;
     }
 
-    public function removeCompanySubscription(CompanySubscription $companysubscription): self
+    public function removeCompanySubscription(CompanySubscription $companySubscription): self
     {
-        if ($this->companysubscriptions->contains($companysubscription)) {
-            $this->companysubscriptions->removeElement($companysubscription);
+        if ($this->companySubscriptions->contains($companySubscription)) {
+            $this->companySubscriptions->removeElement($companySubscription);
         }
 
         return $this;

@@ -4,6 +4,7 @@ namespace App\Application\Form\Type;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
 use App\Domain\Model\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +24,6 @@ class CategoryType extends AbstractType
                     ]),
                 ],
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
             ])
             ->add('code', TextType::class, [
                 'constraints' => [
@@ -32,7 +32,6 @@ class CategoryType extends AbstractType
                     ]),
                 ],
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
             ]);
     }
 

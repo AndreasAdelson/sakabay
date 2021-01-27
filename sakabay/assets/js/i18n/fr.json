@@ -23,10 +23,18 @@
     "more_details": "Plus de détails",
     "maximum_n_characters": "Maximum {n} caractère | Maximum {n} caractère | Maximum {n} caractères",
     "n_charaters_left": "{n} caractère restant | {n} caractère restant | {n} caractères restants",
+    "only_subscribed_edit": "Cette information est modifiable et visible uniquement lorsque l'entreprise est abonnée.",
     "placeholder": {
       "search": "Que recherchez-vous ?",
       "category": "Filtrer par categorie",
-      "city": "Filtrer par ville"
+      "city": "Filtrer par ville",
+      "sous_category": "Filtrer par activités"
+    },
+    "label": {
+      "key_words": "Mots clés",
+      "category": "Catégorie",
+      "activity": "Activité",
+      "city": "Ville"
     },
     "confirm_modal": {
       "validate": {
@@ -141,7 +149,8 @@
           "longitude": "Longitude",
           "warning_message": "Si l'emplacement proposé n'est pas correct, veuillez déplacer le marker à l'aide de la souris, à la localisation exacte de votre entreprise.",
           "error_geoloc": "Veuillez modifier les coordonnées de géolocoalisation car l'adresse donnée n'a pas permis de déterminer automatiquement ces données. Merci d'avance :)."
-        }
+        },
+        "sous_category": "Activités"
       }
     },
     "fields": {
@@ -178,7 +187,8 @@
         "dt_fin": "Date fin abonnement",
         "siret": "Siret",
         "city": "Ville",
-        "url_name": "Url page de détails"
+        "url_name": "Url page de détails",
+        "sous_category": "Activités"
       }
     },
     "already_validate": "Cette candidature à déjà été acceptée par nos équipes.",
@@ -204,7 +214,8 @@
     "title": "Liste des catégories",
     "fields": {
       "name": "Nom de la catégorie",
-      "code": "Code de la catégorie"
+      "code": "Code de la catégorie",
+      "sous_category": "Sous-catégories"
     },
     "placeholder": {
       "name": "Renseignez un nom d'une catégorie",
@@ -257,6 +268,19 @@
     "detailsPremium": "detailsPremium",
     "detailsPro": "detailsPro",
     "detailsFree": "detailsFree"
+  },
+  "sous_category": {
+    "title": "Liste des sous-catégories",
+    "fields": {
+      "name": "Nom de la sous-catégorie",
+      "code": "Code de la sous-catégorie",
+      "category": "Catégorie"
+    },
+    "placeholder": {
+      "name": "Renseignez un nom d'une catégorie",
+      "code": "Renseignez un Code d'une catégorie",
+      "category": "Sélectionner une catégorie"
+    }
   },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",
   "error_message_required_username": "La taille de votre pseudonyme ne doit pas être inférieure à 5 caractères ni supérieur à 10 caractères",

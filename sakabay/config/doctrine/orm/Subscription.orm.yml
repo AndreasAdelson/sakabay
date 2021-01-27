@@ -27,7 +27,7 @@ App\Domain\Model\Subscription:
             length: 50
             column: price
     oneToMany:
-        companysubscriptions:
+        companySubscriptions:
             targetEntity: CompanySubscription
             orphanRemoval: true
             cascade: [persist, remove]

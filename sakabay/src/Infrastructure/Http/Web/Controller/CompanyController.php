@@ -62,13 +62,15 @@ class CompanyController extends AbstractController
         $company = $this->companyService->getCompanyByUrlName($slug);
         if (!$company) {
             throw new NotFoundHttpException('Company with url_name ' . $slug . ' does not exist!');
-        } else if ($company->getCompanystatut()->getCode() == "ENC") {
+        } else if ($company->getCompanystatut()->getCode() !== "VAL") {
             throw $this->createNotFoundException("This company does not exist");
         }
+        $isSubscriptionActive = $this->companyService->isCompanySubscribtionActive($company);
         $titlePage = $company->getName();
         return $this->render('company/show.html.twig', [
             'companyUrlName' => $slug,
-            'titlePage' => $titlePage
+            'titlePage' => $titlePage,
+            'isSubscriptionActive' => $isSubscriptionActive
         ]);
     }
 
@@ -238,10 +240,13 @@ class CompanyController extends AbstractController
         if ($ownerId != $utilisateurId || $company->getCompanystatut()->getCode() != 'VAL') {
             throw new NotFoundHttpException('Page does not exist');
         }
+        $isSubscriptionActive = $this->companyService->isCompanySubscribtionActive($company);
+
         return $this->render('company/list/form.html.twig', [
             'utilisateurId' => $utilisateurId,
             'urlPrecedente' => $this->urlPrecedente(),
-            'companyUrlName' => $slug
+            'companyUrlName' => $slug,
+            'isSubscriptionActive' => $isSubscriptionActive
         ]);
     }
 

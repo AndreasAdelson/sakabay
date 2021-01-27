@@ -38,7 +38,9 @@ class FixCompany extends Fixture implements
                 $companyStatut,
                 $address,
                 $city,
+                $sousCategorys
             ) = explode(';', trim($data));
+
 
             $company = new Company();
             $company->setName($name);
@@ -50,6 +52,13 @@ class FixCompany extends Fixture implements
             $company->setAddress($this->getReference('address_' . $address));
             $company->setCity($this->getReference('city_' . $city));
             $company->setDtCreated(new \DateTime());
+
+            $listSousCategories = explode('|', $sousCategorys);
+            foreach ($listSousCategories as $itemSousCategories) {
+                if ('' !== $itemSousCategories) {
+                    $company->addSousCategory($this->getReference('sousCategory_' . $itemSousCategories));
+                }
+            }
 
             $manager->persist($company);
             $this->addReference('company_' . $name, $company);

@@ -7,7 +7,7 @@
     </div>
     <div v-else-if="company">
       <div class="row mt-4 card-skb">
-        <div class="col-7">
+        <div class="col-12">
           <b-img
             v-if="company.image_profil"
             :src="'/build/images/uploads/' + company.url_name + '/' + company.image_profil"
@@ -24,8 +24,18 @@
                 {{ company.name }}
               </h1>
             </div>
-            <div class="activity-domain">
+            <div class="category mb-1">
               <span class="fontSize18 fontAlice">{{ company.category.name }}</span>
+            </div>
+            <div
+              v-if="company.sous_categorys.length !=0 && isSubscriptionActive"
+              class="row activity-domain"
+            >
+              <span
+                v-for="(sousCategory, index2) in company.sous_categorys"
+                :key="'sousCategory_' + index2"
+                class="multiselect__tag_no_icon"
+              >{{ sousCategory.name }}</span>
             </div>
           </div>
         </div>
@@ -81,7 +91,10 @@
         type: String,
         default: ''
       },
-
+      isSubscriptionActive: {
+        type: Boolean,
+        default: false
+      }
     },
 
     data() {

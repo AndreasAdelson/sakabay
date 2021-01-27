@@ -5,7 +5,6 @@ namespace App\Infrastructure\Http\Rest\Controller;
 use App\Application\Form\Type\CategoryType;
 use App\Application\Service\CategoryService;
 use App\Domain\Model\Category;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
@@ -119,7 +118,9 @@ final class CategoryController extends AbstractFOSRestController
     public function getCategory(int $categoryId): View
     {
         $category = $this->categoryService->getCategory($categoryId);
-
+        if (!$category) {
+            throw new EntityNotFoundException('Category with id ' . $categoryId . ' does not exist!');
+        }
         return View::create($category, Response::HTTP_OK);
     }
 
@@ -146,6 +147,7 @@ final class CategoryController extends AbstractFOSRestController
         if (!$form->isValid()) {
             return $form;
         }
+
         $this->entityManager->persist($category);
         $this->entityManager->flush($category);
 

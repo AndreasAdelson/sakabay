@@ -36,6 +36,8 @@ menu_refused_company: Refusées
 menu_all_companustatus: Liste statut des entreprises
 dashboard: "Tableau de bord"
 settings: "Paramètres"
+menu_management_entities: "Gestion des entités"
+menu_all_sous_category: "Liste des sous catégories"
 
 #form-user
 username_placeholder: "Pseudonyme"
@@ -169,3 +171,9 @@ check_email_message_fisrt: "Un courriel a été envoyé, contenant un lien sur l
 check_email_message_second: "Si vous ne recevez pas de courriel, veuillez vérifier votre dossier de courrier indésirable ou "
 check_email_message_third: "réessayer."
 new_password_placeholder: "Nouveau mot de passe"
+
+#Sous Category's pages
+sous_category_title_list_page: "Liste des sous-categories"
+sous_category_title_edit_page: "Modifier une sous-categorie"
+sous_category_title_create_page: "Créer une sous-categorie"
+sous_category_title_show_page: "Détails d'une sous-categorie"

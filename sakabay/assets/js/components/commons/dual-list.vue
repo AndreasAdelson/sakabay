@@ -154,7 +154,6 @@
             specifyBorderRadius: false,
             gutterOfEnds: '1px',
             gutterOfSide: '2px',
-            keepShow: true,
           },
         },
         clickedItems: [],

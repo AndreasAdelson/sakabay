@@ -30,4 +30,8 @@ CCOMPANYSTATUT; Création d'une catégorie
 RCOMPANYSTATUT; Consultation d'une catégorie
 UCOMPANYSTATUT; Modification d'une catégorie
 DCOMPANYSTATUT; Suppression d'une catégorie
+CSOUSCATEGORY; Création d'une sous catégorie
+RSOUSCATEGORY; Consultation d'une sous catégorie
+USOUSCATEGORY; Modification d'une sous catégorie
+DSOUSCATEGORY; Suppression d'une sous catégorie
 ADMIN; Administrateur du site

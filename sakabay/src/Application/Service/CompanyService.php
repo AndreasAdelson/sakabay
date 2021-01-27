@@ -4,9 +4,8 @@ namespace App\Application\Service;
 
 use App\Domain\Model\Company;
 use App\Infrastructure\Repository\CompanyRepositoryInterface;
+use DateTime;
 use Doctrine\ORM\EntityNotFoundException;
-use phpDocumentor\Reflection\Types\Integer;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CompanyService
 {
@@ -14,6 +13,7 @@ class CompanyService
      * @var CompanyRepositoryInterface
      */
     private $companyRepository;
+
 
     /**
      * CompanyRestController constructor.
@@ -49,6 +49,21 @@ class CompanyService
         $this->companyRepository->delete($company);
     }
 
+    public function isCompanySubscribtionActive(Company $company): bool
+    {
+        $companySubscriptions = $company->getCompanySubscriptions()->toArray();
+        if (!empty($companySubscriptions)) {
+            usort($companySubscriptions, function ($a, $b) {
+                return ($a->getdtFin()->format('Y-m-d H:i:s') < $b->getDtFin()->format('Y-m-d H:i:s'));
+            });
+            $now = new DateTime('now');
+            $lastDtFinSubscription = $companySubscriptions[0]->getDtfin();
+            if ($lastDtFinSubscription > $now) {
+                return true;
+            }
+        }
+        return false;
+    }
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *
@@ -61,6 +76,7 @@ class CompanyService
      * @param int    $perPage
      * @param int    $category
      * @param int    $city
+     * @param int    $sousCategory
      *
      * @return Pagerfanta
      */
@@ -73,10 +89,12 @@ class CompanyService
         $perPage = PHP_INT_MAX ? PHP_INT_MAX : 10,
         $codeStatut = '',
         $category = '',
-        $city = ''
+        $city = '',
+        $sousCategory = ''
+
     ) {
         return $this->companyRepository
-            ->getPaginatedList($sortBy, $descending, $filterFields, $filterText, $currentPage, $perPage, $codeStatut, $category, $city);
+            ->getPaginatedList($sortBy, $descending, $filterFields, $filterText, $currentPage, $perPage, $codeStatut, $category, $city, $sousCategory);
     }
 
     public function getCompanyByUserId($utilisateur = '')

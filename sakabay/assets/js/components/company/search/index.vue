@@ -1,78 +1,109 @@
 <template>
   <div class="skb-body container-fluid">
-    <div class="row py-3">
+    <div class="row py-3 ">
       <div class="container">
-        <div class="row pt-3 pb-4">
-          <div class="col">
-            <b-form-group
-              horizontal
-              class="mb-0"
-            >
-              <b-input-group>
-                <b-form-input
-                  v-model="filters.filter"
-                  class="fontAlice"
-                  :placeholder="$t('commons.placeholder.search')"
-                  @keydown.enter.native="applyFilter()"
-                />
-              </b-input-group>
-            </b-form-group>
-          </div>
-          <div class="col">
-            <multiselect
-              v-model="filters.category"
-              v-validate="'required'"
-              :options="category"
-              name="category"
-              :placeholder="$t('commons.placeholder.category')"
-              :searchable="false"
-              :close-on-select="false"
-              :show-labels="false"
-              label="name"
-              track-by="name"
-              class="fontAlice"
-            />
-          </div>
-          <div class="col">
-            <b-form-group
-              horizontal
-              class="mb-0"
-            >
-              <b-input-group>
-                <autocomplete
-                  ref="autocomplete"
-                  :min="3"
-                  :debounce="500"
-                  :on-should-render-child="$getCityLabel"
-                  :on-select="setCity"
-                  :placeholder="$t('commons.placeholder.city')"
-                  :on-blur="resetCity"
-                  param="autocomplete"
-                  url="/api/admin/cities"
-                  anchor="label"
-                  style="width:85%"
-                  :classes="{input: 'form-control'}"
+        <div class="row search mb-3">
+          <div class="col-12">
+            <div class="row pt-3 pb-4">
+              <div class="col">
+                <b-form-group
+                  horizontal
+                  class="mb-0"
+                >
+                  <label class="fontSize16">{{ $t('commons.label.key_words') }}</label>
+                  <b-input-group>
+                    <b-form-input
+                      v-model="filters.filter"
+                      class="fontAlice"
+                      :placeholder="$t('commons.placeholder.search')"
+                      @keydown.enter.native="applyFilter()"
+                    />
+                  </b-input-group>
+                </b-form-group>
+              </div>
+              <div class="col">
+                <label class="fontSize16">{{ $t('commons.label.category') }}</label>
+                <multiselect
+                  v-model="filters.category"
+                  v-validate="'required'"
+                  :options="category"
+                  :options-limit="300"
+                  name="category"
+                  :placeholder="$t('commons.placeholder.category')"
+                  :searchable="false"
+                  :close-on-select="true"
+                  :show-labels="false"
+                  label="name"
+                  track-by="name"
                   class="fontAlice"
                 />
-                <b-input-group-append>
-                  <b-btn
-                    disabled
-                    style="height:min-content"
-                  >
-                    <i class="fas fa-map-marker-alt" />
-                  </b-btn>
-                </b-input-group-append>
-              </b-input-group>
-            </b-form-group>
-          </div>
-          <div class="col">
-            <b-button
-              :disabled="!filters.filter && !filters.category && !filters.city"
-              class="w-100"
-              @click="applyFilter()"
+              </div>
+              <div class="col">
+                <b-form-group
+                  horizontal
+                  class="mb-0"
+                >
+                  <label class="fontSize16">{{ $t('commons.label.city') }}</label>
+                  <b-input-group>
+                    <autocomplete
+                      ref="autocomplete"
+                      :min="3"
+                      :debounce="500"
+                      :on-should-render-child="$getCityLabel"
+                      :on-select="setCity"
+                      :placeholder="$t('commons.placeholder.city')"
+                      :on-blur="resetCity"
+                      param="autocomplete"
+                      url="/api/admin/cities"
+                      anchor="label"
+                      style="width:85%"
+                      :classes="{input: 'form-control'}"
+                      class="fontAlice"
+                    />
+                    <b-input-group-append>
+                      <b-btn
+                        disabled
+                        style="height:min-content"
+                      >
+                        <i class="fas fa-map-marker-alt" />
+                      </b-btn>
+                    </b-input-group-append>
+                  </b-input-group>
+                </b-form-group>
+              </div>
+              <div class="col align-self-end pb-1">
+                <b-button
+                  :disabled="!filters.filter && !filters.category && !filters.city"
+                  class="w-100 button_skb_yellow"
+                  :class="!filters.filter && !filters.category && !filters.city ? 'no-cursor' : ''"
+                  @click="applyFilter()"
+                >
+                  <span class="mr-2 fontAlice">{{ $t('commons.search_button') }}</span><i class="ml-2 fas fa-search" />
+                </b-button>
+              </div>
+            </div>
+            <div
+              v-if="filters.category && filters.category.sous_categorys && filters.category.sous_categorys.length != 0"
+              class="row pb-3"
             >
-              <span class="mr-2 fontAlice">{{ $t('commons.search_button') }}</span><i class="ml-2 fas fa-search" />
-            </b-button>
+              <div class="col-3 offset-3">
+                <label class="fontSize16">{{ $t('commons.label.activity') }}</label>
+                <multiselect
+                  v-model="filters.sousCategory"
+                  v-validate="'required'"
+                  :options="sousCategory"
+                  :options-limit="300"
+                  name="category"
+                  :placeholder="$t('commons.placeholder.sous_category')"
+                  :searchable="false"
+                  :close-on-select="false"
+                  :show-labels="false"
+                  label="name"
+                  track-by="name"
+                  class="fontAlice"
+                />
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -82,12 +113,12 @@
         <!-- Results here -->
         <div v-else-if="companies && companies.length > 0">
           <div
-            v-for="(companie, index) in companies"
+            v-for="(company, index) in companies"
             :key="'card_' + index"
             class="row"
           >
-            <div class="col-10 mx-auto">
-              <company-card :company="companie" />
+            <div class="col-11 mx-auto">
+              <company-card :company="company" />
             </div>
           </div>
           <b-row align-h="center">
@@ -104,7 +135,7 @@
         <!-- No Results founds here -->
 
         <div v-else-if="companies && companies.length == 0">
-          <div class="col-10 mx-auto text-center mt-5">
+          <div class="col-11 mx-auto text-center mt-5">
             <span class="fontPoppins fontSize16">{{ $t('commons.no_results_found') }}</span>
           </div>
         </div>
@@ -141,16 +172,33 @@
           currentPage: 1,
           perPage: 10,
           codeStatut: 'VAL',
-          city: null
+          city: null,
+          sousCategory: null
         },
         pager: {
           pageOptions: [10, 50, 100],
           totalRows: 0
         },
+        sousCategory: [],
         category: [],
         companies: null,
         loading: false,
       };
+    },
+    computed: {
+      categoryIsSet() {
+        return this.filters.category;
+      }
+    },
+    watch: {
+      /**
+       * When category is set to start a research, reset sousCategory field.
+       * @param {Object} newValue
+       */
+      categoryIsSet(newValue) {
+        this.sousCategory = newValue.sous_categorys;
+        this.filters.sousCategory = [];
+      },
     },
     created() {
       let promises = [];
@@ -182,7 +230,7 @@
         if (!this.$refs.autocomplete.value) {
           this.filters.city = null;
         }
-      }
+      },
     },
   };
 </script>

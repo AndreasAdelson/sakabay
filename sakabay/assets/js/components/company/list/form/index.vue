@@ -283,6 +283,43 @@
                 </div>
               </fieldset>
             </div>
+            <div
+              v-if="formFields.sousCategorys && formFields.sousCategorys.length != 0"
+              class="col-6"
+            >
+              <div class="form-group">
+                <fieldset
+                  id="sousCategory"
+                  class="sousCategory"
+                >
+                  <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.table.fields.sous_category') }}</label>
+
+                  <multiselect
+                    v-model="formFields.sousCategorys"
+                    :disabled="!isSubscriptionActive"
+                    :options="sousCategorys"
+                    name="sousCategory"
+                    placeholder="Selectionner vos activités"
+                    :searchable="false"
+                    :close-on-select="false"
+                    :show-labels="false"
+                    :multiple="true"
+                    label="name"
+                    track-by="name"
+                    open-direction="below"
+                  />
+                  <div
+                    v-for="errorText in formErrors.sousCategorys"
+                    :key="'sousCategory_' + errorText"
+                  >
+                    <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
+                  </div>
+                  <div>
+                    <span class="fontSize14 fontUbuntuItalic">{{ $t('commons.only_subscribed_edit') }}</span>
+                  </div>
+                </fieldset>
+              </div>
+            </div>
           </div>
 
           <!-- Sixth row -->
@@ -356,6 +393,10 @@
       companyUrlName: {
         type: String,
         default: null
+      },
+      isSubscriptionActive: {
+        type: Boolean,
+        default: false
       }
     },
     data() {
@@ -363,6 +404,7 @@
         loading: true,
         loadingMap: false,
         category: [],
+        sousCategorys: [],
         position: {
           lng: null,
           lat: null
@@ -383,7 +425,8 @@
           },
           city: null,
           description: null,
-          imageProfil: null
+          imageProfil: null,
+          sousCategorys: null
         },
         formErrors: {
           name: [],
@@ -396,7 +439,8 @@
           latitude: [],
           city: [],
           description: [],
-          imageProfil: []
+          imageProfil: [],
+          sousCategorys: []
         }
       };
     },
@@ -418,6 +462,16 @@
           this.$setEditForm(company);
           this.setPosition(company.address);
           this.setCity(company.city, false);
+          axios.get('/api/admin/sous-categories', {
+            params: {
+              category: this.formFields.category.id
+            }
+          }).then(res => {
+            this.sousCategorys =  res.data;
+          }).catch(e => {
+            this.$handleError(e);
+            this.loading = false;
+          });
         }
         this.loading = false;
       }).catch(e => {

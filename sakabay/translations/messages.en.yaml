@@ -36,6 +36,8 @@ menu_refused_company: Refused
 menu_all_companustatus: Company Status page
 dashboard: "Dashboard"
 settings: "Settings"
+menu_management_entities: "Entities Management"
+menu_all_sous_category: "Sous catgory list"
 
 #form-user
 username_placeholder: "Username"
@@ -169,3 +171,9 @@ check_email_message_fisrt: "An email has been sent that contains a link that you
 check_email_message_second: "If you don't receive an email please check your spam folder or "
 check_email_message_third: "try again."
 new_password_placeholder: "New password"
+
+#Sous Category's pages
+sous_category_title_list_page: "List of  subcategories"
+sous_category_title_edit_page: "Edit a subcategory"
+sous_category_title_create_page: "Create a subcategory"
+sous_category_title_show_page: "Detail of subcategory"

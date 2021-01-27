@@ -5,5 +5,6 @@
 {% block body %}
     <company-show
     :company-url-name="{{ companyUrlName|json_encode }}"
+    :is-subscription-active="{{ isSubscriptionActive|json_encode }}"
     ></company-show>
 {% endblock %}

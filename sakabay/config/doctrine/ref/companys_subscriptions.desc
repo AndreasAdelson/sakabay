@@ -1,0 +1,8 @@
+#Fixture.FixCompany
+#Fixture.References.0:"companySubscription_".dtFin
+
+#Structure
+0;dtDebut;Nom du statut d'une entreprise
+1;dtFin;Code du statut de l'entreprise
+2;company;Nom de l'entreprise
+3;subscription;Code abonnement

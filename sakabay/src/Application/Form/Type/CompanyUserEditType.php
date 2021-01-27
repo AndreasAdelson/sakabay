@@ -74,6 +74,10 @@ class CompanyUserEditType extends AbstractType
                 ]
             ])->add('imageProfil', TextType::class, [
                 'required' => false
+            ])->add('sousCategorys', EntityType::class, [
+                'class' => 'App:SousCategory',
+                'multiple' => true,
+                'required' => false
             ]);
     }
 

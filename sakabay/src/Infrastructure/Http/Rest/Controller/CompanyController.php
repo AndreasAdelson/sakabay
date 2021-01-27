@@ -156,6 +156,10 @@ final class CompanyController extends AbstractFOSRestController
      *             default="",
      *             description="Identifiant d'une ville"
      * )
+     * @QueryParam(name="sousCategory",
+     *             default="",
+     *             description="Identifiant d'une ville"
+     * )
      * @return View
      */
 
@@ -170,9 +174,10 @@ final class CompanyController extends AbstractFOSRestController
         $codeStatut = $paramFetcher->get('codeStatut');
         $category = $paramFetcher->get('category');
         $city = $paramFetcher->get('city');
+        $sousCategory = $paramFetcher->get('sousCategory');
 
         $pager = $this->companyService
-            ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage, $codeStatut, $category, $city);
+            ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage, $codeStatut, $category, $city, $sousCategory);
         $companies = $pager->getCurrentPageResults();
         $nbResults = $pager->getNbResults();
         $datas = iterator_to_array($companies);

@@ -12,12 +12,12 @@ App\Domain\Model\CompanySubscription:
             options:
                 comment: Identifiant technique de la company_subscription
     fields:
-        dt_debut:
+        dtDebut:
             type: datetime
             length: 50
             nullable: true
             column: dt_debut
-        dt_fin:
+        dtFin:
             type: datetime
             length: 50
             nullable: true
@@ -27,7 +27,7 @@ App\Domain\Model\CompanySubscription:
         subscription:
             targetEntity: Subscription
             cascade: [persist, merge]
-            inversedBy: companysubscriptions
+            inversedBy: companySubscriptions
             joinColumn:
                 name: id_subscription
                 referencedColumnName: id
@@ -36,7 +36,7 @@ App\Domain\Model\CompanySubscription:
         company:
             targetEntity: Company
             cascade: [persist, merge]
-            inversedBy: companysubscriptions
+            inversedBy: companySubscriptions
             joinColumn:
                 name: id_company
                 referencedColumnName: id

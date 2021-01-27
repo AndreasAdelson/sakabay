@@ -27,5 +27,12 @@ App\Domain\Model\Category:
         companys:
             targetEntity: Company
             orphanRemoval: true
-            cascade: [persist, remove]
+            cascade: [persist]
             mappedBy: category
+        sousCategorys:
+            targetEntity: SousCategory
+            cascade: [persist]
+            mappedBy: category
+    uniqueConstraints:
+        uniqueGroupCode:
+            columns: [code]

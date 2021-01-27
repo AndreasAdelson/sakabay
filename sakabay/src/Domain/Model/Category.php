@@ -26,6 +26,7 @@ class Category
      * "api_categories",
      * "api_companies",
      * "api_admin_companies",
+     * "api_sous_categories",
      * })
      */
     private $id;
@@ -36,7 +37,8 @@ class Category
      * @Groups({
      * "api_categories",
      * "api_companies",
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_sous_categories"
      * })
      */
     private $name;
@@ -45,7 +47,8 @@ class Category
      * @var string
      * @Expose
      * @Groups({
-     * "api_categories"
+     * "api_categories",
+     * "api_sous_categories"
      * })
      */
     private $code;
@@ -59,11 +62,21 @@ class Category
      */
     private $companys;
 
+    /**
+     * @var SousCategory[]
+     * @Expose
+     * @Groups({
+     * "api_categories",
+     * })
+     */
+    private $sousCategorys;
+
 
     public function __construct()
 
     {
         $this->companys = new ArrayCollection();
+        $this->sousCategorys = new ArrayCollection();
     }
 
     /**
@@ -142,6 +155,35 @@ class Category
         if ($this->companys->contains($company)) {
             $this->companys->removeElement($company);
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection|SousCategory[]
+     */
+    public function getSousCategorys(): Collection
+    {
+        return $this->sousCategorys;
+    }
+
+    public function addSousCategory(SousCategory $sousCategory): self
+    {
+        if (!$this->sousCategorys->contains($sousCategory)) {
+            $this->sousCategorys[] = $sousCategory;
+            $sousCategory->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSousCategory(SousCategory $sousCategory): self
+    {
+        if ($this->sousCategorys->contains($sousCategory)) {
+            $this->sousCategorys->removeElement($sousCategory);
+        }
+        $sousCategory->setCategory(null);
+
+        // dump($this);
 
         return $this;
     }

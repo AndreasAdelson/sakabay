@@ -91,11 +91,24 @@ App\Domain\Model\Company:
             cascade: [persist,remove]
 
     oneToMany:
-        companysubscriptions:
+        companySubscriptions:
             targetEntity: CompanySubscription
             orphanRemoval: true
             cascade: [persist, remove]
             mappedBy: company
+
+    manyToMany:
+        sousCategorys:
+            targetEntity: SousCategory
+            inversedBy: companys
+            joinTable:
+                name: company_sous_categories
+                joinColumn:
+                    id_sous_category:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    id_company:
+                        referencedColumnName: id
 
 
 

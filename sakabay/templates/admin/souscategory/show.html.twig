@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'sous_category_title_show_page'|trans }}{% endblock %}
+
+{% block body %}
+    <show-sous-category
+    :sous-category-id="{{ sousCategoryId }}"
+    :can-edit="{{ canEdit|json_encode }}"
+    url-precedente="{{ urlPrecedente }}"
+    ></show-sous-category>
+{% endblock %}

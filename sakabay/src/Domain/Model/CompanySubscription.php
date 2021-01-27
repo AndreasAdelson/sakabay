@@ -32,7 +32,7 @@ class CompanySubscription
      * "api_companies"
      * })
      */
-    private $dt_debut;
+    private $dtDebut;
 
     /**
      * @var DateTime
@@ -42,7 +42,7 @@ class CompanySubscription
      * "api_companies"
      * })
      */
-    private $dt_fin;
+    private $dtFin;
 
     /**
      * @var Subscription
@@ -101,19 +101,19 @@ class CompanySubscription
      */
     public function getDtDebut()
     {
-        return $this->dt_debut;
+        return $this->dtDebut;
     }
 
     /**
      * Set })
      *
-     * @param  DateTime  $dt_debut  })
+     * @param  DateTime  $dtDebut  })
      *
      * @return  self
      */
-    public function setDtDebut(DateTime $dt_debut)
+    public function setDtDebut(DateTime $dtDebut)
     {
-        $this->dt_debut = $dt_debut;
+        $this->dtDebut = $dtDebut;
 
         return $this;
     }
@@ -125,19 +125,19 @@ class CompanySubscription
      */
     public function getDtFin()
     {
-        return $this->dt_fin;
+        return $this->dtFin;
     }
 
     /**
      * Set })
      *
-     * @param  DateTime  $dt_fin  })
+     * @param  DateTime  $dtFin  })
      *
      * @return  self
      */
-    public function setDtFin(DateTime $dt_fin)
+    public function setDtFin(DateTime $dtFin)
     {
-        $this->dt_fin = $dt_fin;
+        $this->dtFin = $dtFin;
 
         return $this;
     }

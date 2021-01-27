@@ -2,8 +2,7 @@
   <div class="container skb-body">
     <div v-show="loading">
       <div class="loader-container-full">
-        <div class="loader">
-        </div>
+        <div class="loader" />
       </div>
     </div>
     <a href="/admin/group">
@@ -12,7 +11,7 @@
         type="button"
         class="w-40px p-0 rounded-circle btn-close btn"
       >
-        <i class="fas fa-times "></i>
+        <i class="fas fa-times " />
       </button>
     </a>
     <form>
@@ -28,12 +27,12 @@
                 >
                   <label class="fontUbuntuItalic fontSize16">{{ this.$t('group.fields.name') }}</label>
                   <input
+                    v-model="formFields.name"
                     v-validate="'required'"
                     type="text"
                     name="name"
                     class="form-control"
                     :placeholder="$t('group.placeholder.name')"
-                    v-model="formFields.name"
                   >
                   <div
                     v-for="errorText in formErrors.name"
@@ -52,12 +51,12 @@
                 >
                   <label class="fontUbuntuItalic fontSize16">{{ this.$t('group.fields.code') }}</label>
                   <input
+                    v-model="formFields.code"
                     v-validate="'required'"
                     name="code"
                     type="text"
                     class="form-control"
                     :placeholder="$t('group.placeholder.code')"
-                    v-model="formFields.code"
                   >
                   <div
                     v-for="errorText in formErrors.code"
@@ -84,8 +83,8 @@
                 @selected-items-change="$onSelectedItemsChange(arguments, 'roles')"
               />
               <input
-                v-validate="'required'"
                 v-model="formFields.roles"
+                v-validate="'required'"
                 name="roles"
                 class="d-none"
               >
@@ -119,8 +118,8 @@
                 :classes="{input: 'form-control'}"
               />
               <input
-                v-validate="'required'"
                 v-model="formFields.utilisateurs"
+                v-validate="'required'"
                 name="utilisateurs"
                 class="d-none "
               >
@@ -137,8 +136,7 @@
               :key="'utilisateurs' + index"
               :user="utilisateur"
               @delete-entity="$onDeleteEntity(index, 'utilisateurs', formFields)"
-            >
-            </user-card>
+            />
           </div>
           <div class="row my-3">
             <div class="col-6 offset-3">
@@ -146,7 +144,9 @@
                 type="button"
                 class="btn button_skb fontUbuntuItalic"
                 @click="$validateForm()"
-              >{{ this.groupId ? this.$t('commons.edit') :  this.$t('commons.create')}}</button>
+              >
+                {{ this.groupId ? this.$t('commons.edit') : this.$t('commons.create') }}
+              </button>
             </div>
           </div>
         </div>
@@ -155,97 +155,98 @@
   </div>
 </template>
 <script>
-import axios from 'axios';
-import Autocomplete from 'vue2-autocomplete-js';
-import validatorRulesMixin from 'mixins/validatorRulesMixin';
-import adminFormMixin from 'mixins/adminFormMixin';
-import DualList from 'components/commons/dual-list';
-import UserCard from 'components/commons/user-card';
+  import axios from 'axios';
+  import Autocomplete from 'vue2-autocomplete-js';
+  import validatorRulesMixin from 'mixins/validatorRulesMixin';
+  import adminFormMixin from 'mixins/adminFormMixin';
+  import DualList from 'components/commons/dual-list';
+  import UserCard from 'components/commons/user-card';
+  import _ from 'lodash';
 
-export default {
-  components: {
-    DualList,
-    Autocomplete,
-    UserCard
-  },
-  mixins: [
-    validatorRulesMixin,
-    adminFormMixin
-  ],
-  data () {
-    return {
-      loading: true,
-      API_URL: '/api/admin/groups' + (this.groupId ? `/${this.groupId}` : ''),
-      rolesAtCreation: null,
-      roles: [],
-      formFields: {
-        name: null,
-        code: null,
-        roles: [],
-        utilisateurs: []
-      },
-      formErrors: {
-        name: [],
-        code: [],
-        roles: [],
-        utilisateurs: []
-      },
-      includedFormsFields: undefined
-    };
-  },
-  props: {
-    groupId: {
-      type: Number,
-      default: null,
-    }
-  },
-  created () {
-    let promises = [];
-    promises.push(axios.get('/api/admin/roles'));
-    if (this.groupId) {
-      promises.push(axios.get(this.API_URL));
-    }
-    return Promise.all(promises).then(res => {
-      this.roles = res[0].data;
-      if (this.groupId) {
-        let group = res[1].data;
-        this.$removeFieldsNotInForm(group, Object.keys(this.formFields));
-        this.$setEditForm(group);
-      }
-      this.rolesAtCreation = _.cloneDeep(this.formFields.roles);
-      this.loading = false;
-    }).catch(e => {
-      this.$handleError(e);
-      this.loading = false;
-    });
-  },
-  methods: {
-    setUser (utilisateur) {
-      if (!this.find(utilisateur)) {
-        this.$onAfterCreateEntity(arguments, 'utilisateurs', this.formFields);
-      }
-      this.$refs.autocomplete.setValue('');
+  export default {
+    components: {
+      DualList,
+      Autocomplete,
+      UserCard
     },
+    mixins: [
+      validatorRulesMixin,
+      adminFormMixin
+    ],
+    props: {
+      groupId: {
+        type: Number,
+        default: null,
+      }
+    },
+    data() {
+      return {
+        loading: true,
+        API_URL: '/api/admin/groups' + (this.groupId ? `/${this.groupId}` : ''),
+        rolesAtCreation: null,
+        roles: [],
+        formFields: {
+          name: null,
+          code: null,
+          roles: [],
+          utilisateurs: []
+        },
+        formErrors: {
+          name: [],
+          code: [],
+          roles: [],
+          utilisateurs: []
+        },
+        includedFormsFields: undefined
+      };
+    },
+    created() {
+      let promises = [];
+      promises.push(axios.get('/api/admin/roles'));
+      if (this.groupId) {
+        promises.push(axios.get(this.API_URL));
+      }
+      return Promise.all(promises).then(res => {
+        this.roles = _.cloneDeep(res[0].data);
+        if (this.groupId) {
+          let group = res[1].data;
+          this.$removeFieldsNotInForm(group, Object.keys(this.formFields));
+          this.$setEditForm(group);
+        }
+        this.rolesAtCreation = _.cloneDeep(this.formFields.roles);
+        this.loading = false;
+      }).catch(e => {
+        this.$handleError(e);
+        this.loading = false;
+      });
+    },
+    methods: {
+      setUser(utilisateur) {
+        if (!this.find(utilisateur)) {
+          this.$onAfterCreateEntity(arguments, 'utilisateurs', this.formFields);
+        }
+        this.$refs.autocomplete.setValue('');
+      },
 
-    /**
+      /**
        * Called after each request. If the request returns an empty list, adds an error to the
        * autocomplete field.
        * Hide the loading image
        */
-    onUsersAjaxLoaded (data) {
-      if (data.length) {
-        this.formErrors.utilisateurs = [];
-      } else {
-        this.formErrors.utilisateurs = [this.$t('group.error.utilisateur_does_not_exist')];
-      }
-      this.loading = false;
+      onUsersAjaxLoaded(data) {
+        if (data.length) {
+          this.formErrors.utilisateurs = [];
+        } else {
+          this.formErrors.utilisateurs = [this.$t('group.error.utilisateur_does_not_exist')];
+        }
+        this.loading = false;
+      },
+
+      find(utilisateur) {
+        return _.find(this.formFields.utilisateurs, ['id', utilisateur.id]);
+      },
+
+
     },
-
-    find (utilisateur) {
-      return _.find(this.formFields.utilisateurs, ['id', utilisateur.id]);
-    },
-
-
-  },
-}
+  };
 </script>

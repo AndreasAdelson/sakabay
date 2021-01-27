@@ -277,10 +277,10 @@
       companySubscriptions() {
         let history = [];
         this.companies.forEach(company => {
-          company.companysubscriptions.forEach(subscription => {
+          company.company_subscriptions.forEach(subscription => {
             subscription.company_name = company.name;
           });
-          history = _.concat(history, _.cloneDeep(company.companysubscriptions));
+          history = _.concat(history, _.cloneDeep(company.company_subscriptions));
         });
         return  history;
       },

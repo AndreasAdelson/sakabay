@@ -142,7 +142,6 @@ class ResetPasswordController extends AbstractController
         $user = $this->getDoctrine()->getRepository(Utilisateur::class)->findOneBy([
             'email' => $emailFormData,
         ]);
-        dump($user);
         // Marks that you are allowed to see the app_check_email page.
         $this->setCanCheckEmailInSession();
 

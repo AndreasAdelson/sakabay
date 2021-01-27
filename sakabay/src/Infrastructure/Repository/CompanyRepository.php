@@ -52,7 +52,8 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
         $perPage = PHP_INT_MAX,
         $codeStatut = '',
         $category = '',
-        $city = ''
+        $city = '',
+        $sousCategory = ''
     ) {
         $qb = $this->createQueryBuilder('c');
         if (!empty($codeStatut)) {
@@ -71,6 +72,15 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
             $qb->leftJoin('c.category', 'category')
                 ->andWhere('category.id = :categoryId')
                 ->setParameter('categoryId', $category);
+            if (!empty($sousCategory)) {
+                $qb->leftJoin('c.sousCategorys', 'sousCategory')
+                    ->andWhere('sousCategory.id = :sousCategoryId')
+                    ->setParameter('sousCategoryId', $sousCategory);
+                $today = \DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:m:s"));
+                $qb->leftJoin('c.companySubscriptions', 'companySubscription')
+                    ->andWhere('companySubscription.dtFin >= :today')
+                    ->setParameter('today', $today);
+            }
         }
         if (!empty($city)) {
             $qb->leftJoin('c.city', 'city')

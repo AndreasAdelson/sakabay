@@ -136,7 +136,7 @@ class Company
      * "api_dashboard_utilisateur"
      * })
      */
-    private $companysubscriptions;
+    private $companySubscriptions;
 
     /**
      * @var DateTime
@@ -159,6 +159,17 @@ class Company
     private $description;
 
     /**
+     * @var String
+     * @Expose
+     * @Groups({
+     * "api_companies",
+     * })
+     */
+    private $sousCategorys;
+
+
+
+    /**
      * @var string
      * @Expose
      * @Groups({
@@ -176,7 +187,8 @@ class Company
 
     public function __construct()
     {
-        $this->companysubscriptions = new ArrayCollection();
+        $this->companySubscriptions = new ArrayCollection();
+        $this->sousCategorys =  new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -338,23 +350,23 @@ class Company
      */
     public function getCompanySubscriptions(): Collection
     {
-        return $this->companysubscriptions;
+        return $this->companySubscriptions;
     }
 
-    public function addCompanySubscription(CompanySubscription $companysubscription): self
+    public function addCompanySubscription(CompanySubscription $companySubscription): self
     {
-        if (!$this->companysubscriptions->contains($companysubscription)) {
-            $this->companysubscriptions[] = $companysubscription;
-            $companysubscription->setCompany($this);
+        if (!$this->companySubscriptions->contains($companySubscription)) {
+            $this->companySubscriptions[] = $companySubscription;
+            $companySubscription->setCompany($this);
         }
 
         return $this;
     }
 
-    public function removeCompanySubscription(CompanySubscription $companysubscription): self
+    public function removeCompanySubscription(CompanySubscription $companySubscription): self
     {
-        if ($this->companysubscriptions->contains($companysubscription)) {
-            $this->companysubscriptions->removeElement($companysubscription);
+        if ($this->companySubscriptions->contains($companySubscription)) {
+            $this->companySubscriptions->removeElement($companySubscription);
         }
 
         return $this;
@@ -388,6 +400,42 @@ class Company
     public function setDescription(string $description)
     {
         $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return Collection|SousCategory[]
+     */
+    public function getSousCategorys(): Collection
+    {
+        return $this->sousCategorys;
+    }
+
+    /**
+     * Set the value of sousCategorys
+     * @param  SousCategorys[]  $sousCategorys
+     * @return  self
+     */
+    public function addSousCategory(SousCategory $sousCategory): self
+    {
+        if (
+            !$this->sousCategorys->contains($sousCategory)
+            && $sousCategory->getCategory()->getId() === $this->getCategory()->getId()
+        ) {
+            $this->sousCategorys[] = $sousCategory;
+            $sousCategory->addCompany($this);
+        }
+
+        return $this;
+    }
+
+
+    public function removeSousCategory(SousCategory $sousCategory): self
+    {
+        if ($this->sousCategorys->contains($sousCategory)) {
+            $this->sousCategorys->removeElement($sousCategory);
+            $sousCategory->removeCompany($this);
+        }
         return $this;
     }
 

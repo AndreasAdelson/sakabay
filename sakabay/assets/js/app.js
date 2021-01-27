@@ -71,6 +71,9 @@ import CompanyRefusedShow from './components/admin/company/refused/show';
 import ListCompanyRefused from './components/admin/company/refused';
 import CompanyList from './components/company/list';
 import CompanyEdit from './components/company/list/form';
+import FormSousCategory from './components/admin/sous-category/form';
+import ShowSousCategory from './components/admin/sous-category/show';
+import ListSousCategory from './components/admin/sous-category';
 import 'utils/logger';
 
 Vue.use(BootstrapVue);
@@ -179,7 +182,10 @@ new Vue({
     CompanyRefusedShow,
     ListCompanyRefused,
     CompanyList,
-    CompanyEdit
+    CompanyEdit,
+    FormSousCategory,
+    ShowSousCategory,
+    ListSousCategory
   }
 });
 

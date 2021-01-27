@@ -1,0 +1,24 @@
+COIF;Coiffure;BEAUTE;
+ESTH;Esthétique;BEAUTE
+MASS;Massage;BEAUTE
+DJ;Disque Jockey;EVEN
+LOCSALL;Locateur de salle;EVEN
+DECO;Décorateur;EVEN
+REST;Restaurant;RESTAU
+HOT;Hôtel;RESTAU
+TRAIT;Traiteur;RESTAU
+INF;Informatique;SERV
+INFELEC;Electronique;SERV
+ELEC;Electricien;SERV
+TRANSPERS;Transport de personne;SERV
+TRANSPROD;Transport de produits;SERV
+PRET;Prêt à porter;COMM
+SUP;Superette;COMM
+PROM;Promoteur;BAT
+AGENIMO;Agence immobilière;BAT
+MATPRE;Matière première;BAT
+CONST;Construction;BAT
+AGR;Agriculteur;AGRO
+PECH;Pêcheur;AGRO
+CHASS;Chasseur;AGRO
+ELEV;Eleveur;AGRO

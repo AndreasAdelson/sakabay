@@ -251,3 +251,25 @@ subscription_details_subscriptions:
     path: /subscription/{slug}
     controller: App\Infrastructure\Http\Web\Controller\SubscriptionController::detailsSubscriptions
     methods: [GET]
+
+# Routes for SousCategory object
+sous_category_index:
+    path: admin/sous-category
+    controller: App\Infrastructure\Http\Web\Controller\SousCategoryController::index
+    methods: [GET]
+
+sous_category_new:
+    path: admin/sous-category/new
+    controller: App\Infrastructure\Http\Web\Controller\SousCategoryController::new
+    methods: [GET, POST]
+
+sous_category_edit:
+    path: admin/sous-category/edit/{id}
+    controller: App\Infrastructure\Http\Web\Controller\SousCategoryController::edit
+    methods: [GET, POST]
+
+sous_category_show:
+    path: admin/sous-category/show/{id}
+    controller: App\Infrastructure\Http\Web\Controller\SousCategoryController::show
+    methods: [GET, POST]
+

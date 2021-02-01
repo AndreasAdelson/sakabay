@@ -65,7 +65,10 @@
         </div>
       </div>
       <div v-if="presentationActive">
-        <presentation-page :company="company" />
+        <presentation-page
+          :is-subscription-active="isSubscriptionActive"
+          :company="company"
+        />
       </div>
 
       <div v-else-if="jobOfferActive">
@@ -107,7 +110,7 @@
       };
     },
     async created() {
-      return axios.get('/api/entreprise/' + this.companyUrlName)
+      return axios.get('/api/entreprise/' + this.companyUrlName, {params: {'serial_group': 'api_companies'}})
         .then(response => {
           this.company = _.cloneDeep(response.data);
           this.loading = false;

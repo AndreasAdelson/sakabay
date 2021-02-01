@@ -75,6 +75,7 @@ import FormSousCategory from './components/admin/sous-category/form';
 import ShowSousCategory from './components/admin/sous-category/show';
 import ListSousCategory from './components/admin/sous-category';
 import 'utils/logger';
+import Nl2br from 'vue-nl2br';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -127,6 +128,7 @@ var filter = function(text, length, clamp){
   clamp = clamp || '...';
   var node = document.createElement('div');
   node.innerHTML = text;
+
   var content = node.textContent;
   return content.length > length ? content.slice(0, length) + clamp : content;
 };
@@ -137,6 +139,7 @@ Vue.component('Multiselect', MultiSelect);
 Vue.component('VMap', LMap);
 Vue.component('VTileLayer', LTileLayer);
 Vue.component('VMarker', LMarker);
+Vue.component('Nl2br', Nl2br);
 
 new Vue({
   el: '#root',

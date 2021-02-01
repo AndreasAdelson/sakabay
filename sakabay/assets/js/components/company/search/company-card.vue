@@ -44,11 +44,11 @@
                 </div>
               </div>
               <div
-                v-if="company.description"
+                v-if="company.description_clean"
                 class="row"
               >
                 <div class="col-12">
-                  <p class="mb-0 fontAlice fontSize16">{{ company.description | truncate(150, '...') }}</p>
+                  <p class="mb-0 fontAlice fontSize16">{{ company.description_clean | truncate(150, '...') }}</p>
                 </div>
               </div>
             </div>

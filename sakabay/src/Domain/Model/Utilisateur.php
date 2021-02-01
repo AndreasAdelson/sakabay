@@ -129,7 +129,6 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * @Groups({
      * "api_utilisateurs",
      * "api_groups",
-     * "api_companies",
      * "api_dashboard_utilisateur"
      * })
      */

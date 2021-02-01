@@ -18,6 +18,7 @@ use App\Infrastructure\Factory\NotificationFactory;
 use App\Infrastructure\Repository\CompanyStatutRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\Annotations\QueryParam;
@@ -28,9 +29,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Mime\Message;
 use Symfony\Component\Routing\Generator\UrlGenerator;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 final class CompanyController extends AbstractFOSRestController
 {
@@ -121,7 +120,7 @@ final class CompanyController extends AbstractFOSRestController
      * Retrieves sorted list of all companies
      * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      * @QueryParam(name="filterFields",
-     *             default="name,description",
+     *             default="name,description_clean",
      *             description="Liste des champs sur lesquels le filtre s'appuie"
      * )
      * @QueryParam(name="filter",
@@ -177,11 +176,11 @@ final class CompanyController extends AbstractFOSRestController
         $sousCategory = $paramFetcher->get('sousCategory');
 
         $pager = $this->companyService
-            ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage, $codeStatut, $category, $city, $sousCategory);
+            ->getPaginatedListUser($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage, $codeStatut, $category, $city, $sousCategory);
         $companies = $pager->getCurrentPageResults();
         $nbResults = $pager->getNbResults();
-        $datas = iterator_to_array($companies);
-        $view = $this->view($datas, Response::HTTP_OK);
+        // $datas = iterator_to_array($companies);
+        $view = $this->view($companies, Response::HTTP_OK);
         $view->setHeader('X-Total-Count', $nbResults);
 
         return $view;
@@ -252,11 +251,9 @@ final class CompanyController extends AbstractFOSRestController
         $currentPage = $paramFetcher->get('currentPage');
         $perPage = $paramFetcher->get('perPage');
         $codeStatut = $paramFetcher->get('codeStatut');
-        $category = $paramFetcher->get('category');
-
 
         $pager = $this->companyService
-            ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage, $codeStatut, $category);
+            ->getPaginatedListAdmin($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage, $codeStatut);
         $companies = $pager->getCurrentPageResults();
         $nbResults = $pager->getNbResults();
         $datas = iterator_to_array($companies);
@@ -281,18 +278,34 @@ final class CompanyController extends AbstractFOSRestController
 
 
     /**
-     * @Rest\View(serializerGroups={"api_companies"})
+     * @Rest\View(serializerGroups={"api_admin_companies"})
      * @Rest\Get("entreprise/{urlName}")
-     *
+     * @QueryParam(name="serial_group",
+     *             nullable=false,
+     *             default="api_companies",
+     *             description="Un groupe de sérialisation parmis les groupes autorisés"
+     * )
      * @return View
      */
-    public function getCompanyByUrlName(string $urlName): View
+    public function getCompanyByUrlName(string $urlName, ParamFetcher $paramFetcher): View
     {
         $company = $this->companyService->getCompanyByUrlName($urlName);
         if (!$company) {
             throw new NotFoundHttpException('Company with url_name ' . $urlName . ' does not exist!');
         }
-        return View::create($company, Response::HTTP_OK);
+        $authorizedSerialGroups = [
+            'api_companies',
+            'api_admin_companies'
+        ];
+        $querySerial = $paramFetcher->get('serial_group');
+        if (in_array($querySerial, $authorizedSerialGroups)) {
+            $serializerGroups = [$querySerial];
+        } else {
+            $serializerGroups = ['api_companies'];
+        }
+        $context = new Context();
+        $context->setGroups($serializerGroups);
+        return View::create($company, Response::HTTP_OK)->setContext($context);
     }
 
     /**
@@ -492,7 +505,7 @@ final class CompanyController extends AbstractFOSRestController
     }
 
     /**
-     * @Rest\View(serializerGroups={"api_companies"})
+     * @Rest\View(serializerGroups={"api_admin_companies"})
      * @Rest\Get("/companies/utilisateur/{utilisateurId}")
      *
      * @return View

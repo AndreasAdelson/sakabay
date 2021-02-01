@@ -56,7 +56,6 @@ class Company
      * @Expose
      * @Groups({
      * "api_admin_companies",
-     * "api_companies"
      * })
      */
     private $numSiret;
@@ -76,7 +75,6 @@ class Company
      * @var Utilisateur
      * @Expose
      * @Groups({
-     * "api_companies",
      * "api_admin_companies"
      * })
      */
@@ -99,7 +97,6 @@ class Company
      * @Groups({
      * "api_companystatut",
      * "api_admin_companies",
-     * "api_companies",
      * "api_dashboard_utilisateur"
      * })
      * @var CompanyStatut
@@ -131,8 +128,8 @@ class Company
      * @var CompanySubscription[]
      * @Expose
      * @Groups({
-     * "api_companies",
      * "api_admin_companies",
+     * "api_companies",
      * "api_dashboard_utilisateur"
      * })
      */
@@ -142,7 +139,6 @@ class Company
      * @var DateTime
      * @Expose
      * @Groups({
-     * "api_companies",
      * "api_admin_companies",
      * "api_dashboard_utilisateur"
      * })
@@ -154,15 +150,27 @@ class Company
      * @Expose
      * @Groups({
      * "api_companies",
+     * "api_admin_companies",
      * })
      */
-    private $description;
+    private $descriptionFull;
 
     /**
      * @var String
      * @Expose
      * @Groups({
      * "api_companies",
+     * "api_admin_companies",
+     * })
+     */
+    private $descriptionClean;
+
+    /**
+     * @var String
+     * @Expose
+     * @Groups({
+     * "api_companies",
+     * "api_admin_companies"
      * })
      */
     private $sousCategorys;
@@ -388,18 +396,37 @@ class Company
      *
      * @return  string
      */
-    public function getDescription()
+    public function getDescriptionFull()
     {
-        return $this->description;
+        return $this->descriptionFull;
     }
 
     /**
-     * @param  string  $description
+     * @param  string  $descriptionFull
      * @return  self
      */
-    public function setDescription(string $description)
+    public function setDescriptionFull(string $descriptionFull)
     {
-        $this->description = $description;
+        $this->descriptionFull = $descriptionFull;
+        return $this;
+    }
+
+    /**
+     *
+     * @return  string
+     */
+    public function getDescriptionClean()
+    {
+        return $this->descriptionClean;
+    }
+
+    /**
+     * @param  string  $descriptionClean
+     * @return  self
+     */
+    public function setDescriptionClean(string $descriptionClean)
+    {
+        $this->descriptionClean = $descriptionClean;
         return $this;
     }
 

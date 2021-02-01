@@ -23,6 +23,7 @@
     "more_details": "Plus de détails",
     "maximum_n_characters": "Maximum {n} caractère | Maximum {n} caractère | Maximum {n} caractères",
     "n_charaters_left": "{n} caractère restant | {n} caractère restant | {n} caractères restants",
+    "n_charaters_left_short_description": "{n} caractère restant pour la description courte | {n} caractère restant pour la description courte | {n} caractères restants pour la description courte",
     "only_subscribed_edit": "Cette information est modifiable et visible uniquement lorsque l'entreprise est abonnée.",
     "placeholder": {
       "search": "Que recherchez-vous ?",
@@ -156,6 +157,9 @@
     "fields": {
       "name": "Nom de votre entreprise",
       "num_siret": "Numéro de SIRET"
+    },
+    "information": {
+      "short_description": "Les 300 premiers caractères de ce champ seront utilisés pour la description courte affichée sur votre carte de présentation, lors d'une recherche utilisateur."
     },
     "placeholder": {
       "name": "Renseignez un nom",

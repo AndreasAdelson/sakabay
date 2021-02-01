@@ -23,6 +23,7 @@
     "more_details": "More details",
     "maximum_n_characters": "Maximum {n} character | Maximum {n} character | Maximum {n} characters",
     "n_charaters_left": "{n} character left | {n} character left | {n} characters left",
+    "n_charaters_left_short_description": "{n} caractère restant for short description | {n} caractère restant for short description | {n} caractères restants for short description",
     "only_subscribed_edit": "This information is modifiable and visible only when the company is a subscriber.",
     "placeholder": {
       "search": "Whata re you looking for ?",
@@ -155,6 +156,9 @@
     "fields": {
       "name": "Company name",
       "num_siret": "SIRET number"
+    },
+    "information": {
+      "short_description": "The first 300 characters of this field will be used for the short description displayed on your presentation card during a user search."
     },
     "placeholder": {
       "name": "Enter a name",

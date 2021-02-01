@@ -128,6 +128,7 @@
                 :total-rows="pager.totalRows"
                 :per-page="filters.perPage"
                 align="center"
+                @input="applyFilter()"
               />
             </b-col>
           </b-row>
@@ -165,15 +166,15 @@
         currentFilter: '',
         filters: {
           filter: '',
-          filterFields: 'name, description',
+          filterFields: 'name, descriptionClean',
           category: null,
           sortBy: 'name',
           sortDesc: false,
-          currentPage: 1,
-          perPage: 10,
           codeStatut: 'VAL',
           city: null,
-          sousCategory: null
+          sousCategory: null,
+          currentPage: 1,
+          perPage: 10,
         },
         pager: {
           pageOptions: [10, 50, 100],
@@ -196,8 +197,11 @@
        * @param {Object} newValue
        */
       categoryIsSet(newValue) {
-        this.sousCategory = newValue.sous_categorys;
-        this.filters.sousCategory = [];
+        if (newValue) {
+          console.log(newValue, 'value');
+          this.sousCategory = newValue.sous_categorys;
+          this.filters.sousCategory = [];
+        }
       },
     },
     created() {
@@ -231,6 +235,11 @@
           this.filters.city = null;
         }
       },
+      // companysList() {
+      //   console.log('oui');
+      //   return this.companies.slice((this.pager.currentPage - 1) * this.pager.perPage,
+      //                               this.pager.currentPage * this.pager.perPage);
+      // }
     },
   };
 </script>

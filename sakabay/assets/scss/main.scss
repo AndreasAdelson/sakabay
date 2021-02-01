@@ -4,6 +4,12 @@
 */
 
 @import "~leaflet/dist/leaflet.css";
+@import "~vue2-editor/dist/vue2-editor.css";
+
+/* Import the Quill styles you want */
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
 /*---------------------------------
     VARIABLES
 -----------------------------------*/
@@ -470,6 +476,10 @@ a[data-toggle="collapse"] {
 -----------------------------------*/
 .green-bg-skb {
   background-color: $green_color; //remettre du vert ou changer le nom de la classe et changer partout où elle est appelée dans le projet.
+}
+
+.white-bg-skb {
+  background-color: $white_color;
 }
 
 .yellow-bg-skb {

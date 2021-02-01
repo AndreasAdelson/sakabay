@@ -2,7 +2,8 @@
   <div>
     <details-card :company="company" />
     <description-card
-      v-if="company.description"
+      v-if="company.description_clean"
+      :is-subscription-active="isSubscriptionActive"
       :company="company"
     />
   </div>
@@ -20,6 +21,10 @@
       company: {
         type: Object,
         default: null
+      },
+      isSubscriptionActive: {
+        type: Boolean,
+        default: false
       }
     }
 

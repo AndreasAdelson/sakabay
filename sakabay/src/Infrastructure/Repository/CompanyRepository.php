@@ -43,7 +43,48 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
      * @throws LogicException
      * @return Pagerfanta
      */
-    public function getPaginatedList(
+    public function getPaginatedListAdmin(
+        $sortBy = 'id',
+        $descending = false,
+        $filterFields = '',
+        $filterText = '',
+        $currentPage = 1,
+        $perPage = PHP_INT_MAX,
+        $codeStatut = ''
+    ) {
+        $qb = $this->createQueryBuilder('c');
+        if (!empty($codeStatut)) {
+            $qb->leftJoin('c.companystatut', 'companystatut')
+                ->andWhere('companystatut.code = :codeStatut')
+                ->setParameter('codeStatut', $codeStatut);
+        }
+        if (!empty($filterText)) {
+            $queryFilter = ' LOWER(c.'
+                . implode(') LIKE LOWER(:searchPattern) OR LOWER(c.', explode(',', $filterFields))
+                . ') LIKE LOWER(:searchPattern)';
+            $qb->andWhere($queryFilter);
+            $qb->setParameter('searchPattern', '%' . mb_strtolower($filterText) . '%');
+        }
+        if (!empty($sortBy)) {
+            $qb->orderBy('c.' . $sortBy, $descending ? 'DESC' : 'ASC');
+        }
+
+        return $this->paginate($qb, $perPage, $currentPage);
+    }
+
+    /**
+     * Retourne une page, potentiellement triée et filtrée.
+     *
+     *
+     * @param string $sortBy
+     * @param bool   $descending
+     * @param string $filterFields
+     * @param string $filterText
+     * @param int    $currentPage
+     * @param int    $perPage
+     *
+     */
+    public function getPaginatedListUser(
         $sortBy = 'id',
         $descending = false,
         $filterFields = '',
@@ -91,8 +132,10 @@ class CompanyRepository extends AbstractRepository implements CompanyRepositoryI
             $qb->orderBy('c.' . $sortBy, $descending ? 'DESC' : 'ASC');
         }
 
-        return $this->paginate($qb, $perPage, $currentPage);
+        return $qb->getQuery()->getResult();
+        // return $this->paginate($qb, $perPage, $currentPage);
     }
+
     public function getCompanyByUserId($utilisateur = '')
     {
         $qb = $this->createQueryBuilder('u');

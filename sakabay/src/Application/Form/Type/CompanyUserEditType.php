@@ -65,7 +65,14 @@ class CompanyUserEditType extends AbstractType
                 ],
                 'required' => true,
                 'multiple' => false
-            ])->add('description', TextType::class, [
+            ])->add('descriptionFull', TextType::class, [
+                'constraints' => [
+                    new Length([
+                        'max' => 5000,
+                        'maxMessage' => $translator->trans('error_message_n_length')
+                    ]),
+                ]
+            ])->add('descriptionClean', TextType::class, [
                 'constraints' => [
                     new Length([
                         'max' => 2000,

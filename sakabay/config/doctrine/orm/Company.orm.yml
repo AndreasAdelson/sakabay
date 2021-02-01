@@ -34,10 +34,15 @@ App\Domain\Model\Company:
                     on: create
             options:
                 default: CURRENT_TIMESTAMP
-        description:
+        descriptionFull:
+            type: string
+            length: 5000
+            column: description_full
+            nullable: true
+        descriptionClean:
             type: string
             length: 2000
-            column: description
+            column: description_clean
             nullable: true
         imageProfil:
             type: string

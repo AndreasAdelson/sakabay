@@ -148,7 +148,6 @@
                   class="col-3"
                 >
                   <div
-                    v-if="company.sous_categorys.length != 0 "
                     class="row mb-1"
                   >
                     <div class="col-12 fontSize18 fontPoppins">
@@ -295,16 +294,16 @@
       },
 
       getSubscriptionDateLabel(companySubscriptions) {
-        let label;
-        label = _.filter(companySubscriptions, subscription => {
+        let labels;
+        labels = _.filter(companySubscriptions, subscription => {
           return subscription.isActive;
         });
-        if (label.length > 0) {
-          label = moment(label[0].dt_fin, 'DD/MM/YYYY HH:mm:ss').format('[le] DD/MM/YYYY, [à] HH:mm');
+        if (labels.length > 0) {
+          labels = moment(labels[0].dt_fin, 'DD/MM/YYYY HH:mm:ss').format('[le] DD/MM/YYYY, [à] HH:mm');
         } else {
-          label = this.$t('company.presentation.no_subscriptions');
+          labels = this.$t('company.presentation.no_subscriptions');
         }
-        return label;
+        return labels;
       },
 
       getCreationDateLabel(date) {

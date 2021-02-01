@@ -326,27 +326,48 @@
           <div class="row mb-3">
             <div class="col-12">
               <fieldset
-                id="city"
-                class="city"
+                id="descriptionClean"
+                class="descriptionClean"
               >
                 <label class="fontUbuntuItalic fontSize16">{{ this.$t('company.table.fields.description') }}</label>
+
+                <vue-editor
+                  v-if="isSubscriptionActive"
+                  id="descriptionFull"
+                  v-model="formFields.descriptionFull"
+                  class="white-bg-skb"
+                  :placeholder="$tc('commons.maximum_n_characters', 2000)"
+                  :maxlength="2000"
+                  :editor-toolbar="customToolBar"
+                />
                 <textarea
-                  v-model="formFields.description"
+                  v-else
+                  v-model="formFields.descriptionClean"
                   class="form-control"
                   :placeholder="$tc('commons.maximum_n_characters', 2000)"
                   type="text"
                   :maxlength="2000"
                   :rows="10"
                 />
-                <div
-                  :class="!$getNbCharactersLeft(formFields.description, 2000) ? 'red-skb' : 'black-skb'"
-                  class="text-right pt-2 fontSize12"
-                >
-                  {{ $tc('commons.n_charaters_left', $getNbCharactersLeft(formFields.description, 5000)) }}
+                <div class="text-left pt-2 fontSize14">
+                  <span>{{ $t('company.information.short_description') }}</span>
                 </div>
                 <div
-                  v-for="errorText in formErrors.description"
-                  :key="'description_' + errorText"
+                  :class="!$getNbCharactersLeft(formFields.descriptionClean, 2000) ? 'red-skb' : 'black-skb'"
+                  class="text-right pt-2 fontSize12"
+                >
+                  {{ $tc('commons.n_charaters_left_short_description', $getNbCharactersLeft(formFields.descriptionClean, 150)) }}
+                </div>
+                <div
+                  :class="!$getNbCharactersLeft(formFields.descriptionClean, 2000) ? 'red-skb' : 'black-skb'"
+                  class="text-right pt-2 fontSize12"
+                >
+                  {{ $tc('commons.n_charaters_left', $getNbCharactersLeft(formFields.descriptionClean, 2000)) }}
+                </div>
+
+                <div
+                  v-for="errorText in formErrors.descriptionClean"
+                  :key="'descriptionClean_' + errorText"
                 >
                   <span class="fontUbuntuItalic fontSize13 red-skb">{{ errorText }}</span>
                 </div>
@@ -376,10 +397,12 @@
   import axios from 'axios';
   import _ from 'lodash';
   import Autocomplete from 'vue2-autocomplete-js';
+  import { VueEditor } from 'vue2-editor/dist/vue2-editor.core.js';
 
   export default {
     components: {
-      Autocomplete
+      Autocomplete,
+      VueEditor
     },
     props: {
       utilisateurId: {
@@ -412,6 +435,7 @@
         urlImageProfil: null,
         imageProfilSelected: null,
         imageName: null,
+        currentFullDescription: null,
         formFields: {
           name: null,
           category: null,
@@ -424,7 +448,8 @@
             longitude: null,
           },
           city: null,
-          description: null,
+          descriptionFull: null,
+          descriptionClean: null,
           imageProfil: null,
           sousCategorys: null
         },
@@ -438,22 +463,53 @@
           longitude: [],
           latitude: [],
           city: [],
-          description: [],
+          descriptionFull: [],
+          descriptionClean: [],
           imageProfil: [],
           sousCategorys: []
-        }
+        },
+        customToolBar: [
+          [{header: [false,1,2,3,4,5,6]}],
+          ['bold', 'italic', 'underline', 'strike'],
+          [
+            {align: '' },
+            {align: 'center' },
+            {align: 'right' },
+            {align: 'justify' },
+
+          ],
+          [{list: 'ordered'}, {list: 'bullet'},{ list: 'check' }],
+          [{ indent: '-1' }, { indent: '+1' }],
+          ['blockquote'],
+          [{ color: [] }],
+          ['clean']
+        ]
       };
+    },
+    computed: {
+      fullDescription() {
+        return this.formFields.descriptionFull;
+      }
+    },
+    watch: {
+      fullDescription(newValue) {
+        if (newValue != this.currentFullDescription) {
+          let cleanText = document.getElementsByClassName('ql-editor').item(0).textContent;
+          this.formFields.descriptionClean = cleanText.replace(/\n/g, ' ');
+        }
+      },
     },
     created() {
       let promises = [];
       promises.push(axios.get('/api/admin/categories'));
       if (this.companyUrlName) {
-        promises.push(axios.get('/api/entreprise/' + this.companyUrlName));
+        promises.push(axios.get('/api/entreprise/' + this.companyUrlName, {params: {'serial_group': 'api_admin_companies'}}));
       }
       return Promise.all(promises).then(res => {
         this.category = res[0].data;
         if (this.companyUrlName) {
-          let company = res[1].data;
+          let company = _.cloneDeep(res[1].data);
+          this.currentFullDescription = company.description_full;
           if (company.image_profil) {
             this.urlImageProfil = '/build/images/uploads/' + this.companyUrlName + '/' + company.image_profil;
             this.formFields.imageProfil = company.image_profil;

@@ -35,9 +35,6 @@ class CompanyController extends AbstractController
      */
     public function registerIndex(AuthorizationCheckerInterface $authorizationChecker)
     {
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_login');
-        }
         return $this->render('company/index.html.twig', []);
     }
 

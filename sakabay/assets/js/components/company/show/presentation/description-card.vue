@@ -1,14 +1,21 @@
 <template>
   <div class="row mt-3 ">
-    <div class="mx-auto col-8 card-skb">
+    <div class="mx-auto col-10 card-skb">
       <div class="title-card-skb">
         <i class="fas fa-file-alt fa-lg yellow-login-skb" />
         <span class="fontPoppins underline ml-1">{{ $t('company.presentation.description') }}</span>
       </div>
       <div class="details-card">
-        <p class="fontAlice fontSize18">
-          {{ company.description }}
-        </p>
+        <div
+          v-if="isSubscriptionActive && company.description_full != null"
+          class-name="fontAlice fontSize18"
+          v-html="company.description_full"
+        />
+        <nl2br
+          v-else
+          tag="p"
+          :text="company.description_clean"
+        />
       </div>
     </div>
   </div>
@@ -19,6 +26,10 @@
       company: {
         type: Object,
         default: null
+      },
+      isSubscriptionActive: {
+        type: Boolean,
+        default: false
       }
     }
   };

@@ -3,13 +3,13 @@
 namespace App\Application\Form\Type;
 
 use Symfony\Component\Validator\Constraints\NotBlank;
-use App\Domain\Model\CompanyStatut;
+use App\Domain\Model\BesoinStatut;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CompanyStatutType extends AbstractType
+class BesoinStatutType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -23,7 +23,6 @@ class CompanyStatutType extends AbstractType
                     ]),
                 ],
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
             ])
             ->add('code', TextType::class, [
                 'constraints' => [
@@ -32,14 +31,13 @@ class CompanyStatutType extends AbstractType
                     ]),
                 ],
                 'required' => true,
-                'attr' => ['class' => 'form-control'],
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => CompanyStatut::class,
+            'data_class' => BesoinStatut::class,
             'csrf_protection' => false,
         ]);
         $resolver->setRequired('translator');

@@ -1,8 +1,8 @@
-App\Domain\Model\CompanyStatut:
+App\Domain\Model\BesoinStatut:
     type: entity
-    table: company_statut
+    table: besoin_statut
     options:
-        comment: Entité représentant le statut de l entreprise.
+        comment: Entité représentant le statut d'un besoin.
 
     id:
         id:
@@ -10,7 +10,7 @@ App\Domain\Model\CompanyStatut:
             generator:
                 strategy: AUTO
             options:
-                comment: Identifiant technique d'un CompanyStatut
+                comment: Identifiant technique d'un Besoin Statut
     fields:
         name:
             type: string
@@ -23,11 +23,10 @@ App\Domain\Model\CompanyStatut:
             column: code
             nullable: false
     oneToMany:
-        companys:
-            targetEntity: Company
-            orphanRemoval: true
-            cascade: [persist, remove]
-            mappedBy: companystatut
+        besoins:
+            targetEntity: Besoin
+            cascade: [persist]
+            mappedBy: besoinStatut
     uniqueConstraints:
-        uniqueCompanyStatutCode:
+        uniqueBesoinStatutCode:
             columns: [code]

@@ -145,6 +145,16 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
     private $companys;
 
     /**
+     * @var Besoin
+     * @Expose
+     * @Groups({
+     * "api_utilisateurs",
+     * "api_dashboard_utilisateur"
+     * })
+     */
+    private $besoins;
+
+    /**
      * Unmapped property to handle file uploads
      */
     private $file;
@@ -175,6 +185,7 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
     {
         $this->groups = new ArrayCollection();
         $this->companys = new ArrayCollection();
+        $this->besoins = new ArrayCollection();
     }
 
 
@@ -479,5 +490,32 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
         }
 
         return true;
+    }
+
+    /**
+     * @return Collection|Besoin[]
+     */
+    public function getBesoins(): Collection
+    {
+        return $this->besoins;
+    }
+
+    public function addBesoin(Besoin $besoin): self
+    {
+        if (!$this->besoins->contains($besoin)) {
+            $this->besoins[] = $besoin;
+            $besoin->setUtilisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBesoin(Besoin $besoin): self
+    {
+        if ($this->besoins->contains($besoin)) {
+            $this->besoins->removeElement($besoin);
+        }
+
+        return $this;
     }
 }

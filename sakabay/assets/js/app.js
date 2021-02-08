@@ -47,9 +47,9 @@ import ShowGroup from './components/admin/group/show';
 import FormCategory from './components/admin/category/form';
 import ShowCategory from './components/admin/category/show';
 import ListCategory from './components/admin/category';
-import FormCompanyStatut from './components/admin/companystatut/form';
-import ShowCompanyStatut from './components/admin/companystatut/show';
-import ListCompanyStatut from './components/admin/companystatut';
+import FormCompanyStatut from './components/admin/company-statut/form';
+import ShowCompanyStatut from './components/admin/company-statut/show';
+import ListCompanyStatut from './components/admin/company-statut';
 import RegisterCompanyForm from './components/company/register/form';
 import RegisterCompany from './components/company/register';
 import ListCompanySubscribed from './components/admin/company/subscribed';
@@ -74,6 +74,9 @@ import CompanyEdit from './components/company/list/form';
 import FormSousCategory from './components/admin/sous-category/form';
 import ShowSousCategory from './components/admin/sous-category/show';
 import ListSousCategory from './components/admin/sous-category';
+import FormBesoinStatut from './components/admin/besoin-statut/form';
+import ShowBesoinStatut from './components/admin/besoin-statut/show';
+import ListBesoinStatut from './components/admin/besoin-statut';
 import 'utils/logger';
 import Nl2br from 'vue-nl2br';
 
@@ -188,7 +191,10 @@ new Vue({
     CompanyEdit,
     FormSousCategory,
     ShowSousCategory,
-    ListSousCategory
+    ListSousCategory,
+    ListBesoinStatut,
+    ShowBesoinStatut,
+    FormBesoinStatut
   }
 });
 

@@ -262,15 +262,15 @@
         let icon;
         switch(companyStatutCode) {
         case 'VAL':
-          label = this.$t('companyStatut.state.validate');
+          label = this.$t('company_statut.state.validate');
           icon = 'fa-check';
           break;
         case 'ENC':
-          label = this.$t('companyStatut.state.pending');
+          label = this.$t('company_statut.state.pending');
           icon = 'fa-history';
           break;
         case 'REF':
-          label = this.$t('companyStatut.state.refused');
+          label = this.$t('company_statut.state.refused');
           icon = 'fa-times';
           break;
         }

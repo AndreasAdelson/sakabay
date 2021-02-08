@@ -197,7 +197,7 @@
     "already_validate": "This nomination has already been accepted by our teams.",
     "already_refused": "This nomination has already been rejected by our teams."
   },
-  "companyStatut": {
+  "company_statut": {
     "title": "List of company status",
     "fields": {
       "name": "Company status",
@@ -283,6 +283,17 @@
       "name": "Enter a name",
       "code": "Enter code number",
       "category": "Select one category"
+    }
+  },
+  "besoin_statut": {
+    "title": "List of service status",
+    "fields": {
+      "name": "Service status",
+      "code": "Code number"
+    },
+    "placeholder": {
+      "name": "Enter a name",
+      "code": "Enter code number"
     }
   },
   "error_message_required": "This field is mandatory. Thank you for filling it in.",

@@ -2,9 +2,9 @@
 
 namespace App\Infrastructure\Http\Rest\Controller;
 
-use App\Application\Form\Type\CompanyStatutType;
-use App\Application\Service\CompanyStatutService;
-use App\Domain\Model\CompanyStatut;
+use App\Application\Form\Type\BesoinType;
+use App\Application\Service\BesoinService;
+use App\Domain\Model\Besoin;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
@@ -19,50 +19,50 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-final class CompanyStatutController extends AbstractFOSRestController
+final class BesoinController extends AbstractFOSRestController
 {
     private $entityManager;
-    private $companyStatutService;
+    private $roleService;
     private $translator;
 
     /**
-     * CompanyStatutRestController constructor.
+     * BesoinRestController constructor.
      */
-    public function __construct(EntityManagerInterface $entityManager, CompanyStatutService $companyStatutService, TranslatorInterface $translator)
+    public function __construct(EntityManagerInterface $entityManager, BesoinService $besoinService, TranslatorInterface $translator)
     {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
-        $this->companyStatutService = $companyStatutService;
+        $this->besoinService = $besoinService;
     }
 
     /**
      * @Rest\View()
-     * @Rest\Post("admin/company-statuts")
-     * @Security("is_granted('ROLE_CROLE')")
+     * @Rest\Post("admin/besoins")
+     * @Security("is_granted('ROLE_CGROUP')")
      * @param Request $request
      *
      * @return View
      */
-    public function createCompanyStatut(Request $request)
+    public function createBesoin(Request $request)
     {
-        $companyStatut = new CompanyStatut();
+        $besoin = new Besoin();
         $formOptions = ['translator' => $this->translator];
-        $form = $this->createForm(CompanyStatutType::class, $companyStatut, $formOptions);
+        $form = $this->createForm(BesoinType::class, $besoin, $formOptions);
         $form->submit($request->request->all());
         if (!$form->isValid()) {
             return $form;
         }
-        $this->entityManager->persist($companyStatut);
+        $this->entityManager->persist($besoin);
         $this->entityManager->flush();
 
-        $ressourceLocation = $this->generateUrl('company_statut_index');
+        $ressourceLocation = $this->generateUrl('besoin_index');
 
         return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
     }
 
     /**
-     * @Rest\View(serializerGroups={"api_company_statut"})
-     * @Rest\Get("/admin/company-statuts")
+     * @Rest\View(serializerGroups={"api_besoins"})
+     * @Rest\Get("/admin/besoins")
      *
      * @QueryParam(name="filterFields",
      *             default="name",
@@ -91,7 +91,7 @@ final class CompanyStatutController extends AbstractFOSRestController
      * @return View
      */
 
-    public function getCompanyStatuts(ParamFetcher $paramFetcher): View
+    public function getBesoins(ParamFetcher $paramFetcher): View
     {
         $filterFields = $paramFetcher->get('filterFields');
         $filter = $paramFetcher->get('filter');
@@ -100,74 +100,74 @@ final class CompanyStatutController extends AbstractFOSRestController
         $currentPage = $paramFetcher->get('currentPage');
         $perPage = $paramFetcher->get('perPage');
 
-        $pager = $this->companyStatutService
+        $pager = $this->besoinService
             ->getPaginatedList($sortBy, 'true' === $sortDesc, $filterFields, $filter, $currentPage, $perPage);
-        $companyStatuts = $pager->getCurrentPageResults();
+        $besoins = $pager->getCurrentPageResults();
         $nbResults = $pager->getNbResults();
-        $datas = iterator_to_array($companyStatuts);
+        $datas = iterator_to_array($besoins);
         $view = $this->view($datas, Response::HTTP_OK);
         $view->setHeader('X-Total-Count', $nbResults);
 
         return $view;
     }
     /**
-     * @Rest\View(serializerGroups={"api_company_statut"})
-     * @Rest\Get("admin/company-statuts/{companyStatutId}")
+     * @Rest\View(serializerGroups={"api_besoins"})
+     * @Rest\Get("admin/besoins/{besoinId}")
      *
      * @return View
      */
-    public function getCompanyStatut(int $companyStatutId): View
+    public function getBesoin(int $besoinId): View
     {
-        $companyStatut = $this->companyStatutService->getCompanyStatut($companyStatutId);
+        $besoin = $this->besoinService->getBesoin($besoinId);
 
-        return View::create($companyStatut, Response::HTTP_OK);
+        return View::create($besoin, Response::HTTP_OK);
     }
 
     /**
      * @Rest\View()
-     * @Rest\Post("admin/company-statuts/{companyStatutId}")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Rest\Post("admin/besoins/{besoinId}")
+     * @Security("is_granted('ROLE_UGROUP')")
      *
      * @return View
      */
-    public function editCompanyStatut(int $companyStatutId, Request $request)
+    public function editBesoin(int $besoinId, Request $request)
     {
-        $companyStatut = $this->companyStatutService->getCompanyStatut($companyStatutId);
+        $besoin = $this->besoinService->getBesoin($besoinId);
 
-        if (!$companyStatut) {
-            throw new EntityNotFoundException('CompanyStatut with id ' . $companyStatutId . ' does not exist!');
+        if (!$besoin) {
+            throw new EntityNotFoundException('Besoin with id ' . $besoinId . ' does not exist!');
         }
 
         $formOptions = [
             'translator' => $this->translator,
         ];
-        $form = $this->createForm(CompanyStatutType::class, $companyStatut, $formOptions);
+        $form = $this->createForm(BesoinType::class, $besoin, $formOptions);
         $form->submit($request->request->all());
         if (!$form->isValid()) {
             return $form;
         }
-        $this->entityManager->persist($companyStatut);
+        $this->entityManager->persist($besoin);
         $this->entityManager->flush();
 
-        $ressourceLocation = $this->generateUrl('company_statut_index');
+        $ressourceLocation = $this->generateUrl('besoin_index');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 
     /**
      * @Rest\View()
-     * @Rest\Delete("admin/company-statuts/{companyStatutId}")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Rest\Delete("admin/besoins/{besoinId}")
+     * @Security("is_granted('ROLE_DGROUP')")
      *
      * @return View
      */
-    public function deleteCompanyStatuts(int $companyStatutId): View
+    public function deleteBesoins(int $besoinId): View
     {
         try {
-            $this->companyStatutService->deleteCompanyStatut($companyStatutId);
+            $this->besoinService->deleteBesoin($besoinId);
         } catch (EntityNotFoundException $e) {
             throw new NotFoundHttpException($e->getMessage());
         }
-        $ressourceLocation = $this->generateUrl('company_statut_index');
+        $ressourceLocation = $this->generateUrl('besoin_index');
 
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }

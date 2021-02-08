@@ -11,22 +11,20 @@ use JMS\Serializer\Annotation\Groups;
 
 
 /**
- * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @ORM\Entity(repositoryClass=BesoinStatutRepository::class)
  *
  * @ExclusionPolicy("all")
  *
  */
-class Category
+class BesoinStatut
 {
     /**
-     *
      * @var int
      * @Expose
      * @Groups({
-     * "api_categories",
-     * "api_companies",
+     * "api_besoin_statut",
      * "api_admin_companies",
-     * "api_sous_categories",
+     * "api_companies"
      * })
      */
     private $id;
@@ -35,10 +33,9 @@ class Category
      * @var string
      * @Expose
      * @Groups({
-     * "api_categories",
-     * "api_companies",
+     * "api_besoin_statut",
      * "api_admin_companies",
-     * "api_sous_categories"
+     * "api_companies"
      * })
      */
     private $name;
@@ -47,29 +44,13 @@ class Category
      * @var string
      * @Expose
      * @Groups({
-     * "api_categories",
-     * "api_sous_categories"
+     * "api_besoin_statut",
+     * "api_admin_companies",
+     * "api_companies",
+     * "api_dashboard_utilisateur"
      * })
      */
     private $code;
-
-
-    /**
-     * @var Company[]
-     * @Expose
-     * @Groups({
-     * })
-     */
-    private $companys;
-
-    /**
-     * @var SousCategory[]
-     * @Expose
-     * @Groups({
-     * "api_categories",
-     * })
-     */
-    private $sousCategorys;
 
     /**
      * @var Besoin[]
@@ -79,25 +60,16 @@ class Category
      */
     private $besoins;
 
-
     public function __construct()
 
     {
-        $this->companys = new ArrayCollection();
         $this->besoins = new ArrayCollection();
-        $this->sousCategorys = new ArrayCollection();
     }
 
-    /**
-     * Get the value of id
-     * @return  int
-     */
     public function getId()
     {
         return $this->id;
     }
-
-
 
     /**
      * Get the value of name
@@ -142,61 +114,7 @@ class Category
     }
 
     /**
-     * @return Collection|Company[]
-     */
-    public function getCompanys(): Collection
-    {
-        return $this->companys;
-    }
-
-    public function addCompany(Company $company): self
-    {
-        if (!$this->companys->contains($company)) {
-            $this->companys[] = $company;
-            $company->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompany(Company $company): self
-    {
-        if ($this->companys->contains($company)) {
-            $this->companys->removeElement($company);
-        }
-        return $this;
-    }
-
-    /**
-     * @return Collection|SousCategory[]
-     */
-    public function getSousCategorys(): Collection
-    {
-        return $this->sousCategorys;
-    }
-
-    public function addSousCategory(SousCategory $sousCategory): self
-    {
-        if (!$this->sousCategorys->contains($sousCategory)) {
-            $this->sousCategorys[] = $sousCategory;
-            $sousCategory->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSousCategory(SousCategory $sousCategory): self
-    {
-        if ($this->sousCategorys->contains($sousCategory)) {
-            $this->sousCategorys->removeElement($sousCategory);
-        }
-        $sousCategory->setCategory(null);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Besoin[]
+     * @return Besoin[]
      */
     public function getBesoins(): Collection
     {
@@ -207,7 +125,7 @@ class Category
     {
         if (!$this->besoins->contains($besoin)) {
             $this->besoins[] = $besoin;
-            $besoin->setCategory($this);
+            $besoin->setBesoinstatut($this);
         }
 
         return $this;

@@ -27,6 +27,7 @@ class Category
      * "api_companies",
      * "api_admin_companies",
      * "api_sous_categories",
+     * "api_besoins"
      * })
      */
     private $id;
@@ -38,7 +39,8 @@ class Category
      * "api_categories",
      * "api_companies",
      * "api_admin_companies",
-     * "api_sous_categories"
+     * "api_sous_categories",
+     * "api_besoins"
      * })
      */
     private $name;
@@ -48,7 +50,8 @@ class Category
      * @Expose
      * @Groups({
      * "api_categories",
-     * "api_sous_categories"
+     * "api_sous_categories",
+     * "api_besoins"
      * })
      */
     private $code;
@@ -67,6 +70,7 @@ class Category
      * @Expose
      * @Groups({
      * "api_categories",
+     * "api_besoins"
      * })
      */
     private $sousCategorys;

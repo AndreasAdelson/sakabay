@@ -39,7 +39,8 @@ class Utilisateur implements UserInterface, EquatableInterface, NotifiableInterf
      * "api_utilisateurs",
      * "api_groups",
      * "api_admin_companies",
-     * "api_dashboard_utilisateur"
+     * "api_dashboard_utilisateur",
+     * "api_besoins"
      * })
      */
     private $id;

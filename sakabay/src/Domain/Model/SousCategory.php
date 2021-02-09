@@ -28,6 +28,7 @@ class SousCategory
      * "api_categories",
      * "api_companies",
      * "api_admin_companies",
+     * "api_besoins"
      * })
      */
     private $id;
@@ -39,7 +40,8 @@ class SousCategory
      * "api_sous_categories",
      * "api_categories",
      * "api_companies",
-     * "api_admin_companies"
+     * "api_admin_companies",
+     * "api_besoins"
      * })
      */
     private $name;
@@ -49,7 +51,8 @@ class SousCategory
      * @Expose
      * @Groups({
      * "api_sous_categories",
-     * "api_categories"
+     * "api_categories",
+     * "api_besoins"
      * })
      */
     private $code;

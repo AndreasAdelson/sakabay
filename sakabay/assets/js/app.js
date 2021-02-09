@@ -77,6 +77,8 @@ import ListSousCategory from './components/admin/sous-category';
 import FormBesoinStatut from './components/admin/besoin-statut/form';
 import ShowBesoinStatut from './components/admin/besoin-statut/show';
 import ListBesoinStatut from './components/admin/besoin-statut';
+import BesoinList from './components/utilisateur/besoin/list';
+import BesoinForm from './components/utilisateur/besoin/form';
 import 'utils/logger';
 import Nl2br from 'vue-nl2br';
 
@@ -194,7 +196,9 @@ new Vue({
     ListSousCategory,
     ListBesoinStatut,
     ShowBesoinStatut,
-    FormBesoinStatut
+    FormBesoinStatut,
+    BesoinList,
+    BesoinForm
   }
 });
 

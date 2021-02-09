@@ -297,6 +297,24 @@
       "code": "Renseignez un Code du statut"
     }
   },
+  "besoin": {
+    "title_list": "Vos demandes de services",
+    "create_button": "Faire une nouvelle demande",
+    "pending_request": "Demandes en cours",
+    "expired_request": "Demandes expirées",
+    "no_pending_services": "Vous n'avez aucune demande de service en cours",
+    "no_expired_services": "Vous n'avez aucune demande de service expirée",
+    "not_editable": "Ce champ n'est pas modifiable ",
+    "placeholder": {
+      "title": "Titre de la demande",
+      "description": "Décrivez votre besoin",
+      "category":"Sélectionner une catégorie",
+      "activity": "Sélectionner les domaines d'activités concernés"
+    },
+    "label": {
+      "description": "Description"
+    }
+  },
   "error_message_required": "Ce champ est obligatoire. Merci de bien vouloir le renseigner.",
   "error_message_required_username": "La taille de votre pseudonyme ne doit pas être inférieure à 5 caractères ni supérieur à 10 caractères",
   "error_message_email": "Veuillez entrer un email valide",

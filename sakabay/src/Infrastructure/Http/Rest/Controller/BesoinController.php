@@ -4,7 +4,9 @@ namespace App\Infrastructure\Http\Rest\Controller;
 
 use App\Application\Form\Type\BesoinType;
 use App\Application\Service\BesoinService;
+use App\Application\Service\BesoinStatutService;
 use App\Domain\Model\Besoin;
+use App\Infrastructure\Factory\NotificationFactory;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityNotFoundException;
@@ -22,23 +24,32 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 final class BesoinController extends AbstractFOSRestController
 {
     private $entityManager;
-    private $roleService;
+    private $besoinService;
+    private $besoinStatutService;
     private $translator;
+    private $notificationFactory;
+
 
     /**
      * BesoinRestController constructor.
      */
-    public function __construct(EntityManagerInterface $entityManager, BesoinService $besoinService, TranslatorInterface $translator)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        BesoinService $besoinService,
+        TranslatorInterface $translator,
+        BesoinStatutService $besoinStatutService,
+        NotificationFactory $notificationFactory
+    ) {
         $this->entityManager = $entityManager;
         $this->translator = $translator;
         $this->besoinService = $besoinService;
+        $this->besoinStatutService = $besoinStatutService;
+        $this->notificationFactory = $notificationFactory;
     }
 
     /**
      * @Rest\View()
-     * @Rest\Post("admin/besoins")
-     * @Security("is_granted('ROLE_CGROUP')")
+     * @Rest\Post("/besoins")
      * @param Request $request
      *
      * @return View
@@ -52,10 +63,15 @@ final class BesoinController extends AbstractFOSRestController
         if (!$form->isValid()) {
             return $form;
         }
+        $besoinsStatut = $this->besoinStatutService->getBesoinStatutByCode('PUB');
+        $besoin->setBesoinStatut($besoinsStatut);
         $this->entityManager->persist($besoin);
         $this->entityManager->flush();
 
-        $ressourceLocation = $this->generateUrl('besoin_index');
+        $ressourceLocation = $this->generateUrl('service_list');
+        $this->notificationFactory->createService([$besoin->getAuthor()], $ressourceLocation, $besoin);
+
+        $ressourceLocation = $this->generateUrl('dashboard');
 
         return View::create([], Response::HTTP_CREATED, ['Location' => $ressourceLocation]);
     }
@@ -110,9 +126,15 @@ final class BesoinController extends AbstractFOSRestController
 
         return $view;
     }
+
     /**
      * @Rest\View(serializerGroups={"api_besoins"})
-     * @Rest\Get("admin/besoins/{besoinId}")
+     * @Rest\Get("besoins/{besoinId}")
+     *
+     * @QueryParam(name="filterFields",
+     *             default="name",
+     *             description="Liste des champs sur lesquels le filtre s'appuie"
+     * )
      *
      * @return View
      */
@@ -124,9 +146,27 @@ final class BesoinController extends AbstractFOSRestController
     }
 
     /**
+     * @Rest\View(serializerGroups={"api_besoins"})
+     * @Rest\Get("besoins/utilisateur/{utilisateurId}")
+     *
+     * @QueryParam(name="codeStatut",
+     *             default="",
+     *             description="Trie par besoinStatut"
+     * )
+     *
+     * @return View
+     */
+    public function getBesoinByUser(int $utilisateurId, ParamFetcher $paramFetcher): View
+    {
+        $codeStatut = $paramFetcher->get('codeStatut');
+        $besoin = $this->besoinService->getBesoinByUserId($utilisateurId, $codeStatut);
+
+        return View::create($besoin, Response::HTTP_OK);
+    }
+
+    /**
      * @Rest\View()
-     * @Rest\Post("admin/besoins/{besoinId}")
-     * @Security("is_granted('ROLE_UGROUP')")
+     * @Rest\Post("besoins/{besoinId}")
      *
      * @return View
      */
@@ -149,25 +189,24 @@ final class BesoinController extends AbstractFOSRestController
         $this->entityManager->persist($besoin);
         $this->entityManager->flush();
 
-        $ressourceLocation = $this->generateUrl('besoin_index');
+        $ressourceLocation = $this->generateUrl('service_list');
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }
 
     /**
      * @Rest\View()
-     * @Rest\Delete("admin/besoins/{besoinId}")
-     * @Security("is_granted('ROLE_DGROUP')")
+     * @Rest\Delete("/besoins/{besoinId}")
      *
      * @return View
      */
-    public function deleteBesoins(int $besoinId): View
+    public function deleteBesoin(int $besoinId): View
     {
         try {
             $this->besoinService->deleteBesoin($besoinId);
         } catch (EntityNotFoundException $e) {
             throw new NotFoundHttpException($e->getMessage());
         }
-        $ressourceLocation = $this->generateUrl('besoin_index');
+        $ressourceLocation = $this->generateUrl('service_list');
 
         return View::create([], Response::HTTP_NO_CONTENT, ['Location' => $ressourceLocation]);
     }

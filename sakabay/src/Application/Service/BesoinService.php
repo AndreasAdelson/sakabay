@@ -41,6 +41,11 @@ class BesoinService
         $this->besoinRepository->delete($besoin);
     }
 
+    public function getBesoinByUserId(string $utilisateur = '', string $codeStatut)
+    {
+        return $this->besoinRepository->getBesoinByUserId($utilisateur, $codeStatut);
+    }
+
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *

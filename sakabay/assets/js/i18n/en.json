@@ -296,6 +296,24 @@
       "code": "Enter code number"
     }
   },
+  "besoin": {
+    "title_list": "Your service requests",
+    "create_button": "Make a new request",
+    "pending_request": "Pending requests",
+    "expired_request": "Expired requests",
+    "no_pending_services": "You have no current service requests",
+    "no_expired_services": "You have no expired service requests",
+    "not_editable": "This field is not editable ",
+    "placeholder": {
+      "title": "Title of the request",
+      "description": "Describe your need",
+      "category":"Select a category",
+      "activity": "Select the relevant fields of activity"
+    },
+    "label": {
+      "description": "Description"
+    }
+  },
   "error_message_required": "This field is mandatory. Thank you for filling it in.",
   "error_message_required_username": "The size of your username must not be less than 5 characters and not more than 10 characters.",
   "error_message_email": "Please enter a valid email",

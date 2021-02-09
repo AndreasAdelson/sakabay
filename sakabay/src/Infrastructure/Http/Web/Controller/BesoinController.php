@@ -28,24 +28,32 @@ class BesoinController extends AbstractController
     }
 
     /**
-     * @Route("admin/group/new", name="group_new", methods="GET|POST")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("services/new", name="service_new", methods="GET|POST")
      */
     public function new()
     {
-        return $this->render('admin/group/form.html.twig', [
-            'groupId' => 'null'
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        $utilisateurId = $this->getUser()->getId();
+        return $this->render('utilisateur/besoin/form.html.twig', [
+            'utilisateurId' => $utilisateurId,
+            'besoinId' => null
         ]);
     }
 
     /**
-     * @Route("admin/group/edit/{id}", name="group_edit", methods="GET|POST")
-     * @Security("is_granted('ROLE_ADMIN')")
+     * @Route("services/edit/{id}", name="service_edit", methods="GET|POST")
      */
     public function edit(int $id)
     {
-        return $this->render('admin/group/form.html.twig', [
-            'groupId' => $id,
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        $utilisateurId = $this->getUser()->getId();
+        return $this->render('utilisateur/besoin/form.html.twig', [
+            'utilisateurId' => $utilisateurId,
+            'besoinId' => $id
         ]);
     }
 
@@ -58,6 +66,20 @@ class BesoinController extends AbstractController
             'canEdit' => $authorizationChecker->isGranted('ROLE_UGROUP'),
             'groupId' => $id,
             'urlPrecedente' => $this->urlPrecedente()
+        ]);
+    }
+
+    /**
+     * @Route("services/list", name="service_list", methods="GET")
+     */
+    public function manageBesoinList()
+    {
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+        $utilisateurId = $this->getUser()->getId();
+        return $this->render('utilisateur/besoin/list.html.twig', [
+            'utilisateurId' => $utilisateurId,
         ]);
     }
 

@@ -24,6 +24,7 @@ class Besoin
      * @var int
      * @Expose
      * @Groups({
+     * "api_besoins"
      * })
      */
     private $id;
@@ -32,6 +33,7 @@ class Besoin
      * @var string
      * @Expose
      * @Groups({
+     * "api_besoins"
      * })
      */
     private $title;
@@ -40,6 +42,7 @@ class Besoin
      * @var string
      * @Expose
      * @Groups({
+     * "api_besoins"
      * })
      */
     private $description;
@@ -48,6 +51,7 @@ class Besoin
      * @var DateTime
      * @Expose
      * @Groups({
+     * "api_besoins"
      * })
      */
     private $dtCreated;
@@ -57,6 +61,7 @@ class Besoin
      * @var DateTime
      * @Expose
      * @Groups({
+     * "api_besoins"
      * })
      */
     private $dtUpdated;
@@ -65,6 +70,7 @@ class Besoin
      * @var Category
      * @Expose
      * @Groups({
+     * "api_besoins"
      * })
      */
     private $category;
@@ -73,6 +79,7 @@ class Besoin
      * @var Utilisateur
      * @Expose
      * @Groups({
+     * "api_besoins"
      * })
      */
     private $author;
@@ -81,6 +88,7 @@ class Besoin
      * @var BesoinStatut
      * @Expose
      * @Groups({
+     * "api_besoins"
      * })
      */
     private $besoinStatut;
@@ -89,6 +97,7 @@ class Besoin
      * @var SousCategory[]
      * @Expose
      * @Groups({
+     * "api_besoins"
      * })
      */
     private $sousCategorys;

@@ -295,3 +295,17 @@ besoin_statut_edit:
     controller: App\Infrastructure\Http\Web\Controller\BesoinStatutController::edit
     methods: [GET, POST]
 
+# Page de gestion des demandes de services
+service_list:
+    path: services/list
+    controller: App\Infrastructure\Http\Web\Controller\BesoinController::manageBesoinList
+    methods: [GET]
+service_new:
+    path: services/new
+    controller: App\Infrastructure\Http\Web\Controller\BesoinController::new
+    methods: [GET, POST]
+service_edit:
+    path: services/edit/{id}
+    controller: App\Infrastructure\Http\Web\Controller\BesoinController::edit
+    methods: [GET, POST]
+

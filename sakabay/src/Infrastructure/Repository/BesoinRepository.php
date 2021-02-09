@@ -25,4 +25,21 @@ class BesoinRepository extends AbstractRepository implements BesoinRepositoryInt
         $this->_em->remove($companyStatut);
         $this->_em->flush($companyStatut);
     }
+
+    public function getBesoinByUserId($utilisateur = '', string $codeStatut)
+    {
+        $qb = $this->createQueryBuilder('b');
+        $qb->leftJoin('b.author', 'author')
+            ->andWhere('author.id = :utilisateurId')
+            ->setParameter('utilisateurId', $utilisateur);
+
+        if (!empty($codeStatut)) {
+            $qb->leftJoin('b.besoinStatut', 'besoinStatut')
+                ->andWhere('besoinStatut.code = :codeStatut')
+                ->setParameter('codeStatut', $codeStatut);
+        }
+        $qb->orderBy('b.dtCreated', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

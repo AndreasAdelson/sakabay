@@ -24,7 +24,8 @@ class BesoinStatut
      * @Groups({
      * "api_besoin_statut",
      * "api_admin_companies",
-     * "api_companies"
+     * "api_companies",
+     * "api_besoins"
      * })
      */
     private $id;
@@ -35,7 +36,8 @@ class BesoinStatut
      * @Groups({
      * "api_besoin_statut",
      * "api_admin_companies",
-     * "api_companies"
+     * "api_companies",
+     * "api_besoins"
      * })
      */
     private $name;
@@ -47,7 +49,8 @@ class BesoinStatut
      * "api_besoin_statut",
      * "api_admin_companies",
      * "api_companies",
-     * "api_dashboard_utilisateur"
+     * "api_dashboard_utilisateur",
+     * "api_besoins"
      * })
      */
     private $code;

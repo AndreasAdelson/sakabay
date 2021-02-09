@@ -153,6 +153,8 @@ validatecompany_subject: "Acceptance of your candidacy"
 validatecompany_message: "Congratulations! You are now part of Sakabay Entrepeneur. In order to welcome you, we offer you 2 months of premium subscriptions. Welcome to Sakabay :)."
 updatepassword_subject: "Confirm password change"
 updatepassword_message: "Your password has been changed successfully. A confirmation email was also sent to you."
+createbesoin_message: "Your « %s » request has been successfully published. We forward it to our partner companies that can meet this need."
+createbesoin_subject: "Création d'un service"
 
 ####Footer:
 company_footer_name: "SAKABAY"
@@ -185,3 +187,6 @@ besoin_statut_title_edit_page: "Edit service status"
 besoin_statut_title_create_page: "Create a service status"
 besoin_statut_title_show_page: "Service status detail"
 
+#Besoin/Service pages
+besoin_list_title_page: "Manage yours services"
+besoin_create_title_page: "Request a service"

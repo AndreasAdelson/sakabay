@@ -41,6 +41,11 @@ class BesoinStatutService
         $this->besoinStatutRepository->delete($besoinStatut);
     }
 
+    public function getBesoinStatutByCode(string $code)
+    {
+        return $this->besoinStatutRepository->findOneBy(['code' => $code]);
+    }
+
     /**
      * Retourne une page, potentiellement triée et filtrée.
      *

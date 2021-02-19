@@ -64,7 +64,7 @@ import ShowCity from './components/admin/city/show';
 import ListCity from './components/admin/city';
 import moment from 'moment';
 import Dashboard from './components/dashboard';
-import Abonnement from './components/company/abonnement';
+import Abonnement from './components/abonnement';
 import Subscription from './components/subscription';
 import AbonnementDetails from './components/subscription/details';
 import CompanyRefusedShow from './components/admin/company/refused/show';
@@ -79,6 +79,7 @@ import ShowBesoinStatut from './components/admin/besoin-statut/show';
 import ListBesoinStatut from './components/admin/besoin-statut';
 import BesoinList from './components/utilisateur/besoin/list';
 import BesoinForm from './components/utilisateur/besoin/form';
+import OpportunityList from './components/opportunity';
 import 'utils/logger';
 import Nl2br from 'vue-nl2br';
 
@@ -198,7 +199,8 @@ new Vue({
     ShowBesoinStatut,
     FormBesoinStatut,
     BesoinList,
-    BesoinForm
+    BesoinForm,
+    OpportunityList
   }
 });
 

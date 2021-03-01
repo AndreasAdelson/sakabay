@@ -12,6 +12,24 @@
           {{ $t('opportunity.title_list') }}
         </h1>
       </div>
+      <div class="col-3">
+        <fieldset
+          id="companySelected"
+          class="companySelected"
+        >
+          <multiselect
+            v-model="companySelected"
+            :disabled="onlyOne"
+            :options="companies"
+            name="companySelected"
+            :searchable="false"
+            :close-on-select="true"
+            :show-labels="false"
+            label="name"
+            track-by="name"
+          />
+        </fieldset>
+      </div>
     </div>
     <div class="container opportunity-list">
       <div class="row">
@@ -20,9 +38,7 @@
             <div class="card-body">
               <div class="row scroll-h650">
                 <vuescroll :ops="opsButton">
-                  <div class="col" >
-
-                    </div>
+                  <div class="col" />
                 </vuescroll>
               </div>
             </div>
@@ -50,7 +66,7 @@
     },
     data() {
       return {
-        loading: false,
+        loading: true,
         opsButton: {
           bar: {
             keepShow: true,
@@ -66,32 +82,57 @@
             keepShow: false
           },
         },
+        opportunities: [],
+        companies: [],
+        companySelected: null,
+        onlyOne: true,
+        category: null,
+        sousCategories: null
       };
     },
+    watch: {
+      companySelected(newValue) {
+        this.sousCategories = [];
+        this.category =  _.clone(newValue.category.code);
+        if (newValue.sous_categorys.length > 0) {
+          this.sousCategories = _.clone(_.map(newValue.sous_categorys, 'code'));
+        }
+        this.getOpportunities();
+      }
+    },
     created() {
-      // let promises = [];
-      // promises.push(axios.get('/api/besoins/utilisateur/' + this.utilisateurId,{
-      //   params: {
-      //     codeStatut: 'PUB'
-      //   }
-      // }
-      // ));
-      // promises.push(axios.get('/api/besoins/utilisateur/' + this.utilisateurId,{
-      //   params: {
-      //     codeStatut: 'ENC'
-      //   }
-      // }
-      // ));
-      // return Promise.all(promises).then(res => {
-      //   this.loading = false;
-      //   this.pendingBesoins = _.cloneDeep(res[0].data);
-      //   this.expiredBesoins = _.cloneDeep(res[1].data);
-      // }).catch(e => {
-      //   this.$handleError(e);
-      //   this.loading = false;
-      // });
+      let promises = [];
+      promises.push(axios.get('/api/companies/utilisateur/' + this.utilisateurId));
+      return Promise.all(promises).then(res => {
+        this.loading = false;
+        this.companies = _.cloneDeep(res[0].data);
+        if (this.companies.length > 0) {
+          this.companySelected = this.companies[0];
+          if (this.companies.length > 1) {
+            this.onlyOne =  false;
+          }
+        }
+      }).catch(e => {
+        this.$handleError(e);
+        this.loading = false;
+      });
     },
     methods: {
+      getOpportunities() {
+        this.loading = true;
+        return axios.get('/api/opportunities', {
+          params: {
+            category: this.category,
+            sousCategory: this.sousCategories
+          }
+        }).then(res => {
+          this.loading = false;
+          this.opportunities = res.data;
+        }).catch(e => {
+          this.$handleError(e);
+          this.loading = false;
+        });
+      },
     }
 
   };

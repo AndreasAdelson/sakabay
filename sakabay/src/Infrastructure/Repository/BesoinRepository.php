@@ -42,4 +42,48 @@ class BesoinRepository extends AbstractRepository implements BesoinRepositoryInt
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * Ici on sépare les cas particulier par requêtes.
+     *
+     * Dans un premier temps on gère la requête pour les entreprises
+     * ayant sélectionnées une ou plusieurs sous-catégories.
+     * La requête doit rendre tous les besoins sans sous-catégories ayant
+     * la même catégorie que l'entreprise. Ainsi que les besoins ayant au
+     * moins une sous-catégorie commune à l'entreprise.
+     *
+     * Dans un second temps on gère la requête pour les entreprises
+     * n'ayant pas encore sélectionnées de sous catégorie.
+     * La requête doit rendre uniquement les besoins sans sous-catégories
+     * et qui correspondent à la catégorie de l'entreprise.
+     */
+    public function getPaginatedOpportunityList(
+        $sortBy = 'id',
+        $descending = false,
+        $category = '',
+        $sousCategory = null
+    ) {
+        $qb = $this->createQueryBuilder('b');
+        if (is_array($sousCategory) && !empty($sousCategory)) {
+            $qb->leftJoin('b.category', 'category')
+                ->andWhere('category.code =:category')
+                ->setParameter('category', $category);
+            $qb->leftJoin('b.sousCategorys', 'sousCategory');
+            $orStatements = $qb->expr()->orX();
+            foreach ($sousCategory as $sousCategoryCode) {
+                $orStatements->add(
+                    $qb->expr()->like('sousCategory.code', $qb->expr()->literal('%' . $sousCategoryCode . '%'))
+                );
+            }
+            $qb->orWhere($orStatements);
+        } else {
+            $qb->leftJoin('b.category', 'category')
+                ->andWhere('category.code =:category')
+                ->setParameter('category', $category);
+            $qb->leftJoin('b.sousCategorys', 'sousCategory')
+                ->andWhere('sousCategory.id is NULL');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

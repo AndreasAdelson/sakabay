@@ -121,7 +121,6 @@ class BesoinController extends AbstractController
 
         return $this->render('opportunity/list.html.twig', [
             'utilisateurId' => $utilisateurId,
-            
         ]);
     }
 

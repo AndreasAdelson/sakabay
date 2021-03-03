@@ -21,6 +21,7 @@ import MultiSelect from 'vue-multiselect';
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import { Icon } from 'leaflet';
 import vuescroll from 'vuescroll';
+import VueObserveVisibility from 'vue-observe-visibility';
 
 import {
   BootstrapVue,
@@ -89,6 +90,7 @@ Vue.use(cnsRenderUtils);
 Vue.use(cnsFormUtils);
 Vue.use(VueLoaders);
 Vue.use(MultiSelect);
+Vue.use(VueObserveVisibility);
 Vue.use(VeeValidate, {
   inject: true,
   events: '', // Automatic validation is desactivated

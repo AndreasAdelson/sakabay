@@ -31,21 +31,66 @@
         </fieldset>
       </div>
     </div>
-    <div class="container opportunity-list">
+    <div class="opportunity-list">
       <div class="row">
         <div class="col-12">
-          <div class="card">
-            <div class="card-body">
+          <div class="">
+            <div class="">
               <div class="row scroll-h650">
                 <vuescroll :ops="opsButton">
-                  <div class="col" />
+                  <div class="col-12">
+                    <div
+                      v-for="(opportunity, index) in printedOpportunities"
+                      :key="'opp_' + index"
+                      class="row mb-2 card"
+                    >
+                      <div class="col-12 card-body-opportunities">
+                        <div class="row">
+                          <div class="col-12">
+                            <span>{{ opportunity.title }}</span>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12">
+                            <span>{{ opportunity.description }}</span>
+                          </div>
+                        </div>
+                        <div class="row no-gutters my-2">
+                          <div class="col-6 text-center">
+                            <span>Je suis intéressé</span>
+                          </div>
+
+                          <div class="col-6 text-center">
+                            <span>Pas intéressé</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      v-if="isScrolling"
+                      class="w-100 whitebg text-center"
+                    >
+                      <img
+                        src="images/loader.gif"
+                        alt="loading..."
+                      >
+                    </div>
+
+                    <div
+                      v-if="printedOpportunities.length"
+                      v-observe-visibility="(isVisible,entry) => throttledScroll(isVisible,entry)"
+                      name="spy"
+                    />
+                  </div>
                 </vuescroll>
               </div>
+              </vuescroll>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 <script>
@@ -82,13 +127,25 @@
             keepShow: false
           },
         },
-        opportunities: [],
+        printedOpportunities: [],
         companies: [],
         companySelected: null,
         onlyOne: true,
         category: null,
-        sousCategories: null
+        sousCategories: null,
+        isScrolling: false,
+        bottom: false,
+        nbMaxResult: 24,
       };
+    },
+    computed: {
+      /**
+       * Limits scroll function invokation to at most once per every 4 seconds.
+       * To be used within visibility-changed callback.
+       */
+      throttledScroll() {
+        return _.throttle(this.scroll, 4000);
+      }
     },
     watch: {
       companySelected(newValue) {
@@ -127,11 +184,39 @@
           }
         }).then(res => {
           this.loading = false;
-          this.opportunities = res.data;
+          this.printedOpportunities = res.data;
         }).catch(e => {
           this.$handleError(e);
           this.loading = false;
         });
+      },
+
+      /**
+       * Handler for the scroll observation.
+       * Must be throttled for use. See computed properties.
+       * @param {Boolean} isVisible
+       * @param {*} entry
+       */
+      scroll(isVisible, entry) {
+        // if (isVisible && !this.isScrolling) {
+        //   this.search(this.SESSION_STORAGE_FILTER_NAME, true, false);
+        // }
+        if (isVisible && !this.isScrolling) {
+          this.loading = true;
+          return axios.get('/api/opportunities', {
+            params: {
+              category: this.category,
+              sousCategory: this.sousCategories
+            }
+          }).then(res => {
+            this.loading = false;
+            this.printedOpportunities = _.orderBy(_.unionBy(this.printedEntities, res.data, 'id'), ['dtCreated', 'id'], ['desc', 'desc']);
+          }).catch(e => {
+            this.$handleError(e);
+            this.loading = false;
+          });
+        }
+
       },
     }
 
